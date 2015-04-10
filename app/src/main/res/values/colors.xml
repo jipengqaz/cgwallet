@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="main_blue">#45c01a</color>
+    <color name="top_title">#0085d4</color>
+    <color name="main_red">#fb5e4f</color>
+    <color name="main_bg">#f8f8f8</color>
+    <color name="main_comment">#606060</color>
+    <color name="main_tips1">#262831</color>//tips1
+    <color name="main_tips2">#7d7d7d</color>//tips2
+    <color name="main_tips3">#6c6c6c</color>//tips3
+    <color name="main_tips4">#898989</color>//tips4
+    <color name="list_item_red">#ff7700</color>//tips4
+    <color name="main_tips5">#0085d4</color>//tips3
+    <color name="recommend_a">#fe980f</color>
+</resources>
