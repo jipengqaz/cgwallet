@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="action_bar_bg">#f8f8f8</color>
+    <color name="action_bar_title_text_color">#000000</color>
     <color name="main_blue">#45c01a</color>
     <color name="top_title">#0085d4</color>
     <color name="main_red">#fb5e4f</color>

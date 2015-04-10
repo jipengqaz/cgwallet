@@ -1,7 +1,9 @@
 package cgtz.com.cgwallet.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,9 +15,9 @@ import cgtz.com.cgwallet.view.BidirSlidingLayout;
 import cgtz.com.cgwallet.view.ISplashView;
 
 /**
- * Ê×Ò³
+ * ï¿½ï¿½é¦–é¡µ
  */
-public class MainActivity extends BaseActivity implements ISplashView{
+public class MainActivity extends Activity implements ISplashView{
     private BidirSlidingLayout bidirSldingLayout;
     private LinearLayout conter_menu_layout;
     private ImageView showLeftButton;
@@ -24,7 +26,7 @@ public class MainActivity extends BaseActivity implements ISplashView{
     private ArrayAdapter<String> contentListAdapter;
     private SplashPresenter splashPresenter;
     /**
-     * ÓÃÓÚÌî³äcontentListAdapterµÄÊý¾ÝÔ´¡£
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     private String[] contentItems = { "Content Item 1", "Content Item 2", "Content Item 3",
             "Content Item 4", "Content Item 5", "Content Item 6", "Content Item 7",
@@ -34,6 +36,7 @@ public class MainActivity extends BaseActivity implements ISplashView{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         splashPresenter = new SplashPresenter(this);
         initViews();
@@ -76,6 +79,7 @@ public class MainActivity extends BaseActivity implements ISplashView{
     @Override
     protected void onResume() {
         super.onResume();
+        splashPresenter.didFinishLoading(this);
     }
 
     @Override
