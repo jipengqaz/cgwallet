@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.Window;
 
 /**
- * 自定义主activity
+ * 锟借嚜瀹氫箟涓籥ctivity
  * Created by Administrator on 2015/4/9.
  */
 public class BaseActivity extends Activity {

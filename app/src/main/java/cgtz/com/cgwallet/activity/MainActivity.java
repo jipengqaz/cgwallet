@@ -70,7 +70,7 @@ public class MainActivity extends BaseActivity implements ISplashView{
 
     private void initViews(){
         bidirSldingLayout = (BidirSlidingLayout) findViewById(R.id.custom_sliding_layout);
-        conter_menu_layout = (LinearLayout) findViewById(R.id.conter_menu_layout);
+        conter_menu_layout = (LinearLayout) findViewById(R.id.content);
         showLeftButton = (ImageView) findViewById(R.id.show_left_button);
         showRightButton = (ImageView) findViewById(R.id.show_right_button);
         contentList = (ListView) findViewById(R.id.contentList);
