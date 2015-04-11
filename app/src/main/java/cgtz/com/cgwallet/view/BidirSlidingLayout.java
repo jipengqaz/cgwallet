@@ -151,8 +151,7 @@ public class BidirSlidingLayout extends RelativeLayout implements OnTouchListene
 	 */
 	public BidirSlidingLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-		screenWidth = wm.getDefaultDisplay().getWidth();
+		screenWidth = context.getResources().getDisplayMetrics().widthPixels;
 		touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
 	}
 

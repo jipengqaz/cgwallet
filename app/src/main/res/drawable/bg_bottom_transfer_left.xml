@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/layout_bottom_transfer_left"/>
+    <stroke android:color="@color/layout_bottom_transfer_right"
+        android:width="@dimen/layout_bottom_transfer_left_stroke_width"/>
+</shape>

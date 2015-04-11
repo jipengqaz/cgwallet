@@ -4,20 +4,5 @@
     android:layout_height="match_parent">
     <include layout="@layout/main_left_layout"/>
     <include layout="@layout/main_right_layout"/>
-    <LinearLayout
-        android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#e9e9e9" >
-        <include layout="@layout/layout_top_title"/>
-        <ListView
-            android:id="@+id/contentList"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:scrollbars="none"
-            android:cacheColorHint="#00000000" >
-        </ListView>
-    </LinearLayout>
+    <include layout="@layout/main_conter_layout"/>
 </cgtz.com.cgwallet.view.BidirSlidingLayout>

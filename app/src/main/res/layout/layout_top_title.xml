@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/top_title_layout"
     android:background="@color/top_title"
+    android:layout_alignParentTop="true"
     android:layout_width="match_parent"
     android:layout_height="@dimen/activity_title_height">
     <ImageView
@@ -11,6 +13,29 @@
         android:layout_alignParentLeft="true"
         android:src="@drawable/icon_about"
         />
+    <LinearLayout
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal"
+        android:layout_width="@dimen/main_top_text_width"
+        android:layout_height="@dimen/main_top_text_height">
+        <TextView
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/bg_main_top_selected"
+            android:text="@string/main_top_cg_wallet"
+            android:textSize="@dimen/main_top_text_size"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/bg_main_top_normal"
+            android:text="@string/main_top_cg_wallet"
+            android:textSize="@dimen/main_top_text_size"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
     <ImageView
         android:layout_marginRight="10dp"
         android:id="@+id/show_right_button"
