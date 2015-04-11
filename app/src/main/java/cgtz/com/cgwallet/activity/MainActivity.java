@@ -1,13 +1,13 @@
 package cgtz.com.cgwallet.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.Window;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
@@ -15,24 +15,17 @@ import cgtz.com.cgwallet.view.BidirSlidingLayout;
 import cgtz.com.cgwallet.view.ISplashView;
 
 /**
- * ��首页
+ * 首页
  */
-public class MainActivity extends Activity implements ISplashView{
+public class MainActivity extends FragmentActivity implements ISplashView{
     private BidirSlidingLayout bidirSldingLayout;
-    private LinearLayout conter_menu_layout;
+    private RelativeLayout conter_menu_layout;
     private ImageView showLeftButton;
     private ImageView showRightButton;
-    private ListView contentList;
-    private ArrayAdapter<String> contentListAdapter;
+    private ScrollView conterScrollview;
+    private ViewPager mViewPager;
     private SplashPresenter splashPresenter;
-    /**
-     * �������
-     */
-    private String[] contentItems = { "Content Item 1", "Content Item 2", "Content Item 3",
-            "Content Item 4", "Content Item 5", "Content Item 6", "Content Item 7",
-            "Content Item 8", "Content Item 9", "Content Item 10", "Content Item 11",
-            "Content Item 12", "Content Item 13", "Content Item 14", "Content Item 15",
-            "Content Item 16" };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,10 +33,7 @@ public class MainActivity extends Activity implements ISplashView{
         setContentView(R.layout.activity_main);
         splashPresenter = new SplashPresenter(this);
         initViews();
-        contentListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
-                contentItems);
-        contentList.setAdapter(contentListAdapter);
-        bidirSldingLayout.setScrollEvent(contentList);
+        bidirSldingLayout.setScrollEvent(conterScrollview);
         showLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,10 +60,11 @@ public class MainActivity extends Activity implements ISplashView{
 
     private void initViews(){
         bidirSldingLayout = (BidirSlidingLayout) findViewById(R.id.custom_sliding_layout);
-        conter_menu_layout = (LinearLayout) findViewById(R.id.content);
+        conter_menu_layout = (RelativeLayout) findViewById(R.id.content);
         showLeftButton = (ImageView) findViewById(R.id.show_left_button);
         showRightButton = (ImageView) findViewById(R.id.show_right_button);
-        contentList = (ListView) findViewById(R.id.contentList);
+        conterScrollview = (ScrollView) findViewById(R.id.conter_scrollview);
+        mViewPager = (ViewPager) findViewById(R.id.main_conter_viewpager);
     }
 
     @Override

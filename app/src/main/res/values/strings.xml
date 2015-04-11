@@ -2,4 +2,8 @@
     <string name="app_name">草根钱包</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="transfer_input">转入</string>
+    <string name="transfer_output">转出</string>
+    <string name="main_top_cg_wallet">草根钱包</string>
+    <string name="main_top_my_wallet">我的钱包</string>
 </resources>

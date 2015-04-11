@@ -5,5 +5,17 @@
     <dimen name="activity_title_height">48dp</dimen>
     <dimen name="top_title_text_size">14sp</dimen>
     <dimen name="action_bar_title_text_size">18sp</dimen>
-
+    <dimen name="layout_bottom_transfer_text_size">16sp</dimen>
+    <dimen name="layout_bottom_transfer_height">48dp</dimen>
+    <dimen name="layout_bottom_transfer_left_stroke_width">0.5dp</dimen>
+    <dimen name="main_top_text_size">14sp</dimen>
+    <dimen name="main_top_text_height">30dp</dimen>
+    <dimen name="main_top_text_width">160dp</dimen>
+    <dimen name="main_top_normal_width">0.5dp</dimen>
+    <dimen name="main_conter_rate_text_size">22sp</dimen>
+    <dimen name="text_size_12sp">12sp</dimen>
+    <dimen name="text_size_14sp">14sp</dimen>
+    <dimen name="text_size_16sp">16sp</dimen>
+    <dimen name="text_size_18sp">18sp</dimen>
+    <dimen name="text_normal">14sp</dimen>
 </resources>
