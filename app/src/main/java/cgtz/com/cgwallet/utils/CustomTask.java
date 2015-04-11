@@ -1,10 +1,12 @@
 package cgtz.com.cgwallet.utils;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;
 
 import java.util.Map;
 
+import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.utility.Constants;
 
 /**
@@ -18,7 +20,8 @@ public class CustomTask extends AsyncTask<String,Void,String> {
     private String content;//post传递的参数
     private String encode;//编码
     private int handler_what;//回调handler的 what判断值
-
+    private Context mContext;//所在页面
+    private boolean isFinish;//判断是否要关闭所在页面
     /**
      *
      * @param handler
@@ -87,6 +90,7 @@ public class CustomTask extends AsyncTask<String,Void,String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        handler.sendMessage(handler.obtainMessage(handler_what,s));
+        JsonBean jsonBean = new JsonBean(s);
+        handler.sendMessage(handler.obtainMessage(handler_what,jsonBean));
     }
 }
