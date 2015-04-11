@@ -17,24 +17,18 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
     </LinearLayout>
-    <ScrollView
-        android:id="@+id/conter_scrollview"
+    <LinearLayout
+        android:id="@+id/main_conter_layout"
         android:layout_below="@+id/main_conter_top"
         android:layout_above="@+id/transfer_layout"
+        android:gravity="center"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
-            android:gravity="center"
-            android:orientation="vertical"
+        <android.support.v4.view.ViewPager
+            android:id="@+id/main_conter_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <android.support.v4.view.ViewPager
-                android:id="@+id/main_conter_viewpager"
-                android:persistentDrawingCache="animation"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        </LinearLayout>
-    </ScrollView>
+            android:layout_height="match_parent"/>
+    </LinearLayout>
     <include layout="@layout/layout_bottom_transfer"/>
 </RelativeLayout>
