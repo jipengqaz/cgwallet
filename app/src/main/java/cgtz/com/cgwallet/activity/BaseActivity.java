@@ -58,6 +58,14 @@ public class BaseActivity extends ActionBarActivity {
         }
     }
 
+    public void isShowBack(boolean flag){
+        if(flag){
+            backLayout.setVisibility(View.VISIBLE);
+        }else{
+            backLayout.setVisibility(View.GONE);
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
