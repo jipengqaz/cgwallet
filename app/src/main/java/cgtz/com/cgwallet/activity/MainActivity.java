@@ -10,7 +10,6 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 
 import java.util.ArrayList;
 
@@ -125,11 +124,25 @@ public class MainActivity extends FragmentActivity implements ISplashView{
                         yMove = event.getRawY();
                         // 手指移动时，对比按下时的坐标，计算出移动的距离。
                         int moveDistanceX = (int) (xMove - xDown);
-                        int moveDistanceY = (int) (yMove - yDown);
                         LogUtils.i(TAG,"xmove: "+moveDistanceX);
+                        if(moveDistanceX < 0 && currIndex == 1){
+                            if (bidirSldingLayout.isRightLayoutVisible()) {
+                                bidirSldingLayout.scrollToContentFromRightMenu();
+                            } else {
+                                bidirSldingLayout.initShowRightState();
+                                bidirSldingLayout.scrollToRightMenu();
+                            }
+                        }else if(moveDistanceX > 0 && currIndex == 0){
+                            if (bidirSldingLayout.isLeftLayoutVisible()) {
+                                bidirSldingLayout.scrollToContentFromLeftMenu();
+                            } else {
+                                bidirSldingLayout.initShowLeftState();
+                                bidirSldingLayout.scrollToLeftMenu();
+                            }
+                        }
                         break;
                     case MotionEvent.ACTION_UP:
-
+                        mViewPager.setFocusable(true);
                         break;
                 }
                 return false;
