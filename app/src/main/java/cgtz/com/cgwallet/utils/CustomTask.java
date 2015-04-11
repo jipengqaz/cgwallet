@@ -51,14 +51,14 @@ public class CustomTask extends AsyncTask<String,Void,String> {
      * @param isPost        判断是否为post访问   true为post
      * @param maps          参数集合
      * @param encode        文字编码
-     * @param if_ping       判断是否拼接路径  true为拼接
+     * @param is_ping       判断是否拼接路径  true为拼接
      */
     public CustomTask(Handler handler,int handler_what,String url_,
-                      boolean isPost,Map<String,String> maps,String encode,boolean if_ping){
+                      boolean isPost,Map<String,String> maps,String encode,boolean is_ping){
         this.handler = handler;
         this.handler_what = handler_what;
         this.flag = isPost;
-        if(if_ping) {
+        if(is_ping) {
             this.url_ = (Constants.IS_TEST?Constants.OFFLINE_HTTP:Constants.ONLINE_HTTP) + url_;
         }else{
             this.url_ = url_;
