@@ -25,7 +25,7 @@ import cgtz.com.cgwallet.view.ISplashView;
 /**
  * 首页
  */
-public class MainActivity extends FragmentActivity implements ISplashView{
+public class MainActivity extends FragmentActivity implements ISplashView,View.OnClickListener{
     private static final String TAG = "MainActivity";
     private BidirSlidingLayout bidirSldingLayout;
     private RelativeLayout conter_menu_layout;
@@ -49,6 +49,7 @@ public class MainActivity extends FragmentActivity implements ISplashView{
         splashPresenter = new SplashPresenter(this);
         initViews();
         initFragment();
+        setViewLinstener();
         bidirSldingLayout.setScrollEvent(mViewPager);
         showLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +85,11 @@ public class MainActivity extends FragmentActivity implements ISplashView{
         borderLeft = (LinearLayout) findViewById(R.id.main_conter_layout_border_left);
         tvCgWallet = (TextView) findViewById(R.id.tv_top_title_cg_wallet);
         tvMyWallet = (TextView) findViewById(R.id.tv_top_title_my_wallet);
+    }
+
+    private void setViewLinstener(){
+        tvCgWallet.setOnClickListener(this);
+        tvMyWallet.setOnClickListener(this);
     }
 
     private void initFragment(){
@@ -131,6 +137,32 @@ public class MainActivity extends FragmentActivity implements ISplashView{
     @Override
     public void startNextActivity() {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.tv_top_title_cg_wallet:
+                if(currIndex == 1){
+                    currIndex = 0;
+                    mViewPager.setCurrentItem(0);
+                    tvCgWallet.setBackgroundResource(R.drawable.bg_main_top_selected);
+                    tvMyWallet.setBackgroundResource(R.drawable.bg_main_top_normal);
+                    bidirSldingLayout.setMovedLeft(true);
+                    bidirSldingLayout.setMovedRight(false);
+                }
+                break;
+            case R.id.tv_top_title_my_wallet:
+                if(currIndex == 0){
+                    currIndex = 1;
+                    mViewPager.setCurrentItem(1);
+                    tvCgWallet.setBackgroundResource(R.drawable.bg_main_top_normal);
+                    tvMyWallet.setBackgroundResource(R.drawable.bg_main_top_selected);
+                    bidirSldingLayout.setMovedRight(true);
+                    bidirSldingLayout.setMovedLeft(false);
+                }
+                break;
+        }
     }
 
     /**
