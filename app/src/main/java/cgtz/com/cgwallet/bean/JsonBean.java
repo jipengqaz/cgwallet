@@ -8,46 +8,46 @@ import org.json.JSONObject;
 import cgtz.com.cgwallet.utility.Constants;
 
 /**
- * ½âÎöµÄÊı¾İ±£´æ¶ÔÏó
+ * è§£ææ•°æ®å¯¹è±¡ï¿½ï¿½ï¿½İ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * Created by Administrator on 2015/4/11.
  */
 public class JsonBean {
-    private int code;//Êı¾İ´íÎóÅĞ¶ÏÖµ
-    private String error_msg;//´íÎóĞÅÏ¢
-    private String jsonString;//Õı³£json¸ñÊ½Êı¾İÄÚÈİ
+    private int code;//æ•°æ®ç±»å‹åˆ¤æ–­å€¼Öµ
+    private String error_msg;//é”™è¯¯ä¿¡æ¯
+    private String jsonString;//æ•°æ®jsonå†…å®¹
 
     public JsonBean(){}
     public JsonBean(String str){
         if(TextUtils.isEmpty(str)){
-            code = Constants.NO_DATA;//Êı¾İÎª¿Õ»ònull£¬±íÊ¾·şÎñÆ÷Ã»ÓĞ·µ»ØÊı¾İ
+            code = Constants.NO_DATA;//ç½‘ç»œä¸ç¨³å®šæˆ–è€…æœåŠ¡å™¨æ²¡æœ‰è¿”å›æ•°æ®
             error_msg = Constants.NO_DATA_MSG;
         }else {
             if (str.equals("event")) {
-                code = Constants.IS_EVENT;//·şÎñÆ÷·ÃÎÊ³¬Ê±£¬»òÕßhttp·ÃÎÊÒì³£
+                code = Constants.IS_EVENT;//è®¿é—®æœåŠ¡å™¨è¶…æ—¶
                 error_msg = Constants.IS_EVENT_MSG;
             } else {
-                //·şÎñÆ÷Êı¾İ·µ»ØÕı³£
+                //æ­£å¸¸è·å–åˆ°æœåŠ¡å™¨è¿”å›çš„å†…å®¹
                 try {
                     JSONObject obj = new JSONObject(str);
                     String action = obj.optString("action");
                     int state = obj.optInt("success");
                     if (action.equals("login")) {
-                        //±¾µØtoken¹ıÆÚ£¬ĞèÒªÖØĞÂµÇÂ¼
+                        //æœ¬åœ°tokenè¿‡æœŸï¼Œéœ€é‡æ–°ç™»å½•
                         code = Constants.NEED_LOGIN_AGAIN;
                         error_msg = obj.optString("msg");
                     } else if (action.equals("maintain")) {
-                        //·şÎñÆ÷Î¬»¤ÖĞ
+                        //æœåŠ¡å™¨ç»´æŠ¤ä¸­
                         code = Constants.SERVICE_MAINTAIN;
                         error_msg = obj.optString("msg");
                     } else {
-                        //Êı¾İ·µ»ØÕı³£
+                        //å¯¹è®¿é—®æœåŠ¡å™¨æ“ä½œè¿›è¡Œå¤±è´¥ä¸å¦åˆ¤æ–­
                         if (state == 0) {
-                            //²Ù×÷Ê§°Ü
+                            //è®¿é—®æœåŠ¡å™¨æ“ä½œå¤±è´¥
                             code = Constants.OPERATION_FAIL;
                             error_msg = obj.optString("msg");
                             jsonString = str;
                         } else {
-                            //²Ù×÷³É¹¦
+                            //è®¿é—®æœåŠ¡å™¨æ“ä½œæˆåŠŸ
                             code = Constants.OPERATION_SUCCESS;
                             error_msg = obj.optString("msg");
                             jsonString = str;
@@ -55,7 +55,7 @@ public class JsonBean {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    code = Constants.DATA_EVENT;
+                    code = Constants.DATA_EVENT;//æ•°æ®è§£æå‡ºé”™
                 }
             }
         }
