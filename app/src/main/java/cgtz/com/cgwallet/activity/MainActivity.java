@@ -98,8 +98,7 @@ public class MainActivity extends FragmentActivity implements ISplashView{
         splashPresenter.didFinishLoading(this);
     }
 
-    @Override
-    protected void onPause() {
+    @Override    protected void onPause() {
         super.onPause();
     }
 
