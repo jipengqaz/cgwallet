@@ -20,6 +20,7 @@
         android:layout_width="@dimen/main_top_text_width"
         android:layout_height="@dimen/main_top_text_height">
         <TextView
+            android:id="@+id/tv_top_title_cg_wallet"
             android:layout_weight="1"
             android:gravity="center"
             android:background="@drawable/bg_main_top_selected"
@@ -28,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <TextView
+            android:id="@+id/tv_top_title_my_wallet"
             android:layout_weight="1"
             android:gravity="center"
             android:background="@drawable/bg_main_top_normal"

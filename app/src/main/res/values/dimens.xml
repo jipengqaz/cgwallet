@@ -18,4 +18,5 @@
     <dimen name="text_size_16sp">16sp</dimen>
     <dimen name="text_size_18sp">18sp</dimen>
     <dimen name="text_normal">14sp</dimen>
+    <dimen name="bg_overstriking_height">2dp</dimen>
 </resources>

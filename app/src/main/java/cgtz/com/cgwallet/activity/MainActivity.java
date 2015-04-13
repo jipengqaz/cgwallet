@@ -10,6 +10,7 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -34,6 +35,8 @@ public class MainActivity extends FragmentActivity implements ISplashView{
     private ImageView showLeftButton;
     private ImageView showRightButton;
     private ViewPager mViewPager;
+    private TextView tvCgWallet;//草根钱包
+    private TextView tvMyWallet;//我的钱包
     private SplashPresenter splashPresenter;
     private ArrayList<Fragment> listFms;
     private int currIndex;//当前页卡编号
@@ -79,6 +82,8 @@ public class MainActivity extends FragmentActivity implements ISplashView{
         main_conter_layout = (RelativeLayout) findViewById(R.id.main_conter_layout);
         mViewPager = (ViewPager) findViewById(R.id.main_conter_viewpager);
         borderLeft = (LinearLayout) findViewById(R.id.main_conter_layout_border_left);
+        tvCgWallet = (TextView) findViewById(R.id.tv_top_title_cg_wallet);
+        tvMyWallet = (TextView) findViewById(R.id.tv_top_title_my_wallet);
     }
 
     private void initFragment(){
@@ -142,9 +147,13 @@ public class MainActivity extends FragmentActivity implements ISplashView{
         public void onPageSelected(int position) {
             currIndex = position;
             if(position == 1){
+                tvCgWallet.setBackgroundResource(R.drawable.bg_main_top_normal);
+                tvMyWallet.setBackgroundResource(R.drawable.bg_main_top_selected);
                 bidirSldingLayout.setMovedRight(true);
                 bidirSldingLayout.setMovedLeft(false);
             }else if(position == 0){
+                tvCgWallet.setBackgroundResource(R.drawable.bg_main_top_selected);
+                tvMyWallet.setBackgroundResource(R.drawable.bg_main_top_normal);
                 bidirSldingLayout.setMovedLeft(true);
                 bidirSldingLayout.setMovedRight(false);
             }
