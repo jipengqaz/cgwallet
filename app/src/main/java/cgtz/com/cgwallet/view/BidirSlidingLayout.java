@@ -143,6 +143,10 @@ public class BidirSlidingLayout extends RelativeLayout implements OnTouchListene
 	 */
 	private VelocityTracker mVelocityTracker;
 
+	private boolean isMovedRight = false;//判断viewpager是否移动到最右边
+
+	private boolean isMovedLeft = false;//判断viewpager是否移动到最左边
+
 	/**
 	 * 重写BidirSlidingLayout的构造函数，其中获取了屏幕的宽度和touchSlop的值。
 	 * 
@@ -151,8 +155,7 @@ public class BidirSlidingLayout extends RelativeLayout implements OnTouchListene
 	 */
 	public BidirSlidingLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-		screenWidth = wm.getDefaultDisplay().getWidth();
+		screenWidth = context.getResources().getDisplayMetrics().widthPixels;
 		touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
 	}
 
@@ -165,6 +168,14 @@ public class BidirSlidingLayout extends RelativeLayout implements OnTouchListene
 	public void setScrollEvent(View bindView) {
 		mBindView = bindView;
 		mBindView.setOnTouchListener(this);
+	}
+
+	public void setMovedRight(boolean flag){
+		this.isMovedRight = flag;
+	}
+
+	public void setMovedLeft(boolean flag){
+		this.isMovedLeft = flag;
 	}
 
 	/**
@@ -369,23 +380,25 @@ public class BidirSlidingLayout extends RelativeLayout implements OnTouchListene
 	 */
 	private void checkSlideState(int moveDistanceX, int moveDistanceY) {
 		if (isLeftMenuVisible) {
-			if (!isSliding && Math.abs(moveDistanceX) >= touchSlop && moveDistanceX < 0) {
+			if (!isSliding && Math.abs(moveDistanceX) >= touchSlop && moveDistanceX < 0
+					&& isMovedLeft && !isMovedRight) {
 				isSliding = true;
 				slideState = HIDE_LEFT_MENU;
 			}
 		} else if (isRightMenuVisible) {
-			if (!isSliding && Math.abs(moveDistanceX) >= touchSlop && moveDistanceX > 0) {
+			if (!isSliding && Math.abs(moveDistanceX) >= touchSlop && moveDistanceX > 0
+					&& !isMovedLeft && isMovedRight) {
 				isSliding = true;
 				slideState = HIDE_RIGHT_MENU;
 			}
 		} else {
 			if (!isSliding && Math.abs(moveDistanceX) >= touchSlop && moveDistanceX > 0
-					&& Math.abs(moveDistanceY) < touchSlop) {
+					&& Math.abs(moveDistanceY) < touchSlop && isMovedLeft && !isMovedRight) {
 				isSliding = true;
 				slideState = SHOW_LEFT_MENU;
 				initShowLeftState();
 			} else if (!isSliding && Math.abs(moveDistanceX) >= touchSlop && moveDistanceX < 0
-					&& Math.abs(moveDistanceY) < touchSlop) {
+					&& Math.abs(moveDistanceY) < touchSlop && !isMovedLeft && isMovedRight) {
 				isSliding = true;
 				slideState = SHOW_RIGHT_MENU;
 				initShowRightState();

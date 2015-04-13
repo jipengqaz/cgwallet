@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/transfer_layout"
+    android:layout_alignParentBottom="true"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/layout_bottom_transfer_height">
+    <TextView
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/transfer_output"
+        android:textColor="@color/layout_bottom_transfer_left_text"
+        android:textSize="@dimen/layout_bottom_transfer_text_size"
+        android:background="@drawable/bg_bottom_transfer_left"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+    <TextView
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/transfer_input"
+        android:textColor="@color/layout_bottom_transfer_right_text"
+        android:textSize="@dimen/layout_bottom_transfer_text_size"
+        android:background="@drawable/bg_bottom_transfer_right"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+</LinearLayout>
