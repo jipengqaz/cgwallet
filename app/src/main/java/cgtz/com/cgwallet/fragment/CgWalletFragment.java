@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import cgtz.com.cgwallet.R;
 
 /**
- * ²İ¸ùÇ®°üfragment
+ * ï¿½İ¸ï¿½è‰æ ¹é’±åŒ…
  * Created by Administrator on 2015/4/11.
  */
 public class CgWalletFragment extends BaseFragment {
@@ -16,6 +16,7 @@ public class CgWalletFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layoutView = inflater.inflate(R.layout.layout_cg_wallet,container,false);
+
         return layoutView;
     }
 }

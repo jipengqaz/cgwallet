@@ -4,17 +4,17 @@ package cgtz.com.cgwallet.utility;
  * Created by Administrator on 2015/4/11.
  */
 public class Constants {
-    public static final boolean IS_TEST = true;//ÅĞ¶ÏÊÇ·ñÎª²âÊÔ»·¾³
-    public static final String OFFLINE_HTTP = "";//ÏßÏÂÂ·¾¶
-    public static final String ONLINE_HTTP = "";//ÏßÉÏÂ·¾¶
-    public static final String VERSION = "";//°æ±¾ºÅ
-    public static final int DATA_EVENT = -1;//Êı¾İ½âÎö´íÎó
-    public static final int NO_DATA = 0;//Ã»ÓĞÊı¾İ»òÕßÊı¾İÎª¿Õ
-    public static final int IS_EVENT = 1;//·ÃÎÊ·şÎñÆ÷³¬Ê±£¬»òÕßhttp·ÃÎÊÒì³£
-    public static final int NEED_LOGIN_AGAIN = 2;//ÕËºÅĞèÒªÖØĞÂµÇÂ¼
-    public static final int SERVICE_MAINTAIN = 3;//·şÎñÆ÷Î¬»¤ÖĞ
-    public static final int OPERATION_FAIL = 4;//²Ù×÷Ê§°Ü
-    public static final int OPERATION_SUCCESS = 5;//²Ù×÷³É¹¦
-    public static final String NO_DATA_MSG = "µ±Ç°ÍøÂç²»¸øÁ¦";
-    public static final String IS_EVENT_MSG = "µ±Ç°ÍøÂç²»¸øÁ¦";
+    public static final boolean IS_TEST = true;//åˆ¤æ–­æ˜¯å¦ä¸ºæµ‹è¯•ç¯å¢ƒ
+    public static final String OFFLINE_HTTP = "";//æµ‹è¯•æœåŠ¡å™¨è·¯å¾„
+    public static final String ONLINE_HTTP = "";//çº¿ä¸ŠæœåŠ¡å™¨è·¯å¾„
+    public static final String VERSION = "";//ç‰ˆæœ¬å·
+    public static final int DATA_EVENT = -1;//æœåŠ¡å™¨è¿”å›çš„jsonæ•°æ®è§£æå¼‚å¸¸
+    public static final int NO_DATA = 0;//æœåŠ¡å™¨æ²¡æœ‰æ•°æ®è¿”å›
+    public static final int IS_EVENT = 1;//æœåŠ¡å™¨è®¿é—®è¶…æ—¶æˆ–è€…httpè®¿é—®å¼‚å¸¸
+    public static final int NEED_LOGIN_AGAIN = 2;//éœ€è¦é‡æ–°ç™»å½•
+    public static final int SERVICE_MAINTAIN = 3;//æœåŠ¡å™¨éœ€è¦ç»´æŠ¤ä¸­
+    public static final int OPERATION_FAIL = 4;//æœåŠ¡å™¨äº¤äº’æ“ä½œå¤±è´¥
+    public static final int OPERATION_SUCCESS = 5;//æœåŠ¡å™¨äº¤äº’æ“ä½œæˆåŠŸ
+    public static final String NO_DATA_MSG = "ç½‘ç»œä¸ç¨³å®š";
+    public static final String IS_EVENT_MSG = "ç”±äºç½‘ç»œåŸå› ï¼ŒæœåŠ¡å™¨è®¿é—®è¶…æ—¶";
 }
