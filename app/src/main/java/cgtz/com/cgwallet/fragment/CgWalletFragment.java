@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import cgtz.com.cgwallet.R;
 
 /**
- * ²İ¸ùÇ®°üfragment
+ * ï¿½İ¸ï¿½è‰æ ¹é’±åŒ…
  * Created by Administrator on 2015/4/11.
  */
 public class CgWalletFragment extends BaseFragment {
