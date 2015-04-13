@@ -88,6 +88,8 @@ public class MainActivity extends FragmentActivity implements ISplashView{
         mViewPager.setAdapter(new MFragmentPagerAdater(getSupportFragmentManager(), listFms));
         mViewPager.setCurrentItem(0);
         mViewPager.setOnPageChangeListener(new MyOnPageChangeListener());
+        bidirSldingLayout.setMovedLeft(true);
+        bidirSldingLayout.setMovedRight(false);
     }
 
     @Override
