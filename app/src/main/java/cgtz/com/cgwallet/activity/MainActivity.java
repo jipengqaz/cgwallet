@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.view.MotionEvent;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -18,7 +18,6 @@ import cgtz.com.cgwallet.adapter.MFragmentPagerAdater;
 import cgtz.com.cgwallet.fragment.CgWalletFragment;
 import cgtz.com.cgwallet.fragment.MyWalletFragment;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
-import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.view.BidirSlidingLayout;
 import cgtz.com.cgwallet.view.ISplashView;
 
@@ -29,37 +28,15 @@ public class MainActivity extends FragmentActivity implements ISplashView{
     private static final String TAG = "MainActivity";
     private BidirSlidingLayout bidirSldingLayout;
     private RelativeLayout conter_menu_layout;
-    private LinearLayout main_conter_layout;
+    private RelativeLayout main_conter_layout;
+    private LinearLayout borderLeft;
+    private LinearLayout borderRight;
     private ImageView showLeftButton;
     private ImageView showRightButton;
     private ViewPager mViewPager;
     private SplashPresenter splashPresenter;
     private ArrayList<Fragment> listFms;
     private int currIndex;//当前页卡编号
-    /**
-     * 记录手指按下时的横坐标。
-     */
-    private float xDown;
-
-    /**
-     * 记录手指按下时的纵坐标。
-     */
-    private float yDown;
-
-    /**
-     * 记录手指移动时的横坐标。
-     */
-    private float xMove;
-
-    /**
-     * 记录手指移动时的纵坐标。
-     */
-    private float yMove;
-
-    /**
-     * 记录手机抬起时的横坐标。
-     */
-    private float xUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +46,7 @@ public class MainActivity extends FragmentActivity implements ISplashView{
         splashPresenter = new SplashPresenter(this);
         initViews();
         initFragment();
-        bidirSldingLayout.setScrollEvent(main_conter_layout);
+        bidirSldingLayout.setScrollEvent(mViewPager);
         showLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,8 +76,9 @@ public class MainActivity extends FragmentActivity implements ISplashView{
         conter_menu_layout = (RelativeLayout) findViewById(R.id.content);
         showLeftButton = (ImageView) findViewById(R.id.show_left_button);
         showRightButton = (ImageView) findViewById(R.id.show_right_button);
-        main_conter_layout = (LinearLayout) findViewById(R.id.main_conter_layout);
+        main_conter_layout = (RelativeLayout) findViewById(R.id.main_conter_layout);
         mViewPager = (ViewPager) findViewById(R.id.main_conter_viewpager);
+        borderLeft = (LinearLayout) findViewById(R.id.main_conter_layout_border_left);
     }
 
     private void initFragment(){
@@ -110,44 +88,6 @@ public class MainActivity extends FragmentActivity implements ISplashView{
         mViewPager.setAdapter(new MFragmentPagerAdater(getSupportFragmentManager(), listFms));
         mViewPager.setCurrentItem(0);
         mViewPager.setOnPageChangeListener(new MyOnPageChangeListener());
-        mViewPager.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()){
-                    case MotionEvent.ACTION_DOWN:
-                        // 手指按下时，记录按下时的坐标
-                        xDown = event.getRawX();
-                        yDown = event.getRawY();
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        xMove = event.getRawX();
-                        yMove = event.getRawY();
-                        // 手指移动时，对比按下时的坐标，计算出移动的距离。
-                        int moveDistanceX = (int) (xMove - xDown);
-                        LogUtils.i(TAG,"xmove: "+moveDistanceX);
-                        if(moveDistanceX < 0 && currIndex == 1){
-                            if (bidirSldingLayout.isRightLayoutVisible()) {
-                                bidirSldingLayout.scrollToContentFromRightMenu();
-                            } else {
-                                bidirSldingLayout.initShowRightState();
-                                bidirSldingLayout.scrollToRightMenu();
-                            }
-                        }else if(moveDistanceX > 0 && currIndex == 0){
-                            if (bidirSldingLayout.isLeftLayoutVisible()) {
-                                bidirSldingLayout.scrollToContentFromLeftMenu();
-                            } else {
-                                bidirSldingLayout.initShowLeftState();
-                                bidirSldingLayout.scrollToLeftMenu();
-                            }
-                        }
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        mViewPager.setFocusable(true);
-                        break;
-                }
-                return false;
-            }
-        });
     }
 
     @Override
@@ -199,12 +139,18 @@ public class MainActivity extends FragmentActivity implements ISplashView{
         @Override
         public void onPageSelected(int position) {
             currIndex = position;
-
+            if(position == 1){
+                bidirSldingLayout.setMovedRight(true);
+                bidirSldingLayout.setMovedLeft(false);
+            }else if(position == 0){
+                bidirSldingLayout.setMovedLeft(true);
+                bidirSldingLayout.setMovedRight(false);
+            }
         }
 
         @Override
         public void onPageScrollStateChanged(int state) {
-
+            Log.i(TAG,"state: "+state);
         }
     }
 }

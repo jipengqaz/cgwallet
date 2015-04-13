@@ -16,6 +16,7 @@ public class CgWalletFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layoutView = inflater.inflate(R.layout.layout_cg_wallet,container,false);
+
         return layoutView;
     }
 }
