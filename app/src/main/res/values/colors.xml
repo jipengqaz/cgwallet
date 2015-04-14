@@ -3,7 +3,7 @@
     <color name="action_bar_bg">#f8f8f8</color>
     <color name="action_bar_title_text_color">#000000</color>
     <color name="main_blue">#45c01a</color>
-    <color name="top_title">#fb5e4f</color>
+    <color name="top_title">#0085d4</color>
     <color name="main_red">#fb5e4f</color>
     <color name="main_bg">#f8f8f8</color>
     <color name="main_comment">#606060</color>
@@ -18,13 +18,16 @@
     <color name="layout_bottom_transfer_right">#0085d4</color>
     <color name="layout_bottom_transfer_left_text">#000000</color>
     <color name="layout_bottom_transfer_right_text">#ffffff</color>
-    <color name="bg_main_top_selected_text">#0085d4</color>
-    <color name="bg_main_top_normal_text">#ffffff</color>
-    <color name="main_top_normal_text">#000000</color>
-    <color name="main_top_selected_text">#ffffff</color>
+    <color name="bg_main_top_selected_text">#0095d1</color>
+    <color name="bg_main_top_normal_text">#0085d4</color>
+    <color name="main_top_normal_text">#ffffff</color>
+    <color name="main_top_selected_text">#005383</color>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
     <color name="bg_line">#dadada</color>
     <color name="bg_overstriking">#0085d4</color>
-
+    <color name="left_layout_text_color">#ffffff</color>
+    <color name="bg_left_layout_rate_color">#0095d1</color>
+    <color name="monitoring_platform">#0054d1</color>
+    <color name="bg_center_layout_introduce">#005383</color>
 </resources>

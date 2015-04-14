@@ -6,4 +6,6 @@
     <string name="transfer_output">转出</string>
     <string name="main_top_cg_wallet">草根钱包</string>
     <string name="main_top_my_wallet">我的钱包</string>
+    <string name="cg_wallet_earnings">万份年化收益</string>
+    <string name="monitoring_platform">平台资金账户由国有银行实时监管</string>
 </resources>

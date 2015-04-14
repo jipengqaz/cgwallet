@@ -148,6 +148,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                     mViewPager.setCurrentItem(0);
                     tvCgWallet.setBackgroundResource(R.drawable.bg_main_top_selected);
                     tvMyWallet.setBackgroundResource(R.drawable.bg_main_top_normal);
+                    tvCgWallet.setTextColor(getResources().getColor(R.color.main_top_selected_text));
+                    tvMyWallet.setTextColor(getResources().getColor(R.color.main_top_normal_text));
                     bidirSldingLayout.setMovedLeft(true);
                     bidirSldingLayout.setMovedRight(false);
                 }
@@ -158,6 +160,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                     mViewPager.setCurrentItem(1);
                     tvCgWallet.setBackgroundResource(R.drawable.bg_main_top_normal);
                     tvMyWallet.setBackgroundResource(R.drawable.bg_main_top_selected);
+                    tvCgWallet.setTextColor(getResources().getColor(R.color.main_top_normal_text));
+                    tvMyWallet.setTextColor(getResources().getColor(R.color.main_top_selected_text));
                     bidirSldingLayout.setMovedRight(true);
                     bidirSldingLayout.setMovedLeft(false);
                 }
@@ -181,11 +185,15 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             if(position == 1){
                 tvCgWallet.setBackgroundResource(R.drawable.bg_main_top_normal);
                 tvMyWallet.setBackgroundResource(R.drawable.bg_main_top_selected);
+                tvCgWallet.setTextColor(getResources().getColor(R.color.main_top_selected_text));
+                tvMyWallet.setTextColor(getResources().getColor(R.color.main_top_normal_text));
                 bidirSldingLayout.setMovedRight(true);
                 bidirSldingLayout.setMovedLeft(false);
             }else if(position == 0){
                 tvCgWallet.setBackgroundResource(R.drawable.bg_main_top_selected);
                 tvMyWallet.setBackgroundResource(R.drawable.bg_main_top_normal);
+                tvCgWallet.setTextColor(getResources().getColor(R.color.main_top_normal_text));
+                tvMyWallet.setTextColor(getResources().getColor(R.color.main_top_selected_text));
                 bidirSldingLayout.setMovedLeft(true);
                 bidirSldingLayout.setMovedRight(false);
             }

@@ -26,6 +26,7 @@
             android:background="@drawable/bg_main_top_selected"
             android:text="@string/main_top_cg_wallet"
             android:textSize="@dimen/main_top_text_size"
+            android:textColor="@color/main_top_selected_text"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <TextView
@@ -33,8 +34,9 @@
             android:layout_weight="1"
             android:gravity="center"
             android:background="@drawable/bg_main_top_normal"
-            android:text="@string/main_top_cg_wallet"
+            android:text="@string/main_top_my_wallet"
             android:textSize="@dimen/main_top_text_size"
+            android:textColor="@color/main_top_normal_text"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
     </LinearLayout>
