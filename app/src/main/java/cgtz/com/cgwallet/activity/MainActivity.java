@@ -1,5 +1,6 @@
 package cgtz.com.cgwallet.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -37,6 +38,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private ViewPager mViewPager;
     private TextView tvCgWallet;//草根钱包
     private TextView tvMyWallet;//我的钱包
+    private TextView tvLogin;//未登录显示文案或者显示登录的手机号
     private SplashPresenter splashPresenter;
     private ArrayList<Fragment> listFms;
     private int currIndex;//当前页卡编号
@@ -85,11 +87,13 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         borderLeft = (LinearLayout) findViewById(R.id.main_conter_layout_border_left);
         tvCgWallet = (TextView) findViewById(R.id.tv_top_title_cg_wallet);
         tvMyWallet = (TextView) findViewById(R.id.tv_top_title_my_wallet);
+        tvLogin = (TextView) findViewById(R.id.tv_goToLogin);
     }
 
     private void setViewLinstener(){
         tvCgWallet.setOnClickListener(this);
         tvMyWallet.setOnClickListener(this);
+        tvLogin.setOnClickListener(this);
     }
 
     private void initFragment(){
@@ -142,7 +146,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.tv_top_title_cg_wallet:
+            case R.id.tv_top_title_cg_wallet://草根钱包
                 if(currIndex == 1){
                     currIndex = 0;
                     mViewPager.setCurrentItem(0);
@@ -154,7 +158,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                     bidirSldingLayout.setMovedRight(false);
                 }
                 break;
-            case R.id.tv_top_title_my_wallet:
+            case R.id.tv_top_title_my_wallet://我的钱包
                 if(currIndex == 0){
                     currIndex = 1;
                     mViewPager.setCurrentItem(1);
@@ -165,6 +169,9 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                     bidirSldingLayout.setMovedRight(true);
                     bidirSldingLayout.setMovedLeft(false);
                 }
+                break;
+            case R.id.tv_goToLogin://去登录或者个人信息
+                startActivity(new Intent(MainActivity.this,LoginOrRegistActivity.class));
                 break;
         }
     }

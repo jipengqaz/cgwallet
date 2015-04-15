@@ -37,7 +37,7 @@ public class BaseActivity extends ActionBarActivity {
         actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setDisplayUseLogoEnabled(false);
         actionBar.setIcon(android.R.color.transparent);
-        actionBar.setBackgroundDrawable(getResources().getDrawable(R.color.action_bar_bg));
+        actionBar.setBackgroundDrawable(getResources().getDrawable(R.color.top_title));
         actionBar.setTitle("草根");
         View actionBarWeek = RelativeLayout.inflate(this, R.layout.layout_action_bar, null);
         backLayout = (LinearLayout) actionBarWeek.findViewById(R.id.action_bar_back_layout);
@@ -58,7 +58,7 @@ public class BaseActivity extends ActionBarActivity {
         }
     }
 
-    public void isShowBack(boolean flag){
+    public void showBack(boolean flag){
         if(flag){
             backLayout.setVisibility(View.VISIBLE);
         }else{

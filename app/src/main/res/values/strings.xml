@@ -8,4 +8,5 @@
     <string name="main_top_my_wallet">我的钱包</string>
     <string name="cg_wallet_earnings">万份年化收益</string>
     <string name="monitoring_platform">平台资金账户由国有银行实时监管</string>
+    <string name="title_activity_login_or_regist">LoginOrRegistActivity</string>
 </resources>
