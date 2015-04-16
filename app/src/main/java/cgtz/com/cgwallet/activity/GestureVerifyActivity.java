@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.GestureContentView;
 import cgtz.com.cgwallet.view.GestureDrawline;
 
@@ -69,7 +71,7 @@ public class GestureVerifyActivity extends Activity implements android.view.View
 
 
         // 初始化一个显示各个点的viewGroup
-        mGestureContentView = new GestureContentView(this, true, "1235789",
+        mGestureContentView = new GestureContentView(this, true, Utils.getLockPassword(this,"123456"),
                 new GestureDrawline.GestureCallBack() {
 
                     @Override
@@ -110,13 +112,19 @@ public class GestureVerifyActivity extends Activity implements android.view.View
             return "";
         }
         StringBuilder builder = new StringBuilder();
-        builder.append(phoneNumber.subSequence(0,3));
+        builder.append(phoneNumber.subSequence(0, 3));
         builder.append("****");
-        builder.append(phoneNumber.subSequence(7,11));
+        builder.append(phoneNumber.subSequence(7, 11));
         return builder.toString();
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
 
+        }
+        return true;
+    }
 
     @Override
     public void onClick(View v) {

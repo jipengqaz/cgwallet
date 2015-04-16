@@ -22,7 +22,6 @@ public class Constants {
     public static final String CONFIG = "config";
     public static final String MOBILE_PASSWORD = "login_password";//登录密码
 
-
     // 手势密码点的状态
     public static final int POINT_STATE_NORMAL = 0; // 正常状态
     public static final int POINT_STATE_SELECTED = 1; // 按下状态
