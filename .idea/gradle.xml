@@ -5,7 +5,11 @@
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+<<<<<<< Temporary merge branch 1
+        <option name="gradleHome" value="F:\Android-IDE\android-studio\gradle\gradle-2.2.1" />
+=======
         <option name="gradleHome" value="F:\BaiduYunDownload\android-studio\gradle\gradle-2.2.1" />
+>>>>>>> Temporary merge branch 2
         <option name="gradleJvm" value="1.7" />
         <option name="modules">
           <set>
