@@ -6,4 +6,16 @@
     <string name="transfer_output">转出</string>
     <string name="main_top_cg_wallet">草根钱包</string>
     <string name="main_top_my_wallet">我的钱包</string>
+    <string name="main_right_text">当面扫一扫，好友一起赚</string>
+
+    <!-- 设置手势界面文案  -->
+    <string name="setup_gesture_code">设置手势密码</string>
+    <string name="setup_gesture_pattern">绘制解锁图案</string>
+    <string name="setup_gesture_pattern_again">再次绘制解锁图案</string>
+    <string name="forget_gesture_code">忘记手势密码?</string>
+    <string name="use_other_account_login">用其他账号登录</string>
+    <string name="set_gesture_pattern">绘制解锁图案</string>
+    <string name="set_gesture_pattern_reason">设置手势密码，防止他人未经授权查看</string>
+    <string name="reset_gesture_code">重新设置手势密码</string>
+    <!-- End -->
 </resources>
