@@ -17,4 +17,14 @@ public class Utils {
         SharedUtils sharedUtils = new SharedUtils(context, Constants.CONFIG);
         return sharedUtils.getString(Constants.LOGIN_PHONE,"");
     }
+
+    /**
+     * 退出账号,删除登录密码
+     * @param context
+     * @return
+     */
+    public static void loginOut(Context context){
+        SharedUtils sharedUtils = new SharedUtils(context,Constants.CONFIG);
+        sharedUtils.remove(Constants.MOBILE_PASSWORD);
+    }
 }

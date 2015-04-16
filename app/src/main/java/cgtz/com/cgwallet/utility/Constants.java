@@ -20,4 +20,5 @@ public class Constants {
     public static final String CONFIG_GESTURE = "config_gesture";//
     public static final String LOGIN_PHONE = "login_phone";//登录手机号
     public static final String CONFIG = "config";
+    public static final String MOBILE_PASSWORD = "login_password";//登录密码
 }
