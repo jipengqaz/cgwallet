@@ -27,4 +27,26 @@ public class Utils {
         SharedUtils sharedUtils = new SharedUtils(context,Constants.CONFIG);
         sharedUtils.remove(Constants.MOBILE_PASSWORD);
     }
+
+    /**
+     * 保存手势密码
+     * @param context
+     * @param phone
+     * @param pwd
+     */
+    public static void saveLockPassWord(Context context,String phone,String pwd){
+        SharedUtils sharedUtils = new SharedUtils(context,Constants.CONFIG_GESTURE);
+        sharedUtils.saveString(phone, pwd);
+    }
+
+    /**
+     * 获取手势密码
+     * @param context
+     * @param phone
+     * @return
+     */
+    public static String getLockPassword(Context context,String phone){
+        SharedUtils sharedUtils = new SharedUtils(context,Constants.CONFIG_GESTURE);
+        return sharedUtils.getString(phone,"");
+    }
 }
