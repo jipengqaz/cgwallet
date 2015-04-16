@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.utils.MD5Util;
+import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.GestureContentView;
 import cgtz.com.cgwallet.view.GestureDrawline;
 import cgtz.com.cgwallet.view.LockIndicator;
@@ -79,6 +81,7 @@ public class GestureEditActivity extends Activity implements OnClickListener {
                     if (inputCode.equals(mFirstPassword)) {
                         Toast.makeText(GestureEditActivity.this, "设置成功", Toast.LENGTH_SHORT).show();
                         mGestureContentView.clearDrawlineState(0L);
+                        Utils.saveLockPassWord(GestureEditActivity.this,"123456", MD5Util.md5(mFirstPassword));//把用户的输入的手势密码保存好
                         GestureEditActivity.this.finish();
                     } else {
                         mTextTip.setText(Html.fromHtml("<font color='#c70c1e'>与上一次绘制不一致，请重新绘制</font>"));

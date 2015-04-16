@@ -1,9 +1,5 @@
 package cgtz.com.cgwallet.view;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -16,11 +12,16 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import cgtz.com.cgwallet.entity.GesturePoint;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.AppUtil;
+import cgtz.com.cgwallet.utils.MD5Util;
 
 /**
  * 手势密码路径绘制
@@ -171,6 +172,7 @@ public class GestureDrawline extends View {
                     // 那么以当前的点中心为起点，以手指移动位置为终点画线
                     canvas.drawLine(currentPoint.getCenterX(), currentPoint.getCenterY(), event.getX(), event.getY(), paint);// 画线
                     //用于用户输入一个是图案变色
+                    Log.e("aaa","aaaa");
                     if(first == null){
                         first = currentPoint;
                     }
@@ -208,7 +210,7 @@ public class GestureDrawline extends View {
                 if (isVerify) {
                     // 手势密码校验
                     // 清掉屏幕上所有的线，只画上集合里面保存的线
-                    if (passWord.equals(passWordSb.toString())) {
+                    if (passWord.equals(MD5Util.md5(passWordSb.toString()))) {
                         // 代表用户绘制的密码手势与传入的密码相同
                         callBack.checkedSuccess();
                     } else {
@@ -319,9 +321,14 @@ public class GestureDrawline extends View {
      * 校验错误/两次绘制不一致提示
      */
     private void drawErrorPathTip() {
-        canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+        if(canvas!=null){
+            canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+        }
         paint.setColor(Color.rgb(154, 7, 21));// 设置默认线路颜色
-        first.setPointState(Constants.POINT_STATE_WRONG);
+
+        if(first !=null){
+            first.setPointState(Constants.POINT_STATE_WRONG);
+        }
         for (Pair<GesturePoint, GesturePoint> pair : lineList) {
             pair.first.setPointState(Constants.POINT_STATE_WRONG);
             pair.second.setPointState(Constants.POINT_STATE_WRONG);

@@ -39,6 +39,15 @@
             android:name=".activity.LoginOrRegistActivity"
             android:label="@string/title_activity_login_or_regist" >
         </activity>
+
+        <activity
+            android:name=".activity.GestureEditActivity"
+            android:theme="@android:style/Theme.NoTitleBar"/>
+
+        <activity
+            android:name=".activity.GestureVerifyActivity"
+            android:theme="@android:style/Theme.NoTitleBar"/>
+
     </application>
     <!-- QQ、QQ空间所需权限 -->
     <uses-permission android:name="android.permission.GET_TASKS" />
