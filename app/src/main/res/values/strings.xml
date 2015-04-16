@@ -6,12 +6,9 @@
     <string name="transfer_output">转出</string>
     <string name="main_top_cg_wallet">草根钱包</string>
     <string name="main_top_my_wallet">我的钱包</string>
-<<<<<<< HEAD
-=======
     <string name="cg_wallet_earnings">万份年化收益</string>
     <string name="monitoring_platform">平台资金账户由国有银行实时监管</string>
     <string name="title_activity_login_or_regist">LoginOrRegistActivity</string>
->>>>>>> c15f83593cc2a2a4a14f11c5f4f5a5ead96bd742
     <string name="main_right_text">当面扫一扫，好友一起赚</string>
 
     <!-- 设置手势界面文案  -->
@@ -24,10 +21,4 @@
     <string name="set_gesture_pattern_reason">设置手势密码，防止他人未经授权查看</string>
     <string name="reset_gesture_code">重新设置手势密码</string>
     <!-- End -->
-<<<<<<< HEAD
-    <string name="cg_wallet_earnings">万份年化收益</string>
-    <string name="monitoring_platform">平台资金账户由国有银行实时监管</string>
-    <string name="title_activity_login_or_regist">LoginOrRegistActivity</string>
-=======
->>>>>>> c15f83593cc2a2a4a14f11c5f4f5a5ead96bd742
 </resources>
