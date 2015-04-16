@@ -3,6 +3,8 @@ package cgtz.com.cgwallet.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.List;
+
 
 /**
  * 自定义Sharedpreferences
@@ -12,7 +14,7 @@ public class SharedUtils {
     private Context context;
     private String configxml = "";
     private SharedPreferences sp;
-    private SharedPreferences.Editor spe;
+    public SharedPreferences.Editor spe;
     public SharedUtils(Context context, String configxml){
         this.context = context;
         this.configxml = configxml;
@@ -25,6 +27,25 @@ public class SharedUtils {
      */
     public void clearSp(){
         spe.clear();
+        spe.commit();
+    }
+
+    /**
+     * 循环删除内容
+     * @param keys
+     */
+    public void removeList(String[] keys){
+        for(String key:keys){
+            remove(key);
+        }
+    }
+
+    /**
+     * 删除内容
+     * @param key
+     */
+    public void remove(String key){
+        spe.remove(key);
         spe.commit();
     }
 

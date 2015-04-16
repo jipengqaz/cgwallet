@@ -12,10 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <include layout="@layout/layout_top_title"/>
-        <View
-            android:background="@color/bg_line"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"/>
     </LinearLayout>
     <RelativeLayout
         android:id="@+id/main_conter_layout"

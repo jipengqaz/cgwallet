@@ -2,33 +2,73 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_cg_wallet"
     android:orientation="vertical"
+    android:background="@color/main_bg"
     android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
-        android:layout_marginTop="20dp"
+        android:background="@color/bg_left_layout_rate_color"
         android:gravity="center"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <ImageView
-            android:src="@drawable/icon_wallet1"
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="年化收益率"
+                android:textSize="@dimen/text_size_16sp"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/main_center_rate"
+            android:layout_marginTop="20dp"
+            android:text="7.00%"
+            android:textSize="@dimen/main_center_rate_text_size"
+            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:layout_marginLeft="10dp"
-            android:text="年化收益率"
-            android:textSize="@dimen/text_size_12sp"
-            android:textColor="@color/black"
+            android:layout_marginBottom="30dp"
+            android:id="@+id/main_center_earnings"
+            android:layout_marginTop="20dp"
+            android:text="@string/cg_wallet_earnings"
+            android:textSize="@dimen/text_size_16sp"
+            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-    <TextView
-        android:id="@+id/main_conter_rate"
-        android:layout_marginTop="20dp"
-        android:text="7.00%"
-        android:textSize="@dimen/main_conter_rate_text_size"
-        android:textColor="@color/main_tips5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_monitoring_platform_height">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="@string/monitoring_platform"
+            android:textSize="@dimen/monitoring_platform"
+            android:textColor="@color/monitoring_platform"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:background="@color/bg_center_layout_introduce"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

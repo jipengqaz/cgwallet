@@ -4,5 +4,5 @@
     android:layout_height="match_parent">
     <include layout="@layout/main_left_layout"/>
     <include layout="@layout/main_right_layout"/>
-    <include layout="@layout/main_conter_layout"/>
+    <include layout="@layout/main_center_layout"/>
 </cgtz.com.cgwallet.view.BidirSlidingLayout>
