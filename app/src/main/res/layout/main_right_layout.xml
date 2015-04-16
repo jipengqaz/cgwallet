@@ -15,7 +15,6 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="126dp"
-        android:src="@mipmap/aaaaaaaaaa"
         android:scaleType="center"
         android:layout_margin="20dp"
         />
