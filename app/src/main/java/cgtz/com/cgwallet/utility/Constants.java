@@ -17,6 +17,13 @@ public class Constants {
     public static final int OPERATION_SUCCESS = 5;//服务器交互操作成功
     public static final String NO_DATA_MSG = "网络不稳定";
     public static final String IS_EVENT_MSG = "由于网络原因，服务器访问超时";
+
+
+    // 手势密码点的状态
+    public static final int POINT_STATE_NORMAL = 0; // 正常状态
+    public static final int POINT_STATE_SELECTED = 1; // 按下状态
+    public static final int POINT_STATE_WRONG = 2; // 错误状态
+    //end
     public static final String CONFIG_GESTURE = "config_gesture";//
     public static final String LOGIN_PHONE = "login_phone";//登录手机号
     public static final String CONFIG = "config";

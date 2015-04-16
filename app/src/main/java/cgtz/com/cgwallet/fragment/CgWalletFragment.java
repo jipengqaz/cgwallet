@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import cgtz.com.cgwallet.R;
 
 /**
- * 草根钱包
+ * �ݸ�草根钱包
  * Created by Administrator on 2015/4/11.
  */
 public class CgWalletFragment extends BaseFragment {
