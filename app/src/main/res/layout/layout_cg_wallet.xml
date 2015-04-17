@@ -2,91 +2,154 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_cg_wallet"
     android:orientation="vertical"
-    android:background="@color/main_bg"
+    android:weightSum="1"
+    android:background="@color/main_tips5"
     android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
-        android:background="@color/bg_left_layout_rate_color"
-        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:layout_weight="0.8"
+        android:gravity="center_horizontal|bottom"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <RelativeLayout
+            android:layout_width="200dp"
+            android:layout_height="200dp">
+            <LinearLayout
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="年化收益"
+                    android:textColor="@color/center_layout_normal_text"
+                    android:textSize="@dimen/main_center_normal_text_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="7"
+                        android:textSize="@dimen/main_center_rate_text_size1"
+                        android:textColor="@color/center_layout_normal_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text=".00"
+                        android:textSize="@dimen/main_center_rate_text_size2"
+                        android:textColor="@color/center_layout_normal_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="%"
+                        android:textSize="@dimen/main_center_rate_text_size3"
+                        android:textColor="@color/center_layout_normal_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+        <include layout="@layout/layout_banner"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/banner_text_height"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_weight="0.3"
+        android:weightSum="1"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
-            android:layout_marginTop="20dp"
             android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_gravity="left|center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/transfer_box_padding"
+                android:paddingRight="@dimen/transfer_box_padding"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/transfer_weight_height">
+                <TextView
+                    android:text="@string/transfer_input"
+                    android:drawablePadding="20dp"
+                    android:drawableLeft="@mipmap/mine_my"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/center_layout_normal_text"
+                    android:textSize="@dimen/text_size_16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:layout_gravity="right|center_vertical"
+                android:gravity="center"
+                android:paddingLeft="@dimen/transfer_box_padding"
+                android:paddingRight="@dimen/transfer_box_padding"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/transfer_weight_height">
+                <TextView
+                    android:text="@string/transfer_input"
+                    android:drawablePadding="20dp"
+                    android:gravity="center_vertical"
+                    android:drawableRight="@mipmap/mine_my"
+                    android:textColor="@color/center_layout_normal_text"
+                    android:textSize="@dimen/text_size_16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="0.4"
+            android:gravity="center"
+            android:weightSum="1"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:text="年化收益率"
+                android:text="@string/wallet_basic_info1"
+                android:layout_weight="0.3"
+                android:drawablePadding="@dimen/wallet_basic_info_drawpadding"
+                android:gravity="center"
+                android:drawableTop="@mipmap/mine_my"
+                android:textColor="@color/center_layout_normal_text"
                 android:textSize="@dimen/text_size_16sp"
-                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-        </LinearLayout>
-        <TextView
-            android:id="@+id/main_center_rate"
-            android:layout_marginTop="20dp"
-            android:text="7.00%"
-            android:textSize="@dimen/main_center_rate_text_size"
-            android:textColor="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:layout_marginBottom="30dp"
-            android:id="@+id/main_center_earnings"
-            android:layout_marginTop="20dp"
-            android:text="@string/cg_wallet_earnings"
-            android:textSize="@dimen/text_size_16sp"
-            android:textColor="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <LinearLayout
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/layout_monitoring_platform_height">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="@string/monitoring_platform"
-            android:textSize="@dimen/monitoring_platform"
-            android:textColor="@color/monitoring_platform"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="设置手势"
-            android:id="@+id/aaaaaaaaa"
-            />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="校验手势"
-            android:id="@+id/bbbbbbbb"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:background="@color/bg_center_layout_introduce"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
+            <TextView
+                android:text="@string/wallet_basic_info1"
+                android:layout_weight="0.3"
+                android:drawablePadding="@dimen/wallet_basic_info_drawpadding"
+                android:gravity="center"
+                android:drawableTop="@mipmap/mine_my"
+                android:textColor="@color/center_layout_normal_text"
+                android:textSize="@dimen/text_size_16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="@string/wallet_basic_info3"
+                android:layout_weight="0.3"
+                android:drawablePadding="@dimen/wallet_basic_info_drawpadding"
+                android:gravity="center"
+                android:drawableTop="@mipmap/mine_my"
+                android:textColor="@color/center_layout_normal_text"
+                android:textSize="@dimen/text_size_16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

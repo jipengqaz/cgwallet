@@ -6,13 +6,16 @@
     <dimen name="top_title_text_size">14sp</dimen>
     <dimen name="action_bar_title_text_size">18sp</dimen>
     <dimen name="layout_bottom_transfer_text_size">16sp</dimen>
-    <dimen name="layout_bottom_transfer_height">48dp</dimen>
+    <dimen name="layout_bottom_transfer_height">60dp</dimen>
     <dimen name="layout_bottom_transfer_left_stroke_width">0.5dp</dimen>
     <dimen name="main_top_text_size">14sp</dimen>
     <dimen name="main_top_text_height">30dp</dimen>
     <dimen name="main_top_text_width">160dp</dimen>
     <dimen name="main_top_normal_width">1dp</dimen>
-    <dimen name="main_center_rate_text_size">28sp</dimen>
+    <dimen name="main_center_rate_text_size1">32sp</dimen>
+    <dimen name="main_center_rate_text_size2">22sp</dimen>
+    <dimen name="main_center_rate_text_size3">18sp</dimen>
+    <dimen name="main_center_normal_text_size">14sp</dimen>
     <dimen name="text_size_12sp">12sp</dimen>
     <dimen name="text_size_14sp">14sp</dimen>
     <dimen name="text_size_16sp">16sp</dimen>
@@ -24,4 +27,8 @@
     <dimen name="layout_monitoring_platform_height">60dp</dimen>
     <dimen name="left_layout_icon_text_distance">20dp</dimen>
     <dimen name="left_layout_item_height">40dp</dimen>
+    <dimen name="banner_text_height">40dp</dimen>
+    <dimen name="transfer_weight_height">60dp</dimen>
+    <dimen name="transfer_box_padding">40dp</dimen>
+    <dimen name="wallet_basic_info_drawpadding">15dp</dimen>
 </resources>

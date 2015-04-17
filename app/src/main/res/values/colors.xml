@@ -30,4 +30,5 @@
     <color name="bg_left_layout_rate_color">#0095d1</color>
     <color name="monitoring_platform">#0054d1</color>
     <color name="bg_center_layout_introduce">#005383</color>
+    <color name="center_layout_normal_text">#ffffff</color>
 </resources>

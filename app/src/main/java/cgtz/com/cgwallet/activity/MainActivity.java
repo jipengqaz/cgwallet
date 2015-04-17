@@ -31,13 +31,11 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private BidirSlidingLayout bidirSldingLayout;
     private RelativeLayout conter_menu_layout;
     private RelativeLayout main_conter_layout;
-    private LinearLayout borderLeft;
-    private LinearLayout borderRight;
     private ImageView showLeftButton;
     private ImageView showRightButton;
     private ViewPager mViewPager;
-    private TextView tvCgWallet;//草根钱包
-    private TextView tvMyWallet;//我的钱包
+//    private TextView tvCgWallet;//草根钱包
+//    private TextView tvMyWallet;//我的钱包
     private TextView tvLogin;//未登录显示文案或者显示登录的手机号
     private SplashPresenter splashPresenter;
     private ArrayList<Fragment> listFms;
@@ -84,15 +82,14 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         showRightButton = (ImageView) findViewById(R.id.show_right_button);
         main_conter_layout = (RelativeLayout) findViewById(R.id.main_conter_layout);
         mViewPager = (ViewPager) findViewById(R.id.main_conter_viewpager);
-        borderLeft = (LinearLayout) findViewById(R.id.main_conter_layout_border_left);
-        tvCgWallet = (TextView) findViewById(R.id.tv_top_title_cg_wallet);
-        tvMyWallet = (TextView) findViewById(R.id.tv_top_title_my_wallet);
+//        tvCgWallet = (TextView) findViewById(R.id.tv_top_title_cg_wallet);
+//        tvMyWallet = (TextView) findViewById(R.id.tv_top_title_my_wallet);
         tvLogin = (TextView) findViewById(R.id.tv_goToLogin);
     }
 
     private void setViewLinstener(){
-        tvCgWallet.setOnClickListener(this);
-        tvMyWallet.setOnClickListener(this);
+//        tvCgWallet.setOnClickListener(this);
+//        tvMyWallet.setOnClickListener(this);
         tvLogin.setOnClickListener(this);
     }
 
@@ -146,30 +143,30 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.tv_top_title_cg_wallet://草根钱包
-                if(currIndex == 1){
-                    currIndex = 0;
-                    mViewPager.setCurrentItem(0);
-                    tvCgWallet.setBackgroundResource(R.drawable.bg_main_top_selected);
-                    tvMyWallet.setBackgroundResource(R.drawable.bg_main_top_normal);
-                    tvCgWallet.setTextColor(getResources().getColor(R.color.main_top_selected_text));
-                    tvMyWallet.setTextColor(getResources().getColor(R.color.main_top_normal_text));
-                    bidirSldingLayout.setMovedLeft(true);
-                    bidirSldingLayout.setMovedRight(false);
-                }
-                break;
-            case R.id.tv_top_title_my_wallet://我的钱包
-                if(currIndex == 0){
-                    currIndex = 1;
-                    mViewPager.setCurrentItem(1);
-                    tvCgWallet.setBackgroundResource(R.drawable.bg_main_top_normal);
-                    tvMyWallet.setBackgroundResource(R.drawable.bg_main_top_selected);
-                    tvCgWallet.setTextColor(getResources().getColor(R.color.main_top_normal_text));
-                    tvMyWallet.setTextColor(getResources().getColor(R.color.main_top_selected_text));
-                    bidirSldingLayout.setMovedRight(true);
-                    bidirSldingLayout.setMovedLeft(false);
-                }
-                break;
+//            case R.id.tv_top_title_cg_wallet://草根钱包
+//                if(currIndex == 1){
+//                    currIndex = 0;
+//                    mViewPager.setCurrentItem(0);
+//                    tvCgWallet.setBackgroundResource(R.drawable.bg_main_top_selected);
+//                    tvMyWallet.setBackgroundResource(R.drawable.bg_main_top_normal);
+//                    tvCgWallet.setTextColor(getResources().getColor(R.color.main_top_selected_text));
+//                    tvMyWallet.setTextColor(getResources().getColor(R.color.main_top_normal_text));
+//                    bidirSldingLayout.setMovedLeft(true);
+//                    bidirSldingLayout.setMovedRight(false);
+//                }
+//                break;
+//            case R.id.tv_top_title_my_wallet://我的钱包
+//                if(currIndex == 0){
+//                    currIndex = 1;
+//                    mViewPager.setCurrentItem(1);
+//                    tvCgWallet.setBackgroundResource(R.drawable.bg_main_top_normal);
+//                    tvMyWallet.setBackgroundResource(R.drawable.bg_main_top_selected);
+//                    tvCgWallet.setTextColor(getResources().getColor(R.color.main_top_normal_text));
+//                    tvMyWallet.setTextColor(getResources().getColor(R.color.main_top_selected_text));
+//                    bidirSldingLayout.setMovedRight(true);
+//                    bidirSldingLayout.setMovedLeft(false);
+//                }
+//                break;
             case R.id.tv_goToLogin://去登录或者个人信息
                 startActivity(new Intent(MainActivity.this,LoginOrRegistActivity.class));
                 break;
@@ -190,17 +187,17 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         public void onPageSelected(int position) {
             currIndex = position;
             if(position == 1){
-                tvCgWallet.setBackgroundResource(R.drawable.bg_main_top_normal);
-                tvMyWallet.setBackgroundResource(R.drawable.bg_main_top_selected);
-                tvCgWallet.setTextColor(getResources().getColor(R.color.main_top_selected_text));
-                tvMyWallet.setTextColor(getResources().getColor(R.color.main_top_normal_text));
+//                tvCgWallet.setBackgroundResource(R.drawable.bg_main_top_normal);
+//                tvMyWallet.setBackgroundResource(R.drawable.bg_main_top_selected);
+//                tvCgWallet.setTextColor(getResources().getColor(R.color.main_top_selected_text));
+//                tvMyWallet.setTextColor(getResources().getColor(R.color.main_top_normal_text));
                 bidirSldingLayout.setMovedRight(true);
                 bidirSldingLayout.setMovedLeft(false);
             }else if(position == 0){
-                tvCgWallet.setBackgroundResource(R.drawable.bg_main_top_selected);
-                tvMyWallet.setBackgroundResource(R.drawable.bg_main_top_normal);
-                tvCgWallet.setTextColor(getResources().getColor(R.color.main_top_normal_text));
-                tvMyWallet.setTextColor(getResources().getColor(R.color.main_top_selected_text));
+//                tvCgWallet.setBackgroundResource(R.drawable.bg_main_top_selected);
+//                tvMyWallet.setBackgroundResource(R.drawable.bg_main_top_normal);
+//                tvCgWallet.setTextColor(getResources().getColor(R.color.main_top_normal_text));
+//                tvMyWallet.setTextColor(getResources().getColor(R.color.main_top_selected_text));
                 bidirSldingLayout.setMovedLeft(true);
                 bidirSldingLayout.setMovedRight(false);
             }

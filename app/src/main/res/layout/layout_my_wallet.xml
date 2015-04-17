@@ -33,7 +33,7 @@
             android:id="@+id/main_conter_rate"
             android:layout_marginTop="20dp"
             android:text="3.68"
-            android:textSize="@dimen/main_center_rate_text_size"
+            android:textSize="@dimen/main_center_rate_text_size1"
             android:textColor="@color/main_tips5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
