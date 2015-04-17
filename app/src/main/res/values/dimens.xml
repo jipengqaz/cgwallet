@@ -22,4 +22,6 @@
     <dimen name="left_layout_text_size">14sp</dimen>
     <dimen name="monitoring_platform">18sp</dimen>
     <dimen name="layout_monitoring_platform_height">60dp</dimen>
+    <dimen name="left_layout_icon_text_distance">20dp</dimen>
+    <dimen name="left_layout_item_height">40dp</dimen>
 </resources>
