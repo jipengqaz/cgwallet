@@ -28,7 +28,6 @@
         <ImageView
             android:layout_marginRight="5dp"
             android:id="@+id/action_bar_left_icon"
-            android:src="@drawable/icon_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
