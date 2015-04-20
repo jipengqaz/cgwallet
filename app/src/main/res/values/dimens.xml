@@ -36,4 +36,6 @@
     <dimen name="transfer_box_padding">40dp</dimen>
     <dimen name="wallet_basic_info_drawpadding">13dp</dimen>
     <dimen name="left_menu_loginout_text">12sp</dimen>
+    <dimen name="right_menu_share_text">14sp</dimen>
+    <dimen name="right_menu_text">16sp</dimen>
 </resources>

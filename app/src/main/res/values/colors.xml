@@ -32,4 +32,5 @@
     <color name="bg_center_layout_introduce">#005383</color>
     <color name="center_layout_normal_text">#ffffff</color>
     <color name="left_menu_loginout_text">#91939a</color>
+    <color name="right_menu_share_text">#ffffff</color>
 </resources>
