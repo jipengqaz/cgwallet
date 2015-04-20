@@ -76,6 +76,58 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                 }
             }
         });
+
+        initShare();
+    }
+
+    /**
+     * 初始化分享页面
+     */
+    private void initShare() {
+        LinearLayout QQ,qzone,sms,wechat,wxcircle,sina;
+        TextView rules;//推荐规则
+        QQ = (LinearLayout) findViewById(R.id.QQ);
+        qzone = (LinearLayout) findViewById(R.id.qzone);
+        sms = (LinearLayout) findViewById(R.id.sms);
+        wechat = (LinearLayout) findViewById(R.id.wechat);
+        wxcircle = (LinearLayout) findViewById(R.id.wxcircle);
+        sina = (LinearLayout) findViewById(R.id.sina);
+        rules = (TextView) findViewById(R.id.rules);
+        View.OnClickListener share_click = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()){
+                    case R.id.QQ:
+
+                        break;
+                    case R.id.qzone:
+
+                        break;
+                    case R.id.sms:
+
+                        break;
+                    case R.id.wechat:
+
+                        break;
+                    case R.id.wxcircle:
+
+                        break;
+                    case R.id.sina:
+
+                        break;
+                    case R.id.rules:
+
+                        break;
+                }
+            }
+        };
+        QQ.setOnClickListener(share_click);
+        qzone.setOnClickListener(share_click);
+        sms.setOnClickListener(share_click);
+        wechat.setOnClickListener(share_click);
+        wxcircle.setOnClickListener(share_click);
+        sina.setOnClickListener(share_click);
+        rules.setOnClickListener(share_click);
     }
 
     private void initViews(){
