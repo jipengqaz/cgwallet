@@ -1,18 +1,21 @@
 package cgtz.com.cgwallet.activity;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.utility.Constants;
+import cgtz.com.cgwallet.utils.Utils;
 
 /**
  * �自定义主activity
@@ -76,5 +79,42 @@ public class BaseActivity extends ActionBarActivity {
                 break;
         }
         return false;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Constants.GESTURES_PASSWORD =false;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Constants.GESTURES_PASSWORD =true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Constants.GESTURES_PASSWORD =false;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("123", Constants.GESTURES_PASSWORD + "");
+        if(Utils.getLockPassword(this, "123456")!=""&& Constants.GESTURES_PASSWORD){
+            Intent intent  = new Intent();
+            intent.setClass(this,GestureVerifyActivity.class);
+            startActivity(intent);
+        }else{
+            Toast.makeText(this, "未设置手势密码", Toast.LENGTH_SHORT);
+        }
     }
 }

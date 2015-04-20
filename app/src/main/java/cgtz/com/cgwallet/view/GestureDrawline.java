@@ -8,7 +8,6 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PorterDuff;
 import android.os.Handler;
-import android.util.Log;
 import android.util.Pair;
 import android.view.MotionEvent;
 import android.view.View;
@@ -172,7 +171,6 @@ public class GestureDrawline extends View {
                     // 那么以当前的点中心为起点，以手指移动位置为终点画线
                     canvas.drawLine(currentPoint.getCenterX(), currentPoint.getCenterY(), event.getX(), event.getY(), paint);// 画线
                     //用于用户输入一个是图案变色
-                    Log.e("aaa","aaaa");
                     if(first == null){
                         first = currentPoint;
                     }

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -20,6 +21,8 @@ import cgtz.com.cgwallet.adapter.MFragmentPagerAdater;
 import cgtz.com.cgwallet.fragment.CgWalletFragment;
 import cgtz.com.cgwallet.fragment.MyWalletFragment;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
+import cgtz.com.cgwallet.utility.Constants;
+import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.BidirSlidingLayout;
 import cgtz.com.cgwallet.view.ISplashView;
 
@@ -206,6 +209,24 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         @Override
         public void onPageScrollStateChanged(int state) {
             Log.i(TAG,"state: "+state);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Constants.GESTURES_PASSWORD = true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onRestart();
+        if(Utils.getLockPassword(this, "123456")!=""&& Constants.GESTURES_PASSWORD){
+            Intent intent  = new Intent();
+            intent.setClass(this,GestureVerifyActivity.class);
+            startActivity(intent);
+        }else{
+            Toast.makeText(this, ".............手势密码", Toast.LENGTH_SHORT);
         }
     }
 }

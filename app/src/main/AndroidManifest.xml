@@ -47,7 +47,9 @@
         <activity
             android:name=".activity.GestureVerifyActivity"
             android:theme="@android:style/Theme.NoTitleBar"/>
-
+        <activity
+            android:name=".activity.aaaaaaa"
+            />
     </application>
     <!-- QQ、QQ空间所需权限 -->
     <uses-permission android:name="android.permission.GET_TASKS" />
