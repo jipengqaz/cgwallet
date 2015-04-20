@@ -10,6 +10,7 @@
     <string name="monitoring_platform">平台资金账户由国有银行实时监管</string>
     <string name="title_activity_login_or_regist">LoginOrRegistActivity</string>
     <string name="main_right_text">当面扫一扫，好友一起赚</string>
+    <string name="main_right_text_bottom">推荐规则 ></string>
 
     <!-- 设置手势界面文案  -->
     <string name="setup_gesture_code">设置手势密码</string>
