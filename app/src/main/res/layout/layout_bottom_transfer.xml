@@ -1,25 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/transfer_layout"
-    android:orientation="horizontal"
-    android:layout_width="0dp"
-    android:layout_height="0dp">
-    <TextView
-        android:layout_weight="1"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#00000000"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_marginTop="2dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_bottom_transfer_height">
+        <LinearLayout
+            android:layout_weight="1"
+            android:background="@mipmap/bg_wallet_selected"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:src="@mipmap/icon_wallet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginLeft="2dp"
+                android:gravity="center"
+                android:text="@string/main_top_cg_wallet"
+                android:textColor="@color/layout_bottom_transfer_left_text"
+                android:textSize="@dimen/layout_bottom_transfer_text_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="1"
+            android:background="@mipmap/bg_wallet_normal"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:src="@mipmap/icon_my_wallet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginLeft="2dp"
+                android:gravity="center"
+                android:text="@string/main_top_my_wallet"
+                android:textColor="@color/layout_bottom_transfer_right_text"
+                android:textSize="@dimen/layout_bottom_transfer_text_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
         android:gravity="center"
-        android:text="@string/transfer_output"
-        android:textColor="@color/layout_bottom_transfer_left_text"
-        android:textSize="@dimen/layout_bottom_transfer_text_size"
-        android:background="@drawable/bg_bottom_transfer_left"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
-    <TextView
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="@string/transfer_input"
-        android:textColor="@color/layout_bottom_transfer_right_text"
-        android:textSize="@dimen/layout_bottom_transfer_text_size"
-        android:background="@drawable/bg_bottom_transfer_right"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
-</LinearLayout>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_weight="1"
+            android:src="@mipmap/icon_line_selected"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_weight="1"
+            android:src="@mipmap/icon_line_normal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>

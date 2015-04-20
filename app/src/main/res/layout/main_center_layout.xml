@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/content"
-    android:background="#e9e9e9"
+    android:background="@color/main_bg"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include layout="@layout/layout_top_title"
+        android:id="@+id/top_title_layout"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="@dimen/activity_title_height"
@@ -25,7 +26,8 @@
             android:layout_height="match_parent"/>
     </RelativeLayout>
     <include layout="@layout/layout_bottom_transfer"
+        android:id="@+id/transfer_layout"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/layout_bottom_transfer_height"/>
+        android:layout_height="wrap_content"/>
 </RelativeLayout>

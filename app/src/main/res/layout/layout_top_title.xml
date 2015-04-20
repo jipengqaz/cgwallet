@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/top_title_layout"
     android:background="@color/top_title"
-    android:layout_alignParentTop="true"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/activity_title_height">
+    android:layout_width="0dp"
+    android:layout_height="0dp">
     <ImageView
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="20dp"
         android:id="@+id/show_left_button"
-        android:layout_width="30dp"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:src="@drawable/icon_about"
+        android:src="@mipmap/icon_menu_left"
         />
     <ImageView
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <ImageView
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_centerVertical="true"
         android:id="@+id/show_right_button"
-        android:layout_width="30dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:src="@drawable/icon_about"
+        android:src="@mipmap/icon_menu_right"
         />
 </RelativeLayout>
