@@ -21,6 +21,7 @@ public class Constants {
     public static final String LOGIN_PHONE = "login_phone";//登录手机号
     public static final String CONFIG = "config";
     public static final String MOBILE_PASSWORD = "login_password";//登录密码
+    public static boolean GESTURES_PASSWORD = true;//用于判断是否输入手势密码
 
     // 手势密码点的状态
     public static final int POINT_STATE_NORMAL = 0; // 正常状态

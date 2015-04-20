@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.GestureContentView;
 import cgtz.com.cgwallet.view.GestureDrawline;
@@ -83,6 +84,8 @@ public class GestureVerifyActivity extends Activity implements android.view.View
                     public void checkedSuccess() {
                         mGestureContentView.clearDrawlineState(0L);
                         Toast.makeText(GestureVerifyActivity.this, "密码正确", Toast.LENGTH_SHORT).show();
+
+                        Constants.GESTURES_PASSWORD = false;
                         GestureVerifyActivity.this.finish();
                     }
 
