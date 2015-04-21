@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cgtz.com.cgwallet" >
+
     <!-- QQ、QQ空间所需权限 -->
     <uses-permission android:name="android.permission.GET_TASKS" />
     <!-- 检测网络状态 -->
@@ -59,8 +60,8 @@
         </activity>
         <activity
             android:name=".activity.LoginOrRegistActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_login_or_regist" >
+            android:label="@string/title_activity_login_or_regist"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activity.GestureEditActivity"
@@ -72,11 +73,15 @@
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name=".activity.SafeCenterActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activity.WebViewActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.MenuMoreActivity"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 
