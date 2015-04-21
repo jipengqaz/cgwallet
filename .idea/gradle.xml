@@ -3,19 +3,8 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="distributionType" value="LOCAL" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-<<<<<<< Temporary merge branch 1
-<<<<<<< HEAD
-        <option name="gradleHome" value="F:\BaiduYunDownload\android-studio\gradle\gradle-2.2.1" />
-=======
-        <option name="gradleHome" value="F:\Android-IDE\android-studio-1.2.0bete\gradle\gradle-2.2.1" />
-=======
-        <option name="gradleHome" value="F:\Android-IDE\android-studio\gradle\gradle-2.2.1" />
-=======
-        <option name="gradleHome" value="F:\BaiduYunDownload\android-studio\gradle\gradle-2.2.1" />
->>>>>>> c15f83593cc2a2a4a14f11c5f4f5a5ead96bd742
->>>>>>> Temporary merge branch 2
         <option name="gradleJvm" value="1.7" />
         <option name="modules">
           <set>
