@@ -93,36 +93,36 @@ public class FeedBackActivity extends BaseActivity implements ISplashView{
                 }
             }
         });
-        feed_advise.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String str = s.toString();
-                if(!resetText){
-                    char codePoint = str.charAt(start);
-                    if(isEmojiCharacter(codePoint)){
-                        resetText = true;
-                        //是表情符号就将文本还原为输入表情符号之前的内容
-                        feed_advise.setText(tmp);
-                        feed_advise.setSelection(tmp.length());
-                        Utils.makeToast(FeedBackActivity.this, "不支持表情输入");
-                    }
-                }else{
-                    resetText = false;
-                }
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if(!resetText) {
-                    tmp = s.toString();//这里用s.toString()而不直接用s是因为如果用s，那么，tmp和s在内存中指向的是同一个地址，s改变了，tmp也就改变了，那么表情过滤就失败了
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });//设置判断
+//        feed_advise.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                String str = s.toString();
+//                if(!resetText){
+//                    char codePoint = str.charAt(start-1);
+//                    if(isEmojiCharacter(codePoint)){
+//                        resetText = true;
+//                        //是表情符号就将文本还原为输入表情符号之前的内容
+//                        feed_advise.setText(tmp);
+//                        feed_advise.setSelection(tmp.length());
+//                        Utils.makeToast(FeedBackActivity.this, "不支持表情输入");
+//                    }
+//                }else{
+//                    resetText = false;
+//                }
+//            }
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//                if(!resetText) {
+//                    tmp = s.toString();//这里用s.toString()而不直接用s是因为如果用s，那么，tmp和s在内存中指向的是同一个地址，s改变了，tmp也就改变了，那么表情过滤就失败了
+//                }
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });//设置判断
     }
 
     @Override
