@@ -85,7 +85,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/transfer_weight_height">
-            <cgtz.com.cgwallet.view.RippleLayout
+            <LinearLayout
                 android:background="@mipmap/bg_save_money"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -104,7 +104,7 @@
                     android:textSize="@dimen/save_or_draw_money_text_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-            </cgtz.com.cgwallet.view.RippleLayout>
+            </LinearLayout>
             <LinearLayout
                 android:layout_marginLeft="17dp"
                 android:background="@mipmap/bg_draw_money"
