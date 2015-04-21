@@ -36,4 +36,5 @@
     <color name="right_menu_share_text">#ffffff</color>
     <color name="click_color">#ededed</color>
     <color name="no_press_color">#ffffff</color>
+    <color name="save_or_draw_money_layout_text">#21c184</color>
 </resources>

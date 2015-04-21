@@ -39,4 +39,6 @@
     <dimen name="right_menu_share_text">14sp</dimen>
     <dimen name="right_menu_text">16sp</dimen>
     <dimen name="safe_center_text">14sp</dimen>
+    <dimen name="save_or_draw_money_layout_text">14sp</dimen>
+    <dimen name="save_or_draw_money_layout_height">50dp</dimen>
 </resources>
