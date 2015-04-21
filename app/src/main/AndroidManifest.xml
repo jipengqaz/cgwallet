@@ -59,16 +59,24 @@
         </activity>
         <activity
             android:name=".activity.LoginOrRegistActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_login_or_regist" >
         </activity>
         <activity
             android:name=".activity.GestureEditActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name=".activity.GestureVerifyActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity
-            android:name=".activity.SafeCenterActivity">
+            android:name=".activity.SafeCenterActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activity.WebViewActivity"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

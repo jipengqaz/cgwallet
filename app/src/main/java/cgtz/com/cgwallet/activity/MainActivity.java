@@ -38,6 +38,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private ImageView showRightButton;
     private ViewPager mViewPager;
     private LinearLayout menuSafeCenter;//安全中心
+    private LinearLayout menuHelpCenter;//帮助中心
 //    private TextView tvCgWallet;//草根钱包
 //    private TextView tvMyWallet;//我的钱包
     private TextView tvLogin;//未登录显示文案或者显示登录的手机号
@@ -142,6 +143,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 //        tvMyWallet = (TextView) findViewById(R.id.tv_top_title_my_wallet);
         tvLogin = (TextView) findViewById(R.id.tv_goToLogin);
         menuSafeCenter = (LinearLayout) findViewById(R.id.left_menu_safe_center);
+        menuHelpCenter = (LinearLayout) findViewById(R.id.left_menu_help_center);
     }
 
     private void setViewLinstener(){
@@ -149,6 +151,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 //        tvMyWallet.setOnClickListener(this);
         tvLogin.setOnClickListener(this);
         menuSafeCenter.setOnClickListener(this);
+        menuHelpCenter.setOnClickListener(this);
     }
 
     private void initFragment(){
@@ -203,6 +206,11 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         switch (v.getId()){
             case R.id.left_menu_safe_center://安全中心
                 startActivity(new Intent(MainActivity.this,SafeCenterActivity.class));
+                break;
+            case R.id.left_menu_help_center://帮助中心
+                startActivity(new Intent(MainActivity.this,WebViewActivity.class)
+                .putExtra("url","https://d5ds88.cgtz.com/version/notice/FAQ")
+                .putExtra("title","帮助中心"));
                 break;
 //            case R.id.tv_top_title_cg_wallet://草根钱包
 //                if(currIndex == 1){
