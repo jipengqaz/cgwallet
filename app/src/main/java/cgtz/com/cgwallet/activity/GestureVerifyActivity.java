@@ -27,6 +27,7 @@ import cgtz.com.cgwallet.view.GestureDrawline;
  *
  */
 public class GestureVerifyActivity extends Activity implements android.view.View.OnClickListener {
+    private static String TAG = "GestureVerifyActivity";
     /** 手机号码*/
     public static final String PARAM_PHONE_NUMBER = "PARAM_PHONE_NUMBER";
     /** 意图 */
@@ -120,11 +121,19 @@ public class GestureVerifyActivity extends Activity implements android.view.View
         builder.append(phoneNumber.subSequence(7, 11));
         return builder.toString();
     }
-
+    long waitTime = 2000;
+    long touchTime = 0;
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
+            long currentTime = System.currentTimeMillis();
+            if ((currentTime - touchTime) >= waitTime) {
+                Toast.makeText(this, "再按一次退出应用", Toast.LENGTH_SHORT).show();
+                touchTime = currentTime;
+            } else {
 
+                finish();
+            }
         }
         return true;
     }
@@ -133,7 +142,7 @@ public class GestureVerifyActivity extends Activity implements android.view.View
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.text_other_account://用其他账号登录
-
+                finish();
                 break;
             case R.id.text_forget_gesture://忘记手势密码
 
