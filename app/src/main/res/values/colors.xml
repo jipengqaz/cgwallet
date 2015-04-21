@@ -3,6 +3,7 @@
     <color name="action_bar_bg">#12e191</color>
     <color name="action_bar_title_text_color">#ffffff</color>
     <color name="main_blue">#45c01a</color>
+    <color name="bg_about_mine_btn">#45c01a</color>
     <color name="top_title">#12e191</color>
     <color name="main_red">#fb5e4f</color>
     <color name="main_bg">#12e191</color>
