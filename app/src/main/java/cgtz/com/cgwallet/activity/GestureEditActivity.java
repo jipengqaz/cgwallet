@@ -26,6 +26,7 @@ import cgtz.com.cgwallet.view.LockIndicator;
  *
  */
 public class GestureEditActivity extends Activity implements OnClickListener {
+    private static String TAG ="GestureEditActivity";
     /** 手机号码*/
     public static final String PARAM_PHONE_NUMBER = "PARAM_PHONE_NUMBER";
     /** 意图 */

@@ -16,6 +16,33 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+        android:name=".activity.LoginOrRegistActivity"
+        android:label="@string/title_activity_login_or_regist" >
+        </activity>
+
+        <activity
+        android:name=".activity.GestureEditActivity"
+        android:theme="@android:style/Theme.NoTitleBar"/>
+
+        <activity
+        android:name=".activity.GestureVerifyActivity"
+        android:theme="@android:style/Theme.NoTitleBar"/>
+        <activity
+        android:name=".activity.aaaaaaa"
+        />
+        <!-- ###################注册SDK使用的Activity###################### -->
+        <!--分享编辑页-->
+        <activity
+            android:name="com.umeng.socialize.view.ShareActivity"
+            android:configChanges="orientation|keyboard"
+            android:launchMode="singleTask"
+            android:noHistory="true"
+            android:theme="@style/Theme.UMDialog"
+            android:windowSoftInputMode="stateVisible|adjustResize" >
+        </activity>
+
         <!-- ############ QQ空间和QQ SSO授权的Activity注册 ############ -->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
@@ -34,22 +61,21 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:screenOrientation="portrait">
         </activity>
+        <!--QQ   end-->
 
+        <!-- ###################添加UmengAppkey###################### -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="552cc88cfd98c58400000128" >
+        </meta-data>
+        <!--添加UmengAppkey end-->
+        <!--微信分享  回调-->
         <activity
-            android:name=".activity.LoginOrRegistActivity"
-            android:label="@string/title_activity_login_or_regist" >
-        </activity>
-
-        <activity
-            android:name=".activity.GestureEditActivity"
-            android:theme="@android:style/Theme.NoTitleBar"/>
-
-        <activity
-            android:name=".activity.GestureVerifyActivity"
-            android:theme="@android:style/Theme.NoTitleBar"/>
-        <activity
-            android:name=".activity.aaaaaaa"
-            />
+            android:name=".wxapi.WXEntryActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait" />
     </application>
     <!-- QQ、QQ空间所需权限 -->
     <uses-permission android:name="android.permission.GET_TASKS" />
