@@ -1,8 +1,10 @@
 package cgtz.com.cgwallet.utils;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.widget.Toast;
 
+import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.utility.Constants;
 
 /**
@@ -58,5 +60,31 @@ public class Utils {
      */
     public static void makeToast(Context context,String msg){
         Toast.makeText(context,msg,Toast.LENGTH_LONG);
+    }
+
+    /**
+     * 过滤code结果
+     * @param jsonBean
+     */
+    public static boolean filtrateCode(Context context,JsonBean jsonBean){
+        LogUtils.i("JsonBean","过滤code结果："+jsonBean.getJsonString());
+        int code = jsonBean.getCode();//code判断值
+        String errorMsg = jsonBean.getError_msg();//错误信息
+        if(code == Constants.OPERATION_FAIL || code == Constants.OPERATION_SUCCESS){
+            return true;
+        }else{
+            Utils.makeToast(context,errorMsg);
+            return false;
+        }
+    }
+
+    /**
+     * 关闭开启的弹窗
+     * @param dialog
+     */
+    public static void closeDialog(Context context,Dialog dialog){
+        if(dialog != null && dialog.isShowing()){
+            dialog.cancel();
+        }
     }
 }

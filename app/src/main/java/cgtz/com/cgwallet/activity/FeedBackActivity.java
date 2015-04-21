@@ -11,8 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.HashMap;
+
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
+import cgtz.com.cgwallet.utility.Constants;
+import cgtz.com.cgwallet.utils.CustomTask;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.ISplashView;
 import cgtz.com.cgwallet.widget.ProgressDialog;
@@ -23,40 +28,11 @@ import cgtz.com.cgwallet.widget.ProgressDialog;
 public class FeedBackActivity extends BaseActivity implements ISplashView{
     private static final String TAG = "Feed_back_Activity";
     private EditText feed_advise;
+    private Button feed_send;
     //输入表情前EditText中的文本
     private String tmp;
     //是否重置了EditText的内容
     private boolean resetText;
-    private TextWatcher watcher = new TextWatcher() {
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if(!resetText){
-                char codePoint = s.charAt(start);
-                if(isEmojiCharacter(codePoint)){
-                    resetText = true;
-                    //是表情符号就将文本还原为输入表情符号之前的内容
-                    feed_advise.setText(tmp);
-                    feed_advise.setSelection(tmp.length());
-                    Utils.makeToast(FeedBackActivity.this, "不支持表情输入");
-                }
-            }else{
-                resetText = false;
-            }
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            if(!resetText) {
-                tmp = s.toString();//这里用s.toString()而不直接用s是因为如果用s，那么，tmp和s在内存中指向的是同一个地址，s改变了，tmp也就改变了，那么表情过滤就失败了
-            }
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-
-        }
-    };
 
     private SplashPresenter presenter;
     private String editMsg;
@@ -66,8 +42,25 @@ public class FeedBackActivity extends BaseActivity implements ISplashView{
         @Override
         public void handleMessage(Message msg) {
             int what = msg.what;
+            JsonBean jsonBean = (JsonBean) msg.obj;
+            int code = jsonBean.getCode();
+            String errorMsg = jsonBean.getError_msg();
+            if(code == Constants.DATA_EVENT){
+                Utils.makeToast(FeedBackActivity.this,Constants.ERROR_MSG_CODE+code);
+                return;
+            }
             switch (what){
-
+                case Constants.WHAT_FEED_BACK://意见反馈，服务器结果返回
+                    boolean flag = Utils.filtrateCode(FeedBackActivity.this,jsonBean);
+                    if(flag && code == Constants.OPERATION_FAIL){//数据交互失败
+                        Utils.makeToast(FeedBackActivity.this,errorMsg);
+                    }else if(flag && code == Constants.OPERATION_SUCCESS){//数据交互成功
+                        Utils.makeToast(FeedBackActivity.this,errorMsg);
+                        finish();
+                    }else{
+                        progressDialog.dismiss();
+                    }
+                    break;
             }
         }
     };
@@ -79,12 +72,16 @@ public class FeedBackActivity extends BaseActivity implements ISplashView{
         setTitle("意见反馈");
         showBack(true);
         presenter = new SplashPresenter(this);
-        progressDialog = new ProgressDialog(this);
+
         TextView ke_fu= (TextView) findViewById(R.id.ke_fu);
 //        ke_fu.setText(KeFu_Share.getSaveKefu(this));
         feed_advise= (EditText) findViewById(R.id.feed_advise);
-        feed_advise.addTextChangedListener(watcher);//设置判断
-        Button feed_send= (Button) findViewById(R.id.feed_send);
+        feed_send= (Button) findViewById(R.id.feed_send);
+        setListener();
+
+    }
+
+    private void setListener(){
         feed_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +93,42 @@ public class FeedBackActivity extends BaseActivity implements ISplashView{
                 }
             }
         });
+        feed_advise.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String str = s.toString();
+                if(!resetText){
+                    char codePoint = str.charAt(start);
+                    if(isEmojiCharacter(codePoint)){
+                        resetText = true;
+                        //是表情符号就将文本还原为输入表情符号之前的内容
+                        feed_advise.setText(tmp);
+                        feed_advise.setSelection(tmp.length());
+                        Utils.makeToast(FeedBackActivity.this, "不支持表情输入");
+                    }
+                }else{
+                    resetText = false;
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                if(!resetText) {
+                    tmp = s.toString();//这里用s.toString()而不直接用s是因为如果用s，那么，tmp和s在内存中指向的是同一个地址，s改变了，tmp也就改变了，那么表情过滤就失败了
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });//设置判断
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Utils.closeDialog(this,progressDialog);
     }
 
     /**
@@ -114,6 +147,11 @@ public class FeedBackActivity extends BaseActivity implements ISplashView{
 
     @Override
     public void startProcessBar() {
+        if(progressDialog == null){
+            progressDialog = new ProgressDialog(this,R.style.loading_dialog);
+        }else if(progressDialog.isShowing()){
+            progressDialog.dismiss();
+        }
         progressDialog.show();
     }
 
@@ -130,6 +168,15 @@ public class FeedBackActivity extends BaseActivity implements ISplashView{
     @Override
     public void startNextActivity() {
         //服务器数据交互操作
-
+        HashMap<String,String> maps = new HashMap<>();
+        maps.put("user_id","191800033066");
+        maps.put("token","CzjBA6gam5rasbbur9GExoUToYAw_xnI7BoKVl6blto");
+        maps.put("advise",editMsg);
+        maps.put("source","1");
+        CustomTask task = new CustomTask(mHandler, Constants.WHAT_FEED_BACK,
+                                                    Constants.URL_FEED_BACK,
+                                                    true,maps,true);
+        task.execute();
     }
+
 }

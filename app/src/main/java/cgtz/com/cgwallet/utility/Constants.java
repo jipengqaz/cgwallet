@@ -4,6 +4,7 @@ package cgtz.com.cgwallet.utility;
  * Created by Administrator on 2015/4/11.
  */
 public class Constants {
+    public static final String ENCONDING = "UTF-8";
     public static final boolean IS_TEST = true;//判断是否为测试环境
     public static final boolean IS_DEVELOP = true;//用于在开发还是测试之间选择测试服务器路径的判断
     public static final boolean IS_28 = false;//判断是否更改为28服务器路径
@@ -27,6 +28,8 @@ public class Constants {
     public static final String LOGIN_PHONE = "login_phone";//登录手机号
     public static final String CONFIG = "config";
     public static final String MOBILE_PASSWORD = "login_password";//登录密码
+    public static final String ERROR_MSG_CODE = "错误码";//内容解析错误
+
     public static boolean GESTURES_PASSWORD = true;//用于判断是否输入手势密码
 
     // 手势密码点的状态

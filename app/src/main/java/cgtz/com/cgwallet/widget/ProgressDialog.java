@@ -55,7 +55,7 @@ public class ProgressDialog extends Dialog {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT
         ));
-        this.setCanceledOnTouchOutside(false);//µã»÷ÆÁÄ»²»ÏûÊ§
+        this.setCanceledOnTouchOutside(false);//ç‚¹å‡»å±å¹•ä¸æ¶ˆå¤±
     }
 
     private void init(){
@@ -64,9 +64,9 @@ public class ProgressDialog extends Dialog {
         LinearLayout layout = (LinearLayout) mView.findViewById(R.id.loading_dialog);
         ImageView imageView = (ImageView) mView.findViewById(R.id.loading_imageview);
         msgText = (TextView) mView.findViewById(R.id.loading_textview);
-        //¼ÓÔØ¶¯»­
+        //ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½
         Animation jumpAnimation = AnimationUtils.loadAnimation(context, R.anim.anim_loading);
-        //Ê¹ÓÃimageviewÏÔÊ¾¶¯»­
+        //Ê¹ï¿½ï¿½imageviewï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
         imageView.setAnimation(jumpAnimation);
     }
 }

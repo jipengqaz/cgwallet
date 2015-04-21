@@ -18,7 +18,7 @@ public class CustomTask extends AsyncTask<String,Void,String> {
     private String url_;//访问路径
     private boolean flag;//判断get或者post方法  get为false,post为true
     private String content;//post传递的参数
-    private String encode;//编码
+    private String encode = Constants.ENCONDING;//编码
     private int handler_what;//回调handler的 what判断值
     private Context mContext;//所在页面
     private boolean isFinish;//判断是否要关闭所在页面
@@ -38,6 +38,29 @@ public class CustomTask extends AsyncTask<String,Void,String> {
         this.flag = isPost;
         this.url_ = (Constants.IS_TEST?Constants.OFFLINE_HTTP:Constants.ONLINE_HTTP) + url_;
         this.encode = encode;
+        if(flag){
+            content = HttpUtils.getRequestData(maps,encode).toString();
+        }
+        LogUtils.e("CustomTask", "url: " + this.url_+" content: "+content);
+    }/**
+     *
+     * @param handler
+     * @param handler_what  handler 判断值
+     * @param url_          接口
+     * @param isPost        判断是否为post访问   true为post
+     * @param maps          参数集合
+     * @param is_ping       判断是否拼接路径  true为拼接
+     */
+    public CustomTask(Handler handler,int handler_what,String url_,
+                      boolean isPost,Map<String,String> maps,boolean is_ping){
+        this.handler = handler;
+        this.handler_what = handler_what;
+        this.flag = isPost;
+        if(is_ping) {
+            this.url_ = (Constants.IS_TEST?Constants.OFFLINE_HTTP:Constants.ONLINE_HTTP) + url_;
+        }else{
+            this.url_ = url_;
+        }
         if(flag){
             content = HttpUtils.getRequestData(maps,encode).toString();
         }
