@@ -5,7 +5,13 @@ package cgtz.com.cgwallet.utility;
  */
 public class Constants {
     public static final boolean IS_TEST = true;//判断是否为测试环境
-    public static final String OFFLINE_HTTP = "";//测试服务器路径
+    public static final boolean IS_DEVELOP = true;//用于在开发还是测试之间选择测试服务器路径的判断
+    public static final boolean IS_28 = false;//判断是否更改为28服务器路径
+    public static final String OFFLINE_HTTP_TEST = "http://192.168.10.188:45680/wallet/";//用于开发的-测试服务器路径
+    public static final String OFFLINE_HTTP_DEVELOP = "http://192.168.10.188:45680/wallet2/";//用于开发的-测试服务器路径
+    public static final String OFFLINE_HTTP_28 = "http://115.29.245.28:42111/wallet/";//测试服务器路径
+    public static final String OFFLINE_HTTP = IS_28?OFFLINE_HTTP_28:
+                                    (IS_DEVELOP?OFFLINE_HTTP_DEVELOP:OFFLINE_HTTP_TEST);//测试服务器路径
     public static final String ONLINE_HTTP = "";//线上服务器路径
     public static final String VERSION = "";//版本号
     public static final int DATA_EVENT = -1;//服务器返回的json数据解析异常
@@ -28,4 +34,7 @@ public class Constants {
     public static final int POINT_STATE_SELECTED = 1; // 按下状态
     public static final int POINT_STATE_WRONG = 2; // 错误状态
     //end
+
+    public static final int WHAT_FEED_BACK = 2015042114;//意见反馈
+    public static final String URL_FEED_BACK = "site/feedBack";//意见反馈
 }

@@ -1,7 +1,10 @@
 package cgtz.com.cgwallet.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -9,8 +12,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.ISplashView;
+import cgtz.com.cgwallet.widget.ProgressDialog;
 
 /**
  * 意见反馈
@@ -53,12 +58,28 @@ public class FeedBackActivity extends BaseActivity implements ISplashView{
         }
     };
 
+    private SplashPresenter presenter;
+    private String editMsg;
+    private ProgressDialog progressDialog;
+
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            int what = msg.what;
+            switch (what){
+
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed_back);
         setTitle("意见反馈");
         showBack(true);
+        presenter = new SplashPresenter(this);
+        progressDialog = new ProgressDialog(this);
         TextView ke_fu= (TextView) findViewById(R.id.ke_fu);
 //        ke_fu.setText(KeFu_Share.getSaveKefu(this));
         feed_advise= (EditText) findViewById(R.id.feed_advise);
@@ -67,6 +88,12 @@ public class FeedBackActivity extends BaseActivity implements ISplashView{
         feed_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                editMsg = feed_advise.getText().toString();//获取输入的内容
+                if(TextUtils.isEmpty(editMsg)){
+                    Utils.makeToast(FeedBackActivity.this,"请输入意见内容");
+                }else{
+                    presenter.didFinishLoading(FeedBackActivity.this);
+                }
             }
         });
     }
@@ -87,21 +114,22 @@ public class FeedBackActivity extends BaseActivity implements ISplashView{
 
     @Override
     public void startProcessBar() {
-
+        progressDialog.show();
     }
 
     @Override
     public void hideProcessBar() {
-
+        progressDialog.dismiss();
     }
 
     @Override
     public void showNetError() {
-
+        Utils.makeToast(this,"错误");
     }
 
     @Override
     public void startNextActivity() {
+        //服务器数据交互操作
 
     }
 }

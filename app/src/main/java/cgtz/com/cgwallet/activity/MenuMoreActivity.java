@@ -40,13 +40,13 @@ public class MenuMoreActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.about_mine:
+            case R.id.about_mine://关于我们
                 startActivity(new Intent(MenuMoreActivity.this,AboutCompanyActivity.class));
                 break;
-            case R.id.feed_back:
+            case R.id.feed_back://意见反馈
                 startActivity(new Intent(MenuMoreActivity.this,FeedBackActivity.class));
                 break;
-            case R.id.contact_mine:
+            case R.id.contact_mine://联系我们
                 break;
         }
     }

@@ -2,6 +2,8 @@
 <project version="4">
   <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/SafeCenterActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/widget/ProgressDialog.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/bg_custom_progressdialog.png" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
