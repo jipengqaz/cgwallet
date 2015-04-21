@@ -87,6 +87,10 @@
             android:name=".activity.AboutCompanyActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".activity.FeedBackActivity"
+            android:label="@string/title_activity_feed_back" >
+        </activity>
     </application>
 
 </manifest>

@@ -38,4 +38,6 @@
     <color name="click_color">#ededed</color>
     <color name="no_press_color">#ffffff</color>
     <color name="save_or_draw_money_layout_text">#0ac27b</color>
+    <color name="bg_feed_back_edit">#ffffff</color>
+    <color name="feed_back_edit_hint">#959696</color>
 </resources>

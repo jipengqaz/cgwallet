@@ -3,7 +3,6 @@ package cgtz.com.cgwallet.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import cgtz.com.cgwallet.R;
@@ -45,6 +44,7 @@ public class MenuMoreActivity extends BaseActivity implements View.OnClickListen
                 startActivity(new Intent(MenuMoreActivity.this,AboutCompanyActivity.class));
                 break;
             case R.id.feed_back:
+                startActivity(new Intent(MenuMoreActivity.this,FeedBackActivity.class));
                 break;
             case R.id.contact_mine:
                 break;

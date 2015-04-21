@@ -32,4 +32,5 @@
     <string name="no_binding">未绑定</string>
     <string name="login_pwd_change">修改登录密码</string>
     <string name="sodoko_unlock">管理手势密码</string>
+    <string name="title_activity_feed_back">FeedBackActivity</string>
 </resources>
