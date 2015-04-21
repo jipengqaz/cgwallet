@@ -19,6 +19,9 @@
     </LinearLayout>
     <LinearLayout
         android:layout_marginLeft="15dp"
+        android:padding="5dp"
+        android:layout_alignParentLeft="true"
+        android:visibility="gone"
         android:gravity="center"
         android:id="@+id/action_bar_back_layout"
         android:layout_centerVertical="true"

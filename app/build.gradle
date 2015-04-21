@@ -42,7 +42,6 @@ android {
 
     productFlavors {
         cgtz {}
-        qihu360{}
     }
 
     productFlavors.all { flavor ->

@@ -1,6 +1,7 @@
 package cgtz.com.cgwallet.utils;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import cgtz.com.cgwallet.utility.Constants;
 
@@ -48,5 +49,14 @@ public class Utils {
     public static String getLockPassword(Context context,String phone){
         SharedUtils sharedUtils = new SharedUtils(context,Constants.CONFIG_GESTURE);
         return sharedUtils.getString(phone,"");
+    }
+
+    /**
+     * 显示toast信息
+     * @param context
+     * @param msg
+     */
+    public static void makeToast(Context context,String msg){
+        Toast.makeText(context,msg,Toast.LENGTH_LONG);
     }
 }

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="action_bar_bg">#f8f8f8</color>
+    <color name="action_bar_bg">#12e191</color>
     <color name="action_bar_title_text_color">#ffffff</color>
     <color name="main_blue">#45c01a</color>
+    <color name="bg_about_mine_btn">#45c01a</color>
     <color name="top_title">#12e191</color>
     <color name="main_red">#fb5e4f</color>
     <color name="main_bg">#12e191</color>
+    <color name="bg_center">#f8f8f8</color>
     <color name="main_comment">#606060</color>
     <color name="main_tips1">#262831</color>//tips1
     <color name="main_tips2">#7d7d7d</color>//tips2
@@ -33,4 +35,9 @@
     <color name="center_layout_normal_text">#ffffff</color>
     <color name="left_menu_loginout_text">#91939a</color>
     <color name="right_menu_share_text">#ffffff</color>
+    <color name="click_color">#ededed</color>
+    <color name="no_press_color">#ffffff</color>
+    <color name="save_or_draw_money_layout_text">#0ac27b</color>
+    <color name="bg_feed_back_edit">#ffffff</color>
+    <color name="feed_back_edit_hint">#959696</color>
 </resources>

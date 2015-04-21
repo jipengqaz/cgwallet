@@ -55,6 +55,9 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private ImageView showLeftButton;
     private ImageView showRightButton;
     private ViewPager mViewPager;
+    private LinearLayout menuSafeCenter;//安全中心
+    private LinearLayout menuHelpCenter;//帮助中心
+    private LinearLayout menuMore;//更多
 //    private TextView tvCgWallet;//草根钱包
 //    private TextView tvMyWallet;//我的钱包
     private TextView tvLogin;//未登录显示文案或者显示登录的手机号
@@ -303,12 +306,18 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 //        tvCgWallet = (TextView) findViewById(R.id.tv_top_title_cg_wallet);
 //        tvMyWallet = (TextView) findViewById(R.id.tv_top_title_my_wallet);
         tvLogin = (TextView) findViewById(R.id.tv_goToLogin);
+        menuSafeCenter = (LinearLayout) findViewById(R.id.left_menu_safe_center);
+        menuHelpCenter = (LinearLayout) findViewById(R.id.left_menu_help_center);
+        menuMore = (LinearLayout) findViewById(R.id.left_menu_more);
     }
 
     private void setViewLinstener(){
 //        tvCgWallet.setOnClickListener(this);
 //        tvMyWallet.setOnClickListener(this);
         tvLogin.setOnClickListener(this);
+        menuSafeCenter.setOnClickListener(this);
+        menuHelpCenter.setOnClickListener(this);
+        menuMore.setOnClickListener(this);
     }
 
     private void initFragment(){
@@ -361,6 +370,17 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.left_menu_safe_center://安全中心
+                startActivity(new Intent(MainActivity.this,SafeCenterActivity.class));
+                break;
+            case R.id.left_menu_help_center://帮助中心
+                startActivity(new Intent(MainActivity.this,WebViewActivity.class)
+                .putExtra("url","https://d5ds88.cgtz.com/version/notice/FAQ")
+                .putExtra("title","帮助中心"));
+                break;
+            case R.id.left_menu_more://更多
+                startActivity(new Intent(MainActivity.this,MenuMoreActivity.class));
+                break;
 //            case R.id.tv_top_title_cg_wallet://草根钱包
 //                if(currIndex == 1){
 //                    currIndex = 0;

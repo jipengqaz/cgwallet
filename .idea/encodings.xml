@@ -1,32 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/BaseActivity.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/MainActivity.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/adapter/MFragmentPagerAdater.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/bean/JsonBean.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/fragment/BaseFragment.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/fragment/CgWalletFragment.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/fragment/MyWalletFragment.java" charset="UTF-8" />
-<<<<<<< HEAD
-=======
-    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/utils/AppUtil.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/view/GestureContentView.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/view/GestureDrawline.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/view/LockIndicator.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/anim" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/color/gesture_cancel_text_color.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_gesture_edit.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_gesture_verify.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/gesture_node_normal.png" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/gesture_node_pressed.png" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/gesture_node_wrong.png" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/lock_pattern_node_normal.png" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/lock_pattern_node_pressed.png" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/user_logo.png" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/umeng_socialize_sina_off.png" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/umeng_socialize_sina_on.png" charset="GBK" />
->>>>>>> c15f83593cc2a2a4a14f11c5f4f5a5ead96bd742
+  <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/SafeCenterActivity.java" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

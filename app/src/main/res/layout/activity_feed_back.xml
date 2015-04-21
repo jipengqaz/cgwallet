@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="25.0dip"
+            android:paddingTop="25.0dip"
+            android:paddingRight="25.0dip"
+            android:paddingBottom="25.0dip"
+            android:orientation="vertical"
+            >
+            <EditText
+                android:id="@+id/feed_advise"
+                android:layout_width="match_parent"
+                android:layout_height="200dip"
+                android:hint="感谢你对草根投资的关注，您的意见我们一定认真听取!"
+                android:gravity="top"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:maxLength="140"
+                android:textColorHint="@color/feed_back_edit_hint"
+                android:paddingBottom="10dip"
+                android:background="@drawable/bg_feed_back"
+                />
+
+
+            <Button
+                android:id="@+id/feed_send"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textSize="19sp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:text="提交"
+                />
+
+            <TextView
+                android:id="@+id/ke_fu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="客服热线：400-853-8800   [09:00-22:00]"
+                android:paddingTop="30.0dip"
+                android:gravity="center"
+                />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
+

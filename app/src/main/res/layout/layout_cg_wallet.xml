@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_cg_wallet"
     android:orientation="vertical"
-    android:background="@color/main_bg"
     android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -83,6 +82,7 @@
         android:layout_height="wrap_content">
         <LinearLayout
             android:gravity="center"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/transfer_weight_height">
             <LinearLayout
@@ -90,7 +90,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent">
                 <ImageView
                     android:src="@mipmap/icon_save_money"
@@ -108,13 +108,11 @@
             <LinearLayout
                 android:layout_marginLeft="17dp"
                 android:background="@mipmap/bg_draw_money"
-                android:layout_weight="0.3"
+                android:layout_weight="1"
                 android:layout_gravity="right"
                 android:gravity="center"
-                android:paddingLeft="@dimen/transfer_box_padding"
-                android:paddingRight="@dimen/transfer_box_padding"
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent">
                 <TextView
                     android:text="@string/transfer_input"

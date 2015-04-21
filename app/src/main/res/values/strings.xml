@@ -26,4 +26,11 @@
     <string name="wallet_basic_info1">1元起投</string>
     <string name="wallet_basic_info2">五重保障</string>
     <string name="wallet_basic_info3">随存随取</string>
+    <string name="really_name">实名认证</string>
+    <string name="really_bankcard">银行卡</string>
+    <string name="no_anthen">未认证</string>
+    <string name="no_binding">未绑定</string>
+    <string name="login_pwd_change">修改登录密码</string>
+    <string name="sodoko_unlock">管理手势密码</string>
+    <string name="title_activity_feed_back">FeedBackActivity</string>
 </resources>
