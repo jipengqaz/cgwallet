@@ -120,6 +120,9 @@
         <activity android:name=".activity.E_wallet_record_activity"
             android:label="@string/title_activity_e_all"
             />
+        <activity android:name=".activity.Earnings_record"
+
+            />
     </application>
 
 </manifest>

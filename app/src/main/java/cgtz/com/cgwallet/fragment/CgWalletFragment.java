@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import cgtz.com.cgwallet.R;
-import cgtz.com.cgwallet.activity.E_wallet_record_activity;
+import cgtz.com.cgwallet.activity.Earnings_record;
 
 /**
  * �ݸ�草根钱包
@@ -23,7 +23,7 @@ public class CgWalletFragment extends BaseFragment {
         cun_qian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), E_wallet_record_activity.class));
+                startActivity(new Intent(getActivity(), Earnings_record.class));
             }
         });
 //        Button aaaa= (Button) layoutView.findViewById(R.id.aaaaaaaaa);//设置手势密码

@@ -50,4 +50,6 @@
     <color name="save_or_draw_money_layout_text">#0ac27b</color>
     <color name="bg_feed_back_edit">#ffffff</color>
     <color name="feed_back_edit_hint">#959696</color>
+    <color name="item_earnings_record_2_2">#d1d1d1</color>
+    <color name="item_earnings_record_2_background">#f1f1f1</color>
 </resources>

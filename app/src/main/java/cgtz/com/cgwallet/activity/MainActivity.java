@@ -460,7 +460,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     protected void onStart() {
         super.onRestart();
-        Log.e(TAG, "123456" + Constants.GESTURES_PASSWORD);
         if(Utils.getLockPassword(this, "123456")!=""&& Constants.GESTURES_PASSWORD){
             Intent intent  = new Intent();
             intent.setClass(this,GestureVerifyActivity.class);

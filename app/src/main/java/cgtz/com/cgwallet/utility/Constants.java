@@ -40,4 +40,5 @@ public class Constants {
 
     public static final int WHAT_FEED_BACK = 2015042114;//意见反馈
     public static final String URL_FEED_BACK = "site/feedBack";//意见反馈
+    public static final String URL_INTEREST_HISTORY = "ewallet/InterestHistory";//收益历史
 }
