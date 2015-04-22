@@ -48,4 +48,7 @@
     <dimen name="login_welcome_text">14sp</dimen>
     <dimen name="login_edit_text">16sp</dimen>
     <dimen name="login_btn_text">16sp</dimen>
+    <dimen name="my_wallet_today_earning_hint">14sp</dimen>
+    <dimen name="my_wallet_top_height">165dp</dimen>
+    <dimen name="my_wallet_figure_size">68sp</dimen>
 </resources>

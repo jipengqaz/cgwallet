@@ -11,7 +11,7 @@ import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.activity.E_wallet_record_activity;
 
 /**
- * �ݸ�草根钱包
+ * 草根钱包
  * Created by Administrator on 2015/4/11.
  */
 public class CgWalletFragment extends BaseFragment {
@@ -26,30 +26,6 @@ public class CgWalletFragment extends BaseFragment {
                 startActivity(new Intent(getActivity(), E_wallet_record_activity.class));
             }
         });
-//        Button aaaa= (Button) layoutView.findViewById(R.id.aaaaaaaaa);//设置手势密码
-//        Button bbbb = (Button) layoutView.findViewById(R.id.bbbbbbbb);//校验手势密码
-//        View.OnClickListener click   = new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent();
-//                switch (v.getId()){
-//                    case R.id.aaaaaaaaa:
-//                        intent.setClass(getActivity(),GestureEditActivity.class);
-//                        startActivity(intent);
-//                    break;
-//                    case R.id.bbbbbbbb:
-//                        if(Utils.getLockPassword(getActivity(),"123456")!=""){
-//                            intent.setClass(getActivity(),GestureVerifyActivity.class);
-//                            startActivity(intent);
-//                        }else{
-//                            Toast.makeText(getActivity(),"未设置手势密码",Toast.LENGTH_SHORT);
-//                        }
-//                        break;
-//            }
-//            }
-//        };
-//        aaaa.setOnClickListener(click);
-//        bbbb.setOnClickListener(click);
         return layoutView;
     }
 }

@@ -45,5 +45,6 @@
     <string name="login_edit_hint_text">请输入手机号</string>
     <string name="login_button_next">下一步</string>
     <string name="login_button_finish">完成</string>
+    <string name="my_wallet_today_earning_hint">今日收益（元）</string>
 
 </resources>

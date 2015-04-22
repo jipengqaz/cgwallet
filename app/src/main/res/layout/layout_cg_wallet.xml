@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_cg_wallet"
+    android:background="@mipmap/bg_main"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:layout_width="match_parent"

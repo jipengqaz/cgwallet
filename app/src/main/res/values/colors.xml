@@ -57,4 +57,5 @@
     <color name="bg_login_edit_stroke">#0085d4</color>
     <color name="bg_login_button_normal">#0095d1</color>
     <color name="bg_login_button_click">#005383</color>
+    <color name="my_wallet_today_earning_hint">#ffffff</color>
 </resources>
