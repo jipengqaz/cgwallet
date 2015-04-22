@@ -295,6 +295,7 @@ public class BidirSlidingLayout extends RelativeLayout implements OnTouchListene
 				contentLayoutParams.rightMargin = -leftMenuLayoutParams.width - moveDistanceX;
 				checkLeftMenuBorder();
 				contentLayout.setLayoutParams(contentLayoutParams);
+				break;
 			case SHOW_RIGHT_MENU:
 				contentLayoutParams.leftMargin = moveDistanceX;
 				checkRightMenuBorder();
@@ -304,6 +305,7 @@ public class BidirSlidingLayout extends RelativeLayout implements OnTouchListene
 				contentLayoutParams.leftMargin = -rightMenuLayoutParams.width + moveDistanceX;
 				checkRightMenuBorder();
 				contentLayout.setLayoutParams(contentLayoutParams);
+				break;
 			default:
 				break;
 			}
