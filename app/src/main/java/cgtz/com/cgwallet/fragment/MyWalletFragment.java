@@ -2,17 +2,21 @@ package cgtz.com.cgwallet.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.utils.LogUtils;
 
 /**
  * 我的钱包
  * Created by Administrator on 2015/4/11.
  */
 public class MyWalletFragment extends BaseFragment {
+    private static final String TAG = "MyWalletFragment";
     private LinearLayout layoutAuther;
     private LinearLayout layoutBank;
     private LinearLayout layoutDraw;
@@ -26,6 +30,7 @@ public class MyWalletFragment extends BaseFragment {
         View layoutView = inflater.inflate(R.layout.layout_my_wallet,container,false);
         initViews(layoutView);
         setWidgetAttrs();
+        setListener();
         return layoutView;
     }
 
@@ -57,5 +62,8 @@ public class MyWalletFragment extends BaseFragment {
         LinearLayout.LayoutParams saveRecordParams = (LinearLayout.LayoutParams) layoutSaveRecord.getLayoutParams();
         saveRecordParams.width = screenWidth/2;
         layoutSaveRecord.setLayoutParams(saveRecordParams);
+    }
+
+    private void setListener(){
     }
 }
