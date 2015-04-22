@@ -11,6 +11,11 @@
     <string name="title_activity_login_or_regist">LoginOrRegistActivity</string>
     <string name="main_right_text">当面扫一扫，好友一起赚</string>
     <string name="main_right_text_bottom">推荐规则 ></string>
+    <string name="click_to_see_more">点击查看更多</string>
+    <string name="load">加载中……</string>
+    <string name="load_wait">请稍后……</string>
+    <string name="load_error">载入失败，点击重新载入</string>
+    <string name="no_more">• END •</string>
 
     <!-- 设置手势界面文案  -->
     <string name="setup_gesture_code">设置手势密码</string>
@@ -32,5 +37,8 @@
     <string name="no_binding">未绑定</string>
     <string name="login_pwd_change">修改登录密码</string>
     <string name="sodoko_unlock">管理手势密码</string>
+
+    <!--activity  name-->
     <string name="title_activity_feed_back">FeedBackActivity</string>
+    <string name="title_activity_e_all">转账记录</string>
 </resources>

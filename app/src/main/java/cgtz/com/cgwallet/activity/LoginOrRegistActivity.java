@@ -22,7 +22,6 @@ public class LoginOrRegistActivity extends BaseActivity implements ISplashView{
         aaaa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(LoginOrRegistActivity.this,aaaaaaa.class));
             }
         });
     }

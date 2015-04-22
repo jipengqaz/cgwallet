@@ -5,13 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
+import android.widget.LinearLayout;
 
 import cgtz.com.cgwallet.R;
-import cgtz.com.cgwallet.activity.GestureEditActivity;
-import cgtz.com.cgwallet.activity.GestureVerifyActivity;
-import cgtz.com.cgwallet.utils.Utils;
+import cgtz.com.cgwallet.activity.E_wallet_record_activity;
 
 /**
  * �ݸ�草根钱包
@@ -21,7 +18,14 @@ public class CgWalletFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View layoutView = inflater.inflate(R.layout.layout_cg_wallet,container,false);
+        View layoutView = inflater.inflate(R.layout.layout_cg_wallet, container, false);
+        LinearLayout cun_qian = (LinearLayout) layoutView.findViewById(R.id.cun_qian);
+        cun_qian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), E_wallet_record_activity.class));
+            }
+        });
 //        Button aaaa= (Button) layoutView.findViewById(R.id.aaaaaaaaa);//设置手势密码
 //        Button bbbb = (Button) layoutView.findViewById(R.id.bbbbbbbb);//校验手势密码
 //        View.OnClickListener click   = new View.OnClickListener() {

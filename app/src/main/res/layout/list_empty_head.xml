@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:id="@+id/search_empty_view"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/empty_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
+            android:layout_marginBottom="15dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="55dp"
+            android:id="@+id/empty_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="没有搜到你想找的活动"
+            android:textColor="@color/main_tips2"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tv_go_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textSize="14sp"
+            android:textColor="@color/main_blue"
+            android:text="去提交"
+            android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>

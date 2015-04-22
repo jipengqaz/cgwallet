@@ -117,6 +117,9 @@
             android:name=".activity.FeedBackActivity"
             android:label="@string/title_activity_feed_back" >
         </activity>
+        <activity android:name=".activity.E_wallet_record_activity"
+            android:label="@string/title_activity_e_all"
+            />
     </application>
 
 </manifest>

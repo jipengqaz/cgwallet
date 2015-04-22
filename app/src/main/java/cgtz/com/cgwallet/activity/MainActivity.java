@@ -154,9 +154,9 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 
                         QQShareContent qqShareContent = new QQShareContent();
                         //设置分享文字
-                        qqShareContent.setShareContent("来自友盟社会化组件（SDK）让移动应用快速整合社交分享功能 -- QQ");
+                        qqShareContent.setShareContent("草根投资");
                         //设置分享title
-                        qqShareContent.setTitle("hello, title");
+                        qqShareContent.setTitle("草根投资");
                         //设置分享图片
                         qqShareContent.setShareImage(image);
                         //设置点击分享内容的跳转链接
@@ -168,11 +168,11 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         mController.postShare(MainActivity.this, SHARE_MEDIA.QZONE, snsPost);
                         QZoneShareContent qzone = new QZoneShareContent();
                         //设置分享文字
-                        qzone.setShareContent("来自友盟社会化组件（SDK）让移动应用快速整合社交分享功能 -- QZone");
+                        qzone.setShareContent("草根投资");
                         //设置点击消息的跳转URL
                         qzone.setTargetUrl("https://www.cgtz.com");
                         //设置分享内容的标题
-                        qzone.setTitle("QZone title");
+                        qzone.setTitle("草根投资");
                         //设置分享图片
                         qzone.setShareImage(image);
                         mController.setShareMedia(qzone);
@@ -180,7 +180,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                     case R.id.sms:
                         // 设置短信分享内容
                         SmsShareContent sms = new SmsShareContent();
-                        sms.setShareContent("来自友盟社会化组件（SDK）让移动应用快速整合社交分享功能-短信。http://www.umeng.com/social");
+                        sms.setShareContent("草根投资https://www.cgtz.com");
                         sms.setShareImage(image);
                         mController.setShareMedia(sms);
                         break;
@@ -188,9 +188,9 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         //设置微信好友分享内容
                         WeiXinShareContent weixinContent = new WeiXinShareContent();
                         //设置分享文字
-                        weixinContent.setShareContent("来自友盟社会化组件（SDK）让移动应用快速整合社交分享功能，微信");
+                        weixinContent.setShareContent("草根投资");
                         //设置title
-                        weixinContent.setTitle("友盟社会化分享组件-微信");
+                        weixinContent.setTitle("草根投资");
                         //设置分享内容跳转URL
                         weixinContent.setTargetUrl("https://www.cgtz.com");
                         //设置分享图片
@@ -200,9 +200,9 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                     case R.id.wxcircle://朋友圈
                         //设置微信朋友圈分享内容
                         CircleShareContent circleMedia = new CircleShareContent();
-                        circleMedia.setShareContent("来自友盟社会化组件（SDK）让移动应用快速整合社交分享功能，朋友圈");
+                        circleMedia.setShareContent("草根投资");
                         //设置朋友圈title
-                        circleMedia.setTitle("友盟社会化分享组件-朋友圈");
+                        circleMedia.setTitle("草根投资");
                         circleMedia.setShareImage(image);
                         circleMedia.setTargetUrl("https://www.cgtz.com");
                         mController.setShareMedia(circleMedia);
@@ -211,7 +211,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         //设置新浪SSO handler
                         mController.getConfig().setSsoHandler(new SinaSsoHandler());
                         // 设置分享内容
-                        mController.setShareContent("dfafdafsd");
+                        mController.setShareContent("草根投资");
                         //设置分享图片，参数2为本地图片的资源引用
                         mController.setShareMedia(image);
                         break;
