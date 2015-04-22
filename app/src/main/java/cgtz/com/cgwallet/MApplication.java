@@ -70,5 +70,20 @@ public class MApplication extends Application {
         return null;
     }
 
+    /**
+     * 关掉所有Activity
+     */
+    public void finishAllActivitys(){
+        if(activities != null){
+            int size = activities.size();
+            for(int i=0;i<size;i++){
+                Activity activity = activities.get(i);
+                if(!activity.isFinishing()){
+                    activity.finish();
+                }
+            }
+        }
+    }
+
 
 }
