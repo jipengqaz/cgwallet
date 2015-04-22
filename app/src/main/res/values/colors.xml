@@ -58,4 +58,7 @@
     <color name="bg_login_button_normal">#0095d1</color>
     <color name="bg_login_button_click">#005383</color>
     <color name="my_wallet_today_earning_hint">#ffffff</color>
+    <color name="my_wallet_earning_text">#898989</color>
+    <color name="my_wallet_earning_num_text">#536962</color>
+    <color name="bg_my_wallet">#eeeeee</color>
 </resources>
