@@ -41,4 +41,9 @@
     <!--activity  name-->
     <string name="title_activity_feed_back">FeedBackActivity</string>
     <string name="title_activity_e_all">转账记录</string>
+    <string name="login_welcome_text">欢迎加入草根理财</string>
+    <string name="login_edit_hint_text">请输入手机号</string>
+    <string name="login_button_next">下一步</string>
+    <string name="login_button_finish">完成</string>
+
 </resources>

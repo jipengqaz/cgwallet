@@ -1,16 +1,63 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/bg_center"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-
-    <TextView android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/aaaaaaaaa"
+    <LinearLayout
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="测试用的"
-        />
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@mipmap/icon_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="30dp"
+            android:text="@string/login_welcome_text"
+            android:textSize="@dimen/login_welcome_text"
+            android:textColor="@color/login_welcome_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/login_edit_phone"
+            android:textSize="@dimen/login_edit_text"
+            android:background="@drawable/bg_login_edit"
+            android:paddingLeft="10dp"
+            android:hint="@string/login_edit_hint_text"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+        <Button
+            android:id="@+id/login_button_finish"
+            android:background="@drawable/bg_login_button"
+            android:text="@string/login_button_next"
+            android:textSize="@dimen/login_btn_text"
+            android:textColor="@color/login_btn_text"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@color/main_tips5"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:src="@mipmap/bg_slogan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <include layout="@layout/layout_banner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
 </RelativeLayout>

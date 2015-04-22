@@ -50,4 +50,11 @@
     <color name="save_or_draw_money_layout_text">#0ac27b</color>
     <color name="bg_feed_back_edit">#ffffff</color>
     <color name="feed_back_edit_hint">#959696</color>
+    <color name="login_welcome_text">#000000</color>
+    <color name="login_edit_text">#91939a</color>
+    <color name="login_btn_text">#ffffff</color>
+    <color name="bg_login_edit_solid">#ffffff</color>
+    <color name="bg_login_edit_stroke">#0085d4</color>
+    <color name="bg_login_button_normal">#0095d1</color>
+    <color name="bg_login_button_click">#005383</color>
 </resources>

@@ -18,12 +18,6 @@ public class LoginOrRegistActivity extends BaseActivity implements ISplashView{
         setTitle("登录/注册");
         showBack(true);
         setContentView(R.layout.activity_login_or_regist);
-        Button aaaa = (Button) findViewById(R.id.aaaaaaaaa);
-        aaaa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
     }
 
     @Override
