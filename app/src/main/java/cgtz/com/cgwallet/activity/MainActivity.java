@@ -410,6 +410,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                 break;
             case R.id.left_menu_login_out://退出登录
                 Utils.loginExit(this);
+                setLeftMenuInfo(0);
                 break;
         }
     }
