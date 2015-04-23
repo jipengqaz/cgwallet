@@ -40,11 +40,11 @@ public class StartActivity extends Activity {
      */
     private void start(){
         TimerTask task = new TimerTask(){
-                public void run(){
+            public void run(){
 //                    startActivity(new Intent(StartActivity.this,No_notwork_Activity.class));
-                    finish();
-                     }
-             };
+                finish();
+            }
+        };
         Timer timer = new Timer();
         timer.schedule(task, 2000);
     }
@@ -56,15 +56,15 @@ public class StartActivity extends Activity {
         MobclickAgent.setDebugMode(Constants.IS_TEST);
         MobclickAgent.updateOnlineConfig(this);
         rl_start = (ImageView) findViewById(R.id.rl_start);
-            if(file.exists()){
-                Bitmap bitmap = BitmapFactory.decodeFile(Constants.IMG_FILE_PATH);
-                rl_start.setImageDrawable(new BitmapDrawable(bitmap));
-                setAlpha(rl_start);
-            }else{
-                rl_start.setImageResource(R.mipmap.loading);
-                setAlpha(rl_start);
-            }
-        //��ת��   ������
+        if(file.exists()){
+            Bitmap bitmap = BitmapFactory.decodeFile(Constants.IMG_FILE_PATH);
+            rl_start.setImageDrawable(new BitmapDrawable(bitmap));
+            setAlpha(rl_start);
+        }else{
+            rl_start.setImageResource(R.mipmap.loading);
+            setAlpha(rl_start);
+        }
+        //跳转到   主界面
         getonLine();
     }
     private void getonLine(){
@@ -86,7 +86,7 @@ public class StartActivity extends Activity {
                 if (!ChangeLogHelper.isTheSameVersion(StartActivity.this)) {
                     startActivity(new Intent(StartActivity.this, ScreenSlideActivity.class));
                 } else {
-                        startActivity(new Intent(StartActivity.this, MainActivity.class));
+                    startActivity(new Intent(StartActivity.this, MainActivity.class));
                 }
                 finish();
             }
@@ -105,27 +105,27 @@ public class StartActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-            JPushInterface.onResume(this);
-            MobclickAgent.onResume(this);
+        JPushInterface.onResume(this);
+        MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-            JPushInterface.onPause(this);
-            MobclickAgent.onPause(this);
+        JPushInterface.onPause(this);
+        MobclickAgent.onPause(this);
     }
 
     @Override
     protected void onDestroy() {
-            super.onDestroy();
+        super.onDestroy();
     }
 
     private void setAlpha(View view){
-        AlphaAnimation mHideAnimation = new AlphaAnimation(0.0f, 1.0f);//���ôӲ����
-        mHideAnimation.setDuration( 2000 );//���ý���ʱ��
-        mHideAnimation.setFillAfter( true );//���ñ����������ʱ������
-        view.startAnimation(mHideAnimation);//��������
+        AlphaAnimation mHideAnimation = new AlphaAnimation(0.0f, 1.0f);//设置从不见到见
+        mHideAnimation.setDuration( 2000 );//设置渐现时间
+        mHideAnimation.setFillAfter( true );//设置保留动画完成时的样子
+        view.startAnimation(mHideAnimation);//启动动画
     }
 
 
