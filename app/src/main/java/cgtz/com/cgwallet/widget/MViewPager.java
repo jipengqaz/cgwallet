@@ -6,12 +6,15 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import cgtz.com.cgwallet.utils.LogUtils;
+
 /**
  * 自定义Viewpager
  * 增加控制viewpager的滑动和禁止滑动切换功能
  * Created by Administrator on 2015/4/22.
  */
 public class MViewPager extends ViewPager {
+    private static final String TAG = "MViewPager";
     private float xDistance;
     private float yDistance;
     private float xLast;
@@ -39,21 +42,18 @@ public class MViewPager extends ViewPager {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        LogUtils.e(TAG,"viewpager获取到事件");
 //        int action = ev.getAction();
 //        switch (action){
 //            case MotionEvent.ACTION_DOWN:
 //                xDistance = yDistance = 0f;
 //                xLast = ev.getX();
-//                yLast = ev.getY();
 //                break;
 //            case MotionEvent.ACTION_MOVE:
 //                final float curX = ev.getX();
-//                final float cury = ev.getY();
-//                xDistance += Math.abs(curX - xLast);
-//                yDistance += Math.abs(cury - yLast);
+//                xDistance = Math.abs(curX - xLast);
 //                xLast = curX;
-//                yLast = cury;
-//                if(xDistance > yDistance){
+//                if(xDistance > 0){
 //                    return false;
 //                }
 //        }
