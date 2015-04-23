@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -58,9 +59,9 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private LinearLayout menuSafeCenter;//安全中心
     private LinearLayout menuHelpCenter;//帮助中心
     private LinearLayout menuMore;//更多
-//    private TextView tvCgWallet;//草根钱包
-//    private TextView tvMyWallet;//我的钱包
     private TextView tvLogin;//未登录显示文案或者显示登录的手机号
+    private TextView tvShowLoginMobile;//显示登录的手机号
+    private LinearLayout layotExit;//退出登录
     private SplashPresenter splashPresenter;
     private ArrayList<Fragment> listFms;
     private int currIndex;//当前页卡编号
@@ -303,21 +304,20 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         showRightButton = (ImageView) findViewById(R.id.show_right_button);
         main_conter_layout = (RelativeLayout) findViewById(R.id.main_conter_layout);
         mViewPager = (ViewPager) findViewById(R.id.main_conter_viewpager);
-//        tvCgWallet = (TextView) findViewById(R.id.tv_top_title_cg_wallet);
-//        tvMyWallet = (TextView) findViewById(R.id.tv_top_title_my_wallet);
         tvLogin = (TextView) findViewById(R.id.tv_goToLogin);
         menuSafeCenter = (LinearLayout) findViewById(R.id.left_menu_safe_center);
         menuHelpCenter = (LinearLayout) findViewById(R.id.left_menu_help_center);
         menuMore = (LinearLayout) findViewById(R.id.left_menu_more);
+        tvShowLoginMobile = (TextView) findViewById(R.id.tv_show_login_mobile);
+        layotExit = (LinearLayout) findViewById(R.id.left_menu_login_out);
     }
 
     private void setViewLinstener(){
-//        tvCgWallet.setOnClickListener(this);
-//        tvMyWallet.setOnClickListener(this);
         tvLogin.setOnClickListener(this);
         menuSafeCenter.setOnClickListener(this);
         menuHelpCenter.setOnClickListener(this);
         menuMore.setOnClickListener(this);
+        layotExit.setOnClickListener(this);
     }
 
     private void initFragment(){
@@ -334,7 +334,15 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     protected void onResume() {
         super.onResume();
-        splashPresenter.didFinishLoading(this);
+        String userMobile = Utils.getUserPhone(this);
+        String token = Utils.getToken(this);
+        String loginPwd = Utils.getLoginPwd(this);
+        if(!TextUtils.isEmpty(userMobile) && !TextUtils.isEmpty(token) && !TextUtils.isEmpty(loginPwd)){
+            tvShowLoginMobile.setText(userMobile);
+            setLeftMenuInfo(1);//已登录
+        }else{
+            setLeftMenuInfo(0);//未登录
+        }
     }
 
     @Override
@@ -367,46 +375,41 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 
     }
 
+    /**
+     * 根据登录状态，改变左边菜单栏的控件显示
+     * @param type
+     */
+    private void setLeftMenuInfo(int type){
+        if(type == 1){//已登录
+            layotExit.setVisibility(View.VISIBLE);
+            tvShowLoginMobile.setVisibility(View.VISIBLE);
+            tvLogin.setVisibility(View.GONE);
+        }else if(type == 0){//未登录
+            layotExit.setVisibility(View.GONE);
+            tvShowLoginMobile.setVisibility(View.GONE);
+            tvLogin.setVisibility(View.VISIBLE);
+        }
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.left_menu_safe_center://安全中心
-                startActivity(new Intent(MainActivity.this,SafeCenterActivity.class));
+                startActivity(new Intent(this,SafeCenterActivity.class));
                 break;
             case R.id.left_menu_help_center://帮助中心
-                startActivity(new Intent(MainActivity.this,WebViewActivity.class)
+                startActivity(new Intent(this,WebViewActivity.class)
                 .putExtra("url","https://d5ds88.cgtz.com/version/notice/FAQ")
                 .putExtra("title","帮助中心"));
                 break;
             case R.id.left_menu_more://更多
-                startActivity(new Intent(MainActivity.this,MenuMoreActivity.class));
+                startActivity(new Intent(this,MenuMoreActivity.class));
                 break;
-//            case R.id.tv_top_title_cg_wallet://草根钱包
-//                if(currIndex == 1){
-//                    currIndex = 0;
-//                    mViewPager.setCurrentItem(0);
-//                    tvCgWallet.setBackgroundResource(R.drawable.bg_main_top_selected);
-//                    tvMyWallet.setBackgroundResource(R.drawable.bg_main_top_normal);
-//                    tvCgWallet.setTextColor(getResources().getColor(R.color.main_top_selected_text));
-//                    tvMyWallet.setTextColor(getResources().getColor(R.color.main_top_normal_text));
-//                    bidirSldingLayout.setMovedLeft(true);
-//                    bidirSldingLayout.setMovedRight(false);
-//                }
-//                break;
-//            case R.id.tv_top_title_my_wallet://我的钱包
-//                if(currIndex == 0){
-//                    currIndex = 1;
-//                    mViewPager.setCurrentItem(1);
-//                    tvCgWallet.setBackgroundResource(R.drawable.bg_main_top_normal);
-//                    tvMyWallet.setBackgroundResource(R.drawable.bg_main_top_selected);
-//                    tvCgWallet.setTextColor(getResources().getColor(R.color.main_top_normal_text));
-//                    tvMyWallet.setTextColor(getResources().getColor(R.color.main_top_selected_text));
-//                    bidirSldingLayout.setMovedRight(true);
-//                    bidirSldingLayout.setMovedLeft(false);
-//                }
-//                break;
             case R.id.tv_goToLogin://去登录或者个人信息
-                startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                startActivity(new Intent(this,LoginActivity.class));
+                break;
+            case R.id.left_menu_login_out://退出登录
+                Utils.loginExit(this);
                 break;
         }
     }
@@ -425,17 +428,9 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         public void onPageSelected(int position) {
             currIndex = position;
             if(position == 1){
-//                tvCgWallet.setBackgroundResource(R.drawable.bg_main_top_normal);
-//                tvMyWallet.setBackgroundResource(R.drawable.bg_main_top_selected);
-//                tvCgWallet.setTextColor(getResources().getColor(R.color.main_top_selected_text));
-//                tvMyWallet.setTextColor(getResources().getColor(R.color.main_top_normal_text));
                 bidirSldingLayout.setMovedRight(true);
                 bidirSldingLayout.setMovedLeft(false);
             }else if(position == 0){
-//                tvCgWallet.setBackgroundResource(R.drawable.bg_main_top_selected);
-//                tvMyWallet.setBackgroundResource(R.drawable.bg_main_top_normal);
-//                tvCgWallet.setTextColor(getResources().getColor(R.color.main_top_normal_text));
-//                tvMyWallet.setTextColor(getResources().getColor(R.color.main_top_selected_text));
                 bidirSldingLayout.setMovedLeft(true);
                 bidirSldingLayout.setMovedRight(false);
             }

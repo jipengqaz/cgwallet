@@ -92,9 +92,10 @@ public class Utils {
      * @param context
      * @return
      */
-    public static void loginOut(Context context){
+    public static void loginExit(Context context){
         SharedUtils sharedUtils = new SharedUtils(context,Constants.CONFIG);
         sharedUtils.remove(Constants.LOGIN_PASSWORD);
+        sharedUtils.remove(Constants.LOGIN_TOKEN);
     }
 
     /**
