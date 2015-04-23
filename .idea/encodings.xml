@@ -17,11 +17,9 @@
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_start.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_screen_slide_page.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/itme_e_wallet_1.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/layout_server_maintain.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/list_empty_head.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/list_loadmore_foot.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/list_refresh_head.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/loading_bg.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/bg_custom_progressdialog.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/icon_guid_first.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/icon_guid_fourth.png" charset="GBK" />

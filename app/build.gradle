@@ -52,6 +52,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.0.0'
+    compile files('libs/umeng-analytics-v5.4.2.jar')
 }
 // Ϊ������libs�е�.so�ļ�
 task copyNativeLibs(type: Copy) {
