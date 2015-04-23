@@ -36,7 +36,7 @@ public class StartActivity extends Activity {
     private File file = new File(Constants.IMG_FILE_PATH);
 
     /**
-     * ÓÃÓÚÑÓ³ÙÌø×ªµ½ÍøÂçÎ´Á¬½ÓÌáÊ¾Ò³Ãæ
+     * ç”¨äºå»¶è¿Ÿè·³è½¬åˆ°ç½‘ç»œæœªè¿æ¥æç¤ºé¡µé¢
      */
     private void start(){
         TimerTask task = new TimerTask(){
@@ -64,7 +64,7 @@ public class StartActivity extends Activity {
                 rl_start.setImageResource(R.mipmap.loading);
                 setAlpha(rl_start);
             }
-        //Ìø×ªµ½   Ö÷½çÃæ
+        //ï¿½ï¿½×ªï¿½ï¿½   ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         getonLine();
     }
     private void getonLine(){
@@ -122,10 +122,10 @@ public class StartActivity extends Activity {
     }
 
     private void setAlpha(View view){
-        AlphaAnimation mHideAnimation = new AlphaAnimation(0.0f, 1.0f);//ÉèÖÃ´Ó²»¼ûµ½¼û
-        mHideAnimation.setDuration( 2000 );//ÉèÖÃ½¥ÏÖÊ±¼ä
-        mHideAnimation.setFillAfter( true );//ÉèÖÃ±£Áô¶¯»­Íê³ÉÊ±µÄÑù×Ó
-        view.startAnimation(mHideAnimation);//Æô¶¯¶¯»­
+        AlphaAnimation mHideAnimation = new AlphaAnimation(0.0f, 1.0f);//ï¿½ï¿½ï¿½Ã´Ó²ï¿½ï¿½ï¿½ï¿½
+        mHideAnimation.setDuration( 2000 );//ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+        mHideAnimation.setFillAfter( true );//ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        view.startAnimation(mHideAnimation);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     }
 
 

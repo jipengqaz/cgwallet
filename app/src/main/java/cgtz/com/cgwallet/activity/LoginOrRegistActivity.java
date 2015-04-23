@@ -15,7 +15,7 @@ public class LoginOrRegistActivity extends BaseActivity implements ISplashView{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("登录/注册");
+        setTitle("登录");
         showBack(true);
         setContentView(R.layout.activity_login_or_regist);
     }

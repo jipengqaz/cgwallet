@@ -18,7 +18,7 @@
             android:layout_height="match_parent" />
     </LinearLayout>
     <LinearLayout
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="10dp"
         android:padding="5dp"
         android:layout_alignParentLeft="true"
         android:visibility="gone"
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
         <ImageView
-            android:layout_marginRight="5dp"
+            android:src="@mipmap/icon_back"
             android:id="@+id/action_bar_left_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

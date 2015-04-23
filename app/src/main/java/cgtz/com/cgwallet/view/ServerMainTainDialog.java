@@ -9,7 +9,7 @@ import cgtz.com.cgwallet.R;
 
 
 /**
- * 服务器维护中，提示dialog
+ * 鏈嶅姟鍣ㄧ淮鎶や腑锛屾彁绀篸ialog
  * Created by Administrator on 2015/1/19.
  */
 public class ServerMainTainDialog extends Dialog {
