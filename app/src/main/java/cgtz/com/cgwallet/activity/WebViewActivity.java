@@ -36,6 +36,7 @@ public class WebViewActivity extends BaseActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_webview);
+            showBack(true);
             webView = (WebView) findViewById(R.id.webview);
             webView.getSettings().setJavaScriptEnabled(true);//可用JS
             webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);

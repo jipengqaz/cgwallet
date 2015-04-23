@@ -59,4 +59,5 @@
     <string name="error_need_phone">请输入手机号</string>
     <string name="error_need_pwd">请输入登录密码</string>
     <string name="text_please_login">请登录</string>
+    <string name="title_activity_regist">RegistActivity</string>
 </resources>

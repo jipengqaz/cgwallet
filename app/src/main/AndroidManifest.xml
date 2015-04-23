@@ -40,25 +40,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity"
-            android:label="@string/title_activity_main"
-            />
-        <activity android:name=".activity.ScreenSlideActivity"
-            android:label="@string/title_activity_ScreenSlideActivity"/>
         <activity
-        android:name=".activity.LoginActivity"
-        android:label="@string/title_activity_login_or_regist" >
+            android:name=".activity.MainActivity"
+            android:label="@string/title_activity_main" />
+        <activity
+            android:name=".activity.ScreenSlideActivity"
+            android:label="@string/title_activity_ScreenSlideActivity" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:label="@string/title_activity_login_or_regist" >
         </activity>
-
         <activity
-        android:name=".activity.GestureEditActivity"
-        android:theme="@android:style/Theme.NoTitleBar"/>
-
+            android:name=".activity.GestureEditActivity"
+            android:theme="@android:style/Theme.NoTitleBar" />
         <activity
-        android:name=".activity.GestureVerifyActivity"
-        android:theme="@android:style/Theme.NoTitleBar"/>
+            android:name=".activity.GestureVerifyActivity"
+            android:theme="@android:style/Theme.NoTitleBar" />
         <!-- ###################注册SDK使用的Activity###################### -->
-        <!--分享编辑页-->
+        <!-- 分享编辑页 -->
         <activity
             android:name="com.umeng.socialize.view.ShareActivity"
             android:configChanges="orientation|keyboard"
@@ -87,25 +86,25 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
-        <!--QQ   end-->
+        <!-- QQ   end -->
+
 
         <!-- ###################添加UmengAppkey###################### -->
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="552cc88cfd98c58400000128" >
         </meta-data>
-
         <meta-data
-        android:name="UMENG_CHANNEL"
-        android:value="${UMENG_CHANNEL_VALUE}" />
-        <!--添加UmengAppkey end-->
-        <!--微信分享  回调-->
+            android:name="UMENG_CHANNEL"
+            android:value="${UMENG_CHANNEL_VALUE}" />
+        <!-- 添加UmengAppkey end -->
+        <!-- 微信分享  回调 -->
         <activity
             android:name=".wxapi.WXEntryActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".activity.SafeCenterActivity"
             android:screenOrientation="portrait" >
@@ -126,12 +125,16 @@
             android:name=".activity.FeedBackActivity"
             android:label="@string/title_activity_feed_back" >
         </activity>
-        <activity android:name=".activity.E_wallet_record_activity"
-            android:label="@string/title_activity_e_all"
-            />
-        <activity android:name=".activity.Earnings_record"
-            android:label = "@string/title_activity_Earnings_record"
-            />
+        <activity
+            android:name=".activity.E_wallet_record_activity"
+            android:label="@string/title_activity_e_all" />
+        <activity
+            android:name=".activity.Earnings_record"
+            android:label="@string/title_activity_Earnings_record" />
+        <activity
+            android:name=".activity.RegistActivity"
+            android:label="@string/title_activity_regist" >
+        </activity>
     </application>
 
 </manifest>
