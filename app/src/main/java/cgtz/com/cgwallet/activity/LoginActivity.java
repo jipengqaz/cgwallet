@@ -45,28 +45,36 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
     private boolean showHavePhone = false;
     private String loginPhone;//登录手机号
     private String loginPwd;//登录密码
+    private String beforeMobile;//之前登录过的手机号
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("登录");
         showBack(true);
-        setRightText("切换账户");
+        beforeMobile = Utils.getUserPhone(this);
+        if(TextUtils.isEmpty(beforeMobile)){
+            setRightText(null);
+        }else{
+            setRightText("切换账户");
+        }
+
         setRightListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ivNoPhone.setVisibility(View.GONE);
-                layoutHavePhone.setVisibility(View.VISIBLE);
-                showHavePhone = true;
-                setRightText("");
+                ivNoPhone.setVisibility(View.VISIBLE);
+                layoutHavePhone.setVisibility(View.GONE);
+                etLoginPhone.setVisibility(View.VISIBLE);
+                showHavePhone = true;//重新填写手机号
+                setRightText(null);//重新填写手机号
             }
         });
         setBackListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (showHavePhone) {
-                    ivNoPhone.setVisibility(View.VISIBLE);
-                    layoutHavePhone.setVisibility(View.GONE);
+                    changeLoginLayout();
+                    setRightText("切换账户");
                     showHavePhone = false;
                 } else {
                     finish();
@@ -89,6 +97,24 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
         btnLogin = (Button) findViewById(R.id.login_button_finish);//登录按钮
         tvRegistAccount = (TextView) findViewById(R.id.tv_regist_account);//注册账户
         tvForgetPwd = (TextView) findViewById(R.id.tv_forget_pwd);//忘记密码
+        changeLoginLayout();
+    }
+
+    /**
+     * 根据上次登录的手机号，改变布局
+     */
+    private void changeLoginLayout(){
+        if(TextUtils.isEmpty(beforeMobile)){//未登录过
+            setRightText(null);
+            ivNoPhone.setVisibility(View.VISIBLE);
+            layoutHavePhone.setVisibility(View.GONE);
+            etLoginPhone.setVisibility(View.VISIBLE);
+        }else{//登录过，已有手机号
+            ivNoPhone.setVisibility(View.GONE);
+            layoutHavePhone.setVisibility(View.VISIBLE);
+            etLoginPhone.setVisibility(View.GONE);
+            tvLoginPhone.setText(Utils.getHasStarsMobile(beforeMobile));
+        }
     }
 
     private void setListener(){
@@ -134,7 +160,13 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
         int id = v.getId();
         switch (id){
             case R.id.login_button_finish://登录
-                loginPhone = etLoginPhone.getText().toString();
+                if(etLoginPhone.getVisibility() == View.VISIBLE){//判断手机号填写控件是否隐藏
+                    //为隐藏就使用输入的手机号
+                    loginPhone = etLoginPhone.getText().toString();
+                }else{
+                    //隐藏了就使用之前登录过的手机号
+                    loginPhone = beforeMobile;
+                }
                 loginPwd = etLoginPwd.getText().toString();
                 if(TextUtils.isEmpty(loginPhone)){
                     Utils.makeToast(LoginActivity.this,getResources().getString(R.string.error_need_phone));
@@ -176,9 +208,8 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
                             Utils.saveLoginPwd(LoginActivity.this, MD5Util.md5(loginPwd));
                             hideProcessBar();
                             finish();
-                        }else{
-                            hideProcessBar();
                         }
+                        hideProcessBar();
                         break;
                 }
             }catch (Exception e){

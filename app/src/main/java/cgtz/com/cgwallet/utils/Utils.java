@@ -2,6 +2,7 @@ package cgtz.com.cgwallet.utils;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import cgtz.com.cgwallet.bean.JsonBean;
@@ -134,7 +135,7 @@ public class Utils {
      * @param jsonBean
      */
     public static boolean filtrateCode(Context context,JsonBean jsonBean){
-        LogUtils.i("JsonBean","过滤code结果："+jsonBean.getJsonString());
+        LogUtils.i("JsonBean", "过滤code结果：" + jsonBean.getJsonString());
         int code = jsonBean.getCode();//code判断值
         String errorMsg = jsonBean.getError_msg();//错误信息
         if(code == Constants.OPERATION_FAIL || code == Constants.OPERATION_SUCCESS){
@@ -152,6 +153,20 @@ public class Utils {
     public static void closeDialog(Context context,Dialog dialog){
         if(dialog != null && dialog.isShowing()){
             dialog.cancel();
+        }
+    }
+
+    /**
+     * 手机号码添加星号
+     * @param text
+     * @param index
+     * @return
+     */
+    public static String getHasStarsMobile(String text){
+        if(TextUtils.isEmpty(text)){
+            return "";
+        }else{
+            return text.substring(0,3)+"*****"+text.substring(8);
         }
     }
 }
