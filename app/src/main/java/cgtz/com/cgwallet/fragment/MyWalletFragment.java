@@ -10,6 +10,8 @@ import android.widget.ScrollView;
 
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.utils.LogUtils;
+import cgtz.com.cgwallet.view.BidirSlidingLayout;
+import cgtz.com.cgwallet.widget.MScrollView;
 
 /**
  * 我的钱包
@@ -23,6 +25,7 @@ public class MyWalletFragment extends BaseFragment {
     private LinearLayout layoutSave;
     private LinearLayout layoutDrawRecord;
     private LinearLayout layoutSaveRecord;
+    private MScrollView mScrollView;
     private int screenWidth;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +44,7 @@ public class MyWalletFragment extends BaseFragment {
         layoutSave = (LinearLayout) view.findViewById(R.id.layout_save);
         layoutDrawRecord = (LinearLayout) view.findViewById(R.id.layout_draw_record);
         layoutSaveRecord = (LinearLayout) view.findViewById(R.id.layout_save_record);
+        mScrollView = (MScrollView) view.findViewById(R.id.wallet_scrollview);
     }
 
     private void setWidgetAttrs(){
@@ -66,4 +70,5 @@ public class MyWalletFragment extends BaseFragment {
 
     private void setListener(){
     }
+
 }
