@@ -295,6 +295,7 @@ public class BidirSlidingLayout extends RelativeLayout implements OnTouchListene
 				contentLayoutParams.rightMargin = -leftMenuLayoutParams.width - moveDistanceX;
 				checkLeftMenuBorder();
 				contentLayout.setLayoutParams(contentLayoutParams);
+				break;
 			case SHOW_RIGHT_MENU:
 				contentLayoutParams.leftMargin = moveDistanceX;
 				checkRightMenuBorder();
@@ -304,6 +305,7 @@ public class BidirSlidingLayout extends RelativeLayout implements OnTouchListene
 				contentLayoutParams.leftMargin = -rightMenuLayoutParams.width + moveDistanceX;
 				checkRightMenuBorder();
 				contentLayout.setLayoutParams(contentLayoutParams);
+				break;
 			default:
 				break;
 			}
@@ -385,24 +387,27 @@ public class BidirSlidingLayout extends RelativeLayout implements OnTouchListene
 				isSliding = true;
 				slideState = HIDE_LEFT_MENU;
 			}
-		} else if (isRightMenuVisible) {
-			if (!isSliding && Math.abs(moveDistanceX) >= touchSlop && moveDistanceX > 0
-					&& !isMovedLeft && isMovedRight) {
-				isSliding = true;
-				slideState = HIDE_RIGHT_MENU;
-			}
-		} else {
+		}
+//		else if (isRightMenuVisible) {
+//			if (!isSliding && Math.abs(moveDistanceX) >= touchSlop && moveDistanceX > 0
+//					&& !isMovedLeft && isMovedRight) {
+//				isSliding = true;
+//				slideState = HIDE_RIGHT_MENU;
+//			}
+//		}
+		else {
 			if (!isSliding && Math.abs(moveDistanceX) >= touchSlop && moveDistanceX > 0
 					&& Math.abs(moveDistanceY) < touchSlop && isMovedLeft && !isMovedRight) {
 				isSliding = true;
 				slideState = SHOW_LEFT_MENU;
 				initShowLeftState();
-			} else if (!isSliding && Math.abs(moveDistanceX) >= touchSlop && moveDistanceX < 0
-					&& Math.abs(moveDistanceY) < touchSlop && !isMovedLeft && isMovedRight) {
-				isSliding = true;
-				slideState = SHOW_RIGHT_MENU;
-				initShowRightState();
 			}
+//			else if (!isSliding && Math.abs(moveDistanceX) >= touchSlop && moveDistanceX < 0
+//					&& Math.abs(moveDistanceY) < touchSlop && !isMovedLeft && isMovedRight) {
+//				isSliding = true;
+//				slideState = SHOW_RIGHT_MENU;
+//				initShowRightState();
+//			}
 		}
 	}
 

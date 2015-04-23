@@ -3,6 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="activity_title_height">50dp</dimen>
+    <dimen name="activity_bar_right_size">14sp</dimen>
     <dimen name="top_title_text_size">14sp</dimen>
     <dimen name="action_bar_title_text_size">18sp</dimen>
     <dimen name="layout_bottom_transfer_text_size">16sp</dimen>
@@ -45,4 +46,16 @@
     <dimen name="more_item_height">50dp</dimen>
     <dimen name="more_item_icon_right_marign">20dp</dimen>
     <dimen name="layout_margin_13dp">13dp</dimen>
+    <dimen name="login_welcome_text">14sp</dimen>
+    <dimen name="login_edit_text">14sp</dimen>
+    <dimen name="login_btn_text">16sp</dimen>
+    <dimen name="my_wallet_today_earning_hint">14sp</dimen>
+    <dimen name="my_wallet_top_height">165dp</dimen>
+    <dimen name="my_wallet_figure_size">68sp</dimen>
+    <dimen name="my_wallet_earning_size">14sp</dimen>
+    <dimen name="my_wallet_earning_num_size">22sp</dimen>
+    <dimen name="my_wallet_another_size">14sp</dimen>
+    <dimen name="height_login_bottom">48dp</dimen>
+    <dimen name="draw_padding">15dp</dimen>
+    <dimen name="height_login_edit">40dp</dimen>
 </resources>

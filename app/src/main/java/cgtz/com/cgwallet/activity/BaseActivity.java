@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +27,7 @@ public class BaseActivity extends ActionBarActivity {
     private ActionBar actionBar;
     private LinearLayout backLayout;
     private TextView titleView;
+    private TextView rightText;
     private ImageView iconBack;
 
     @Override
@@ -45,6 +47,7 @@ public class BaseActivity extends ActionBarActivity {
         View actionBarWeek = RelativeLayout.inflate(this, R.layout.layout_action_bar, null);
         backLayout = (LinearLayout) actionBarWeek.findViewById(R.id.action_bar_back_layout);
         titleView = (TextView) actionBarWeek.findViewById(R.id.action_bar_title);
+        rightText = (TextView) actionBarWeek.findViewById(R.id.action_bar_right_text);
         iconBack = (ImageView) actionBarWeek.findViewById(R.id.action_bar_left_icon);
         backLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +56,10 @@ public class BaseActivity extends ActionBarActivity {
             }
         });
         actionBar.setCustomView(actionBarWeek);
+    }
+
+    public void setBackListener(View.OnClickListener listener){
+        backLayout.setOnClickListener(listener);
     }
 
     public void setTitle(String msg){
@@ -67,6 +74,18 @@ public class BaseActivity extends ActionBarActivity {
         }else{
             backLayout.setVisibility(View.GONE);
         }
+    }
+
+    public void setRightText(String text){
+        if(!TextUtils.isEmpty(text)){
+            rightText.setText(text);
+            rightText.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void setRightListener(View.OnClickListener listener){
+        if(rightText != null)
+            rightText.setOnClickListener(listener);
     }
 
     @Override
