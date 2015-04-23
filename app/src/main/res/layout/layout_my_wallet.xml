@@ -5,6 +5,12 @@
     android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <cgtz.com.cgwallet.widget.MScrollView
+        android:id="@+id/wallet_scrollview"
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <LinearLayout
             android:orientation="vertical"
             android:gravity="center_horizontal"
@@ -294,4 +300,5 @@
             </LinearLayout>
 
         </LinearLayout>
+    </cgtz.com.cgwallet.widget.MScrollView>
 </LinearLayout>
