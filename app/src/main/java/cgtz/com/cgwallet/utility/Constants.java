@@ -50,6 +50,7 @@ public class Constants {
     public static final String URL_FEED_BACK = "site/feedBack";//意见反馈
     public static final String URL_INTEREST_HISTORY = "ewallet/InterestHistory";//收益历史
     public static final String URL_LOGIN = "site/login";//登录接口
+    public static final String E_WALLET_LIST = "ewallet/list";//草根钱包转入转出数据
 
 
     /**

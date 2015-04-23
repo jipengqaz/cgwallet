@@ -69,4 +69,5 @@
     <color name="bg_login_bottom">#0cc580</color>
     <color name="bg_green_line">#09b376</color>
     <color name="hint_regist_account">#038254</color>
+    <color name="gestures_line">#0abce3</color>
 </resources>
