@@ -8,7 +8,7 @@
     <string name="main_top_my_wallet">我的钱包</string>
     <string name="cg_wallet_earnings">万份年化收益</string>
     <string name="monitoring_platform">平台资金账户由国有银行实时监管</string>
-    <string name="title_activity_login_or_regist">LoginOrRegistActivity</string>
+
     <string name="main_right_text">当面扫一扫，好友一起赚</string>
     <string name="main_right_text_bottom">推荐规则 ></string>
     <string name="click_to_see_more">点击查看更多</string>
@@ -47,4 +47,8 @@
     <string name="login_button_finish">完成</string>
     <string name="my_wallet_today_earning_hint">今日收益（元）</string>
 
+    <string name="title_activity_Earnings_record">我的收益</string>
+    <string name="title_activity_login_or_regist">LoginOrRegistActivity</string>
+    <string name="title_activity_main">主界面</string>
+    <string name="title_activity_ScreenSlideActivity">引导图</string>
 </resources>
