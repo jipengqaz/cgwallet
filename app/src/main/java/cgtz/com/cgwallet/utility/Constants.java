@@ -33,6 +33,7 @@ public class Constants {
     public static final String CONFIG = "config";
     public static final String LOGIN_PHONE = "login_phone";//登录手机号
     public static final String LOGIN_PASSWORD = "login_password";//登录密码
+    public static final String LOGIN_USER_ID = "user_id";//登录后的userid
     public static final String LOGIN_TOKEN = "token";//登录后的token
     public static final String ERROR_MSG_CODE = "错误码";//内容解析错误
     public static final String service_date = "mobileOS=android&";//向服务器全局数据

@@ -12,6 +12,25 @@ import cgtz.com.cgwallet.utility.Constants;
  */
 public class Utils {
     /**
+     * 获取登录的id
+     * @param context
+     * @return
+     */
+    public static String getUserId(Context context){
+        SharedUtils sharedUtils = new SharedUtils(context, Constants.CONFIG);
+        return sharedUtils.getString(Constants.LOGIN_USER_ID,"");
+    }
+
+    /**
+     * 保存登录后的id
+     * @param context
+     * @param userId
+     */
+    public static void saveUserId(Context context,String userId){
+        SharedUtils sharedUtils = new SharedUtils(context, Constants.CONFIG);
+        sharedUtils.saveString(Constants.LOGIN_USER_ID, userId);
+    }
+    /**
      * 获取登录的token
      * @param context
      * @return
