@@ -80,6 +80,8 @@ public class BaseActivity extends ActionBarActivity {
         if(!TextUtils.isEmpty(text)){
             rightText.setText(text);
             rightText.setVisibility(View.VISIBLE);
+        }else{
+            rightText.setVisibility(View.GONE);
         }
     }
 

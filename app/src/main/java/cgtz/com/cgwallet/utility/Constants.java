@@ -30,10 +30,12 @@ public class Constants {
     public static final String NO_DATA_MSG = "网络不稳定";
     public static final String IS_EVENT_MSG = "由于网络原因，服务器访问超时";
     public static final String CONFIG_GESTURE = "config_gesture";//
-    public static final String LOGIN_PHONE = "login_phone";//登录手机号
     public static final String CONFIG = "config";
-    public static final String MOBILE_PASSWORD = "login_password";//登录密码
+    public static final String LOGIN_PHONE = "login_phone";//登录手机号
+    public static final String LOGIN_PASSWORD = "login_password";//登录密码
+    public static final String LOGIN_TOKEN = "token";//登录后的token
     public static final String ERROR_MSG_CODE = "错误码";//内容解析错误
+    public static final String service_date = "mobileOS=android&";//向服务器全局数据
 
     public static boolean GESTURES_PASSWORD = true;//用于判断是否输入手势密码
 
@@ -44,8 +46,10 @@ public class Constants {
     //end
     public static final int HANDLER_SERVER_MAINTAIN = 2015011914;//服务器维护判断值
     public static final int WHAT_FEED_BACK = 2015042114;//意见反馈
+    public static final int WHAT_LOGIN = 2015042315;//登录
     public static final String URL_FEED_BACK = "site/feedBack";//意见反馈
     public static final String URL_INTEREST_HISTORY = "ewallet/InterestHistory";//收益历史
+    public static final String URL_LOGIN = "site/login";//登录接口
 
 
     /**

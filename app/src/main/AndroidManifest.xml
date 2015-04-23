@@ -46,7 +46,7 @@
         <activity android:name=".activity.ScreenSlideActivity"
             android:label="@string/title_activity_ScreenSlideActivity"/>
         <activity
-        android:name=".activity.LoginOrRegistActivity"
+        android:name=".activity.LoginActivity"
         android:label="@string/title_activity_login_or_regist" >
         </activity>
 

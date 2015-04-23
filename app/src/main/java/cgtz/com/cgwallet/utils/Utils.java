@@ -12,6 +12,53 @@ import cgtz.com.cgwallet.utility.Constants;
  */
 public class Utils {
     /**
+     * 获取登录的token
+     * @param context
+     * @return
+     */
+    public static String getToken(Context context){
+        SharedUtils sharedUtils = new SharedUtils(context, Constants.CONFIG);
+        return sharedUtils.getString(Constants.LOGIN_TOKEN,"");
+    }
+
+    /**
+     * 保存登录后的token
+     * @param context
+     * @param token
+     */
+    public static void saveToken(Context context,String token){
+        SharedUtils sharedUtils = new SharedUtils(context, Constants.CONFIG);
+        sharedUtils.saveString(Constants.LOGIN_TOKEN, token);
+    }
+
+    /**
+     * 保存登录手机号
+     * @param context
+     * @param mobile
+     */
+    public static void saveMobile(Context context,String mobile){
+        SharedUtils sharedUtils = new SharedUtils(context, Constants.CONFIG);
+        sharedUtils.saveString(Constants.LOGIN_PHONE, mobile);
+    }
+    /**
+     * 获取登录密码
+     * @param context
+     * @return
+     */
+    public static String getLoginPwd(Context context){
+        SharedUtils sharedUtils = new SharedUtils(context, Constants.CONFIG);
+        return sharedUtils.getString(Constants.LOGIN_PASSWORD,"");
+    }
+    /**
+     * 保存登录密码
+     * @param context
+     * @param pwd
+     */
+    public static void saveLoginPwd(Context context,String pwd){
+        SharedUtils sharedUtils = new SharedUtils(context, Constants.CONFIG);
+        sharedUtils.saveString(Constants.LOGIN_PASSWORD, pwd);
+    }
+    /**
      * 获取登录的手机号
      * @param context
      * @return
@@ -28,7 +75,7 @@ public class Utils {
      */
     public static void loginOut(Context context){
         SharedUtils sharedUtils = new SharedUtils(context,Constants.CONFIG);
-        sharedUtils.remove(Constants.MOBILE_PASSWORD);
+        sharedUtils.remove(Constants.LOGIN_PASSWORD);
     }
 
     /**

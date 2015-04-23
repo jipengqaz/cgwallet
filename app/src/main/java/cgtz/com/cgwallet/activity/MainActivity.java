@@ -406,7 +406,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 //                }
 //                break;
             case R.id.tv_goToLogin://去登录或者个人信息
-                startActivity(new Intent(MainActivity.this,LoginOrRegistActivity.class));
+                startActivity(new Intent(MainActivity.this,LoginActivity.class));
                 break;
         }
     }

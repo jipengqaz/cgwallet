@@ -1,6 +1,9 @@
 package cgtz.com.cgwallet.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -8,9 +11,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
+import cgtz.com.cgwallet.utils.CustomTask;
+import cgtz.com.cgwallet.utils.LogUtils;
+import cgtz.com.cgwallet.utils.MD5Util;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.ISplashView;
 import cgtz.com.cgwallet.widget.ProgressDialog;
@@ -18,7 +29,8 @@ import cgtz.com.cgwallet.widget.ProgressDialog;
 /**
  * 登录或注册页面
  */
-public class LoginOrRegistActivity extends BaseActivity implements ISplashView,View.OnClickListener{
+public class LoginActivity extends BaseActivity implements ISplashView,View.OnClickListener{
+    private static final String TAG = "LoginActivity";
     private ImageView ivNoPhone;//重新输入手机号登录
     private LinearLayout layoutHavePhone;//已有手机号登录
     private TextView tvLoginPhone;//显示已有的手机号
@@ -31,6 +43,8 @@ public class LoginOrRegistActivity extends BaseActivity implements ISplashView,V
     private SplashPresenter presenter;
     private ProgressDialog progressDialog;
     private boolean showHavePhone = false;
+    private String loginPhone;//登录手机号
+    private String loginPwd;//登录密码
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +64,11 @@ public class LoginOrRegistActivity extends BaseActivity implements ISplashView,V
         setBackListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(showHavePhone){
+                if (showHavePhone) {
                     ivNoPhone.setVisibility(View.VISIBLE);
                     layoutHavePhone.setVisibility(View.GONE);
                     showHavePhone = false;
-                }else{
+                } else {
                     finish();
                 }
             }
@@ -62,6 +76,7 @@ public class LoginOrRegistActivity extends BaseActivity implements ISplashView,V
         setContentView(R.layout.activity_login_or_regist);
         presenter = new SplashPresenter(this);
         initViews();
+        setListener();
     }
 
     private void initViews(){
@@ -85,7 +100,7 @@ public class LoginOrRegistActivity extends BaseActivity implements ISplashView,V
     @Override
     public void startProcessBar() {
         if(progressDialog == null){
-            progressDialog = new ProgressDialog(LoginOrRegistActivity.this,R.style.loading_dialog);
+            progressDialog = new ProgressDialog(LoginActivity.this,R.style.loading_dialog);
         }
         if(progressDialog.isShowing()){
             progressDialog.dismiss();
@@ -107,7 +122,11 @@ public class LoginOrRegistActivity extends BaseActivity implements ISplashView,V
 
     @Override
     public void startNextActivity() {
-
+        HashMap<String,String> params = new HashMap<>();
+        params.put("username",loginPhone);
+        params.put("password", MD5Util.md5(loginPwd));
+        CustomTask task = new CustomTask(mHandler,Constants.WHAT_LOGIN,Constants.URL_LOGIN,true,params,true);
+        task.execute();
     }
 
     @Override
@@ -115,8 +134,53 @@ public class LoginOrRegistActivity extends BaseActivity implements ISplashView,V
         int id = v.getId();
         switch (id){
             case R.id.login_button_finish://登录
-
+                loginPhone = etLoginPhone.getText().toString();
+                loginPwd = etLoginPwd.getText().toString();
+                if(TextUtils.isEmpty(loginPhone)){
+                    Utils.makeToast(LoginActivity.this,getResources().getString(R.string.error_need_phone));
+                }else if(TextUtils.isEmpty(loginPwd)){
+                    Utils.makeToast(LoginActivity.this,getResources().getString(R.string.error_need_pwd));
+                }else{
+                    presenter.didFinishLoading(LoginActivity.this);
+                }
                 break;
         }
     }
+
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            try{
+                int action = msg.what;
+                JsonBean jsonBean = (JsonBean) msg.obj;
+                int code = jsonBean.getCode();
+                String errorMsg = jsonBean.getError_msg();
+                if(code == Constants.DATA_EVENT){
+                    Utils.makeToast(LoginActivity.this,Constants.ERROR_MSG_CODE+code);
+                    return;
+                }
+                switch (action){
+                    case Constants.WHAT_LOGIN:
+                        boolean flag = Utils.filtrateCode(LoginActivity.this,jsonBean);
+                        if(flag && code == Constants.OPERATION_FAIL){//数据交互失败
+                            Utils.makeToast(LoginActivity.this,errorMsg);
+                        }else if(flag && code == Constants.OPERATION_SUCCESS){//数据交互成功
+                            JSONObject jsonObject = new JSONObject(jsonBean.getJsonString());
+                            JSONObject object = jsonObject.optJSONObject("info");
+                            String userId = object.optString("userId");
+                            String token = object.optString("token");
+                            String mobile = object.optString("mobile");
+
+                            hideProcessBar();
+                        }else{
+                            hideProcessBar();
+                        }
+                        break;
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+                LogUtils.e(TAG,"activity数据异常");
+            }
+        }
+    };
 }

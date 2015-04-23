@@ -42,6 +42,8 @@
             android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/login_edit_phone"
+                android:maxLength="11"
+                android:numeric="integer"
                 android:gravity="center_vertical"
                 android:textSize="@dimen/login_edit_text"
                 android:background="@drawable/bg_login_edit"
@@ -54,6 +56,7 @@
                 android:layout_height="@dimen/height_login_edit" />
             <EditText
                 android:id="@+id/login_edit_pwd"
+                android:password="true"
                 android:layout_marginTop="5dp"
                 android:gravity="center_vertical"
                 android:textSize="@dimen/login_edit_text"
