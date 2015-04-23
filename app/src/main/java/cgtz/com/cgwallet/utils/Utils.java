@@ -9,6 +9,7 @@ import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.utility.Constants;
 
 /**
+ * 工具类
  * Created by Administrator on 2015/4/10.
  */
 public class Utils {
@@ -127,7 +128,7 @@ public class Utils {
      * @param msg
      */
     public static void makeToast(Context context,String msg){
-        Toast.makeText(context,msg,Toast.LENGTH_LONG);
+        Toast.makeText(context,msg,Toast.LENGTH_LONG).show();
     }
 
     /**

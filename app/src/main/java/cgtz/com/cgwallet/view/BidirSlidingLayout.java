@@ -296,16 +296,16 @@ public class BidirSlidingLayout extends RelativeLayout implements OnTouchListene
 				checkLeftMenuBorder();
 				contentLayout.setLayoutParams(contentLayoutParams);
 				break;
-			case SHOW_RIGHT_MENU:
-				contentLayoutParams.leftMargin = moveDistanceX;
-				checkRightMenuBorder();
-				contentLayout.setLayoutParams(contentLayoutParams);
-				break;
-			case HIDE_RIGHT_MENU:
-				contentLayoutParams.leftMargin = -rightMenuLayoutParams.width + moveDistanceX;
-				checkRightMenuBorder();
-				contentLayout.setLayoutParams(contentLayoutParams);
-				break;
+//			case SHOW_RIGHT_MENU:
+//				contentLayoutParams.leftMargin = moveDistanceX;
+//				checkRightMenuBorder();
+//				contentLayout.setLayoutParams(contentLayoutParams);
+//				break;
+//			case HIDE_RIGHT_MENU:
+//				contentLayoutParams.leftMargin = -rightMenuLayoutParams.width + moveDistanceX;
+//				checkRightMenuBorder();
+//				contentLayout.setLayoutParams(contentLayoutParams);
+//				break;
 			default:
 				break;
 			}
@@ -350,10 +350,11 @@ public class BidirSlidingLayout extends RelativeLayout implements OnTouchListene
 			} else if (upDistanceX < touchSlop && isLeftMenuVisible) {
 				// 当左侧菜单显示时，如果用户点击一下内容部分，则直接滚动到内容界面
 				scrollToContentFromLeftMenu();
-			} else if (upDistanceX < touchSlop && isRightMenuVisible) {
-				// 当右侧菜单显示时，如果用户点击一下内容部分，则直接滚动到内容界面
-				scrollToContentFromRightMenu();
 			}
+//			else if (upDistanceX < touchSlop && isRightMenuVisible) {
+//				// 当右侧菜单显示时，如果用户点击一下内容部分，则直接滚动到内容界面
+//				scrollToContentFromRightMenu();
+//			}
 			recycleVelocityTracker();
 			break;
 		}

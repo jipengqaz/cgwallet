@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -67,6 +68,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
                 etLoginPhone.setVisibility(View.VISIBLE);
                 showHavePhone = true;//重新填写手机号
                 setRightText(null);//重新填写手机号
+                etLoginPwd.setText("");
             }
         });
         setBackListener(new View.OnClickListener() {
@@ -195,7 +197,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
                     case Constants.WHAT_LOGIN:
                         boolean flag = Utils.filtrateCode(LoginActivity.this,jsonBean);
                         if(flag && code == Constants.OPERATION_FAIL){//数据交互失败
-                            Utils.makeToast(LoginActivity.this,errorMsg);
+                            Utils.makeToast(LoginActivity.this, errorMsg);
                         }else if(flag && code == Constants.OPERATION_SUCCESS){//数据交互成功
                             JSONObject jsonObject = new JSONObject(jsonBean.getJsonString());
                             JSONObject object = jsonObject.optJSONObject("info");
