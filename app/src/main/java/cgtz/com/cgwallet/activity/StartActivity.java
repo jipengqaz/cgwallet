@@ -36,15 +36,15 @@ public class StartActivity extends Activity {
     private File file = new File(Constants.IMG_FILE_PATH);
 
     /**
-     * ÓÃÓÚÑÓ³ÙÌø×ªµ½ÍøÂçÎ´Á¬½ÓÌáÊ¾Ò³Ãæ
+     * ç”¨äºå»¶è¿Ÿè·³è½¬åˆ°ç½‘ç»œæœªè¿æ¥æç¤ºé¡µé¢
      */
     private void start(){
         TimerTask task = new TimerTask(){
-                public void run(){
+            public void run(){
 //                    startActivity(new Intent(StartActivity.this,No_notwork_Activity.class));
-                    finish();
-                     }
-             };
+                finish();
+            }
+        };
         Timer timer = new Timer();
         timer.schedule(task, 2000);
     }
@@ -56,15 +56,15 @@ public class StartActivity extends Activity {
         MobclickAgent.setDebugMode(Constants.IS_TEST);
         MobclickAgent.updateOnlineConfig(this);
         rl_start = (ImageView) findViewById(R.id.rl_start);
-            if(file.exists()){
-                Bitmap bitmap = BitmapFactory.decodeFile(Constants.IMG_FILE_PATH);
-                rl_start.setImageDrawable(new BitmapDrawable(bitmap));
-                setAlpha(rl_start);
-            }else{
-                rl_start.setImageResource(R.mipmap.loading);
-                setAlpha(rl_start);
-            }
-        //Ìø×ªµ½   Ö÷½çÃæ
+        if(file.exists()){
+            Bitmap bitmap = BitmapFactory.decodeFile(Constants.IMG_FILE_PATH);
+            rl_start.setImageDrawable(new BitmapDrawable(bitmap));
+            setAlpha(rl_start);
+        }else{
+            rl_start.setImageResource(R.mipmap.loading);
+            setAlpha(rl_start);
+        }
+        //è·³è½¬åˆ°   ä¸»ç•Œé¢
         getonLine();
     }
     private void getonLine(){
@@ -86,7 +86,7 @@ public class StartActivity extends Activity {
                 if (!ChangeLogHelper.isTheSameVersion(StartActivity.this)) {
                     startActivity(new Intent(StartActivity.this, ScreenSlideActivity.class));
                 } else {
-                        startActivity(new Intent(StartActivity.this, MainActivity.class));
+                    startActivity(new Intent(StartActivity.this, MainActivity.class));
                 }
                 finish();
             }
@@ -105,27 +105,27 @@ public class StartActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-            JPushInterface.onResume(this);
-            MobclickAgent.onResume(this);
+        JPushInterface.onResume(this);
+        MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-            JPushInterface.onPause(this);
-            MobclickAgent.onPause(this);
+        JPushInterface.onPause(this);
+        MobclickAgent.onPause(this);
     }
 
     @Override
     protected void onDestroy() {
-            super.onDestroy();
+        super.onDestroy();
     }
 
     private void setAlpha(View view){
-        AlphaAnimation mHideAnimation = new AlphaAnimation(0.0f, 1.0f);//ÉèÖÃ´Ó²»¼ûµ½¼û
-        mHideAnimation.setDuration( 2000 );//ÉèÖÃ½¥ÏÖÊ±¼ä
-        mHideAnimation.setFillAfter( true );//ÉèÖÃ±£Áô¶¯»­Íê³ÉÊ±µÄÑù×Ó
-        view.startAnimation(mHideAnimation);//Æô¶¯¶¯»­
+        AlphaAnimation mHideAnimation = new AlphaAnimation(0.0f, 1.0f);//è®¾ç½®ä»ä¸è§åˆ°è§
+        mHideAnimation.setDuration( 2000 );//è®¾ç½®æ¸ç°æ—¶é—´
+        mHideAnimation.setFillAfter( true );//è®¾ç½®ä¿ç•™åŠ¨ç”»å®Œæˆæ—¶çš„æ ·å­
+        view.startAnimation(mHideAnimation);//å¯åŠ¨åŠ¨ç”»
     }
 
 
