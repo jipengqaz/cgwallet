@@ -1,9 +1,14 @@
 package cgtz.com.cgwallet.utility;
 
+import android.os.Environment;
+
+import java.io.File;
+
 /**
  * Created by Administrator on 2015/4/11.
  */
 public class Constants {
+    public static final String version_ = "100";
     public static final String ENCONDING = "UTF-8";
     public static final boolean IS_TEST = true;//判断是否为测试环境
     public static final boolean IS_DEVELOP = true;//用于在开发还是测试之间选择测试服务器路径的判断
@@ -37,8 +42,18 @@ public class Constants {
     public static final int POINT_STATE_SELECTED = 1; // 按下状态
     public static final int POINT_STATE_WRONG = 2; // 错误状态
     //end
-
+    public static final int HANDLER_SERVER_MAINTAIN = 2015011914;//服务器维护判断值
     public static final int WHAT_FEED_BACK = 2015042114;//意见反馈
     public static final String URL_FEED_BACK = "site/feedBack";//意见反馈
     public static final String URL_INTEREST_HISTORY = "ewallet/InterestHistory";//收益历史
+
+
+    /**
+     *
+     */
+    public static final String COMPANY_FILEDIR = "com.cgtz";//用于保存app下载的文件根目录
+    public static final String IMG_FILE_NAME = "loading"+version_+".jpg";
+    //下载的欢迎图片，保存路径
+    public static final String IMG_FILE_PATH = Environment.getExternalStorageDirectory()
+            + File.separator + Constants.COMPANY_FILEDIR + "/download/"+IMG_FILE_NAME;
 }
