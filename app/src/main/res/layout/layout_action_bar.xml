@@ -34,4 +34,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/action_bar_right_text"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_centerVertical="true"
+        android:padding="5dp"
+        android:textSize="@dimen/activity_bar_right_size"
+        android:textColor="@color/action_bar_right_text_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </RelativeLayout>
