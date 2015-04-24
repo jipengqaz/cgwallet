@@ -111,11 +111,15 @@ public class RegistNextActivity extends BaseActivity implements ISplashView,View
 //                registPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 if(isChecked){//判断现在密码显示状态，正在可见状态
                     //变为不可见
+                    showPwd.setImageResource(R.mipmap.icon_regist_no_show_pwd);
                     registPwd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    registPwd.setSelection(registPwd.getText().toString().length());
                     isChecked = false;
                 }else{//正在不可见状态
                     //变为可见
+                    showPwd.setImageResource(R.mipmap.icon_regist_show_pwd);
                     registPwd.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    registPwd.setSelection(registPwd.getText().toString().length());
                     isChecked = true;
                 }
                 break;

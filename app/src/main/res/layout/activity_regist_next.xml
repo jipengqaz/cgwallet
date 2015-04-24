@@ -44,7 +44,7 @@
                     android:id="@+id/iv_show_pwd"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
-                    android:src="@mipmap/icon_regist_show_pwd"
+                    android:src="@mipmap/icon_regist_no_show_pwd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
