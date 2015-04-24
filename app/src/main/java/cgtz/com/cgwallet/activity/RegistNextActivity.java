@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.InputType;
 import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,6 +41,7 @@ public class RegistNextActivity extends BaseActivity implements ISplashView,View
     private String mobile_pwd;//设置登录密码
     private ProgressDialog progressDialog;
     private SplashPresenter presenter;
+    private boolean isChecked = false;//设置是否显示密码
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +108,16 @@ public class RegistNextActivity extends BaseActivity implements ISplashView,View
         int id = v.getId();
         switch (id){
             case R.id.iv_show_pwd://是否显示密码
-
+//                registPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                if(isChecked){//判断现在密码显示状态，正在可见状态
+                    //变为不可见
+                    registPwd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    isChecked = false;
+                }else{//正在不可见状态
+                    //变为可见
+                    registPwd.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    isChecked = true;
+                }
                 break;
             case R.id.btn_regist://注册按钮
                 mobile_pwd = registPwd.getText().toString().trim();
