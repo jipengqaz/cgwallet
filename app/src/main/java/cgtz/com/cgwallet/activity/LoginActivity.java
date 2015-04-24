@@ -16,6 +16,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
@@ -52,6 +53,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         showBack(true);
+        MApplication.registActivities(this);//存储该activity
         beforeMobile = Utils.getUserPhone(this);
         if(TextUtils.isEmpty(beforeMobile)){
             setRightText(null);

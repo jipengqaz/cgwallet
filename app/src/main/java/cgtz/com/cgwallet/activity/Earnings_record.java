@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.client.Earnings_record_Client;
@@ -50,6 +51,8 @@ public class Earnings_record extends BaseActivity implements ISplashView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_earnings_record);
+        MApplication.registActivities(this);//存储该activity
+        showBack(true);
         setTitle("我的收益");
         init();
     }

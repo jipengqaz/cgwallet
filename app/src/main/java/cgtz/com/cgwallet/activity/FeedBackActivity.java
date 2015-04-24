@@ -3,9 +3,7 @@ package cgtz.com.cgwallet.activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 
+import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
@@ -72,7 +71,7 @@ public class FeedBackActivity extends BaseActivity implements ISplashView{
         setTitle("意见反馈");
         showBack(true);
         presenter = new SplashPresenter(this);
-
+        MApplication.registActivities(this);//存储该activity
         TextView ke_fu= (TextView) findViewById(R.id.ke_fu);
 //        ke_fu.setText(KeFu_Share.getSaveKefu(this));
         feed_advise= (EditText) findViewById(R.id.feed_advise);

@@ -10,8 +10,8 @@ import java.util.ArrayList;
  */
 public class MApplication extends Application {
     private static ArrayList<Activity> activities = new ArrayList<>();
-    private static String token;
-    private static String user_id;
+    private static String token ="";
+    private static String user_id ="";
 
     @Override
     public void onCreate() {
@@ -88,7 +88,7 @@ public class MApplication extends Application {
      * @param activity
      * @return
      */
-    public Activity getActivityByActivity(Activity activity){
+    public synchronized static Activity getActivityByActivity(Activity activity){
         String name = activity.getClass().getName();
         int size = activities.size();
         for(int i=0;i<size;i++){
@@ -106,7 +106,7 @@ public class MApplication extends Application {
     /**
      * 关掉所有Activity
      */
-    public void finishAllActivitys(){
+    public synchronized static void finishAllActivitys(){
         if(activities != null){
             int size = activities.size();
             for(int i=0;i<size;i++){

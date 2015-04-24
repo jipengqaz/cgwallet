@@ -40,6 +40,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.adapter.MFragmentPagerAdater;
 import cgtz.com.cgwallet.bean.JsonBean;
@@ -80,6 +81,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+        MApplication.registActivities(this);//存储该activity
         splashPresenter = new SplashPresenter(this);
         initViews();
         initFragment();
@@ -473,7 +475,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     protected void onStart() {
         super.onRestart();
-        if(Utils.getLockPassword(this, Utils.getUserPhone(this))!=""&& Constants.GESTURES_PASSWORD){
+        if(Utils.getLockPassword(this, Utils.getUserPhone(this))!=""&& Constants.GESTURES_PASSWORD && Utils.getUserId() != ""){
             Intent intent  = new Intent();
             intent.setClass(this,GestureVerifyActivity.class);
             startActivity(intent);

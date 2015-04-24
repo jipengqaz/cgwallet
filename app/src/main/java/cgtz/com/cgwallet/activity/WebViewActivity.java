@@ -15,6 +15,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 
 /**
@@ -37,6 +38,7 @@ public class WebViewActivity extends BaseActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_webview);
             showBack(true);
+            MApplication.registActivities(this);//存储该activity
             webView = (WebView) findViewById(R.id.webview);
             webView.getSettings().setJavaScriptEnabled(true);//可用JS
             webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);

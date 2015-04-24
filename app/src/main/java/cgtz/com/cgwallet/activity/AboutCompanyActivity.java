@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 
 /**
@@ -19,6 +20,7 @@ public class AboutCompanyActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_company);
+        MApplication.registActivities(this);//存储该activity
         setTitle("关于我们");
         showBack(true);
         TextView company_profile= (TextView) findViewById(R.id.company_profile);

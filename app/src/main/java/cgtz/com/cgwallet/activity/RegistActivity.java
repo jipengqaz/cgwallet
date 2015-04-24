@@ -43,6 +43,7 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
         setTitle("注册");
         MApplication.registActivities(this);
         presenter = new SplashPresenter(this);
+        MApplication.registActivities(this);//存储该activity
         showBack(true);
         initViews();
     }

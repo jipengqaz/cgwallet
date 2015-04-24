@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 
 /**
@@ -18,6 +19,7 @@ public class MenuMoreActivity extends BaseActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_more);
+        MApplication.registActivities(this);//存储该activity
         setTitle("更多");
         showBack(true);
         initViews();

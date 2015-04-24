@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 
 /**
@@ -17,6 +18,8 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_safe_center);
+        MApplication.registActivities(this);//存储该activity
+        showBack(true);
         setTitle("安全中心");
         showBack(true);
         init();

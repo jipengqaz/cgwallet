@@ -20,6 +20,7 @@ import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.ChangeLogHelper;
@@ -55,6 +56,7 @@ public class StartActivity extends Activity {
         setContentView(R.layout.activity_start);
         MobclickAgent.setDebugMode(Constants.IS_TEST);
         MobclickAgent.updateOnlineConfig(this);
+        MApplication.registActivities(this);//存储该activity
         rl_start = (ImageView) findViewById(R.id.rl_start);
         if(file.exists()){
             Bitmap bitmap = BitmapFactory.decodeFile(Constants.IMG_FILE_PATH);
