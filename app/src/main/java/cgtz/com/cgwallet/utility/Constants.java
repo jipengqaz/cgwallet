@@ -48,9 +48,11 @@ public class Constants {
     public static final int HANDLER_SERVER_MAINTAIN = 2015011914;//服务器维护判断值
     public static final int WHAT_FEED_BACK = 2015042114;//意见反馈
     public static final int WHAT_LOGIN = 2015042315;//登录
+    public static final int WHAT_GET_SECURITY_CODE = 2015042411;//登录
     public static final String URL_FEED_BACK = "site/feedBack";//意见反馈
     public static final String URL_INTEREST_HISTORY = "ewallet/InterestHistory";//收益历史
     public static final String URL_LOGIN = "site/login";//登录接口
+    public static final String URL_GET_SECURITY_CODE = "site/CheckMobile";//获取验证码
 
 
     /**

@@ -1,5 +1,6 @@
 package cgtz.com.cgwallet.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -51,7 +52,6 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("登录");
         showBack(true);
         beforeMobile = Utils.getUserPhone(this);
         if(TextUtils.isEmpty(beforeMobile)){
@@ -161,6 +161,9 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
     public void onClick(View v) {
         int id = v.getId();
         switch (id){
+            case R.id.tv_regist_account://注册用户
+                startActivity(new Intent(this,RegistActivity.class));
+                break;
             case R.id.login_button_finish://登录
                 if(etLoginPhone.getVisibility() == View.VISIBLE){//判断手机号填写控件是否隐藏
                     //为隐藏就使用输入的手机号
@@ -185,7 +188,6 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
         @Override
         public void handleMessage(Message msg) {
             try{
-                int action = msg.what;
                 JsonBean jsonBean = (JsonBean) msg.obj;
                 int code = jsonBean.getCode();
                 String errorMsg = jsonBean.getError_msg();
@@ -193,6 +195,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
                     Utils.makeToast(LoginActivity.this,Constants.ERROR_MSG_CODE+code);
                     return;
                 }
+                int action = msg.what;
                 switch (action){
                     case Constants.WHAT_LOGIN:
                         boolean flag = Utils.filtrateCode(LoginActivity.this,jsonBean);

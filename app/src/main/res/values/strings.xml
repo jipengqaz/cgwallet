@@ -49,7 +49,6 @@
     <string name="my_wallet_today_earning_hint">今日收益（元）</string>
 
     <string name="title_activity_Earnings_record">我的收益</string>
-    <string name="title_activity_login_or_regist">LoginOrRegistActivity</string>
     <string name="title_activity_main">主界面</string>
     <string name="title_activity_ScreenSlideActivity">引导图</string>
     <string name="hint_can_login">草根投资用户可直接登录</string>
@@ -59,5 +58,9 @@
     <string name="error_need_phone">请输入手机号</string>
     <string name="error_need_pwd">请输入登录密码</string>
     <string name="text_please_login">请登录</string>
-    <string name="title_activity_regist">RegistActivity</string>
+    <string name="hint_regist_mobile">请输入手机号/草根投资用户可直接登录</string>
+    <string name="hint_regist_security_code">请填写验证码</string>
+    <string name="hint_regist_get_security_code">获取验证码</string>
+    <string name="hint_regist_next">下一步</string>
+    <string name="title_activity_login_or_regist">登录</string>
 </resources>
