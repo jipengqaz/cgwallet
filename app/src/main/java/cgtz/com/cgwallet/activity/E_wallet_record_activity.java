@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
@@ -26,7 +25,7 @@ import cn.jpush.android.api.JPushInterface;
  */
 public class E_wallet_record_activity extends  BaseActivity implements View.OnClickListener{
 
-    private static final String TAG = "My_investment_Activity";
+    private static final String TAG = "E_wallet_record_activity";
     /**
      *
      * 三个个选项按钮
@@ -130,7 +129,6 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
 
         @Override
         public void startUpdate(ViewGroup container) {
-            Log.e(TAG, "startUpdate");
             super.startUpdate(container);
             int currentItem = viewpager.getCurrentItem();
             if(currentItem == currenttab){
@@ -144,7 +142,6 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
         @Override
         public void finishUpdate(ViewGroup container) {
             super.finishUpdate(container);//这句话要放在最前面，否则会报错
-            Log.e(TAG, "finishUpdate");
         }
     }
     private void imageMove(int moveToTab){
