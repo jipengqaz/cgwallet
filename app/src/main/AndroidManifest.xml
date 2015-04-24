@@ -127,14 +127,18 @@
         </activity>
         <activity
             android:name=".activity.E_wallet_record_activity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_e_all" />
+            android:label="@string/title_activity_e_all"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.Earnings_record"
             android:label="@string/title_activity_Earnings_record" />
         <activity
             android:name=".activity.RegistActivity"
-            android:screenOrientation="portrait"  >
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.RegistNextActivity"
+            android:label="@string/title_activity_regist_next" >
         </activity>
     </application>
 

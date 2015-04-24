@@ -63,4 +63,5 @@
     <string name="hint_regist_get_security_code">获取验证码</string>
     <string name="hint_regist_next">下一步</string>
     <string name="title_activity_login_or_regist">登录</string>
+    <string name="title_activity_regist_next">RegistNextActivity</string>
 </resources>

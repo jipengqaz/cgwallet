@@ -33,7 +33,7 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
     private String mobile = "";
     private ProgressDialog progressDialog;
     private SplashPresenter presenter;
-    private int portType;
+    private String mobile_code;//验证码
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,12 +62,18 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
                 if(TextUtils.isEmpty(mobile)){
                     Utils.makeToast(this,"请输入注册手机号");
                 }else{
-                    portType = Constants.WHAT_GET_SECURITY_CODE;
                     presenter.didFinishLoading(this);
                 }
                 break;
             case R.id.btn_regist_next://下一步
+                mobile  = registMobile.getText().toString().trim();
+                if(TextUtils.isEmpty(mobile)){
+                    Utils.makeToast(this,"请输入注册手机号");
+                }else if(TextUtils.isEmpty(mobile_code)){
+                    Utils.makeToast(this,"请填写验证码");
+                }else{
 
+                }
                 break;
         }
     }
@@ -92,7 +98,12 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
                             Utils.makeToast(RegistActivity.this, errorMsg);
                         }else if(flag && code == Constants.OPERATION_SUCCESS){//数据交互成功
                             JSONObject jsonObject = new JSONObject(jsonBean.getJsonString());
-
+                            if(Constants.IS_TEST){
+                                mobile_code = jsonObject.optString("mobile_code");
+                                Utils.makeToast(RegistActivity.this,mobile);
+                            }
+                        }else if(flag && code == 2){
+                            Utils.makeToast(RegistActivity.this, "手机号已注册，请直接登录");
                         }
                         hideProcessBar();
                         break;
@@ -128,14 +139,18 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
 
     @Override
     public void startNextActivity() {
-        if(portType == Constants.WHAT_GET_SECURITY_CODE){
-            HashMap<String,String> params = new HashMap();
-            params.put("mobile", mobile);
-            CustomTask task = new CustomTask(mHandler, Constants.WHAT_GET_SECURITY_CODE
-                    ,Constants.URL_GET_SECURITY_CODE,true,params,true);
-            task.execute();
-        }else{
-
-        }
+        HashMap<String,String> params = new HashMap();
+        params.put("mobile", mobile);
+        CustomTask task = new CustomTask(mHandler, Constants.WHAT_GET_SECURITY_CODE
+                ,Constants.URL_GET_SECURITY_CODE,true,params,true);
+        task.execute();
+//        else if(portType == Constants.WHAT_REGISTER){//注册
+//            HashMap<String,String> params = new HashMap();
+//            params.put("mobile", mobile);
+//            params.put("mobile_code", mobile_code);
+//            CustomTask task = new CustomTask(mHandler, Constants.WHAT_REGISTER
+//                    ,Constants.URL_REGISTER,true,params,true);
+//            task.execute();
+//        }
     }
 }
