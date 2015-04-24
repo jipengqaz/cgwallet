@@ -55,17 +55,11 @@
             android:background="@color/bg_projectlist_more"
             />
     </LinearLayout>
-    <View
-        android:id="@+id/aaaa"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_below="@id/tabs"
-        android:background="@color/porp_line"
-        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/aaaa"
+        android:layout_below="@id/tabs"
         android:orientation="vertical">
     <!-- VIewPager 主要是加载内容的 -->
     <android.support.v4.view.ViewPager
@@ -74,10 +68,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+
     <include layout="@layout/layout_save_or_draw_money"
         android:layout_width="wrap_content"
         android:layout_weight="1"
         android:layout_height="58dp"
         />
     </LinearLayout>
+    <RelativeLayout
+        android:layout_alignBottom="@id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/green_sliders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@mipmap/green_sliders"
+
+            />
+    </RelativeLayout>
 </RelativeLayout>

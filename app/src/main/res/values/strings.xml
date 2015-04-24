@@ -37,7 +37,8 @@
     <string name="no_binding">未绑定</string>
     <string name="login_pwd_change">修改登录密码</string>
     <string name="sodoko_unlock">管理手势密码</string>
-
+    <string name="sudoko_open_sudoko_unlock">开启手势密码</string>
+    <string name="sudoko_set_again">重新设置手势</string>
     <!--activity  name-->
     <string name="title_activity_feed_back">FeedBackActivity</string>
     <string name="title_activity_e_all">转账记录</string>
@@ -47,6 +48,7 @@
     <string name="login_button_next">登  录</string>
     <string name="login_button_finish">完成</string>
     <string name="my_wallet_today_earning_hint">今日收益（元）</string>
+
 
     <string name="title_activity_Earnings_record">我的收益</string>
     <string name="title_activity_main">主界面</string>
@@ -64,4 +66,6 @@
     <string name="hint_regist_next">下一步</string>
     <string name="title_activity_login_or_regist">登录</string>
     <string name="title_activity_regist_next">RegistNextActivity</string>
+
+
 </resources>

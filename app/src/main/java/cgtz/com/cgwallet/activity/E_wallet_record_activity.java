@@ -5,10 +5,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
-
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +34,7 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
     private Button buttonTwo;
     private Button button3;
 
+    private View green_sliders;//滚动条
     /**
      * 作为页面容器的ViewPager
      */
@@ -48,6 +51,11 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
     private E_all_records_fragment_1 e_all_records_fragment1;
     private E_all_records_fragment_1 e_all_records_fragment2;
 
+
+
+    //屏幕宽度
+    int screenWidth;
+
     //当前选中项
     private int currenttab = 0;
     @Override
@@ -61,9 +69,14 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
      * 初始化
      */
     private void init(){
+        screenWidth=getResources().getDisplayMetrics().widthPixels;
         buttonOne = (Button) findViewById(R.id.btn_one);
         buttonTwo = (Button) findViewById(R.id.btn_two);
         button3 = (Button) findViewById(R.id.btn_3);
+        green_sliders = findViewById(R.id.green_sliders);
+        RelativeLayout.LayoutParams imageParams=new RelativeLayout.LayoutParams(screenWidth/3, ViewGroup.LayoutParams.WRAP_CONTENT);
+        green_sliders.setLayoutParams(imageParams);
+
 
         buttonOne.setOnClickListener(this);
         buttonTwo.setOnClickListener(this);
@@ -111,9 +124,11 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
             return fragmentList.size();
         }
 
+
         @Override
-        public void finishUpdate(ViewGroup container) {
-            super.finishUpdate(container);//这句话要放在最前面，否则会报错
+        public void startUpdate(ViewGroup container) {
+            Log.e(TAG, "startUpdate");
+            super.startUpdate(container);
             int currentItem = viewpager.getCurrentItem();
             if(currentItem == currenttab){
                 return;
@@ -122,8 +137,24 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
             imageMove(viewpager.getCurrentItem());
             currenttab = viewpager.getCurrentItem();
         }
+
+        @Override
+        public void finishUpdate(ViewGroup container) {
+            super.finishUpdate(container);//这句话要放在最前面，否则会报错
+            Log.e(TAG, "finishUpdate");
+        }
     }
     private void imageMove(int moveToTab){
+        int startPosition=0;
+        int movetoPosition=0;
+
+        startPosition=currenttab*(screenWidth/3);
+        movetoPosition=moveToTab*(screenWidth/3);
+        //平移动画
+        TranslateAnimation translateAnimation=new TranslateAnimation(startPosition,movetoPosition, 0, 0);
+        translateAnimation.setFillAfter(true);
+        translateAnimation.setDuration(200);
+        green_sliders.startAnimation(translateAnimation);
         switch(moveToTab){//改变选中项的颜色
             case 0:
                 buttonOne.setBackgroundResource(R.color.white);

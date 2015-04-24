@@ -20,7 +20,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.bean.JsonBean;
+import cgtz.com.cgwallet.client.E_wallet_list;
 import cgtz.com.cgwallet.data.E_records;
+import cgtz.com.cgwallet.presenter.SplashPresenter;
+import cgtz.com.cgwallet.utils.Utils;
+import cgtz.com.cgwallet.view.ISplashView;
 import cgtz.com.cgwallet.view.RefreshAndLoadMoreListView;
 
 
@@ -28,7 +33,7 @@ import cgtz.com.cgwallet.view.RefreshAndLoadMoreListView;
  * 全部记录 转入记录 转出记录
  * Created by Administrator on 2015-3-16.
  */
-public class E_all_records_fragment_1 extends BaseFragment {
+public class E_all_records_fragment_1 extends BaseFragment implements ISplashView {
     private RefreshAndLoadMoreListView listview;
     private ProjectAdapter1 projectAdapter;
     private ArrayList<E_records> projects;
@@ -38,6 +43,7 @@ public class E_all_records_fragment_1 extends BaseFragment {
     private static final String TAG = "e_all_records_fragment";
     private int type; // 1 为全部记录  2 为转入记录   3 为转出记录
     private int page =0;
+    private SplashPresenter presenter;
     public void setType(int type){
         this.type = type;
     }
@@ -52,6 +58,7 @@ public class E_all_records_fragment_1 extends BaseFragment {
      * @param view
      */
     private void init(View view) {
+        presenter = new SplashPresenter(this);
         listview= (RefreshAndLoadMoreListView) view.findViewById(R.id.record_listview);
         projectAdapter = new ProjectAdapter1();
         listview.setAdapter(projectAdapter);
@@ -62,6 +69,32 @@ public class E_all_records_fragment_1 extends BaseFragment {
         listview.loadMore();
     }
 
+    @Override
+    public void startProcessBar() {
+
+    }
+
+    @Override
+    public void hideProcessBar() {
+
+    }
+
+    @Override
+    public void showNetError() {
+        Utils.makeToast(getActivity(), "错误");
+    }
+
+    @Override
+    public void startNextActivity() {
+        if(!aaa){
+            page +=1;
+            E_wallet_list.get_e_wallet_list(projectAdapter.handler, type, page, PAGE_SIZE);
+        }else{
+            page =1;//刷新时把页数初始化
+            E_wallet_list.get_e_wallet_list(projectAdapter.handler, type, 1, PAGE_SIZE);
+        }
+    }
+
     class ProjectAdapter1 extends BaseAdapter implements  RefreshAndLoadMoreListView.OnLoadMoreListener,
             AdapterView.OnItemClickListener,  RefreshAndLoadMoreListView.OnRefreshListener{
         public ProjectAdapter1(){projects = new ArrayList<E_records>();}
@@ -70,8 +103,8 @@ public class E_all_records_fragment_1 extends BaseFragment {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 try {
-                    JSONObject json = new JSONObject(msg.obj.toString());
-
+                    JsonBean jsonBean = (JsonBean) msg.obj;
+                    JSONObject json = new JSONObject(jsonBean.getJsonString());
                     Log.e(TAG, type + "返回列表数据" + json);
                     if(json.optString("success").equals("1")) {
                         JSONArray list = json.optJSONArray("list");
@@ -212,14 +245,12 @@ public class E_all_records_fragment_1 extends BaseFragment {
         @Override
         public void onLoadMore() {
             aaa = false;
-            page +=1;
-//            E_wallet_Client.get_e_wallet_list(handler, type,page, PAGE_SIZE);
+            presenter.didFinishLoading(getActivity());
         }
         @Override
         public void onRefresh() {
             aaa = true;
-//            E_wallet_Client.get_e_wallet_list(handler,type, 1, PAGE_SIZE);
-            page =1;//刷新时把页数初始化
+            presenter.didFinishLoading(getActivity());
         }
     }
 }

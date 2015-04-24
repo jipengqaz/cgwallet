@@ -1,15 +1,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#48423D" >
+    android:background="@mipmap/gesture_background" >
 
     <RelativeLayout
         android:id="@+id/top_layout"
         android:layout_width="match_parent"
         android:layout_height="46dip"
-        android:background="#000000"
         android:paddingLeft="20dip"
         android:paddingRight="20dip"
+        android:layout_marginTop="10dp"
         android:layout_alignParentTop="true" >
 
         <TextView
@@ -38,6 +38,7 @@
         android:id="@+id/gesture_tip_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:layout_below="@id/top_layout"
         android:gravity="center"
         android:orientation="vertical" >
@@ -54,8 +55,8 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="@string/set_gesture_pattern"
-            android:textColor="#F98F12"
-            android:layout_marginTop="10dip" />
+            android:textColor="@color/white"
+            android:layout_marginTop="20dip" />
     </LinearLayout>
 
     <FrameLayout
@@ -64,6 +65,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/gesture_tip_layout"
         android:layout_gravity="center_horizontal"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="20dip" >
     </FrameLayout>
 
@@ -73,8 +76,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:layout_below="@id/gesture_container"
-        android:layout_marginTop="20dip"
         android:text="@string/set_gesture_pattern_reason"
-        android:textColor="#816E6A" />
+        android:textColor="@color/white" />
 
 </RelativeLayout>

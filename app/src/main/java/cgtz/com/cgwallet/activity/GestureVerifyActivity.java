@@ -1,9 +1,9 @@
 package cgtz.com.cgwallet.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -73,7 +73,7 @@ public class GestureVerifyActivity extends Activity implements android.view.View
 
 
         // 初始化一个显示各个点的viewGroup
-        mGestureContentView = new GestureContentView(this, true, Utils.getLockPassword(this,"123456"),
+        mGestureContentView = new GestureContentView(this, true, Utils.getLockPassword(this,Utils.getUserPhone(this)),
                 new GestureDrawline.GestureCallBack() {
 
                     @Override
@@ -86,7 +86,7 @@ public class GestureVerifyActivity extends Activity implements android.view.View
                         mGestureContentView.clearDrawlineState(0L);
                         Toast.makeText(GestureVerifyActivity.this, "密码正确", Toast.LENGTH_SHORT).show();
 
-                        Constants.GESTURES_PASSWORD = false;
+                        Constants.GESTURES_PASSWORD = false;//用于判断是否需要跳的这页面
                         GestureVerifyActivity.this.finish();
                     }
 
@@ -95,7 +95,7 @@ public class GestureVerifyActivity extends Activity implements android.view.View
                         mGestureContentView.clearDrawlineState(1300L);
                         mTextTip.setVisibility(View.VISIBLE);
                         mTextTip.setText(Html
-                                .fromHtml("<font color='#c70c1e'>密码错误</font>"));
+                                .fromHtml("<font color='"+Constants.colors+"'>密码错误</font>"));
                         // 左右移动动画
                         Animation shakeAnimation = AnimationUtils.loadAnimation(GestureVerifyActivity.this, R.anim.shake);
                         mTextTip.startAnimation(shakeAnimation);
@@ -109,18 +109,10 @@ public class GestureVerifyActivity extends Activity implements android.view.View
         mTextCancel.setOnClickListener(this);
         mTextForget.setOnClickListener(this);
         mTextOther.setOnClickListener(this);
+        mTextPhoneNumber.setText(Utils.getProtectedMobile(Utils.getUserPhone(this)));//设置用户手机号
     }
 
-    private String getProtectedMobile(String phoneNumber) {
-        if (TextUtils.isEmpty(phoneNumber) || phoneNumber.length() < 11) {
-            return "";
-        }
-        StringBuilder builder = new StringBuilder();
-        builder.append(phoneNumber.subSequence(0, 3));
-        builder.append("****");
-        builder.append(phoneNumber.subSequence(7, 11));
-        return builder.toString();
-    }
+
     long waitTime = 2000;
     long touchTime = 0;
     @Override
@@ -142,6 +134,8 @@ public class GestureVerifyActivity extends Activity implements android.view.View
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.text_other_account://用其他账号登录
+                startActivity(new Intent(this,LoginActivity.class));
+                Constants.GESTURES_PASSWORD = false;//用于判断是否需要跳的这页面
                 finish();
                 break;
             case R.id.text_forget_gesture://忘记手势密码

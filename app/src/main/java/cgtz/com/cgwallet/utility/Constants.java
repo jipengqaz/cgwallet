@@ -10,6 +10,7 @@ import java.io.File;
 public class Constants {
     public static final String version_ = "100";
     public static final String ENCONDING = "UTF-8";
+    public static final String colors  ="#e44d42";
     public static final boolean IS_TEST = true;//判断是否为测试环境
     public static final boolean IS_DEVELOP = true;//用于在开发还是测试之间选择测试服务器路径的判断
     public static final boolean IS_28 = false;//判断是否更改为28服务器路径
@@ -55,6 +56,7 @@ public class Constants {
     public static final String URL_LOGIN = "site/login";//登录接口
     public static final String URL_GET_SECURITY_CODE = "site/getvcode";//获取验证码
     public static final String URL_REGISTER = "site/register";//注册
+    public static final String E_WALLET_LIST = "ewallet/list";//草根钱包转入转出数据
 
 
     /**

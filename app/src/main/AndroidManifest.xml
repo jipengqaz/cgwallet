@@ -140,6 +140,12 @@
             android:name=".activity.RegistNextActivity"
             android:label="@string/title_activity_regist_next" >
         </activity>
+            />
+        <activity android:name=".activity.Earnings_record"
+            android:label = "@string/title_activity_Earnings_record"
+            />
+        <activity android:name=".activity.OpenSudokoUnlockActivity"
+            />
     </application>
 
 </manifest>

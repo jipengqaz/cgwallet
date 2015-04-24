@@ -101,6 +101,32 @@ public class Utils {
     }
 
     /**
+     * 设置用户手机号   中间4位为*号
+     * @param phoneNumber  手机号吗
+     * @return
+     */
+    public static String getProtectedMobile(String phoneNumber) {
+        if (TextUtils.isEmpty(phoneNumber) || phoneNumber.length() < 11) {
+            return "";
+        }
+        StringBuilder builder = new StringBuilder();
+        builder.append(phoneNumber.subSequence(0, 3));
+        builder.append("****");
+        builder.append(phoneNumber.subSequence(7, 11));
+        return builder.toString();
+    }
+
+    /**
+     * 删除手势密码
+     * @param context
+     * @param phone
+     */
+    public static void removePassWord(Context context,String phone){
+        SharedUtils sharedUtils = new SharedUtils(context,Constants.CONFIG_GESTURE);
+        sharedUtils.remove(phone);
+    }
+
+    /**
      * 保存手势密码
      * @param context
      * @param phone

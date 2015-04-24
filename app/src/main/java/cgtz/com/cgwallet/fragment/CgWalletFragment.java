@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.activity.E_wallet_record_activity;
 import cgtz.com.cgwallet.utils.LogUtils;
-import cgtz.com.cgwallet.view.BidirSlidingLayout;
 
 /**
  * 草根钱包
