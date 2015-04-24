@@ -335,7 +335,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     protected void onResume() {
         super.onResume();
         String userMobile = Utils.getUserPhone(this);
-        String token = Utils.getToken(this);
+        String token = Utils.getToken();
         String loginPwd = Utils.getLoginPwd(this);
         if(!TextUtils.isEmpty(userMobile) && !TextUtils.isEmpty(token) && !TextUtils.isEmpty(loginPwd)){
             tvShowLoginMobile.setText(userMobile);

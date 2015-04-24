@@ -13,6 +13,8 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/view/RefreshAndLoadMoreListView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/view/ServerMainTainDialog.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/widget/ProgressDialog.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_sodoko_login_edit.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/loading_bg2.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_e_record.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_open_sudoko_unlock.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_screen_slide.xml" charset="GBK" />
@@ -22,6 +24,8 @@
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/list_empty_head.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/list_loadmore_foot.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/list_refresh_head.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/sodoko_unlock_pwd_dialog.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/loading_bg2.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/bg_custom_progressdialog.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/icon_guid_first.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/icon_guid_fourth.png" charset="GBK" />

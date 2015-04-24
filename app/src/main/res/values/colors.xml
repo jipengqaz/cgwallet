@@ -80,4 +80,6 @@
     <color name="hint_regist_pwd_introduce">#999999</color>
     <color name="bg_regist_finish_normal">#21c184</color>
     <color name="bg_regist_protocol">#21c184</color>
+    <color name="btn_invest">#29a600</color>
+    <color name="c_text">#898989</color>
 </resources>

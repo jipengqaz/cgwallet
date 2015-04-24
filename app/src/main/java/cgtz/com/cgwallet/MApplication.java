@@ -10,11 +10,44 @@ import java.util.ArrayList;
  */
 public class MApplication extends Application {
     private static ArrayList<Activity> activities = new ArrayList<>();
-
+    private static String token;
+    private static String user_id;
 
     @Override
     public void onCreate() {
         super.onCreate();
+    }
+
+    /**
+     * 获取token
+     * @return
+     */
+    public static String getToken() {
+        return token;
+    }
+
+    /**
+     * 设置token
+     * @param token
+     */
+    public static void setToken(String token) {
+        MApplication.token = token;
+    }
+
+    /**
+     * 获取id
+     * @return
+     */
+    public static String getUser_id() {
+        return user_id;
+    }
+
+    /**
+     * 设置id
+     * @param user_id
+     */
+    public static void setUser_id(String user_id) {
+        MApplication.user_id = user_id;
     }
 
     /**

@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.CustomTask;
+import cgtz.com.cgwallet.utils.Utils;
 
 /**
  * 我的收益获取数据
@@ -16,8 +17,8 @@ public class Earnings_record_Client {
     public static void getData(Handler mHandler,int page,int limit){
         //服务器数据交互操作
         HashMap<String,String> maps = new HashMap<>();
-        maps.put("user_id","191800033066");
-        maps.put("token", "CzjBA6gam5rasbbur9GExqyFcil8NWwCuFcYBMzx_Oo");
+        maps.put("user_id", Utils.getUserId());
+        maps.put("token", Utils.getToken());
         maps.put("page", page + "");
         maps.put("limit", limit + "");
         CustomTask task = new CustomTask(mHandler, 0,
