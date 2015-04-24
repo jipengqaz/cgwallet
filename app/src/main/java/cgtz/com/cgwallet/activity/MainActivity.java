@@ -2,6 +2,8 @@ package cgtz.com.cgwallet.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -33,17 +35,23 @@ import com.umeng.socialize.weixin.controller.UMWXHandler;
 import com.umeng.socialize.weixin.media.CircleShareContent;
 import com.umeng.socialize.weixin.media.WeiXinShareContent;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.adapter.MFragmentPagerAdater;
+import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.fragment.CgWalletFragment;
 import cgtz.com.cgwallet.fragment.MyWalletFragment;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
+import cgtz.com.cgwallet.utils.CustomTask;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.BidirSlidingLayout;
 import cgtz.com.cgwallet.view.ISplashView;
+import cgtz.com.cgwallet.widget.ProgressDialog;
 
 /**
  * 首页
@@ -65,6 +73,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private SplashPresenter splashPresenter;
     private ArrayList<Fragment> listFms;
     private int currIndex;//当前页卡编号
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -357,17 +366,25 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 
     @Override
     public void startProcessBar() {
-
+        if(progressDialog == null){
+            progressDialog = new ProgressDialog(this,R.style.loading_dialog);
+        }
+        if(progressDialog.isShowing()){
+            progressDialog.dismiss();
+        }
+        progressDialog.show();
     }
 
     @Override
     public void hideProcessBar() {
-
+        if(progressDialog != null && progressDialog.isShowing()){
+            progressDialog.dismiss();
+        }
     }
 
     @Override
     public void showNetError() {
-
+        Utils.makeToast(this, Constants.IS_EVENT_MSG);
     }
 
     @Override
@@ -464,4 +481,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             Toast.makeText(this, ".............手势密码", Toast.LENGTH_SHORT);
         }
     }
+
+
 }

@@ -47,6 +47,7 @@ public class Constants {
     public static final int POINT_STATE_WRONG = 2; // 错误状态
     //end
     public static final int HANDLER_SERVER_MAINTAIN = 2015011914;//服务器维护判断值
+    public static final int WHAT_WALLET_MAIN = 88888888;//钱包首页
     public static final int WHAT_FEED_BACK = 2015042114;//意见反馈
     public static final int WHAT_LOGIN = 2015042315;//登录
     public static final int WHAT_GET_SECURITY_CODE = 2015042411;//验证码
