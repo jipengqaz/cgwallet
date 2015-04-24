@@ -1,5 +1,6 @@
 package cgtz.com.cgwallet.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -72,7 +73,9 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
                 }else if(TextUtils.isEmpty(mobile_code)){
                     Utils.makeToast(this,"请填写验证码");
                 }else{
-
+                    startActivity(new Intent(this,RegistNextActivity.class)
+                    .putExtra("mobile",mobile)
+                    .putExtra("mobile_code",mobile_code));
                 }
                 break;
         }
@@ -100,7 +103,7 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
                             JSONObject jsonObject = new JSONObject(jsonBean.getJsonString());
                             if(Constants.IS_TEST){
                                 mobile_code = jsonObject.optString("mobile_code");
-                                Utils.makeToast(RegistActivity.this,mobile);
+                                Utils.makeToast(RegistActivity.this,mobile_code);
                             }
                         }else if(flag && code == 2){
                             Utils.makeToast(RegistActivity.this, "手机号已注册，请直接登录");
@@ -117,7 +120,7 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
     @Override
     public void startProcessBar() {
         if(progressDialog == null){
-            progressDialog = new ProgressDialog(RegistActivity.this,R.style.loading_dialog);
+            progressDialog = new ProgressDialog(this,R.style.loading_dialog);
         }
         if(progressDialog.isShowing()){
             progressDialog.dismiss();
@@ -144,13 +147,5 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
         CustomTask task = new CustomTask(mHandler, Constants.WHAT_GET_SECURITY_CODE
                 ,Constants.URL_GET_SECURITY_CODE,true,params,true);
         task.execute();
-//        else if(portType == Constants.WHAT_REGISTER){//注册
-//            HashMap<String,String> params = new HashMap();
-//            params.put("mobile", mobile);
-//            params.put("mobile_code", mobile_code);
-//            CustomTask task = new CustomTask(mHandler, Constants.WHAT_REGISTER
-//                    ,Constants.URL_REGISTER,true,params,true);
-//            task.execute();
-//        }
     }
 }

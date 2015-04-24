@@ -77,4 +77,7 @@
     <color name="gray">#717171</color>
     <color name="gestures_line">#0abce3</color><!--手势正常   线颜色-->
     <color name="red_line">#e0372b</color><!--手势错误   线颜色-->
+    <color name="hint_regist_pwd_introduce">#999999</color>
+    <color name="bg_regist_finish_normal">#21c184</color>
+    <color name="bg_regist_protocol">#21c184</color>
 </resources>

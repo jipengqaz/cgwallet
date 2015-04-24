@@ -66,6 +66,11 @@
     <string name="hint_regist_next">下一步</string>
     <string name="title_activity_login_or_regist">登录</string>
     <string name="title_activity_regist_next">RegistNextActivity</string>
+    <string name="hint_regist_edit_pwd">请设置登录密码</string>
+    <string name="hint_regist_pwd_introduce">6-20个字符，由大小写字母、数字组成</string>
+    <string name="pwd_digits">qwertyuiopasdfghjklmnbvcxzQWERTYUIOPLKJHGFDSAZXCVBNM1234567890</string>
+    <string name="text_regist_finish">同意协议并注册</string>
+    <string name="hint_regist_protocol">《草根钱包协议》</string>
 
 
 </resources>

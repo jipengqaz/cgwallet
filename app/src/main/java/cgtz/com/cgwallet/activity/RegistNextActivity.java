@@ -1,39 +1,166 @@
 package cgtz.com.cgwallet.activity;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
+import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.bean.JsonBean;
+import cgtz.com.cgwallet.presenter.SplashPresenter;
+import cgtz.com.cgwallet.utility.Constants;
+import cgtz.com.cgwallet.utils.CustomTask;
+import cgtz.com.cgwallet.utils.MD5Util;
+import cgtz.com.cgwallet.utils.Utils;
+import cgtz.com.cgwallet.view.ISplashView;
+import cgtz.com.cgwallet.widget.ProgressDialog;
 
-public class RegistNextActivity extends ActionBarActivity {
+/**
+ * 注册输入密码页
+ */
+public class RegistNextActivity extends BaseActivity implements ISplashView,View.OnClickListener {
+    private EditText registPwd;//密码输入框
+    private ImageView showPwd;//是否显示密码
+    private Button registBtn;//注册按钮
+    private TextView lookProtocol;//查看协议
+    private String mobile;//手机号
+    private String mobile_code;//验证码
+    private String mobile_pwd;//设置登录密码
+    private ProgressDialog progressDialog;
+    private SplashPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regist_next);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_regist_next, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        setTitle("注册");
+        showBack(true);
+        MApplication.registActivities(this);
+        presenter = new SplashPresenter(this);
+        if(savedInstanceState == null){
+            mobile = getIntent().getStringExtra("mobile");
+            mobile_code = getIntent().getStringExtra("mobile_code");
         }
-
-        return super.onOptionsItemSelected(item);
+        initViews();
     }
+
+    private void initViews(){
+        registPwd = (EditText) findViewById(R.id.et_regist_pwd);//密码输入框
+        showPwd = (ImageView) findViewById(R.id.iv_show_pwd);//是否显示密码
+        registBtn = (Button) findViewById(R.id.btn_regist);//注册按钮
+        lookProtocol = (TextView) findViewById(R.id.tv_regist_protocol);//查看协议
+        showPwd.setOnClickListener(this);
+        registBtn.setOnClickListener(this);
+        lookProtocol.setOnClickListener(this);
+    }
+
+    @Override
+    public void startProcessBar() {
+        if(progressDialog == null){
+            progressDialog = new ProgressDialog(this,R.style.loading_dialog);
+        }
+        if(progressDialog.isShowing()){
+            progressDialog.dismiss();
+        }
+        progressDialog.show();
+    }
+
+    @Override
+    public void hideProcessBar() {
+        if(progressDialog != null && progressDialog.isShowing()){
+            progressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void showNetError() {
+        Utils.makeToast(this, Constants.IS_EVENT_MSG);
+    }
+
+    @Override
+    public void startNextActivity() {
+            HashMap<String,String> params = new HashMap();
+            params.put("mobile", mobile);
+            params.put("verifyCode", mobile_code);
+            params.put("password", mobile_pwd);
+            params.put("register_method", "9");
+            CustomTask task = new CustomTask(mHandler, Constants.WHAT_REGISTER
+                    ,Constants.URL_REGISTER,true,params,true);
+            task.execute();
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id){
+            case R.id.iv_show_pwd://是否显示密码
+
+                break;
+            case R.id.btn_regist://注册按钮
+                mobile_pwd = registPwd.getText().toString().trim();
+                if(TextUtils.isEmpty(mobile) || TextUtils.isEmpty(mobile_code)){
+                    Utils.makeToast(this,"提交数据错误");
+                }else if(TextUtils.isEmpty(mobile_pwd)){
+                    Utils.makeToast(this,"请设置登录密码");
+                }else if(mobile_pwd.length() >20 || mobile_pwd.length() < 6){
+                    Utils.makeToast(this,"密码位数不正确");
+                }else{
+                    presenter.didFinishLoading(this);
+                }
+                break;
+            case R.id.tv_regist_protocol://查看草根协议
+
+                break;
+        }
+    }
+
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            try{
+                JsonBean jsonBean = (JsonBean) msg.obj;
+                int code = jsonBean.getCode();
+                String errorMsg = jsonBean.getError_msg();
+                if(code == Constants.DATA_EVENT){
+                    hideProcessBar();
+                    Utils.makeToast(RegistNextActivity.this,Constants.ERROR_MSG_CODE+code);
+                    return;
+                }
+                int action = msg.what;
+                switch (action){
+                    case Constants.WHAT_REGISTER://注册结果
+                        boolean flag = Utils.filtrateCode(RegistNextActivity.this,jsonBean);
+                        if(flag && code == Constants.OPERATION_FAIL){//数据交互失败
+                            Utils.makeToast(RegistNextActivity.this, errorMsg);
+                        }else if(flag && code == Constants.OPERATION_SUCCESS){//数据交互成功
+                            JSONObject jsonObject = new JSONObject(jsonBean.getJsonString());
+                            JSONObject info = jsonObject.getJSONObject("info");
+                            String userId = info.optString("userId");
+                            String token = info.optString("token");
+                            Utils.saveMobile(RegistNextActivity.this,mobile);
+                            Utils.saveLoginPwd(RegistNextActivity.this,MD5Util.md5(mobile_pwd));
+                            Utils.saveUserId(RegistNextActivity.this,userId);
+                            Utils.saveToken(RegistNextActivity.this, token);
+                            startActivity(new Intent(RegistNextActivity.this,MainActivity.class)
+                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        }
+                        hideProcessBar();
+                        break;
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    };
 }

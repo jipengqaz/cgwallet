@@ -165,11 +165,13 @@ public class Utils {
         LogUtils.i("JsonBean", "过滤code结果：" + jsonBean.getJsonString());
         int code = jsonBean.getCode();//code判断值
         String errorMsg = jsonBean.getError_msg();//错误信息
-        if(code == Constants.OPERATION_FAIL || code == Constants.OPERATION_SUCCESS){
-            return true;
-        }else{
+        if(code == Constants.NO_DATA || code == Constants.IS_EVENT
+                || code == Constants.NEED_LOGIN_AGAIN
+                || code == Constants.SERVICE_MAINTAIN){
             Utils.makeToast(context,errorMsg);
             return false;
+        }else{
+            return true;
         }
     }
 
