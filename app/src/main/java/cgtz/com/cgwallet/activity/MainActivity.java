@@ -353,7 +353,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         String token = Utils.getToken();
         String loginPwd = Utils.getLoginPwd(this);
         if(!TextUtils.isEmpty(userMobile) && !TextUtils.isEmpty(token) && !TextUtils.isEmpty(loginPwd)){
-            tvShowLoginMobile.setText(userMobile);
+            tvShowLoginMobile.setText(Utils.getHasStarsMobile(userMobile));
             setLeftMenuInfo(1);//已登录
         }else{
             setLeftMenuInfo(0);//未登录
@@ -452,7 +452,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         public void onPageSelected(int position) {
             currIndex = position;
             if(position == 1){
-                myWalletFragment.setData();
                 bidirSldingLayout.setMovedRight(true);
                 bidirSldingLayout.setMovedLeft(false);
             }else if(position == 0){

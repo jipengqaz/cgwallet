@@ -21,6 +21,8 @@ import java.util.HashMap;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.activity.E_wallet_record_activity;
+import cgtz.com.cgwallet.activity.Earnings_record;
 import cgtz.com.cgwallet.activity.LoginActivity;
 import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
@@ -52,6 +54,8 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
     private TextView walletAccumulative;//累计收益
     private TextView walletIdentity;//身份证号
     private TextView walletBankCord;//银行卡号
+    private TextView walletNoIdentity;//未实名认证
+    private TextView walletNoBank;//未绑卡
     private ProgressDialog progressDialog;
     private SplashPresenter presenter;
     private String earnings;//今日收益
@@ -59,8 +63,8 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
     private String accumulative;//累计收益
     private String identity;//身份证号
     private String bankCord;//银行卡号
-
     private int screenWidth;
+    private boolean goLogin = false;//判断是否去登录的标志
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         screenWidth = getResources().getDisplayMetrics().widthPixels;
@@ -90,6 +94,8 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
         walletAccumulative = (TextView) view.findViewById(R.id.wallet_accumulative_earnings);//累计收益
         walletIdentity = (TextView) view.findViewById(R.id.wallet_identity);//身份证号
         walletBankCord = (TextView) view.findViewById(R.id.wallet_bank_card);//银行卡号
+        walletNoIdentity = (TextView) view.findViewById(R.id.wallet_no_identity);//未实名认证
+        walletNoBank = (TextView) view.findViewById(R.id.wallet_no_bank);//未绑卡
     }
 
     /**
@@ -138,18 +144,43 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
         walletEarnings.setText(earnings);//今日收益
         walletAssets.setText(assets);//我的资产
         walletAccumulative.setText(accumulative);//累计收益
-        walletIdentity.setText(identity);//身份证号
-        walletBankCord.setText(bankCord);//银行卡号
+        if(TextUtils.isEmpty(identity)){
+            walletNoIdentity.setVisibility(View.GONE);
+            walletIdentity.setText("未实名认证");//未实名认证
+        }else{
+            walletNoIdentity.setVisibility(View.VISIBLE);
+            walletIdentity.setText(identity);//身份证号
+        }
+        if(TextUtils.isEmpty(bankCord)){
+            walletNoBank.setVisibility(View.GONE);
+            walletBankCord.setText("未绑卡");//未绑卡
+        }else{
+            walletNoBank.setVisibility(View.VISIBLE);
+            walletBankCord.setText(bankCord);//银行卡号
+        }
     }
 
-    public void setData(){
-        presenter.didFinishLoading(getActivity());
+    public void setData(boolean flag){
+        if(flag){
+            presenter.didFinishLoading(getActivity());
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(getUserVisibleHint()){
+            setData(true);
+        }else{
+            goLogin = false;
+            setData(false);
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        setData();
+        setData(goLogin);
     }
 
     @Override
@@ -178,6 +209,8 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
     @Override
     public void startNextActivity() {
         if(TextUtils.isEmpty(Utils.getUserId()) || TextUtils.isEmpty(Utils.getToken())){//判断是否登录
+            goLogin = true;
+            hideProcessBar();
             Utils.makeToast(getActivity(),Constants.NEED_LOGIN);
             startActivity(new Intent(getActivity(), LoginActivity.class));
         }else{
@@ -203,12 +236,15 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
             case R.id.layout_save://存钱
                 break;
             case R.id.layout_draw_record://取钱记录
+                startActivity(new Intent(getActivity(),E_wallet_record_activity.class));
                 break;
             case R.id.layout_save_record://存钱记录
+                startActivity(new Intent(getActivity(),E_wallet_record_activity.class));
                 break;
             case R.id.wallet_assets_layout://我的资产layout
                 break;
             case R.id.wallet_accumulative_layout://累计收益layout
+                startActivity(new Intent(getActivity(), Earnings_record.class));
                 break;
         }
     }

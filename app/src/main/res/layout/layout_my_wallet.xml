@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:id="@+id/wallet_earnings"
-                        android:text="3.68"
+                        android:text="0.00"
                         android:textSize="@dimen/my_wallet_figure_size"
                         android:textColor="@color/center_layout_normal_text"
                         android:layout_width="wrap_content"
@@ -158,6 +158,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:id="@+id/wallet_no_identity"
                         android:text="实名认证"
                         android:textColor="@color/my_wallet_earning_text"
                         android:textSize="@dimen/my_wallet_another_size"
@@ -166,7 +167,6 @@
                     <TextView
                         android:id="@+id/wallet_identity"
                         android:layout_margin="5dp"
-                        android:text="3302****0920"
                         android:textColor="@color/my_wallet_earning_num_text"
                         android:textSize="@dimen/my_wallet_earning_size"
                         android:layout_width="wrap_content"
@@ -188,6 +188,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:id="@+id/wallet_no_bank"
                         android:text="银行卡"
                         android:textColor="@color/my_wallet_earning_text"
                         android:textSize="@dimen/my_wallet_another_size"
@@ -196,7 +197,6 @@
                     <TextView
                         android:id="@+id/wallet_bank_card"
                         android:layout_margin="5dp"
-                        android:text="**** **** **** ***2568"
                         android:textColor="@color/my_wallet_earning_num_text"
                         android:textSize="@dimen/my_wallet_earning_size"
                         android:layout_width="wrap_content"
