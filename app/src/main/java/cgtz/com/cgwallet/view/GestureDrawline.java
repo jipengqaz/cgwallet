@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.entity.GesturePoint;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.AppUtil;
@@ -80,7 +81,7 @@ public class GestureDrawline extends View {
         canvas = new Canvas();
         canvas.setBitmap(bitmap);
         paint.setStyle(Style.STROKE);// 设置非填充
-        paint.setStrokeWidth(10);// 笔宽5像素
+        paint.setStrokeWidth(6);// 笔宽5像素
         paint.setColor(Color.rgb(245, 142, 33));// 设置默认连线颜色
         paint.setAntiAlias(true);// 不显示锯齿
 
@@ -131,7 +132,7 @@ public class GestureDrawline extends View {
             // 当期不允许绘制
             return true;
         }
-        paint.setColor(Color.rgb(245, 142, 33));// 设置默认连线颜色
+        paint.setColor(getResources().getColor(R.color.gestures_line));// 设置默认连线颜色
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mov_x = (int) event.getX();
@@ -322,7 +323,7 @@ public class GestureDrawline extends View {
         if(canvas!=null){
             canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
         }
-        paint.setColor(Color.rgb(154, 7, 21));// 设置默认线路颜色
+        paint.setColor(getResources().getColor(R.color.red_line));// 设置默认线路颜色
 
         if(first !=null){
             first.setPointState(Constants.POINT_STATE_WRONG);

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/E_wallet_record_activity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/OpenSudokoUnlockActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/SafeCenterActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/ScreenSlideActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/StartActivity.java" charset="UTF-8" />
@@ -13,6 +14,7 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/view/ServerMainTainDialog.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/widget/ProgressDialog.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_e_record.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_open_sudoko_unlock.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_screen_slide.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_start.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_screen_slide_page.xml" charset="GBK" />
@@ -25,7 +27,10 @@
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/icon_guid_fourth.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/icon_guid_second.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/icon_guid_third.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/icon_lockpattern.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/loading.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/lock_close.9.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/lock_open.9.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/no_data_image.png" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>

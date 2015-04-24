@@ -19,7 +19,7 @@ import cgtz.com.cgwallet.utils.AppUtil;
  */
 public class GestureContentView extends ViewGroup {
 
-    private int baseNum = 6;
+    private int baseNum = 5;//设置  点的大小
 
     private int[] screenDispaly;
 
@@ -45,7 +45,7 @@ public class GestureContentView extends ViewGroup {
     public GestureContentView(Context context, boolean isVerify, String passWord, GestureDrawline.GestureCallBack callBack) {
         super(context);
         screenDispaly = AppUtil.getScreenDispaly(context);
-        blockWidth = screenDispaly[0]/3;
+        blockWidth = screenDispaly[0]/3-40;
         this.list = new ArrayList<GesturePoint>();
         this.context = context;
         this.isVerify = isVerify;

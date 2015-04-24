@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.MD5Util;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.GestureContentView;
@@ -68,7 +69,10 @@ public class GestureEditActivity extends Activity implements OnClickListener {
             @Override
             public void onGestureCodeInput(String inputCode) {
                 if (!isInputPassValidate(inputCode)) {
-                    mTextTip.setText(Html.fromHtml("<font color='#c70c1e'>最少链接4个点, 请重新输入</font>"));
+                    mTextTip.setText(Html.fromHtml("<font color='"+ Constants.colors+"'>最少链接4个点, 请重新输入</font>"));
+                    // 左右移动动画
+                    Animation shakeAnimation = AnimationUtils.loadAnimation(GestureEditActivity.this, R.anim.shake);
+                    mTextTip.startAnimation(shakeAnimation);
                     mGestureContentView.clearDrawlineState(1000L);
                     return;
                 }
@@ -82,10 +86,10 @@ public class GestureEditActivity extends Activity implements OnClickListener {
                     if (inputCode.equals(mFirstPassword)) {
                         Toast.makeText(GestureEditActivity.this, "设置成功", Toast.LENGTH_SHORT).show();
                         mGestureContentView.clearDrawlineState(0L);
-                        Utils.saveLockPassWord(GestureEditActivity.this,"123456", MD5Util.md5(mFirstPassword));//把用户的输入的手势密码保存好
+                        Utils.saveLockPassWord(GestureEditActivity.this,Utils.getUserPhone(GestureEditActivity.this), MD5Util.md5(mFirstPassword));//把用户的输入的手势密码保存好   key 为用户手机号
                         GestureEditActivity.this.finish();
                     } else {
-                        mTextTip.setText(Html.fromHtml("<font color='#c70c1e'>与上一次绘制不一致，请重新绘制</font>"));
+                        mTextTip.setText(Html.fromHtml("<font color='"+Constants.colors+"'>与上一次绘制不一致，请重新绘制</font>"));
                         // 左右移动动画
                         Animation shakeAnimation = AnimationUtils.loadAnimation(GestureEditActivity.this, R.anim.shake);
                         mTextTip.startAnimation(shakeAnimation);
@@ -125,6 +129,8 @@ public class GestureEditActivity extends Activity implements OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.text_cancel:
+                //删除该手机号的  手势
+                Utils.removePassWord(this,Utils.getUserPhone(this));
                 this.finish();
                 break;
             case R.id.text_reset:

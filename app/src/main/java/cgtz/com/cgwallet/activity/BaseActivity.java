@@ -130,7 +130,7 @@ public class BaseActivity extends ActionBarActivity {
     protected void onRestart() {
         super.onRestart();
         Log.e("123", Constants.GESTURES_PASSWORD + "");
-        if(Utils.getLockPassword(this, "123456")!=""&& Constants.GESTURES_PASSWORD){
+        if(Utils.getLockPassword(this, Utils.getUserPhone(this))!=""&& Constants.GESTURES_PASSWORD){
             Intent intent  = new Intent();
             intent.setClass(this,GestureVerifyActivity.class);
             startActivity(intent);
