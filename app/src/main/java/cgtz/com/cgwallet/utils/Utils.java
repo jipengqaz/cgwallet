@@ -18,7 +18,6 @@ public class Utils {
 
     /**
      * 获取登录的id
-     * @param context
      * @return
      */
     public static String getUserId(){
@@ -29,7 +28,6 @@ public class Utils {
 
     /**
      * 保存登录后的id
-     * @param context
      * @param userId
      */
     public static void saveUserId(String userId){
@@ -39,7 +37,6 @@ public class Utils {
     }
     /**
      * 获取登录的token
-     * @param context
      * @return
      */
     public static String getToken(){
@@ -50,7 +47,6 @@ public class Utils {
 
     /**
      * 保存登录后的token
-     * @param context
      * @param token
      */
     public static void saveToken(String token){
@@ -197,7 +193,6 @@ public class Utils {
     /**
      * 手机号码添加星号
      * @param text
-     * @param index
      * @return
      */
     public static String getHasStarsMobile(String text){

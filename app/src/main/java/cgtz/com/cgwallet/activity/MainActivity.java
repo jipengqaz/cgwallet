@@ -75,6 +75,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private ArrayList<Fragment> listFms;
     private int currIndex;//当前页卡编号
     private ProgressDialog progressDialog;
+    private CgWalletFragment cgWalletFragment;
+    private MyWalletFragment myWalletFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -333,8 +335,10 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 
     private void initFragment(){
         listFms = new ArrayList<>();
-        listFms.add(new CgWalletFragment());
-        listFms.add(new MyWalletFragment());
+        cgWalletFragment = new CgWalletFragment();
+        myWalletFragment = new MyWalletFragment();
+        listFms.add(cgWalletFragment);
+        listFms.add(myWalletFragment);
         mViewPager.setAdapter(new MFragmentPagerAdater(getSupportFragmentManager(), listFms));
         mViewPager.setCurrentItem(0);
         mViewPager.setOnPageChangeListener(new MyOnPageChangeListener());
@@ -448,6 +452,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         public void onPageSelected(int position) {
             currIndex = position;
             if(position == 1){
+                myWalletFragment.setData();
                 bidirSldingLayout.setMovedRight(true);
                 bidirSldingLayout.setMovedLeft(false);
             }else if(position == 0){
