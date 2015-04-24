@@ -7,6 +7,7 @@ import java.util.Map;
 
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.CustomTask;
+import cgtz.com.cgwallet.utils.Utils;
 
 /**
  * Created by Administrator on 2015/4/23 0023.
@@ -22,9 +23,8 @@ public class E_wallet_list {
      */
     public  static void get_e_wallet_list(Handler handler ,int type ,int page,int limit){
 
-//        User user = UserSession.getInstance().getLoginedUser();
-        String user_id = "191800033066";
-        String token = "CzjBA6gam5rasbbur9GExj0aGn7oHUH98_zPGHdEdKM";
+        String user_id = Utils.getUserId();
+        String token = Utils.getToken();
         Map<String, String> params = new HashMap<String, String>();
         params.put("user_id", user_id + "");
         params.put("token", token);

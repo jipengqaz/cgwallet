@@ -77,4 +77,6 @@
     <color name="gray">#717171</color>
     <color name="gestures_line">#0abce3</color><!--手势正常   线颜色-->
     <color name="red_line">#e0372b</color><!--手势错误   线颜色-->
+    <color name="btn_invest">#29a600</color>
+    <color name="c_text">#898989</color>
 </resources>

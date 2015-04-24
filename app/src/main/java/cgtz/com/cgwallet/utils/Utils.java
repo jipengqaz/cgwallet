@@ -5,8 +5,10 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.utility.Constants;
+import cn.jpush.android.data.r;
 
 /**
  * 工具类
@@ -18,9 +20,10 @@ public class Utils {
      * @param context
      * @return
      */
-    public static String getUserId(Context context){
-        SharedUtils sharedUtils = new SharedUtils(context, Constants.CONFIG);
-        return sharedUtils.getString(Constants.LOGIN_USER_ID,"");
+    public static String getUserId(){
+        return MApplication.getUser_id();
+//        SharedUtils sharedUtils = new SharedUtils(context, Constants.CONFIG);
+//        return sharedUtils.getString(Constants.LOGIN_USER_ID,"");
     }
 
     /**
@@ -28,18 +31,20 @@ public class Utils {
      * @param context
      * @param userId
      */
-    public static void saveUserId(Context context,String userId){
-        SharedUtils sharedUtils = new SharedUtils(context, Constants.CONFIG);
-        sharedUtils.saveString(Constants.LOGIN_USER_ID, userId);
+    public static void saveUserId(String userId){
+        MApplication.setUser_id(userId);
+//        SharedUtils sharedUtils = new SharedUtils(context, Constants.CONFIG);
+//        sharedUtils.saveString(Constants.LOGIN_USER_ID, userId);
     }
     /**
      * 获取登录的token
      * @param context
      * @return
      */
-    public static String getToken(Context context){
-        SharedUtils sharedUtils = new SharedUtils(context, Constants.CONFIG);
-        return sharedUtils.getString(Constants.LOGIN_TOKEN,"");
+    public static String getToken(){
+        return MApplication.getToken();
+//        SharedUtils sharedUtils = new SharedUtils(context, Constants.CONFIG);
+//        return sharedUtils.getString(Constants.LOGIN_TOKEN,"");
     }
 
     /**
@@ -47,9 +52,10 @@ public class Utils {
      * @param context
      * @param token
      */
-    public static void saveToken(Context context,String token){
-        SharedUtils sharedUtils = new SharedUtils(context, Constants.CONFIG);
-        sharedUtils.saveString(Constants.LOGIN_TOKEN, token);
+    public static void saveToken(String token){
+        MApplication.setToken(token);
+//        SharedUtils sharedUtils = new SharedUtils(context, Constants.CONFIG);
+//        sharedUtils.saveString(Constants.LOGIN_TOKEN, token);
     }
 
     /**

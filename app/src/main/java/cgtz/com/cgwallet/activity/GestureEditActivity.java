@@ -86,7 +86,8 @@ public class GestureEditActivity extends Activity implements OnClickListener {
                     if (inputCode.equals(mFirstPassword)) {
                         Toast.makeText(GestureEditActivity.this, "设置成功", Toast.LENGTH_SHORT).show();
                         mGestureContentView.clearDrawlineState(0L);
-                        Utils.saveLockPassWord(GestureEditActivity.this,Utils.getUserPhone(GestureEditActivity.this), MD5Util.md5(mFirstPassword));//把用户的输入的手势密码保存好   key 为用户手机号
+                        Utils.saveLockPassWord(GestureEditActivity.this, Utils.getUserPhone(GestureEditActivity.this), MD5Util.md5(mFirstPassword));//把用户的输入的手势密码保存好   key 为用户手机号
+                        Constants.GESTURES_PASSWORD = false;
                         GestureEditActivity.this.finish();
                     } else {
                         mTextTip.setText(Html.fromHtml("<font color='"+Constants.colors+"'>与上一次绘制不一致，请重新绘制</font>"));

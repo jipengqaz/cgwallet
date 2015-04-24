@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -207,8 +206,8 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
                             String userId = object.optString("userId");
                             String token = object.optString("token");
                             String mobile = object.optString("mobile");
-                            Utils.saveUserId(LoginActivity.this, userId);
-                            Utils.saveToken(LoginActivity.this, token);
+                            Utils.saveUserId(userId);
+                            Utils.saveToken(token);
                             Utils.saveMobile(LoginActivity.this, mobile);
                             Utils.saveLoginPwd(LoginActivity.this, MD5Util.md5(loginPwd));
                             hideProcessBar();
