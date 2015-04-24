@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.Utils;
@@ -53,6 +54,7 @@ public class GestureVerifyActivity extends Activity implements android.view.View
         ObtainExtraData();
         setUpViews();
         setUpListeners();
+        MApplication.registActivities(this);//存储该activity
     }
 
     private void ObtainExtraData() {
@@ -123,7 +125,7 @@ public class GestureVerifyActivity extends Activity implements android.view.View
                 Toast.makeText(this, "再按一次退出应用", Toast.LENGTH_SHORT).show();
                 touchTime = currentTime;
             } else {
-
+                MApplication.finishAllActivitys();
                 finish();
             }
         }

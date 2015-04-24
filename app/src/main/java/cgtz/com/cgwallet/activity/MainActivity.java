@@ -35,6 +35,7 @@ import com.umeng.socialize.weixin.media.WeiXinShareContent;
 
 import java.util.ArrayList;
 
+import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.adapter.MFragmentPagerAdater;
 import cgtz.com.cgwallet.fragment.CgWalletFragment;
@@ -71,6 +72,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+        MApplication.registActivities(this);//存储该activity
         splashPresenter = new SplashPresenter(this);
         initViews();
         initFragment();

@@ -18,6 +18,7 @@ import com.umeng.analytics.MobclickAgent;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.client.Is_passwrod;
@@ -40,8 +41,10 @@ public class OpenSudokoUnlockActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("设置手势密码");
+        setTitle("管理手势密码");
         setContentView(R.layout.activity_open_sudoko_unlock);
+        MApplication.registActivities(this);//存储该activity
+        showBack(true);
         init();
         setViewsListener();
 

@@ -48,6 +48,7 @@
                 android:textColor="@color/black"
                 android:background="@drawable/bg_sodoko_login_edit"
                 android:password="true"
+                android:maxLength="20"
                 android:singleLine="true"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content" />

@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.umeng.analytics.MobclickAgent;
 
+import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.fragment.ScreenSlidePageFragment;
 import cgtz.com.cgwallet.utils.ChangeLogHelper;
@@ -62,7 +63,7 @@ public class ScreenSlideActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_slide);
-//        CGApp.register(this);
+        MApplication.registActivities(this);//存储该activity
         if(savedInstanceState != null){
             flag = savedInstanceState.getBoolean("cg_characteristic",false);
         }else{

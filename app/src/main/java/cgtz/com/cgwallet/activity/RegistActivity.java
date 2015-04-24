@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
@@ -41,6 +42,7 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
         setContentView(R.layout.activity_regist);
         setTitle("注册");
         presenter = new SplashPresenter(this);
+        MApplication.registActivities(this);//存储该activity
         showBack(true);
         initViews();
     }
