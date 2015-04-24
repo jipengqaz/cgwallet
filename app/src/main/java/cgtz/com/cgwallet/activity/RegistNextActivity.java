@@ -136,7 +136,9 @@ public class RegistNextActivity extends BaseActivity implements ISplashView,View
                 }
                 break;
             case R.id.tv_regist_protocol://查看草根协议
-
+                startActivity(new Intent(this, WebViewActivity.class)
+                        .putExtra("url", Constants.URL_CG_WALLET_PROTOCOL)
+                        .putExtra("title", "草根钱包协议"));
                 break;
         }
     }

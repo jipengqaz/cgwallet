@@ -51,6 +51,7 @@ public class Constants {
     public static final int WHAT_LOGIN = 2015042315;//登录
     public static final int WHAT_GET_SECURITY_CODE = 2015042411;//验证码
     public static final int WHAT_REGISTER = 2015042414;//注册
+    public static final String URL_CG_WALLET_PROTOCOL = "http://d5ds88.cgtz.com/site/agreement/";
     public static final String URL_FEED_BACK = "site/feedBack";//意见反馈
     public static final String URL_INTEREST_HISTORY = "ewallet/InterestHistory";//收益历史
     public static final String URL_LOGIN = "site/login";//登录接口
