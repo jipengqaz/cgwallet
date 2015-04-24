@@ -49,6 +49,7 @@ import cgtz.com.cgwallet.fragment.MyWalletFragment;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.CustomTask;
+import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.BidirSlidingLayout;
 import cgtz.com.cgwallet.view.ISplashView;
@@ -349,6 +350,11 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     protected void onResume() {
         super.onResume();
+        if(MApplication.goLogin && TextUtils.isEmpty(Utils.getToken())){
+            LogUtils.i(TAG,"MApplication.goLogin 为 true");
+            currIndex = 0;
+            mViewPager.setCurrentItem(currIndex);
+        }
         String userMobile = Utils.getUserPhone(this);
         String token = Utils.getToken();
         String loginPwd = Utils.getLoginPwd(this);

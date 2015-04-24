@@ -180,7 +180,7 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
     @Override
     public void onResume() {
         super.onResume();
-        setData(goLogin);
+        setData(goLogin && MApplication.goLogin);
     }
 
     @Override
