@@ -458,7 +458,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     protected void onStart() {
         super.onRestart();
-        if(Utils.getLockPassword(this, Utils.getUserPhone(this))!=""&& Constants.GESTURES_PASSWORD){
+        if(Utils.getLockPassword(this, Utils.getUserPhone(this))!=""&& Constants.GESTURES_PASSWORD && Utils.getUserId() != ""){
             Intent intent  = new Intent();
             intent.setClass(this,GestureVerifyActivity.class);
             startActivity(intent);

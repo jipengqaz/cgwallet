@@ -15,6 +15,7 @@ import cn.jpush.android.data.r;
  * Created by Administrator on 2015/4/10.
  */
 public class Utils {
+
     /**
      * 获取登录的id
      * @param context
@@ -96,14 +97,16 @@ public class Utils {
     }
 
     /**
-     * 退出账号,删除登录密码
+     * 退出账号,删除登录密码  清空  该账户的数据
      * @param context
      * @return
      */
     public static void loginExit(Context context){
         SharedUtils sharedUtils = new SharedUtils(context,Constants.CONFIG);
         sharedUtils.remove(Constants.LOGIN_PASSWORD);
-        sharedUtils.remove(Constants.LOGIN_TOKEN);
+//        sharedUtils.remove(Constants.LOGIN_TOKEN);
+        MApplication.setToken("");
+        MApplication.setUser_id("");
     }
 
     /**

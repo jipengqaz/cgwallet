@@ -10,8 +10,8 @@ import java.util.ArrayList;
  */
 public class MApplication extends Application {
     private static ArrayList<Activity> activities = new ArrayList<>();
-    private static String token;
-    private static String user_id;
+    private static String token ="";
+    private static String user_id ="";
 
     @Override
     public void onCreate() {

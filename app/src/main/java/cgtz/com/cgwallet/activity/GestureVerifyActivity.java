@@ -1,10 +1,12 @@
 package cgtz.com.cgwallet.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.utility.Constants;
+import cgtz.com.cgwallet.utils.AppUtil;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.GestureContentView;
 import cgtz.com.cgwallet.view.GestureDrawline;
@@ -47,6 +50,8 @@ public class GestureVerifyActivity extends Activity implements android.view.View
     private long mExitTime = 0;
     private int mParamIntentCode;
 
+    private LayoutInflater mInflater;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +60,8 @@ public class GestureVerifyActivity extends Activity implements android.view.View
         setUpViews();
         setUpListeners();
         MApplication.registActivities(this);//存储该activity
+
+        mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     private void ObtainExtraData() {
@@ -138,10 +145,11 @@ public class GestureVerifyActivity extends Activity implements android.view.View
             case R.id.text_other_account://用其他账号登录
                 startActivity(new Intent(this,LoginActivity.class));
                 Constants.GESTURES_PASSWORD = false;//用于判断是否需要跳的这页面
+                Utils.loginExit(this);
                 finish();
                 break;
             case R.id.text_forget_gesture://忘记手势密码
-
+                AppUtil.isPasswroid(this, mInflater,true);
                 break;
             default:
                 break;

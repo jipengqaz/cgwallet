@@ -4,24 +4,17 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.umeng.analytics.MobclickAgent;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
-import cgtz.com.cgwallet.bean.JsonBean;
-import cgtz.com.cgwallet.client.Is_passwrod;
+import cgtz.com.cgwallet.utils.AppUtil;
 import cgtz.com.cgwallet.utils.Utils;
 import cn.jpush.android.api.JPushInterface;
 
@@ -118,9 +111,6 @@ public class OpenSudokoUnlockActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         mIsDestroy = true;
-//        if(loginTask != null && loginTask.getStatus() == AsyncTask.Status.RUNNING){
-//            loginTask.cancel(true);
-//        }
     }
 
     /**
@@ -130,45 +120,7 @@ public class OpenSudokoUnlockActivity extends BaseActivity {
         if(mIsDestroy){
             return;
         }
-        mDialog = new Dialog(OpenSudokoUnlockActivity.this,
-                R.style.loading_dialog2);//填写登录密码提示框
-        View linearLayout = mInflater.inflate(R.layout.sodoko_unlock_pwd_dialog,null);
-        TextView login_phone = (TextView) linearLayout.findViewById(R.id.tv_sodoko_login_phone);
-        final EditText login_pwd = (EditText) linearLayout.findViewById(R.id.et_sodoko_login_pwd);
-        TextView confirm = (TextView) linearLayout.findViewById(R.id.tv_sodoko_confirm);
-        errorHint = (TextView) linearLayout.findViewById(R.id.tv_sodoko_error_hint);
-        mDialog.setContentView(linearLayout);
-        mDialog.setCanceledOnTouchOutside(false);
-        mDialog.show();
-        login_phone.setText(Utils.getProtectedMobile(Utils.getUserPhone(this)));
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                errorHint.setVisibility(View.VISIBLE);
-                errorHint.setText("正在判断登录密码...");
-                Is_passwrod.isPasswrod(mHandler, login_pwd.getText().toString());
-            }
-        });
+        AppUtil.isPasswroid(this,mInflater,false);
     }
 
-    private Handler mHandler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            JsonBean jsonBean = (JsonBean) msg.obj;
-            try {
-                JSONObject json = new JSONObject(jsonBean.getJsonString());
-                String status = json.getString("success");
-                if ("0".equals(status)) {
-                    errorHint.setText(json.optString("msg"));
-                }else{
-                    Utils.removePassWord(OpenSudokoUnlockActivity.this,Utils.getUserPhone(OpenSudokoUnlockActivity.this));
-                    Intent intent = new Intent(OpenSudokoUnlockActivity.this,GestureEditActivity.class);
-                    startActivity(intent);
-                    mDialog.dismiss();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    };
 }
