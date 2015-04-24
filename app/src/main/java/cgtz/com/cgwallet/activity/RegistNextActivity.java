@@ -162,8 +162,8 @@ public class RegistNextActivity extends BaseActivity implements ISplashView,View
                             String token = info.optString("token");
                             Utils.saveMobile(RegistNextActivity.this,mobile);
                             Utils.saveLoginPwd(RegistNextActivity.this,MD5Util.md5(mobile_pwd));
-                            Utils.saveUserId(RegistNextActivity.this,userId);
-                            Utils.saveToken(RegistNextActivity.this, token);
+                            Utils.saveUserId(userId);
+                            Utils.saveToken(token);
                             startActivity(new Intent(RegistNextActivity.this,MainActivity.class)
                             .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                         }
