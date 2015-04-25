@@ -12,6 +12,8 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.umeng.analytics.MobclickAgent;
+
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.utility.Constants;
@@ -20,6 +22,7 @@ import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.GestureContentView;
 import cgtz.com.cgwallet.view.GestureDrawline;
 import cgtz.com.cgwallet.view.LockIndicator;
+import cn.jpush.android.api.JPushInterface;
 
 
 /**
@@ -152,5 +155,17 @@ public class GestureEditActivity extends Activity implements OnClickListener {
         }
         return true;
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
+        MobclickAgent.onResume(this);
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+        MobclickAgent.onPause(this);
+    }
 }

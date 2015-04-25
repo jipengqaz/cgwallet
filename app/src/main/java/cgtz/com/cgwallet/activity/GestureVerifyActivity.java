@@ -16,6 +16,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.umeng.analytics.MobclickAgent;
+
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.utility.Constants;
@@ -23,6 +25,7 @@ import cgtz.com.cgwallet.utils.AppUtil;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.GestureContentView;
 import cgtz.com.cgwallet.view.GestureDrawline;
+import cn.jpush.android.api.JPushInterface;
 
 
 /**
@@ -155,5 +158,17 @@ public class GestureVerifyActivity extends Activity implements android.view.View
                 break;
         }
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
+        MobclickAgent.onResume(this);
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+        MobclickAgent.onPause(this);
+    }
 }

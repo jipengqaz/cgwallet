@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
+
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -27,6 +29,7 @@ import cgtz.com.cgwallet.utils.MD5Util;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.ISplashView;
 import cgtz.com.cgwallet.widget.ProgressDialog;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * 登录或注册页面
@@ -224,4 +227,17 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
             }
         }
     };
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+        MobclickAgent.onPause(this);
+    }
 }

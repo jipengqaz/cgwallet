@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.bean.SocializeEntity;
 import com.umeng.socialize.controller.UMServiceFactory;
@@ -45,6 +46,7 @@ import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.BidirSlidingLayout;
 import cgtz.com.cgwallet.view.ISplashView;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * 首页
@@ -345,11 +347,15 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         }else{
             setLeftMenuInfo(0);//未登录
         }
+        JPushInterface.onResume(this);
+        MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        JPushInterface.onPause(this);
+        MobclickAgent.onPause(this);
     }
 
     @Override

@@ -15,8 +15,11 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+import com.umeng.analytics.MobclickAgent;
+
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by Administrator on 2015/4/21.
@@ -158,15 +161,15 @@ public class WebViewActivity extends BaseActivity {
         @Override
         protected void onResume() {
             super.onResume();
-//            JPushInterface.onResume(this);
-//            MobclickAgent.onResume(this);
+            JPushInterface.onResume(this);
+            MobclickAgent.onResume(this);
         }
 
         @Override
         protected void onPause() {
             super.onPause();
-//            JPushInterface.onPause(this);
-//            MobclickAgent.onPause(this);
+            JPushInterface.onPause(this);
+            MobclickAgent.onPause(this);
         }
 
         @Override
@@ -184,9 +187,9 @@ public class WebViewActivity extends BaseActivity {
         protected void onSaveInstanceState(Bundle outState) {
             super.onSaveInstanceState(outState);
             outState.putString("url",url);
-            outState.putString("title",title);
-            outState.putLong("projectID",id);
-            outState.putInt("type",type);
+            outState.putString("title", title);
+            outState.putLong("projectID", id);
+            outState.putInt("type", type);
         }
 
 }
