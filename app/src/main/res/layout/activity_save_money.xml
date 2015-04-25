@@ -50,6 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/save_money_assets_use"
             android:text="银行卡资金可与草根账户余额一同转入"
             android:layout_marginLeft="10dp"
             android:textSize="@dimen/save_moeny_hint_text"
@@ -77,6 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/et_save_figure"
             android:layout_centerInParent="true"
             android:background="@null"
             android:layout_centerVertical="true"
@@ -87,6 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageView
+            android:id="@+id/delete_edit"
             android:src="@mipmap/icon_delete_edit"
             android:layout_marginRight="@dimen/save_moeny_marign_left"
             android:layout_alignParentRight="true"
@@ -106,6 +109,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/income_time_hint"
             android:text="开始计算收益时间4月9日（星期四）"
             android:textSize="@dimen/save_moeny_hint_text"
             android:textColor="@color/money_tv_hint_text"
@@ -125,6 +129,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/safe_copywrite_hint"
             android:text="平台资金账户由国有银行实时监管"
             android:layout_marginLeft="10dp"
             android:textSize="@dimen/save_moeny_hint_text"
@@ -133,6 +138,7 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
     <Button
+        android:id="@+id/cofirm_save"
         android:text="@string/save_money_button_text"
         android:textSize="@dimen/button_text_size"
         android:textColor="@color/button_text_not_enabled"
