@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -82,6 +83,9 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private ProgressDialog progressDialog;
     private CgWalletFragment cgWalletFragment;
     private MyWalletFragment myWalletFragment;
+    private ImageView bottomLineSelected;//底部的白线
+    private ImageView bottomLineNormal;//底部的
+    private LinearLayout layoutBottom;//底部的选项
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -330,6 +334,9 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         menuMore = (LinearLayout) findViewById(R.id.left_menu_more);
         tvShowLoginMobile = (TextView) findViewById(R.id.tv_show_login_mobile);
         layotExit = (LinearLayout) findViewById(R.id.left_menu_login_out);
+        layoutBottom = (LinearLayout) findViewById(R.id.layout_bottom);
+        bottomLineSelected = (ImageView) findViewById(R.id.wallet_bottom_line_selected);//底部的选中
+        bottomLineNormal = (ImageView) findViewById(R.id.wallet_bottom_line_normal);//底部的未选中
     }
 
     private void setViewLinstener(){
@@ -488,7 +495,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 
         @Override
         public void onPageScrollStateChanged(int state) {
-            Log.i(TAG,"state: "+state);
         }
     }
 
@@ -510,7 +516,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             intent.setClass(this,GestureVerifyActivity.class);
             startActivity(intent);
         }else{
-            Toast.makeText(this, ".............手势密码", Toast.LENGTH_SHORT);
+            Utils.makeToast(this, "手势密码");
         }
     }
 
