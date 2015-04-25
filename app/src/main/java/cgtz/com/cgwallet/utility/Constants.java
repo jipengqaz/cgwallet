@@ -57,7 +57,9 @@ public class Constants {
     public static final String URL_FEED_BACK = "site/feedBack";//意见反馈
     public static final String URL_INTEREST_HISTORY = "ewallet/InterestHistory";//收益历史
     public static final String URL_LOGIN = "site/login";//登录接口
-    public static final String URL_GET_SECURITY_CODE = "site/getvcode";//获取验证码
+    public static final String URL_GET_SECURITY_CODE = "site/getvcode";//注册时获取验证码
+    public static final String URL_FORGET_PWD_CODE = "site/mbcode";//忘记密码时，获取验证码
+    public static final String URL_PASSWORD = "site/password1";//忘记密码时，验证码密码的提交
     public static final String URL_REGISTER = "site/register";//注册
     public static final String E_WALLET_LIST = "ewallet/list";//草根钱包转入转出数据
     public static final String AGAINLOGIN_URL = "account/checkPass";//判断登录密码接口

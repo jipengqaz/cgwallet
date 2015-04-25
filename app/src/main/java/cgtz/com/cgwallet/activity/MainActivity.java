@@ -63,6 +63,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private BidirSlidingLayout bidirSldingLayout;
     private RelativeLayout conter_menu_layout;
     private RelativeLayout main_conter_layout;
+    private LinearLayout layoutCgWallet;//底部的草根钱包
+    private LinearLayout layoutMyWallet;//底部的我的钱包
     private ImageView showLeftButton;
     private ImageView showRightButton;
     private ViewPager mViewPager;
@@ -312,6 +314,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     }
 
     private void initViews(){
+        layoutCgWallet = (LinearLayout) findViewById(R.id.layout_cg_wallet);//底部的草根钱包
+        layoutMyWallet = (LinearLayout) findViewById(R.id.layout_my_wallet);//底部的我的钱包
         bidirSldingLayout = (BidirSlidingLayout) findViewById(R.id.custom_sliding_layout);
         conter_menu_layout = (RelativeLayout) findViewById(R.id.content);
         showLeftButton = (ImageView) findViewById(R.id.show_left_button);
@@ -332,6 +336,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         menuHelpCenter.setOnClickListener(this);
         menuMore.setOnClickListener(this);
         layotExit.setOnClickListener(this);
+        layoutCgWallet.setOnClickListener(this);//底部的草根钱包
+        layoutMyWallet.setOnClickListener(this);//底部的我的钱包
     }
 
     private void initFragment(){
@@ -423,6 +429,14 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.layout_cg_wallet://显示草根钱包页面
+                currIndex = 0;
+                mViewPager.setCurrentItem(currIndex);
+                break;
+            case R.id.layout_my_wallet://显示我的钱包页面
+                currIndex = 1;
+                mViewPager.setCurrentItem(currIndex);
+                break;
             case R.id.left_menu_safe_center://安全中心
                 startActivity(new Intent(this,SafeCenterActivity.class));
                 break;

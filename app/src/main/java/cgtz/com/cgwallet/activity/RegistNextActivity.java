@@ -42,6 +42,7 @@ public class RegistNextActivity extends BaseActivity implements ISplashView,View
     private ProgressDialog progressDialog;
     private SplashPresenter presenter;
     private boolean isChecked = false;//设置是否显示密码
+    private boolean beforeMobile = false;//判断是否忘记密码的操作标示
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class RegistNextActivity extends BaseActivity implements ISplashView,View
         if(savedInstanceState == null){
             mobile = getIntent().getStringExtra("mobile");
             mobile_code = getIntent().getStringExtra("mobile_code");
+            beforeMobile = getIntent().getBooleanExtra("beforeMobile",false);
         }
         initViews();
     }
@@ -99,7 +101,7 @@ public class RegistNextActivity extends BaseActivity implements ISplashView,View
             params.put("password", mobile_pwd);
             params.put("register_method", "9");
             CustomTask task = new CustomTask(mHandler, Constants.WHAT_REGISTER
-                    ,Constants.URL_REGISTER,true,params,true);
+                    ,beforeMobile?Constants.URL_PASSWORD:Constants.URL_REGISTER,true,params,true);
             task.execute();
     }
 
@@ -162,22 +164,30 @@ public class RegistNextActivity extends BaseActivity implements ISplashView,View
                         if(flag && code == Constants.OPERATION_FAIL){//数据交互失败
                             Utils.makeToast(RegistNextActivity.this, errorMsg);
                         }else if(flag && code == Constants.OPERATION_SUCCESS){//数据交互成功
-                            JSONObject jsonObject = new JSONObject(jsonBean.getJsonString());
-                            JSONObject info = jsonObject.getJSONObject("info");
-                            String userId = info.optString("userId");
-                            String token = info.optString("token");
-                            Utils.saveMobile(RegistNextActivity.this,mobile);
-                            Utils.saveLoginPwd(RegistNextActivity.this,MD5Util.md5(mobile_pwd));
-                            Utils.saveUserId(userId);
-                            Utils.saveToken(token);
-                            startActivity(new Intent(RegistNextActivity.this,MainActivity.class)
-                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                            if(beforeMobile){
+                                Utils.makeToast(RegistNextActivity.this, errorMsg);
+                                Utils.saveMobile(RegistNextActivity.this, mobile);
+                                startActivity(new Intent(RegistNextActivity.this, LoginActivity.class)
+                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                            }else{
+                                JSONObject jsonObject = new JSONObject(jsonBean.getJsonString());
+                                JSONObject info = jsonObject.getJSONObject("info");
+                                String userId = info.optString("userId");
+                                String token = info.optString("token");
+                                Utils.saveMobile(RegistNextActivity.this,mobile);
+                                Utils.saveLoginPwd(RegistNextActivity.this,MD5Util.md5(mobile_pwd));
+                                Utils.saveUserId(userId);
+                                Utils.saveToken(token);
+                                startActivity(new Intent(RegistNextActivity.this,MainActivity.class)
+                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                            }
                         }
                         hideProcessBar();
                         break;
                 }
             }catch (Exception e){
                 e.printStackTrace();
+                hideProcessBar();;
             }
         }
     };

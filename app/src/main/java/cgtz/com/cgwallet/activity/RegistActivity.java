@@ -36,11 +36,19 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
     private ProgressDialog progressDialog;
     private SplashPresenter presenter;
     private String mobile_code;//验证码
+    private boolean beforeMobile = false;//判断是否为忘记密码标示
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regist);
-        setTitle("注册");
+        mobile = getIntent().getStringExtra("beforeMobile");
+        if(TextUtils.isEmpty(mobile)){
+            setTitle("注册");
+            beforeMobile = false;
+        }else{
+            beforeMobile = true;
+            setTitle("忘记密码");
+        }
         MApplication.registActivities(this);//存储该activity
         presenter = new SplashPresenter(this);
         showBack(true);
@@ -54,6 +62,10 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
         registNext = (Button) findViewById(R.id.btn_regist_next);
         getSecurityCode.setOnClickListener(this);
         registNext.setOnClickListener(this);
+        if(beforeMobile){
+            registMobile.setText(mobile);
+            registMobile.setSelection(mobile.length());
+        }
     }
 
     @Override
@@ -77,7 +89,8 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
                 }else{
                     startActivity(new Intent(this,RegistNextActivity.class)
                     .putExtra("mobile",mobile)
-                    .putExtra("mobile_code",mobile_code));
+                    .putExtra("mobile_code",mobile_code)
+                    .putExtra("beforeMobile",beforeMobile));
                 }
                 break;
         }
@@ -147,7 +160,8 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
         HashMap<String,String> params = new HashMap();
         params.put("mobile", mobile);
         CustomTask task = new CustomTask(mHandler, Constants.WHAT_GET_SECURITY_CODE
-                ,Constants.URL_GET_SECURITY_CODE,true,params,true);
+                ,beforeMobile?Constants.URL_FORGET_PWD_CODE:Constants.URL_GET_SECURITY_CODE,
+                true,params,true);
         task.execute();
     }
 }
