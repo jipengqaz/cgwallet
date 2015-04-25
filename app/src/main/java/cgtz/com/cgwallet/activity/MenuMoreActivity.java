@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.umeng.analytics.MobclickAgent;
+
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * 更多页面
@@ -51,5 +54,18 @@ public class MenuMoreActivity extends BaseActivity implements View.OnClickListen
             case R.id.contact_mine://联系我们
                 break;
         }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+        MobclickAgent.onPause(this);
     }
 }

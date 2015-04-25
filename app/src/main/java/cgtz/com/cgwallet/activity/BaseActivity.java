@@ -103,6 +103,11 @@ public class BaseActivity extends ActionBarActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
         Constants.GESTURES_PASSWORD =false;

@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
+
 import java.util.HashMap;
 
 import cgtz.com.cgwallet.MApplication;
@@ -20,6 +22,7 @@ import cgtz.com.cgwallet.utils.CustomTask;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.ISplashView;
 import cgtz.com.cgwallet.widget.ProgressDialog;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * 意见反馈
@@ -127,7 +130,7 @@ public class FeedBackActivity extends BaseActivity implements ISplashView{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Utils.closeDialog(this,progressDialog);
+        Utils.closeDialog(this, progressDialog);
     }
 
     /**
@@ -161,7 +164,7 @@ public class FeedBackActivity extends BaseActivity implements ISplashView{
 
     @Override
     public void showNetError() {
-        Utils.makeToast(this,"错误");
+        Utils.makeToast(this, "错误");
     }
 
     @Override
@@ -177,5 +180,17 @@ public class FeedBackActivity extends BaseActivity implements ISplashView{
                                                     true,maps,true);
         task.execute();
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
+        MobclickAgent.onResume(this);
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+        MobclickAgent.onPause(this);
+    }
 }

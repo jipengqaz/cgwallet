@@ -8,8 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
+
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * 关于我们
@@ -43,6 +46,19 @@ public class AboutCompanyActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+        MobclickAgent.onPause(this);
     }
 
 }
