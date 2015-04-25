@@ -49,7 +49,7 @@
                     android:layout_alignParentRight="true"
                     android:gravity="center"
                     android:textSize="@dimen/hint_regist_mobile"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:text="@string/hint_regist_get_security_code"
                     android:background="@color/bg_get_security_code"
                     android:layout_width="120dp"
