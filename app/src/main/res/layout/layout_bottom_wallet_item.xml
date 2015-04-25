@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/layout_bottom_transfer_height">
         <LinearLayout
+            android:id="@+id/layout_cg_wallet"
             android:layout_weight="1"
             android:background="@mipmap/bg_wallet_selected"
             android:orientation="horizontal"
@@ -28,6 +29,7 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/layout_my_wallet"
             android:layout_weight="1"
             android:background="@mipmap/bg_wallet_normal"
             android:gravity="center"

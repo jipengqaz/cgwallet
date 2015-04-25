@@ -65,6 +65,7 @@
                 android:drawablePadding="10dp"
                 android:paddingLeft="@dimen/draw_padding"
                 android:hint="@string/login_edit_pwd_hint_text"
+                android:digits="@string/pwd_digits"
                 android:textColorHint="@color/login_edit_hint"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_login_edit" />

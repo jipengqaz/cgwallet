@@ -22,6 +22,7 @@ import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.CustomTask;
+import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.ISplashView;
 import cgtz.com.cgwallet.widget.ProgressDialog;
@@ -31,6 +32,7 @@ import cn.jpush.android.api.JPushInterface;
  * 注册页面
  */
 public class RegistActivity extends BaseActivity implements ISplashView, View.OnClickListener{
+    private static final String TAG = "RegistActivity";
     private EditText registMobile;
     private EditText securityCode;
     private TextView getSecurityCode;
@@ -39,13 +41,24 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
     private ProgressDialog progressDialog;
     private SplashPresenter presenter;
     private String mobile_code;//验证码
+    private boolean beforeMobile = false;//判断是否为忘记密码标示
+    private static final int GET_CODE_TIME = 60;//获取验证码后，60秒后才能获取的handler判断值
+    private int CODE_TIME = 60;//读秒  60秒
+    private static final String TIME_MSG = "秒后重发";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regist);
-        setTitle("注册");
-        presenter = new SplashPresenter(this);
+        mobile = getIntent().getStringExtra("beforeMobile");
+        if(TextUtils.isEmpty(mobile)){
+            setTitle("注册");
+            beforeMobile = false;
+        }else{
+            beforeMobile = true;
+            setTitle("忘记密码");
+        }
         MApplication.registActivities(this);//存储该activity
+        presenter = new SplashPresenter(this);
         showBack(true);
         initViews();
     }
@@ -57,6 +70,10 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
         registNext = (Button) findViewById(R.id.btn_regist_next);
         getSecurityCode.setOnClickListener(this);
         registNext.setOnClickListener(this);
+        if(beforeMobile){
+            registMobile.setText(mobile);
+            registMobile.setSelection(mobile.length());
+        }
     }
 
     @Override
@@ -80,16 +97,32 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
                 }else{
                     startActivity(new Intent(this,RegistNextActivity.class)
                     .putExtra("mobile",mobile)
-                    .putExtra("mobile_code",mobile_code));
+                    .putExtra("mobile_code", mobile_code)
+                    .putExtra("beforeMobile", beforeMobile));
                 }
                 break;
         }
     }
 
+
     private Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             try{
+                int action = msg.what;
+                if(action == GET_CODE_TIME){
+                    if(CODE_TIME == 0){
+                        getSecurityCode.setText(getResources().getString(R.string.hint_regist_get_security_code));
+                        getSecurityCode.setTextColor(getResources().getColor(R.color.black));
+                        getSecurityCode.setEnabled(true);
+                    }else{
+                        --CODE_TIME;
+                        LogUtils.i(TAG, "时间time：" + CODE_TIME);
+                        getSecurityCode.setText(CODE_TIME + TIME_MSG);
+                        mHandler.sendEmptyMessageDelayed(GET_CODE_TIME, 1000);
+                    }
+                    return;
+                }
                 JsonBean jsonBean = (JsonBean) msg.obj;
                 int code = jsonBean.getCode();
                 String errorMsg = jsonBean.getError_msg();
@@ -98,7 +131,6 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
                     Utils.makeToast(RegistActivity.this,Constants.ERROR_MSG_CODE+code);
                     return;
                 }
-                int action = msg.what;
                 switch (action){
                     case Constants.WHAT_GET_SECURITY_CODE:
                         boolean flag = Utils.filtrateCode(RegistActivity.this,jsonBean);
@@ -118,6 +150,7 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
                 }
             }catch (Exception e){
                 e.printStackTrace();
+                hideProcessBar();
             }
         }
     };
@@ -147,11 +180,22 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
 
     @Override
     public void startNextActivity() {
+        getSecurityCode.setText(CODE_TIME + TIME_MSG);
+        getSecurityCode.setTextColor(getResources().getColor(R.color.white));
+        getSecurityCode.setEnabled(false);
+        mHandler.sendEmptyMessageDelayed(GET_CODE_TIME,1000);
         HashMap<String,String> params = new HashMap();
         params.put("mobile", mobile);
         CustomTask task = new CustomTask(mHandler, Constants.WHAT_GET_SECURITY_CODE
-                ,Constants.URL_GET_SECURITY_CODE,true,params,true);
+                ,beforeMobile?Constants.URL_FORGET_PWD_CODE:Constants.URL_GET_SECURITY_CODE,
+                true,params,true);
         task.execute();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeMessages(GET_CODE_TIME);
     }
     @Override
     protected void onResume() {

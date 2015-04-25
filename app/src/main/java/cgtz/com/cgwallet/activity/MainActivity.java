@@ -2,6 +2,8 @@ package cgtz.com.cgwallet.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -34,18 +36,25 @@ import com.umeng.socialize.weixin.controller.UMWXHandler;
 import com.umeng.socialize.weixin.media.CircleShareContent;
 import com.umeng.socialize.weixin.media.WeiXinShareContent;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.adapter.MFragmentPagerAdater;
+import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.fragment.CgWalletFragment;
 import cgtz.com.cgwallet.fragment.MyWalletFragment;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
+import cgtz.com.cgwallet.utils.CustomTask;
+import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.BidirSlidingLayout;
 import cgtz.com.cgwallet.view.ISplashView;
+import cgtz.com.cgwallet.widget.ProgressDialog;
 import cn.jpush.android.api.JPushInterface;
 
 /**
@@ -56,6 +65,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private BidirSlidingLayout bidirSldingLayout;
     private RelativeLayout conter_menu_layout;
     private RelativeLayout main_conter_layout;
+    private LinearLayout layoutCgWallet;//底部的草根钱包
+    private LinearLayout layoutMyWallet;//底部的我的钱包
     private ImageView showLeftButton;
     private ImageView showRightButton;
     private ViewPager mViewPager;
@@ -68,6 +79,9 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private SplashPresenter splashPresenter;
     private ArrayList<Fragment> listFms;
     private int currIndex;//当前页卡编号
+    private ProgressDialog progressDialog;
+    private CgWalletFragment cgWalletFragment;
+    private MyWalletFragment myWalletFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -302,6 +316,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     }
 
     private void initViews(){
+        layoutCgWallet = (LinearLayout) findViewById(R.id.layout_cg_wallet);//底部的草根钱包
+        layoutMyWallet = (LinearLayout) findViewById(R.id.layout_my_wallet);//底部的我的钱包
         bidirSldingLayout = (BidirSlidingLayout) findViewById(R.id.custom_sliding_layout);
         conter_menu_layout = (RelativeLayout) findViewById(R.id.content);
         showLeftButton = (ImageView) findViewById(R.id.show_left_button);
@@ -322,12 +338,16 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         menuHelpCenter.setOnClickListener(this);
         menuMore.setOnClickListener(this);
         layotExit.setOnClickListener(this);
+        layoutCgWallet.setOnClickListener(this);//底部的草根钱包
+        layoutMyWallet.setOnClickListener(this);//底部的我的钱包
     }
 
     private void initFragment(){
         listFms = new ArrayList<>();
-        listFms.add(new CgWalletFragment());
-        listFms.add(new MyWalletFragment());
+        cgWalletFragment = new CgWalletFragment();
+        myWalletFragment = new MyWalletFragment();
+        listFms.add(cgWalletFragment);
+        listFms.add(myWalletFragment);
         mViewPager.setAdapter(new MFragmentPagerAdater(getSupportFragmentManager(), listFms));
         mViewPager.setCurrentItem(0);
         mViewPager.setOnPageChangeListener(new MyOnPageChangeListener());
@@ -338,11 +358,16 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     protected void onResume() {
         super.onResume();
+        if(MApplication.goLogin && TextUtils.isEmpty(Utils.getToken())){
+            LogUtils.i(TAG,"MApplication.goLogin 为 true");
+            currIndex = 0;
+            mViewPager.setCurrentItem(currIndex);
+        }
         String userMobile = Utils.getUserPhone(this);
         String token = Utils.getToken();
         String loginPwd = Utils.getLoginPwd(this);
         if(!TextUtils.isEmpty(userMobile) && !TextUtils.isEmpty(token) && !TextUtils.isEmpty(loginPwd)){
-            tvShowLoginMobile.setText(userMobile);
+            tvShowLoginMobile.setText(Utils.getHasStarsMobile(userMobile));
             setLeftMenuInfo(1);//已登录
         }else{
             setLeftMenuInfo(0);//未登录
@@ -365,17 +390,25 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 
     @Override
     public void startProcessBar() {
-
+        if(progressDialog == null){
+            progressDialog = new ProgressDialog(this,R.style.loading_dialog);
+        }
+        if(progressDialog.isShowing()){
+            progressDialog.dismiss();
+        }
+        progressDialog.show();
     }
 
     @Override
     public void hideProcessBar() {
-
+        if(progressDialog != null && progressDialog.isShowing()){
+            progressDialog.dismiss();
+        }
     }
 
     @Override
     public void showNetError() {
-
+        Utils.makeToast(this, Constants.IS_EVENT_MSG);
     }
 
     @Override
@@ -402,6 +435,14 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.layout_cg_wallet://显示草根钱包页面
+                currIndex = 0;
+                mViewPager.setCurrentItem(currIndex);
+                break;
+            case R.id.layout_my_wallet://显示我的钱包页面
+                currIndex = 1;
+                mViewPager.setCurrentItem(currIndex);
+                break;
             case R.id.left_menu_safe_center://安全中心
                 startActivity(new Intent(this,SafeCenterActivity.class));
                 break;
@@ -472,4 +513,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             Toast.makeText(this, ".............手势密码", Toast.LENGTH_SHORT);
         }
     }
+
+
 }

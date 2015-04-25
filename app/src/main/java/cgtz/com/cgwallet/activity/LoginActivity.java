@@ -83,6 +83,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
                     setRightText("切换账户");
                     showHavePhone = false;
                 } else {
+                    MApplication.goLogin = false;
                     finish();
                 }
             }
@@ -166,7 +167,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
         int id = v.getId();
         switch (id){
             case R.id.tv_regist_account://注册用户
-                startActivity(new Intent(this,RegistActivity.class));
+                startActivity(new Intent(LoginActivity.this,RegistActivity.class));
                 break;
             case R.id.login_button_finish://登录
                 if(etLoginPhone.getVisibility() == View.VISIBLE){//判断手机号填写控件是否隐藏
@@ -184,6 +185,17 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
                 }else{
                     presenter.didFinishLoading(LoginActivity.this);
                 }
+                break;
+            case R.id.tv_forget_pwd://忘记密码
+                if(etLoginPhone.getVisibility() == View.VISIBLE){//判断手机号填写控件是否隐藏
+                    //为隐藏就使用输入的手机号
+                    loginPhone = etLoginPhone.getText().toString();
+                }else{
+                    //隐藏了就使用之前登录过的手机号
+                    loginPhone = beforeMobile;
+                }
+                startActivity(new Intent(LoginActivity.this,RegistActivity.class)
+                            .putExtra("beforeMobile",loginPhone));
                 break;
         }
     }

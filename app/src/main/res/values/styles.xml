@@ -7,6 +7,7 @@
         <item name="actionBarSize">@dimen/activity_title_height</item>
         <!-- 去除ActionBar底部阴影效果 -->
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@null</item>
     </style>
 
     <style name="ActionBarStyle" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">

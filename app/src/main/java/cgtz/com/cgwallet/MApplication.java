@@ -12,10 +12,19 @@ public class MApplication extends Application {
     private static ArrayList<Activity> activities = new ArrayList<>();
     private static String token ="";
     private static String user_id ="";
+    public static boolean goLogin = true;//登录页面是否按了返回键
 
     @Override
     public void onCreate() {
         super.onCreate();
+    }
+
+    public static boolean isGoLogin() {
+        return goLogin;
+    }
+
+    public static void setGoLogin(boolean goLogin) {
+        MApplication.goLogin = goLogin;
     }
 
     /**

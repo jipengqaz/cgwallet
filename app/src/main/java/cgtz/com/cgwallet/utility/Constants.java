@@ -47,24 +47,31 @@ public class Constants {
     public static final int POINT_STATE_WRONG = 2; // 错误状态
     //end
     public static final int HANDLER_SERVER_MAINTAIN = 2015011914;//服务器维护判断值
+    public static final int WHAT_WALLET_MAIN = 88888888;//钱包首页
     public static final int WHAT_FEED_BACK = 2015042114;//意见反馈
     public static final int WHAT_LOGIN = 2015042315;//登录
     public static final int WHAT_GET_SECURITY_CODE = 2015042411;//验证码
     public static final int WHAT_REGISTER = 2015042414;//注册
+    public static final int WHAT__WALLET_DETAIL = 2015042418;//我的钱包
+    public static final String URL_CG_WALLET_PROTOCOL = "http://d5ds88.cgtz.com/site/agreement/";
     public static final int WHAT_STARTUP = 2015042511;//(启动调用接口)获取是否更新数据
     public static final String URL_FEED_BACK = "site/feedBack";//意见反馈
     public static final String URL_INTEREST_HISTORY = "ewallet/InterestHistory";//收益历史
     public static final String URL_LOGIN = "site/login";//登录接口
-    public static final String URL_GET_SECURITY_CODE = "site/getvcode";//获取验证码
+    public static final String URL_GET_SECURITY_CODE = "site/getvcode";//注册时获取验证码
+    public static final String URL_FORGET_PWD_CODE = "site/mbcode";//忘记密码时，获取验证码
+    public static final String URL_PASSWORD = "site/password1";//忘记密码时，验证码密码的提交
     public static final String URL_REGISTER = "site/register";//注册
     public static final String E_WALLET_LIST = "ewallet/list";//草根钱包转入转出数据
     public static final String AGAINLOGIN_URL = "account/checkPass";//判断登录密码接口
+    public static final String URL_WALLET_DETAIL = "ewallet/detail";//我的钱包接口
     public static final String URL_STARTUP = "api/startUp";//(启动调用接口)获取是否更新数据判断值
 
 
     /**
      *
      */
+    public static final String NEED_LOGIN = "请先登录";
     public static final String COMPANY_FILEDIR = "com.cgtz";//用于保存app下载的文件根目录
     public static final String IMG_FILE_NAME = "loading"+version_+".jpg";
     //下载的欢迎图片，保存路径

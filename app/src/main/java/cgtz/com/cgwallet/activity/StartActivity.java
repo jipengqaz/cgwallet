@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -30,6 +31,7 @@ import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.client.Get_data;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.ChangeLogHelper;
+import cgtz.com.cgwallet.utils.Start_update_value;
 import cgtz.com.cgwallet.utils.Utils;
 import cn.jpush.android.api.JPushInterface;
 
@@ -73,12 +75,31 @@ public class StartActivity extends Activity {
             rl_start.setImageResource(R.mipmap.loading);
             setAlpha(rl_start);
         }
-//        getData();
+        //获取
+        Get_data.getStartUp(handler);
         //跳转到   主界面
         getonLine();
     }
-    private void getData(){
-        Get_data.getStartUp(handler);
+
+    /**
+     * 根据接口返回数据判断   启动图  客服信息   和分行信息  是否需要更新
+     * @param json
+     */
+    private void getJudge_Update(JSONObject json){
+        Map map = Start_update_value.getUpdateTime(StartActivity.this);
+        String imageUpdate = json.optString("imageUpdate");//启动图图片更新时间
+        String kefuUpdate = json.optString("kefuUpdate");//客服信息更新时间
+        String provinceCityUpdate = json.optString("provinceCityUpdate");//分行信息更新时间
+        if(map.put(Start_update_value.KEY_IMAGE_UPDATE,"").equals(imageUpdate)){
+
+        }
+        if(map.put(Start_update_value.KEY_KEFU_UPDATE,"").equals(kefuUpdate)){
+
+        }
+
+        if(map.put(Start_update_value.KEY_CITY_UPDATE,"").equals(provinceCityUpdate)){
+
+        }
     }
     private Handler handler = new Handler(){
         @Override
@@ -88,7 +109,7 @@ public class StartActivity extends Activity {
             JsonBean jsonBean = (JsonBean) msg.obj;
             int code = jsonBean.getCode();
             String errorMsg = jsonBean.getError_msg();
-            JSONObject  json;
+            JSONObject  json = null;
             try {
                 Log.e(TAG,"1111"+ jsonBean.getJsonString());
                 json = new JSONObject(jsonBean.getJsonString());
@@ -102,13 +123,15 @@ public class StartActivity extends Activity {
                 return;
             }
             switch (msg.what){
-                case Constants.WHAT_STARTUP:
-
+                case Constants.WHAT_STARTUP://数据更新时间
+                    getJudge_Update(json);
                 break;
 
             }
         }
     };
+
+
 
     private void getonLine(){
         turnHandler = new TurnHandler();

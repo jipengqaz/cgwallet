@@ -31,31 +31,30 @@ public class JsonBean {
                     JSONObject obj = new JSONObject(str);
                     String action = obj.optString("action");
                     int state = obj.optInt("success");
-                    String msg = obj.optString("msg");
                     if (action.equals("login")) {
                         //本地token过期，需重新登录
                         code = Constants.NEED_LOGIN_AGAIN;
-                        error_msg = msg;
+                        error_msg = obj.optString("msg");
                     } else if (action.equals("maintain")) {
                         //服务器维护中
                         code = Constants.SERVICE_MAINTAIN;
-                        error_msg = msg;
+                        error_msg = obj.optString("msg");
                     } else {
                         //对访问服务器操作进行失败与否判断
                         if (state == 0) {
                             //访问服务器操作失败
                             code = Constants.OPERATION_FAIL;
-                            error_msg = msg;
+                            error_msg = obj.optString("msg");
                             jsonString = str;
                         } else if(state == 1){
                             //访问服务器操作成功
                             code = Constants.OPERATION_SUCCESS;
-                            error_msg = msg;
+                            error_msg = obj.optString("msg");
                             jsonString = str;
                         }else{
                             //访问服务器操作其它判断
                             code = state;
-                            error_msg = msg;
+                            error_msg = obj.optString("msg");
                             jsonString = str;
                         }
                     }

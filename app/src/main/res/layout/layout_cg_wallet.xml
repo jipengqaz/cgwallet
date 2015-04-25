@@ -48,13 +48,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:text="7"
+                        android:id="@+id/cg_wallet_rate_integer"
                         android:textSize="@dimen/main_center_rate_text_size1"
                         android:textColor="@color/center_layout_normal_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
-                        android:text=".00"
+                        android:id="@+id/cg_wallet_rate_decimal"
                         android:textSize="@dimen/main_center_rate_text_size2"
                         android:textColor="@color/center_layout_normal_text"
                         android:layout_width="wrap_content"
@@ -87,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/transfer_weight_height">
             <LinearLayout
-                android:id="@+id/cun_qian"
+                android:id="@+id/layout_draw"
                 android:background="@mipmap/bg_save_money"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -108,6 +108,7 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/layout_save"
                 android:layout_marginLeft="17dp"
                 android:background="@mipmap/bg_draw_money"
                 android:layout_weight="1"
@@ -138,6 +139,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
+                android:id="@+id/cg_wallet_link1"
                 android:layout_weight="0.2"
                 android:orientation="vertical"
                 android:gravity="center"
@@ -148,6 +150,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:id="@+id/cg_wallet_link_name1"
                     android:text="@string/wallet_basic_info1"
                     android:layout_marginTop="@dimen/wallet_basic_info_drawpadding"
                     android:gravity="center"
@@ -157,6 +160,7 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/cg_wallet_link2"
                 android:layout_weight="0.2"
                 android:orientation="vertical"
                 android:gravity="center"
@@ -167,6 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:id="@+id/cg_wallet_link_name2"
                     android:text="@string/wallet_basic_info2"
                     android:layout_marginTop="@dimen/wallet_basic_info_drawpadding"
                     android:gravity="center"
@@ -177,6 +182,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/cg_wallet_link3"
                 android:layout_weight="0.2"
                 android:orientation="vertical"
                 android:gravity="center"
@@ -187,6 +193,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:id="@+id/cg_wallet_link_name3"
                     android:text="@string/wallet_basic_info3"
                     android:layout_marginTop="@dimen/wallet_basic_info_drawpadding"
                     android:gravity="center"
