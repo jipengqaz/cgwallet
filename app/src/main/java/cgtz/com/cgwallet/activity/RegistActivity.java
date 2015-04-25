@@ -41,9 +41,8 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regist);
         setTitle("注册");
-        MApplication.registActivities(this);
-        presenter = new SplashPresenter(this);
         MApplication.registActivities(this);//存储该activity
+        presenter = new SplashPresenter(this);
         showBack(true);
         initViews();
     }

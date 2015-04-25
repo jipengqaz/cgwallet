@@ -164,7 +164,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
         int id = v.getId();
         switch (id){
             case R.id.tv_regist_account://注册用户
-                startActivity(new Intent(this,RegistActivity.class));
+                startActivity(new Intent(LoginActivity.this,RegistActivity.class));
                 break;
             case R.id.login_button_finish://登录
                 if(etLoginPhone.getVisibility() == View.VISIBLE){//判断手机号填写控件是否隐藏
