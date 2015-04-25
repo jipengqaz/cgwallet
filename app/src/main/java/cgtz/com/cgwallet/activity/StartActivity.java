@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -16,14 +17,20 @@ import android.widget.LinearLayout;
 
 import com.umeng.analytics.MobclickAgent;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.bean.JsonBean;
+import cgtz.com.cgwallet.client.Get_data;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.ChangeLogHelper;
+import cgtz.com.cgwallet.utils.Utils;
 import cn.jpush.android.api.JPushInterface;
 
 public class StartActivity extends Activity {
@@ -31,7 +38,7 @@ public class StartActivity extends Activity {
     TurnHandler turnHandler;
     Handler timerHandler;
     private SwitchPagerTimerTask timerTask;
-    private long timerSpace = 4000;
+    private long timerSpace = 3000;
     private LinearLayout ll_start;
     private ImageView rl_start;
     private File file = new File(Constants.IMG_FILE_PATH);
@@ -66,9 +73,43 @@ public class StartActivity extends Activity {
             rl_start.setImageResource(R.mipmap.loading);
             setAlpha(rl_start);
         }
+//        getData();
         //跳转到   主界面
         getonLine();
     }
+    private void getData(){
+        Get_data.getStartUp(handler);
+    }
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Log.e(TAG, "数据" + msg.obj);
+            JsonBean jsonBean = (JsonBean) msg.obj;
+            int code = jsonBean.getCode();
+            String errorMsg = jsonBean.getError_msg();
+            JSONObject  json;
+            try {
+                Log.e(TAG,"1111"+ jsonBean.getJsonString());
+                json = new JSONObject(jsonBean.getJsonString());
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            if(code == Constants.DATA_EVENT){
+                Utils.makeToast(StartActivity.this, Constants.ERROR_MSG_CODE + code+errorMsg);
+                return;
+            }
+            switch (msg.what){
+                case Constants.WHAT_STARTUP:
+
+                break;
+
+            }
+        }
+    };
+
     private void getonLine(){
         turnHandler = new TurnHandler();
         timerTask = new SwitchPagerTimerTask();

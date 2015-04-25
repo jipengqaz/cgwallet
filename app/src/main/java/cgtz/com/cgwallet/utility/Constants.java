@@ -51,6 +51,7 @@ public class Constants {
     public static final int WHAT_LOGIN = 2015042315;//登录
     public static final int WHAT_GET_SECURITY_CODE = 2015042411;//验证码
     public static final int WHAT_REGISTER = 2015042414;//注册
+    public static final int WHAT_STARTUP = 2015042511;//(启动调用接口)获取是否更新数据
     public static final String URL_FEED_BACK = "site/feedBack";//意见反馈
     public static final String URL_INTEREST_HISTORY = "ewallet/InterestHistory";//收益历史
     public static final String URL_LOGIN = "site/login";//登录接口
@@ -58,6 +59,7 @@ public class Constants {
     public static final String URL_REGISTER = "site/register";//注册
     public static final String E_WALLET_LIST = "ewallet/list";//草根钱包转入转出数据
     public static final String AGAINLOGIN_URL = "account/checkPass";//判断登录密码接口
+    public static final String URL_STARTUP = "api/startUp";//(启动调用接口)获取是否更新数据判断值
 
 
     /**

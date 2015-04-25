@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -134,7 +133,6 @@ public class BaseActivity extends ActionBarActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.e("123", Constants.GESTURES_PASSWORD + "");
         if(Utils.getLockPassword(this, Utils.getUserPhone(this))!=""&& Constants.GESTURES_PASSWORD && Utils.getUserId() != ""){
             Intent intent  = new Intent();
             intent.setClass(this,GestureVerifyActivity.class);
