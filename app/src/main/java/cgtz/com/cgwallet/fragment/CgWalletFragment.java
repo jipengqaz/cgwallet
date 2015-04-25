@@ -18,6 +18,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.activity.SaveMoneyActivity;
 import cgtz.com.cgwallet.activity.WebViewActivity;
 import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
@@ -188,10 +189,10 @@ public class CgWalletFragment extends BaseFragment implements ISplashView,View.O
     public void onClick(View v) {
         int id = v.getId();
         switch (id){
-
             case R.id.layout_draw://取钱
                 break;
             case R.id.layout_save://存钱
+                startActivity(new Intent(getActivity(), SaveMoneyActivity.class));
                 break;
             case R.id.cg_wallet_link1://第一个特色布局
                 link_name = null;//获取的特色文案

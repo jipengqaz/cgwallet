@@ -365,7 +365,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     protected void onResume() {
         super.onResume();
-        if(MApplication.goLogin && TextUtils.isEmpty(Utils.getToken())){
+        if(!MApplication.isGoLogin() && TextUtils.isEmpty(Utils.getToken())){
             LogUtils.i(TAG,"MApplication.goLogin 为 true");
             currIndex = 0;
             mViewPager.setCurrentItem(currIndex);
@@ -516,7 +516,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             intent.setClass(this,GestureVerifyActivity.class);
             startActivity(intent);
         }else{
-            Utils.makeToast(this, "手势密码");
+//            Utils.makeToast(this, "手势密码");
         }
     }
 

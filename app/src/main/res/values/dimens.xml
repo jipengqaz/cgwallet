@@ -60,4 +60,10 @@
     <dimen name="draw_padding">15dp</dimen>
     <dimen name="height_login_edit">40dp</dimen>
     <dimen name="hint_regist_mobile">12sp</dimen>
+    <dimen name="height_save_money_figure">60dp</dimen>
+    <dimen name="save_moeny_main_text">14sp</dimen>
+    <dimen name="save_moeny_hint_text">12sp</dimen>
+    <dimen name="save_moeny_marign_left">30dp</dimen>
+    <dimen name="button_height">46dp</dimen>
+    <dimen name="button_text_size">16sp</dimen>
 </resources>
