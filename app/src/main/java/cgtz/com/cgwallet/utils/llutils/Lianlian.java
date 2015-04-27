@@ -61,7 +61,7 @@ public class Lianlian {
         // MD5 签名方式
 //        sign = Md5Algorithm.getInstance().sign(content,
 //                EnvConstants.MD5_KEY);
-//        DebugUtils.i("InvestPayOfBankCardActivity","sign: "+sign);
+//        LogUtils.i("LianLian","sign: "+sign);
 //        order.setSign(sign);
         order.setSign(MD5_KEY);
         return order;
