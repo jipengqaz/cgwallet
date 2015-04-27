@@ -44,7 +44,7 @@ public class Earnings_record extends BaseActivity implements ISplashView {
     private int PAGE_SIZE=10;
     private static boolean aaa = false;//判断是否刷新
 
-    private static final String TAG = "Earnings_record";
+    private  String TAG = "Earnings_record";
     private int page =0;
     private SplashPresenter presenter;
 

@@ -16,6 +16,11 @@ import cgtz.com.cgwallet.utils.Utils;
  */
 public class Is_passwrod {
 
+    /**
+     * 判断密码是否正确
+     * @param handler
+     * @param passwrod
+     */
     public static void isPasswrod(Handler handler,String passwrod){
         Map<String,String> maps = new HashMap<String, String>();
         maps.put("user_id", Utils.getUserId()+"");

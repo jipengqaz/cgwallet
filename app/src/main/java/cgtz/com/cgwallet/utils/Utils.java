@@ -3,6 +3,7 @@ package cgtz.com.cgwallet.utils;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Environment;
 import android.content.Intent;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -14,7 +15,6 @@ import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.activity.LoginActivity;
 import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.utility.Constants;
-import cn.jpush.android.data.r;
 
 /**
  * 工具类
@@ -168,7 +168,17 @@ public class Utils {
     public static void makeToast(Context context,String msg){
         Toast.makeText(context,msg,Toast.LENGTH_LONG).show();
     }
-
+    /**
+     * 判断SD卡是否存在
+     * @return
+     */
+    public static boolean isHaveSD(){
+        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+            return true;
+        }else{
+            return false;
+        }
+    }
     /**
      * 过滤code结果
      * @param jsonBean

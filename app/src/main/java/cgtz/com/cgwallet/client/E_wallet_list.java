@@ -15,7 +15,7 @@ import cgtz.com.cgwallet.utils.Utils;
 public class E_wallet_list {
 
     /**
-     *
+     * 转入转出  记录
      * @param handler
      * @param type (全部传1,转入传2，转出传3)
      * @param page  第几页
