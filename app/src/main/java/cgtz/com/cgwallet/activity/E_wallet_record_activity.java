@@ -11,15 +11,12 @@ import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
-import com.umeng.analytics.MobclickAgent;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.fragment.E_all_records_fragment_1;
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * 草根钱包  转入转出流水
@@ -208,15 +205,11 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
     @Override
     protected void onResume() {
         super.onResume();
-        JPushInterface.onResume(this);
-        MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        JPushInterface.onPause(this);
-        MobclickAgent.onPause(this);
     }
 
     @Override

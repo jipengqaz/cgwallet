@@ -11,8 +11,6 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.umeng.analytics.MobclickAgent;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,7 +28,6 @@ import cgtz.com.cgwallet.utils.AppUtil;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.ISplashView;
 import cgtz.com.cgwallet.view.RefreshAndLoadMoreListView;
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * 我的收益记录
@@ -271,14 +268,10 @@ public class Earnings_record extends BaseActivity implements ISplashView {
     @Override
     protected void onResume() {
         super.onResume();
-        JPushInterface.onResume(this);
-        MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        JPushInterface.onPause(this);
-        MobclickAgent.onPause(this);
     }
 }

@@ -2,11 +2,14 @@
 <project version="4">
   <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/Service/Provinces_download_Service.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/Change_password_Activity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/E_wallet_record_activity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/Modify_trade_password_Activity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/OpenSudokoUnlockActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/SafeCenterActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/ScreenSlideActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/StartActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/TradePwdActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/bean/Bank.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/bean/BankCard.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/data/E_records.java" charset="UTF-8" />

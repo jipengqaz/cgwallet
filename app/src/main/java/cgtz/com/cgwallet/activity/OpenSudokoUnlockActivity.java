@@ -10,13 +10,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.umeng.analytics.MobclickAgent;
-
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.utils.AppUtil;
 import cgtz.com.cgwallet.utils.Utils;
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * 选择手势密码是否开启
@@ -88,8 +85,6 @@ public class OpenSudokoUnlockActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        JPushInterface.onResume(this);
-        MobclickAgent.onResume(this);
         flag = Utils.getLockPassword(this,Utils.getUserPhone(this))!="";
         if(flag){
             tv_openLock.setImageResource(R.mipmap.lock_open);
@@ -103,8 +98,6 @@ public class OpenSudokoUnlockActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        JPushInterface.onPause(this);
-        MobclickAgent.onPause(this);
     }
 
     @Override
