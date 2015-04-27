@@ -12,7 +12,7 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/fragment/ScreenSlidePageFragment.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/receiver/Provinces_Observer.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/utils/ChangeLogHelper.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/utils/DownloadingTask.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/utils/DownloadingTask.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/view/RefreshAndLoadMoreListView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/view/ServerMainTainDialog.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/widget/ProgressDialog.java" charset="UTF-8" />
