@@ -97,6 +97,12 @@
     <string name="invester_password">交易密码</string>
     <string name="invester_password_hint">请输入交易密码</string>
     <string name="title_activity_in_progress">InProgressActivity</string>
+    <string name="trade_pwd_top_text_hint">请设置六位数字的交易密码</string>
+    <string name="trade_pwd_again">确认密码</string>
+    <string name="trade_pwd_et_hint1">请确认交易密码</string>
+    <string name="text_trade_pwd_hint">交易密码在存钱、取钱中使用</string>
+    <string name="text_confirm">确定</string>
+    <string name="text_seted_trade_pwd_hint1">您已经设置了交易密码</string>
 
 
 </resources>
