@@ -74,6 +74,7 @@ public class Constants {
     public static final String URL_KEFUTIP = "api/getKefuTip";//客服文案
     public static final String URL_PROVINCES_CITIES_UPDATE = "api/getProvinceAndCities";//获取省市数据
     public static final String URL_API_STARTIMAGE = "api/startImage";//获取开机图片
+    public static final String URL_SHARE_TIP ="account/GetShareTip";//获取分享内容和二维码
 
 
     /**
