@@ -24,4 +24,36 @@ public class Get_data {
                 true,params,true);
         task.execute();
     }
+
+    /**
+     * 获取客服文案信息
+     * @param handler
+     */
+    public static void getKefuTip(Handler handler){
+        Map<String, String> params = new HashMap<String, String>();
+        CustomTask task = new CustomTask(handler, Constants.WHAT_KE_FU,
+                Constants.URL_KEFUTIP,
+                true,params,true);
+        task.execute();
+    }
+
+    /**
+     * 获取银行分行信息
+     * @param handler
+     */
+    public static void getProvince(Handler handler){
+        Map<String, String> params = new HashMap<String, String>();
+        CustomTask task = new CustomTask(handler, Constants.WHAT_PROVINCES,
+                Constants.URL_PROVINCES_CITIES_UPDATE,
+                true,params,true);
+        task.execute();
+    }
+
+    public static void getImage(Handler handler){
+        Map<String, String> params = new HashMap<String, String>();
+        CustomTask task = new CustomTask(handler, 0,
+                Constants.URL_API_STARTIMAGE,
+                true,params,true);
+        task.execute();
+    }
 }

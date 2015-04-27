@@ -53,8 +53,10 @@ public class Constants {
     public static final int WHAT_GET_SECURITY_CODE = 2015042411;//验证码
     public static final int WHAT_REGISTER = 2015042414;//注册
     public static final int WHAT__WALLET_DETAIL = 2015042418;//我的钱包
-    public static final String URL_CG_WALLET_PROTOCOL = "http://d5ds88.cgtz.com/site/agreement/";
     public static final int WHAT_STARTUP = 2015042511;//(启动调用接口)获取是否更新数据
+    public static final int WHAT_KE_FU = 2015042515;//(启动调用接口)获取客服文案数据
+    public static final int WHAT_PROVINCES = 2015042517;//获取省市数据
+    public static final String URL_CG_WALLET_PROTOCOL = "http://d5ds88.cgtz.com/site/agreement/";
     public static final String URL_FEED_BACK = "site/feedBack";//意见反馈
     public static final String URL_INTEREST_HISTORY = "ewallet/InterestHistory";//收益历史
     public static final String URL_LOGIN = "site/login";//登录接口
@@ -66,15 +68,21 @@ public class Constants {
     public static final String AGAINLOGIN_URL = "account/checkPass";//判断登录密码接口
     public static final String URL_WALLET_DETAIL = "ewallet/detail";//我的钱包接口
     public static final String URL_STARTUP = "api/startUp";//(启动调用接口)获取是否更新数据判断值
+    public static final String URL_KEFUTIP = "api/getKefuTip";//客服文案
+    public static final String URL_PROVINCES_CITIES_UPDATE = "api/getProvinceAndCities";//获取省市数据
+    public static final String URL_API_STARTIMAGE = "api/startImage";//获取开机图片
 
 
     /**
      *
      */
     public static final String NEED_LOGIN = "请先登录";
-    public static final String COMPANY_FILEDIR = "com.cgtz";//用于保存app下载的文件根目录
+    public static final String COMPANY_FILEDIR = "com.cgwallet";//用于保存app下载的文件根目录
     public static final String IMG_FILE_NAME = "loading"+version_+".jpg";
+    public static final int HANDLER_RL_START = 10000010;//handler判断值，下载图片成功返回值
     //下载的欢迎图片，保存路径
     public static final String IMG_FILE_PATH = Environment.getExternalStorageDirectory()
             + File.separator + Constants.COMPANY_FILEDIR + "/download/"+IMG_FILE_NAME;
+    public static final String PROVINCES = "provinces";//存储省市的文件
+    public static final String PROVINCES_XML = "provinces_xml";//存储省的key
 }

@@ -20,7 +20,7 @@ public class Start_update_value {
      * @param context
      * @return
      */
-    public static Map getUpdateTime(Context context){
+    public static Map<String ,String > getUpdateTime(Context context){
         SharedPreferences  preferences = context.getSharedPreferences(PREFS_FILE_NAME,Context.MODE_PRIVATE);
         Map <String ,String > map = new HashMap<String ,String >();
         map.put(KEY_IMAGE_UPDATE,preferences.getString(KEY_IMAGE_UPDATE,""));
