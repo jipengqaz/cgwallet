@@ -1,0 +1,92 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/bg_center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_progress"
+                android:layout_gravity="left"
+                android:src="@mipmap/icon_save_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RelativeLayout
+                android:layout_margin="5dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:id="@+id/layout_save_figure"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="恭喜成功存入"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/button_text_can_click"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/tv_save_figure"
+                        android:text="139 元"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/money_asset_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_save_time"
+                    android:layout_below="@+id/layout_save_figure"
+                    android:layout_marginTop="5dp"
+                    android:text="今天"
+                    android:textSize="@dimen/text_size_14sp"
+                    android:textColor="@color/green"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_alignParentBottom="true"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="开始计算收益"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/tv_calculate_time"
+                        android:layout_marginTop="5dp"
+                        android:text="05-09 星期二"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/green"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+        <Button
+            android:id="@+id/button_iknow"
+            android:text="知道了"
+            android:textSize="@dimen/text_size_16sp"
+            android:textColor="@color/white"
+            android:layout_margin="30dp"
+            android:background="@color/button_text_can_click"
+            android:layout_width="match_parent"
+            android:layout_height="46dp" />
+        <ImageView
+            android:layout_marginTop="50dp"
+            android:src="@mipmap/wallet_slogan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</ScrollView>

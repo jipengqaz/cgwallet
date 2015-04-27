@@ -97,6 +97,7 @@
     <string name="invester_password">交易密码</string>
     <string name="invester_password_hint">请输入交易密码</string>
     <string name="title_activity_in_progress">InProgressActivity</string>
+    <string name="title_activity_save_money_success">SaveMoneySuccessActivity</string>
 
 
 </resources>

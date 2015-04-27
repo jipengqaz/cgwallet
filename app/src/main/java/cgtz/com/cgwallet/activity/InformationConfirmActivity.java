@@ -1,6 +1,7 @@
 package cgtz.com.cgwallet.activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -590,10 +591,14 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                                 int paying = json.optInt("paying");
                                 if(paying == 1){
                                     //支付处理中
-
+                                    startActivity(new Intent(InformationConfirmActivity.this,
+                                            InProgressActivity.class)
+                                            .putExtra("isSaveAt",true));//是否从存钱页面跳转
                                 }else if(paying == 0){
                                     //支付成功
-
+                                    startActivity(new Intent(InformationConfirmActivity.this,
+                                            SaveMoneySuccessActivity.class)
+                                            .putExtra("isSaveAt",true));//是否从存钱页面跳转
                                 }
                             }
                         }
@@ -691,8 +696,14 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                                 int paying = json.optInt("paying");
                                 if(paying == 0){
                                     //支付成功
+                                    startActivity(new Intent(InformationConfirmActivity.this,
+                                            SaveMoneySuccessActivity.class)
+                                            .putExtra("isSaveAt",true));//是否从存钱页面跳转
                                 }else if(paying == 1){
                                     //处理中
+                                    startActivity(new Intent(InformationConfirmActivity.this,
+                                            InProgressActivity.class)
+                                            .putExtra("isSaveAt",true));//是否从存钱页面跳转
                                 }
                             }
                         }

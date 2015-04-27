@@ -163,7 +163,7 @@
             android:name=".activity.InProgressActivity"
             android:label="@string/title_activity_in_progress" >
         </activity>
-        <!--连连支付服务-->
+        <!-- 连连支付服务 -->
         <!-- LLYT SDK START -->
         <activity
             android:name="com.yintong.secure.activity.BaseActivity"
@@ -172,11 +172,16 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="adjustResize" >
         </activity>
+
         <service
             android:name="com.yintong.secure.service.PayService"
             android:exported="false" >
         </service>
-        <!--连连支付结束-->
+        <!-- 连连支付结束 -->
+        <activity
+            android:name=".activity.SaveMoneySuccessActivity"
+            android:label="@string/title_activity_save_money_success" >
+        </activity>
     </application>
 
 </manifest>
