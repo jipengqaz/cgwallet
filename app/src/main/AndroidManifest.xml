@@ -149,6 +149,10 @@
             android:name=".activity.SaveMoneyActivity"
             android:label="@string/title_activity_save_money" >
         </activity>
+        <activity
+            android:name=".activity.InformationConfirmActivity"
+            android:label="@string/title_activity_information_confirm" >
+        </activity>
     </application>
 
 </manifest>

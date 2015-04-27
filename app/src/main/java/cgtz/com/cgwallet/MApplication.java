@@ -13,6 +13,7 @@ public class MApplication extends Application {
     private static String token ="";
     private static String user_id ="";
     public static boolean goLogin = true;//登录页面是否按了返回键
+    public static boolean isSetTrade = false;//记录登录后，返回的是否设置了交易密码
 
     @Override
     public void onCreate() {
@@ -25,6 +26,14 @@ public class MApplication extends Application {
 
     public static void setGoLogin(boolean goLogin) {
         MApplication.goLogin = goLogin;
+    }
+
+    public static boolean isSetTrade() {
+        return isSetTrade;
+    }
+
+    public static void setIsSetTrade(boolean isSetTrade) {
+        MApplication.isSetTrade = isSetTrade;
     }
 
     /**

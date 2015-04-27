@@ -73,6 +73,7 @@
     <string name="hint_regist_protocol">《草根钱包协议》</string>
     <string name="title_activity_save_money">SaveMoneyActivity</string>
     <string name="save_money_button_text">确认存入</string>
+    <string name="title_activity_information_confirm">InformationConfirmActivity</string>
 
 
 </resources>

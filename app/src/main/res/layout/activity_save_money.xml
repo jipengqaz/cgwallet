@@ -141,6 +141,7 @@
         </LinearLayout>
         <Button
             android:id="@+id/cofirm_save"
+            android:enabled="false"
             android:text="@string/save_money_button_text"
             android:textSize="@dimen/button_text_size"
             android:textColor="@color/button_text_not_enabled"

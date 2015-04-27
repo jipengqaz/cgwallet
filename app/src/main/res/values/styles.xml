@@ -79,4 +79,8 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@drawable/loading_bg2</item>
     </style>
+    <!--Checkbox 自定义样式-->
+    <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/check_stype</item>
+    </style>
 </resources>

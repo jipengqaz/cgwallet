@@ -89,4 +89,6 @@
     <color name="money_asset_text">#ff5400</color>
     <color name="button_text_not_enabled">#ffffff</color>
     <color name="button_text_can_click">#21c184</color>
+    <color name="remond_btn_bg">#07bf05</color>
+    <color name="remond_btn_bg_pressed">#29a600</color>
 </resources>

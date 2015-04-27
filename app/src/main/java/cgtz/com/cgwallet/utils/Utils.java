@@ -109,6 +109,7 @@ public class Utils {
 //        sharedUtils.remove(Constants.LOGIN_TOKEN);
         MApplication.setToken("");
         MApplication.setUser_id("");
+        MApplication.setIsSetTrade(false);
     }
 
     /**
@@ -214,6 +215,11 @@ public class Utils {
         }
     }
 
+    /**
+     * 自动登录
+     * @param context
+     * @param handler
+     */
     public static void autoLogin(Context context,Handler handler){
         String mobile = getUserPhone(context);
         String pwd = getLoginPwd(context);
@@ -223,6 +229,30 @@ public class Utils {
             params.put("password", pwd);
             CustomTask task = new CustomTask(handler,Constants.WHAT_LOGIN,Constants.URL_LOGIN,true,params,true);
             task.execute();
+        }
+    }
+
+    /**
+     * 是否登录
+     * @return
+     */
+    public static boolean isLogined(){
+        if(TextUtils.isEmpty(getUserId()) || TextUtils.isEmpty(getToken())){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    /**
+     * 判断是否设置了交易密码
+     * @return
+     */
+    public static boolean isSetTradePwd(){
+        if(TextUtils.isEmpty(getUserId()) || TextUtils.isEmpty(getToken()) || MApplication.isSetTrade()){
+            return false;
+        }else{
+            return true;
         }
     }
 }
