@@ -2,9 +2,11 @@ package cgtz.com.cgwallet.utils;
 
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -30,12 +32,13 @@ import cgtz.com.cgwallet.utility.Constants;
  * Created by Administrator on 2014/9/19.
  */
 public class HttpUtils {
+    private static int timeout = 30*1000;//连接超时时间
     /**
      * 通过http post 提交数据
      * @param url  访问路径
      * @param content 内容
      * @param encoding  返回内容字符编码
-     * @return
+     * @return String
      */
     public static String HttpPost(String url,String content,String encoding){
         LogUtils.e("HttpUtils", "content: "+content);
@@ -45,13 +48,13 @@ public class HttpUtils {
             conn = (HttpURLConnection)new URL(url).openConnection();
             conn.setDoInput(true);// 打开输入流，以便从服务器获取数据
             conn.setDoOutput(true);// 打开输出流，以便向服务器提交数据
-            conn.setConnectTimeout(30000); // 设置连接超时时间
-            conn.setReadTimeout(30000); //设置返回超时时间,下面要对超时进行处理
+            conn.setConnectTimeout(timeout); // 设置连接超时时间
+            conn.setReadTimeout(timeout); //设置返回超时时间,下面要对超时进行处理
             conn.setRequestMethod("POST");
             conn.setUseCaches(false);// 使用Post方式不能使用缓存
             conn.setInstanceFollowRedirects(true);
             //conn.setRequestProperty("Cookie", SessionId);
-            conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
             conn.connect();
             DataOutputStream out = new DataOutputStream(conn.getOutputStream());
             out.writeBytes(content);
@@ -92,8 +95,8 @@ public class HttpUtils {
             conn = (HttpURLConnection)new URL(url).openConnection();
             conn.setDoInput(true);// 打开输入流，以便从服务器获取数据
             conn.setDoOutput(true);// 打开输出流，以便向服务器提交数据
-            conn.setConnectTimeout(30000); // 设置连接超时时间
-            conn.setReadTimeout(30000); //设置返回超时时间,下面要对超时进行处理
+            conn.setConnectTimeout(timeout); // 设置连接超时时间
+            conn.setReadTimeout(timeout); //设置返回超时时间,下面要对超时进行处理
             conn.setRequestMethod("GET");
             conn.connect();
             int response = conn.getResponseCode(); // 获得服务器的响应码
@@ -152,13 +155,13 @@ public class HttpUtils {
             conn = (HttpsURLConnection)new URL(url).openConnection();
             conn.setDoInput(true);// 打开输入流，以便从服务器获取数据
             conn.setDoOutput(true);// 打开输出流，以便向服务器提交数据
-            conn.setConnectTimeout(30000); // 设置连接超时时间
-            conn.setReadTimeout(30000); //设置返回超时时间,下面要对超时进行处理
+            conn.setConnectTimeout(timeout); // 设置连接超时时间
+            conn.setReadTimeout(timeout); //设置返回超时时间,下面要对超时进行处理
             conn.setRequestMethod("POST");
             conn.setUseCaches(false);// 使用Post方式不能使用缓存
             conn.setInstanceFollowRedirects(true);
             //conn.setRequestProperty("Cookie", SessionId);
-            conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
             conn.connect();
             DataOutputStream out = new DataOutputStream(conn.getOutputStream());
             out.writeBytes(content);
@@ -187,7 +190,7 @@ public class HttpUtils {
     }
 
     public static String HttpsGet(String url,String encoding) {
-        LogUtils.e("HttpUtils","httpsget url: "+url+" encoding: "+encoding);
+        LogUtils.e("HttpUtils", "httpsget url: " + url + " encoding: " + encoding);
         SSLContext sc = null;
         try {
             sc = SSLContext.getInstance("TLS");
@@ -214,8 +217,8 @@ public class HttpUtils {
             conn = (HttpsURLConnection)new URL(url).openConnection();
             conn.setDoInput(true);// 打开输入流，以便从服务器获取数据
             conn.setDoOutput(true);// 打开输出流，以便向服务器提交数据
-            conn.setConnectTimeout(30000); // 设置连接超时时间
-            conn.setReadTimeout(30000); //设置返回超时时间,下面要对超时进行处理
+            conn.setConnectTimeout(timeout); // 设置连接超时时间
+            conn.setReadTimeout(timeout); //设置返回超时时间,下面要对超时进行处理
             conn.setRequestMethod("GET");
             conn.connect();
             int response = conn.getResponseCode(); // 获得服务器的响应码
@@ -328,4 +331,40 @@ public class HttpUtils {
         }
         return flag;
     }
+
+    /**
+     * 从网络获取图像
+     * @param path The path of image
+     * @return byte[]
+     * @throws Exception
+     */
+    public static byte[] getImage(String path) throws Exception{
+        URL url = new URL(path);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setConnectTimeout(timeout);
+        conn.setRequestMethod("GET");
+        InputStream inStream = conn.getInputStream();
+        if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
+            return readStream(inStream);
+        }
+        return null;
+    }
+    /**
+     * 得到数据流
+     * @param inStream
+     * @return byte[]
+     * @throws Exception
+     */
+    public static byte[] readStream(InputStream inStream) throws Exception{
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int len = 0;
+        while( (len=inStream.read(buffer)) != -1){
+            outStream.write(buffer, 0, len);
+        }
+        outStream.close();
+        inStream.close();
+        return outStream.toByteArray();
+    }
+
 }
