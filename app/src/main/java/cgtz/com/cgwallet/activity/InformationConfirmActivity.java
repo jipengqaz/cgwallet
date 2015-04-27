@@ -1,13 +1,19 @@
 package cgtz.com.cgwallet.activity;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -15,9 +21,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.adapter.BankAdapter;
 import cgtz.com.cgwallet.bean.Bank;
 import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.utility.Constants;
@@ -64,6 +70,10 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
     private TextView invester_bank_pay;//银行卡支付金额
     private TextView invester_balance;//余额支付金额
     private ArrayList<Bank> list = new ArrayList<Bank>();//存放银行名称的
+    private boolean noBank = true;//判断是否有可选银行列表
+    private boolean b = false;//用于判断银行卡输入时加空格的
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +83,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
         getIntentInfo();
         initViews();
         fillWidget();
+        setListener();
     }
 
     private void getIntentInfo(){
@@ -129,6 +140,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                     edit_username.setEnabled(false);
                 }else{
                     edit_username.setText(name);
+                    edit_username.setSelection(name.length());
                     edit_username.setEnabled(true);
                 }
             }
@@ -139,6 +151,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                     edit_identity.setEnabled(false);
                 }else{
                     edit_identity.setText(identity);
+                    edit_identity.setSelection(identity.length());
                     edit_identity.setEnabled(true);
                 }
             }
@@ -190,6 +203,138 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
         invester_bank_pay.setText(useBank+"");
     }
 
+    private void setListener(){
+        /**edittext添加空格
+         *
+         */
+        edit_bankcard.addTextChangedListener(new TextWatcher() {
+            private int lastlen = 0;
+            private String lastString = "";
+            private int myend = 0;
+            private StringBuilder sb = null;
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+                if (b) {
+                    lastlen = edit_bankcard.getText().toString().replaceAll(" ", "")
+                            .length();
+                    b = false;
+                    return;
+                }
+                sb = new StringBuilder();
+                myend = edit_bankcard.getSelectionEnd();
+                String str = edit_bankcard.getText().toString();
+                String strtrim = str.replaceAll(" ", "");
+                sb.append(strtrim);
+                int len = strtrim.length();
+                if (len >= lastlen) {
+                    lastString = edit_bankcard.getText().toString();
+                    lastlen = len;
+                    int j = 0;
+                    for (int i = 0; i < len - 1; i++) {
+                        if (i == 3 || i == 7 || i == 11 || i == 15 || i == 19) {
+                            j++;
+                            sb.insert(i + j, " ");
+                            b = true;
+                        }
+                    }
+                    if (b) {
+                        edit_bankcard.setText(sb.toString());
+                        if (sb.charAt(myend - 1) == ' ') {
+                            edit_bankcard.setSelection(myend + 1);
+                        } else {
+                            edit_bankcard.setSelection(myend);
+                        }
+                    }
+                } else {
+                    lastString = edit_bankcard.getText().toString();
+                    lastlen = len;
+                    int j = 0;
+                    if (len == 4) {
+                        b = true;
+                        myend = 4;
+                    } else {
+                        for (int i = 0; i < len - 1; i++) {
+                            if (i == 3 || i == 7 || i == 11 || i == 15 || i == 19) {
+                                j++;
+                                sb.insert(i + j, " ");
+                                b = true;
+                            }
+                        }
+                    }
+                    if (b) {
+                        edit_bankcard.setText(sb.toString());
+                        if (myend > 0 && lastString.charAt(myend - 1) == ' ') {
+                            edit_bankcard.setSelection(myend - 1);
+                        } else {
+                            edit_bankcard.setSelection(myend);
+                        }
+                    }
+                }
+            }
+        });
+
+        /**选择银行按钮**/
+        text_bankname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!noBank) {
+                    chooseBank();
+                } else {
+                    Utils.makeToast(InformationConfirmActivity.this,
+                            getResources().getString(R.string.error_no_bank_list));
+                }
+            }
+        });
+    }
+
+    /**
+     * 选择银行
+     */
+    public void chooseBank(){
+        LinearLayout choose_bank_card_layout =
+                (LinearLayout) LayoutInflater.from(this).inflate(R.layout.activity_choose_bank_card,null);
+        final Dialog choose_bank_card_dialog = new Dialog(this,R.style.loading_dialog2);
+        Button ensure_btn = (Button) choose_bank_card_layout.findViewById(R.id.btn_confirm);//确定按钮
+        ListView listview = (ListView) choose_bank_card_layout.findViewById(R.id.lv_bankname);
+        TextView title = (TextView) choose_bank_card_layout.findViewById(R.id.title);//标题
+
+        ensure_btn.setVisibility(View.GONE);//隐藏按钮
+
+        title.setText("请选择银行");
+        BankAdapter bAdapter = new BankAdapter(this,list);
+        listview.setAdapter(bAdapter);
+        listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {//存储选择的银行名
+                Bank bank = (Bank) parent.getItemAtPosition(position);
+                bankName = bank.getName();//银行名
+                bankId = bank.getId()+"";//银行卡id
+                double pay_limit_test = bank.getPay_limit();
+                payLimit = bank.getPay_limit()*10000+"";
+                tv_pay_limit_desc.setText("该银行卡单笔最高可支付"+pay_limit_test+"万元");
+                tv_pay_limit_desc.setVisibility(View.VISIBLE);
+                text_bankname.setText(bankName);
+                choose_bank_card_dialog.dismiss();
+            }
+        });
+        choose_bank_card_dialog.setContentView(choose_bank_card_layout);
+        choose_bank_card_dialog.show();
+    }
+
+
     /**
      * 获取银行卡列表
      */
@@ -227,6 +372,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                         }
                         break;
                     case Constants.WHAT_SELECTED_BANK:
+                        noBank = true;
                         JSONArray banks = json.optJSONArray("banks");
                         int bank = banks.length();
                         for (int i = 0; i < bank; i++) {
@@ -243,8 +389,10 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 LogUtils.e(TAG, "获取提现银行错误");
-                                finish();
                             }
+                        }
+                        if(list != null && list.size()>0){
+                            noBank = false;
                         }
                         break;
                 }
