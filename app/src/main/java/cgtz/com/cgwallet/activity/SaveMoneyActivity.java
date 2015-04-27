@@ -67,17 +67,19 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
     private String useAccount;//使用账户金额
     private String useBank;//使用银行卡支付金额
     private int taskType = 0;// 接口访问的判断值
+    private boolean onlyUseAccount = true;//是否余额充足支付
     private boolean isRealleyName;//是否真正实名认证
     private boolean isRelleyBank;//是否真正绑卡或者支持连连支付
     private String name;//姓名
     private String identity;//身份证号
     private String bankName;//银行名称
-    private String bankCord;//银行卡号
+    private String bankCard;//银行卡号
     private String payLimit;//银行卡单笔限额
     private String bankId;//用户绑定的银行卡id
     private String payLimitIntruduce;//银行卡单笔限额描述
     private String bankTip;//银行给出的提示内容
     private String lastBankCordNum;//银行卡后四位
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -209,8 +211,23 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
      * 用于切换在未有余额时，是否直接支付还是弹窗确认
      */
     private void payMethod(){
-        Intent intent = new Intent();
-
+        Intent intent = new Intent(this,InformationConfirmActivity.class);
+        intent.putExtra("isRealleyName",isRealleyName);//是否真正实名认证
+        intent.putExtra("isRelleyBank",isRelleyBank);//是否真正绑卡或者支持连连支付
+        intent.putExtra("name",name);//姓名
+        intent.putExtra("identity",identity);//身份证号
+        intent.putExtra("bankName",bankName);//银行名称
+        intent.putExtra("bankCard",bankCard);//银行卡号
+        intent.putExtra("payLimit",payLimit);//银行卡单笔限额
+        intent.putExtra("bankId",bankId);//用户绑定的银行卡id
+        intent.putExtra("payLimitIntruduce",payLimitIntruduce);//银行卡单笔限额描述
+        intent.putExtra("bankTip",bankTip);//银行给出的提示内容
+        intent.putExtra("lastBankCordNum",lastBankCordNum);//银行卡后四位
+        intent.putExtra("saveMoney",saveMoney);//存入金额
+        intent.putExtra("useAccount",useAccount);//使用的余额数值
+        intent.putExtra("useBank",useBank);//使用的银行卡支付金额
+        intent.putExtra("onlyUseAccount",onlyUseAccount);//是否余额充足支付
+        startActivity(intent);
     }
 
     /**
@@ -240,10 +257,12 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
 
         payMoney.setText(saveMoney);//支付金额
         if(Double.parseDouble(saveMoney) > Double.parseDouble(assets)){
+            onlyUseAccount = false;
             String bankNeedPay = (Double.parseDouble(saveMoney) - Double.parseDouble(assets))*1.0+"";
             avaliableBalance.setText(assets);//使用账户金额
             bankCardMoney.setText(bankNeedPay);//银行卡支付金额
         }else{
+            onlyUseAccount = true;
             avaliableBalance.setText(saveMoney);//使用账户金额
             bankCardMoney.setText("0.00");//银行卡支付金额
         }
@@ -277,10 +296,12 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
             public void onClick(View v) {
                 if(checkbox.isChecked()){//选中使用账户余额
                     if(Double.parseDouble(saveMoney) > Double.parseDouble(assets)){
+                        onlyUseAccount = false;
                         String bankNeedPay = (Double.parseDouble(saveMoney) - Double.parseDouble(assets))*1.0+"";
                         avaliableBalance.setText(assets);//使用账户金额
                         bankCardMoney.setText(bankNeedPay);//银行卡支付金额
                     }else{
+                        onlyUseAccount = true;
                         avaliableBalance.setText(saveMoney);//使用账户金额
                         bankCardMoney.setText("0.00");//银行卡支付金额
                     }
@@ -352,6 +373,8 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
         @Override
         public void handleMessage(Message msg) {
             try{
+                isRealleyName = false;//是否真正实名认证
+                isRelleyBank = false;//是否真正绑卡或者支持连连支付
                 JsonBean jsonBean = (JsonBean) msg.obj;
                 int code = jsonBean.getCode();
                 String errorMsg = jsonBean.getError_msg();
@@ -368,7 +391,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                         if(flag && code == Constants.OPERATION_FAIL){//数据交互失败
                             Utils.makeToast(SaveMoneyActivity.this, errorMsg);
                         }else if(flag && code == Constants.OPERATION_SUCCESS){//数据交互成功
-                            JSONObject jsonObject = new JSONObject(jsonBean.getJsonString());
+                            JSONObject jsonObject = jsonBean.getJsonObject();
                             assets = jsonObject.optString("capitalAccountBalance");//账户余额
                             assetUseIntruduce = jsonObject.optString("tip");////余额的使用介绍
                             startCalculateTime = jsonObject.optString("startInterestDay");//计算收益时间
@@ -378,43 +401,87 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                         }
                         break;
                     case Constants.WHAT_BEFORE_PAY://银行卡是否绑定
+                        JSONObject json = jsonBean.getJsonObject();
                         if(flag){
                             if(code == -1){
                                 //未设置交易密码
-                                Utils.makeToast(SaveMoneyActivity.this,errorMsg);
+                                isRealleyName = false;//是否真正实名认证
+                                isRelleyBank = false;//是否真正绑卡或者支持连连支付
+
                             }else if(code == -2){
                                 //未实名认证为绑卡
-                                Utils.makeToast(SaveMoneyActivity.this,errorMsg);
+                                isRealleyName = false;//是否真正实名认证
+                                isRelleyBank = false;//是否真正绑卡或者支持连连支付
+                                payMethod();
                             }else if(code == -3){
                                 //未真正实名 未绑卡
-
-                                Utils.makeToast(SaveMoneyActivity.this,errorMsg);
+                                isRealleyName = false;//是否真正实名认证
+                                isRelleyBank = false;//是否真正绑卡或者支持连连支付
+                                name = json.optString("name");//姓名
+                                identity = json.optString("identity");//身份证号
+                                payMethod();
                             }else if(code == -4){
                                 //未真正实名 已绑卡 但是不支持连连
-                                Utils.makeToast(SaveMoneyActivity.this,errorMsg);
+                                isRealleyName = false;//是否真正实名认证
+                                isRelleyBank = false;//是否真正绑卡或者支持连连支付
+
                             }else if(code == -5){
                                 //未真正实名 已绑卡 支持连连 但未绑定连连
-                                Utils.makeToast(SaveMoneyActivity.this,errorMsg);
+                                isRealleyName = false;//是否真正实名认证
+                                isRelleyBank = false;//是否真正绑卡或者支持连连支付
+                                name = json.optString("name");//姓名
+                                identity = json.optString("identity");//身份证号
+                                bankName = json.optString("bankName");//银行名称
+                                bankCard = json.optString("fullCardNumber");//银行卡号
+                                payLimit = json.optString("pay_limit");//银行卡单笔限额
+                                bankId = json.optString("bankId");//用户绑定的银行卡id
+                                payLimitIntruduce = json.optString("pay_limit_desc");//银行卡单笔限额描述
+                                payMethod();
                             }else if(code == -6){
                                 // 已真正实名认证  未绑卡
-                                Utils.makeToast(SaveMoneyActivity.this,errorMsg);
+                                isRealleyName = true;//是否真正实名认证
+                                isRelleyBank = false;//是否真正绑卡或者支持连连支付
+                                name  = json.optString("name");//姓名
+                                identity = json.optString("identity");//身份证号
+                                payMethod();
                             }else if(code == -7){
                                 //已真正实名认证  已绑卡 不支持连连
-                                Utils.makeToast(SaveMoneyActivity.this,errorMsg);
+
                             }else if(code == -8){
                                 //已真正实名认证  已绑卡 支持连连  但未绑定连连
-                                Utils.makeToast(SaveMoneyActivity.this,errorMsg);
+                                isRealleyName = true;//是否真正实名认证
+                                isRelleyBank = false;//是否真正绑卡或者支持连连支付
+                                name = json.optString("name");//姓名
+                                identity = json.optString("identity");//身份证号
+                                bankName = json.optString("bankName");//银行名称
+                                bankCard = json.optString("fullCardNumber");//银行卡号
+                                payLimit = json.optString("pay_limit");//银行卡单笔限额
+                                bankId = json.optString("bankId");//用户绑定的银行卡id
+                                payLimitIntruduce = json.optString("pay_limit_desc");//银行卡单笔限额描述
+                                payMethod();
                             }else if(code == Constants.OPERATION_SUCCESS){
                                 //可以直接支付
-                                Utils.makeToast(SaveMoneyActivity.this,errorMsg);
+                                isRealleyName = true;//是否真正实名认证
+                                isRelleyBank = true;//是否真正绑卡或者支持连连支付
+                                name = json.optString("name");//姓名
+                                identity = json.optString("identity");//身份证号
+                                bankName = json.optString("bankName");//银行名称
+                                bankCard = json.optString("fullCardNumber");//银行卡号
+                                payLimit = json.optString("pay_limit");//银行卡单笔限额
+                                bankId = json.optString("bankId");//用户绑定的银行卡id
+                                payLimitIntruduce = json.optString("pay_limit_desc");//银行卡单笔限额描述
+                                bankTip = json.optString("bank_tip");//银行给出的提示内容
+                                lastBankCordNum = json.optString("last4number");//银行卡后四位
+                                payMethod();
                             }else if(code == Constants.OPERATION_FAIL){
                                 //出错
+                                isRealleyName = false;//是否真正实名认证
+                                isRelleyBank = false;//是否真正绑卡或者支持连连支付
                                 Utils.makeToast(SaveMoneyActivity.this,errorMsg);
                             }
                         }else{
                             Utils.makeToast(SaveMoneyActivity.this,errorMsg);
                         }
-
                         break;
                 }
             }catch (Exception e){

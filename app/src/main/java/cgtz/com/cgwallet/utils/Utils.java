@@ -265,4 +265,24 @@ public class Utils {
             return true;
         }
     }
+    /**
+     * 获取带星的用户姓名
+     * @param username
+     * @return
+     */
+    public static String getUserNameForStart(String username){
+        return username.substring(0,1)+"*"+(username.length()>2?username.substring(2):"");
+    }
+    /**
+     * 获取带星的身份证号
+     * @param identity
+     * @return
+     */
+    public static String getUserIdentity(String identity){
+        StringBuffer sb = new StringBuffer();
+        return identity.length() == 15?
+                identity.substring(0,6)+"******"+identity.substring(12)
+                :
+                identity.substring(0,6)+"*********"+identity.substring(15);
+    }
 }

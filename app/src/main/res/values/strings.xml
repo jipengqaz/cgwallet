@@ -74,6 +74,25 @@
     <string name="title_activity_save_money">SaveMoneyActivity</string>
     <string name="save_money_button_text">确认存入</string>
     <string name="title_activity_information_confirm">InformationConfirmActivity</string>
+    <string name="stilled_money">支付金额:</string>
+    <string name="invester_balance">账户余额支付:</string>
+    <string name="invester_bank_pay">银行卡支付:</string>
+    <string name="invester_personal_information">身份信息</string>
+    <string name="invester_bank_information">银行信息</string>
+    <string name="invester_name">姓名</string>
+    <string name="invester_id">身份证号</string>
+    <string name="invester_id_hint">正确填写您的身份证号</string>
+    <string name="invester_bank_id">所属银行</string>
+    <string name="invester_bank_id_hint">点击选择</string>
+    <string name="invester_backcard">银行卡号</string>
+    <string name="invester_backcard_hint">正确填写银行卡号</string>
+    <string name="et_invest_pay_identity">请输入身份证号</string>
+    <string name="et_invest_pay_bankcard">请输入您名下的银行卡号</string>
+    <string name="et_invest_pay_username">请输入姓名</string>
+    <string name="invester_identity">身份证</string>
+    <string name="invester_bankname">选择银行</string>
+    <string name="et_invest_pay_bankname">请选择银行</string>
+    <string name="invester_bankcard">银行卡号</string>
 
 
 </resources>
