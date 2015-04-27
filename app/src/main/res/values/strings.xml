@@ -94,6 +94,8 @@
     <string name="et_invest_pay_bankname">请选择银行</string>
     <string name="invester_bankcard">银行卡号</string>
     <string name="error_no_bank_list">获取支持的银行卡列表失败</string>
+    <string name="invester_password">交易密码</string>
+    <string name="invester_password_hint">请输入交易密码</string>
 
 
 </resources>

@@ -83,4 +83,8 @@
     <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/check_stype</item>
     </style>
+    <style name="dialogWindowAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/translate_effect</item>
+        <item name="android:windowExitAnimation">@anim/translate_effect_exit</item>
+    </style>
 </resources>

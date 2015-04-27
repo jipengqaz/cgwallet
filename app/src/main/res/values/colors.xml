@@ -94,4 +94,5 @@
     <color name="invest_start_text1">#a9a9a9</color>
     <color name="invest_start_text2">#898989</color>
     <color name="background_recharge">#ffd3d3</color>
+    <color name="dialog_msg_color">#000000</color>
 </resources>

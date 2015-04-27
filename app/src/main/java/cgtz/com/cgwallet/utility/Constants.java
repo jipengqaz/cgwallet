@@ -59,7 +59,8 @@ public class Constants {
     public static final int WHAT_WALLET_DETAIL = 2015042418;//我的钱包
     public static final int WHAT_WALLET_DEPOSIT = 2015042709;////进入存钱页面获取数据
     public static final int WHAT_BEFORE_PAY = 2015042714;//银行卡是否绑定
-    public static final int WHAT_SELECTED_BANK = 2015042716;//银行卡是否绑定
+    public static final int WHAT_SELECTED_BANK = 2015042716;//获取银行列表
+    public static final int WHAT_EWALLET_AFFIRMDO = 2015042717;//草根钱包余额存入
     /**88888888888888888888888888888888888888**/
     public static final String URL_CG_WALLET_PROTOCOL = "http://d5ds88.cgtz.com/site/agreement/";
     public static final String URL_FEED_BACK = "site/feedBack";//意见反馈
@@ -79,6 +80,7 @@ public class Constants {
     public static final String URL_API_STARTIMAGE = "api/startImage";//获取开机图片
     public static final String URL_BEFORE_PAY = "pay/BeforePay";//判断银行卡是否绑定接口
     public static final String URL_SELECTED_BANK= "api/GetAvailableBanks";//获取连连支付支持的银行卡接口
+    public static final String URL_EWALLET_AFFIRMDO= "ewallet/Affirmdo";//草根钱包余额转入
 
 
     /**

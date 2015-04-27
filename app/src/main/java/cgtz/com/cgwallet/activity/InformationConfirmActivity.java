@@ -21,16 +21,22 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.adapter.BankAdapter;
 import cgtz.com.cgwallet.bean.Bank;
 import cgtz.com.cgwallet.bean.JsonBean;
+import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.CustomTask;
 import cgtz.com.cgwallet.utils.LogUtils;
+import cgtz.com.cgwallet.utils.MD5Util;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.ISplashView;
+import cgtz.com.cgwallet.widget.CustomEffectsDialog;
+import cgtz.com.cgwallet.widget.ProgressDialog;
 
 /**
  * 信息确认页面
@@ -72,6 +78,10 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
     private ArrayList<Bank> list = new ArrayList<Bank>();//存放银行名称的
     private boolean noBank = true;//判断是否有可选银行列表
     private boolean b = false;//用于判断银行卡输入时加空格的
+    private CustomEffectsDialog cDiaog;//
+    private String tradePwd;//输入的交易密码
+    private ProgressDialog progressDialog;
+    private SplashPresenter presenter;
 
 
     @Override
@@ -80,6 +90,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
         setContentView(R.layout.activity_information_confirm);
         setTitle("存钱");
         showBack(true);
+        presenter = new SplashPresenter(this);
         getIntentInfo();
         initViews();
         fillWidget();
@@ -297,6 +308,116 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                 }
             }
         });
+
+        /**确定支付按钮**/
+        btn_finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!isRealleyName || !isRelleyBank) {
+                    //需要重新填写个人信息
+                    if (!isRealleyName) {
+                        name = edit_username.getText().toString().trim();
+                        identity = edit_identity.getText().toString().trim();
+                    }
+                    bankName = text_bankname.getText().toString().trim();//银行名称
+                    bankCard = edit_bankcard.getText().toString().trim().replaceAll(" ", "");//银行卡号
+                }
+                LogUtils.i(TAG, "name: " + name + " identity: " + identity);
+//                cap = invester_balance.getText().toString().trim();//使用账户余额支付的金额
+                if (!isRealleyName || !isRelleyBank) {
+                    if (TextUtils.isEmpty(name)) {
+                        Utils.makeToast(InformationConfirmActivity.this, "用户姓名错误");
+                    } else if (TextUtils.isEmpty(identity) || identity.length() < 14
+                            || identity.length() > 18) {
+                        Utils.makeToast(InformationConfirmActivity.this, "用户身份证号信息错误");
+                    } else if (TextUtils.isEmpty(saveMoney)) {
+                        Utils.makeToast(InformationConfirmActivity.this, "支付金额错误");
+                    } else if (!isRelleyBank && TextUtils.isEmpty(bankName)) {
+                        Utils.makeToast(InformationConfirmActivity.this, "银行信息填写错误");
+                    } else if (!isRelleyBank && !TextUtils.isEmpty(payLimit) &&
+                            Double.parseDouble(saveMoney) > Double.parseDouble(payLimit)) {
+                        Utils.makeToast(InformationConfirmActivity.this, "该银行卡单笔最高可支付" + payLimit + "万元");
+                    } else {
+                        final View layoutTradePwd = LayoutInflater.from(InformationConfirmActivity.this)
+                                .inflate(R.layout.layout_tradepwd, null);
+                        cDiaog =
+                                CustomEffectsDialog.getInstans(InformationConfirmActivity.this);
+                        cDiaog.setCustomView(layoutTradePwd, InformationConfirmActivity.this);
+                        cDiaog.withTitle("请验证交易密码");
+                        cDiaog.withMessage(null);
+                        cDiaog.withBtnLineColor(R.color.bg_line);
+                        cDiaog.withBtnContentLineColor(R.color.bg_line);
+                        cDiaog.withButton1Text("取消");
+                        cDiaog.withButton1Click(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                closeDialog();
+                            }
+                        });
+                        cDiaog.withButton2Text("确定");
+                        cDiaog.withButton2Click(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                tradePwd = ((EditText) layoutTradePwd.findViewById(R.id.trade_password))
+                                        .getText().toString().trim();//交易密码
+                                if (TextUtils.isEmpty(tradePwd)) {
+                                    Utils.makeToast(InformationConfirmActivity.this, "请输入交易密码");
+                                } else {
+                                    //生成订单
+                                    closeDialog();
+
+                                    /**根据不同的支付要求来进行支付**/
+//                                    paySelect(pay_method);
+                                }
+                            }
+                        });
+                        cDiaog.setCancelable(false);
+                        cDiaog.setCanceledOnTouchOutside(false);
+                        cDiaog.show();
+                    }
+                } else {
+                    final View layoutTradePwd = LayoutInflater.from(InformationConfirmActivity.this)
+                            .inflate(R.layout.layout_tradepwd, null);
+                    cDiaog =
+                            CustomEffectsDialog.getInstans(InformationConfirmActivity.this);
+                    cDiaog.setCustomView(layoutTradePwd, InformationConfirmActivity.this);
+                    cDiaog.withTitle("请验证交易密码");
+                    cDiaog.withMessage(null);
+                    cDiaog.withBtnLineColor(R.color.bg_line);
+                    cDiaog.withBtnContentLineColor(R.color.bg_line);
+                    cDiaog.withButton1Text("取消");
+                    cDiaog.withButton1Click(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            closeDialog();
+                        }
+                    });
+                    cDiaog.withButton2Text("确定");
+                    cDiaog.withButton2Click(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            tradePwd = ((EditText) layoutTradePwd.findViewById(R.id.trade_password))
+                                    .getText().toString().trim();//交易密码
+                            if (TextUtils.isEmpty(tradePwd)) {
+                                Utils.makeToast(InformationConfirmActivity.this, "请输入交易密码");
+                            } else {
+                                //生成订单
+                                closeDialog();
+                                /**根据不同的支付要求来进行支付**/
+//                                paySelect(pay_method);
+                            }
+                        }
+                    });
+                    cDiaog.setCancelable(false);
+                    cDiaog.setCanceledOnTouchOutside(false);
+                    cDiaog.show();
+                }
+            }
+        });
+    }
+
+    private void closeDialog(){
+        Utils.closeDialog(this,cDiaog);
     }
 
     /**
@@ -364,35 +485,46 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                 JSONObject json = jsonBean.getJsonObject();
                 boolean flag = Utils.filtrateCode(InformationConfirmActivity.this,jsonBean);
                 switch (action){
-                    case Constants.WHAT_WALLET_DEPOSIT:
-                        if(flag && code == Constants.OPERATION_FAIL){//数据交互失败
-                            Utils.makeToast(InformationConfirmActivity.this, errorMsg);
-                        }else if(flag && code == Constants.OPERATION_SUCCESS){//数据交互成功
-
-                        }
-                        break;
                     case Constants.WHAT_SELECTED_BANK:
                         noBank = true;
-                        JSONArray banks = json.optJSONArray("banks");
-                        int bank = banks.length();
-                        for (int i = 0; i < bank; i++) {
-                            try {
-                                JSONObject temp = (JSONObject) banks.get(i);
-                                Bank bankk = new Bank();
-                                bankk.setId(temp.optInt("code"));//银行卡
-                                bankk.setName(temp.optString("name"));
-                                bankk.setNeedBranch(temp.optInt("needBranch"));
-                                bankk.setPriority(temp.optString("priority"));//判断用那种支付的识别码
-                                bankk.setBindFee(temp.optString("bindFee"));//银行卡扣的1分钱
-                                bankk.setPay_limit(temp.optDouble("pay_limit"));
-                                list.add(bankk);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                                LogUtils.e(TAG, "获取提现银行错误");
+                        if(flag){
+                            JSONArray banks = json.optJSONArray("banks");
+                            int bank = banks.length();
+                            for (int i = 0; i < bank; i++) {
+                                try {
+                                    JSONObject temp = (JSONObject) banks.get(i);
+                                    Bank bankk = new Bank();
+                                    bankk.setId(temp.optInt("code"));//银行卡
+                                    bankk.setName(temp.optString("name"));
+                                    bankk.setNeedBranch(temp.optInt("needBranch"));
+                                    bankk.setPriority(temp.optString("priority"));//判断用那种支付的识别码
+                                    bankk.setBindFee(temp.optString("bindFee"));//银行卡扣的1分钱
+                                    bankk.setPay_limit(temp.optDouble("pay_limit"));
+                                    list.add(bankk);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                    LogUtils.e(TAG, "获取提现银行错误");
+                                }
+                            }
+                            if(list != null && list.size()>0){
+                                noBank = false;
                             }
                         }
-                        if(list != null && list.size()>0){
-                            noBank = false;
+                        break;
+                    case Constants.WHAT_EWALLET_AFFIRMDO://账户余额支付
+                        if(flag){
+                            if(flag && code == Constants.OPERATION_FAIL){//数据交互失败
+                                Utils.makeToast(InformationConfirmActivity.this, errorMsg);
+                            }else if(flag && code == Constants.OPERATION_SUCCESS){//数据交互成功
+                                int paying = json.optInt("paying");
+                                if(paying == 1){
+                                    //支付处理中
+
+                                }else if(paying == 0){
+                                    //支付成功
+
+                                }
+                            }
                         }
                         break;
                 }
@@ -407,21 +539,56 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
 
     @Override
     public void startProcessBar() {
-
+        if(progressDialog == null){
+            progressDialog = new ProgressDialog(this,R.style.loading_dialog);
+        }
+        if(progressDialog.isShowing()){
+            progressDialog.dismiss();
+        }
+        progressDialog.show();
     }
 
     @Override
     public void hideProcessBar() {
-
+        if(progressDialog != null && progressDialog.isShowing()){
+            progressDialog.dismiss();
+        }
     }
 
     @Override
     public void showNetError() {
-
+        Utils.makeToast(this, Constants.IS_EVENT_MSG);
     }
+
 
     @Override
     public void startNextActivity() {
+        /**
+         *  填写个人信息时支付
+         */
+        if(!isRealleyName || !isRelleyBank){
+            /**
+             * 判断是否只使用余额支付
+             */
+            if(onlyUseAccount){
+                //只使用账户余额支付
+                HashMap<String,String> params = new HashMap<>();
+                params.put("user_id",Utils.getUserId());
+                params.put("token",Utils.getToken());
+                params.put("password", MD5Util.md5(tradePwd));//支付密码
+                params.put("cap",useAccount);//余额支付数值
+                params.put("amount",saveMoney);//转入金额
+                params.put("order_from","1");//订单来源 1:android 2:ios
+                params.put("card_no", "");//银行卡号
+                CustomTask task = new CustomTask(mHandler, Constants.WHAT_EWALLET_AFFIRMDO
+                        ,Constants.URL_EWALLET_AFFIRMDO,
+                        true,params,true);
+                task.execute();
+            }else{
+                //使用到银行卡支付
+
+            }
+        }
 
     }
 }
