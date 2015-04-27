@@ -17,6 +17,7 @@ public class JsonBean {
     private int code;//数据类型判断值ֵ
     private String error_msg;//错误信息
     private String jsonString;//数据json内容
+    private JSONObject jsonObject;
 
     public JsonBean(){}
     public JsonBean(String str){
@@ -32,6 +33,7 @@ public class JsonBean {
                 //正常获取到服务器返回的内容
                 try {
                     JSONObject obj = new JSONObject(str);
+                    jsonObject = obj;
                     String action = obj.optString("action");
                     int state = obj.optInt("success");
                     if (action.equals("login")) {
@@ -67,6 +69,10 @@ public class JsonBean {
                 }
             }
         }
+    }
+
+    public JSONObject getJsonObject() {
+        return jsonObject;
     }
 
     public int getCode() {

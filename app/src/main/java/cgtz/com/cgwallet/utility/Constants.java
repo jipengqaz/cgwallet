@@ -58,6 +58,8 @@ public class Constants {
     public static final int WHAT_PROVINCES = 2015042517;//获取省市数据
     public static final int WHAT_WALLET_DETAIL = 2015042418;//我的钱包
     public static final int WHAT_WALLET_DEPOSIT = 2015042709;////进入存钱页面获取数据
+    public static final int WHAT_BEFORE_PAY = 2015042714;//银行卡是否绑定
+    /**88888888888888888888888888888888888888**/
     public static final String URL_CG_WALLET_PROTOCOL = "http://d5ds88.cgtz.com/site/agreement/";
     public static final String URL_FEED_BACK = "site/feedBack";//意见反馈
     public static final String URL_INTEREST_HISTORY = "ewallet/InterestHistory";//收益历史
@@ -74,6 +76,7 @@ public class Constants {
     public static final String URL_KEFUTIP = "api/getKefuTip";//客服文案
     public static final String URL_PROVINCES_CITIES_UPDATE = "api/getProvinceAndCities";//获取省市数据
     public static final String URL_API_STARTIMAGE = "api/startImage";//获取开机图片
+    public static final String URL_BEFORE_PAY = "pay/BeforePay";//判断银行卡是否绑定接口
     public static final String URL_SHARE_TIP ="account/GetShareTip";//获取分享内容和二维码
 
 
