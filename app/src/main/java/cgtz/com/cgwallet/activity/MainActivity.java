@@ -1,6 +1,8 @@
 package cgtz.com.cgwallet.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -8,9 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -40,17 +40,17 @@ import com.umeng.socialize.weixin.media.WeiXinShareContent;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.adapter.MFragmentPagerAdater;
 import cgtz.com.cgwallet.bean.JsonBean;
+import cgtz.com.cgwallet.client.Get_share_content;
 import cgtz.com.cgwallet.fragment.CgWalletFragment;
 import cgtz.com.cgwallet.fragment.MyWalletFragment;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
-import cgtz.com.cgwallet.utils.CustomTask;
+import cgtz.com.cgwallet.utils.HttpUtils;
 import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.BidirSlidingLayout;
@@ -113,10 +113,15 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             @Override
             public void onClick(View v) {
                 if (bidirSldingLayout.isRightLayoutVisible()) {
-                    bidirSldingLayout.scrollToContentFromRightMenu();
+                        bidirSldingLayout.scrollToContentFromRightMenu();
                 } else {
+                    if(Utils.isLogined()) {
+                    Get_share_content.getContent(handler);
                     bidirSldingLayout.initShowRightState();
                     bidirSldingLayout.scrollToRightMenu();
+                    }else{
+                        startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                    }
                 }
             }
         });
@@ -124,8 +129,86 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         initShare();
     }
     //获取友盟分享变量
-    final UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share");
+    private final UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share");
+    private String content="",url="";//分享内容  和  分享链接
+    private ImageView Qr_code;//二维码
+    private Handler handler = new Handler(){//获取分享内容的
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 0:
+                    JsonBean jsonBean = (JsonBean) msg.obj;
+                    int code = jsonBean.getCode();
+                    String errorMsg = jsonBean.getError_msg();
+                    JSONObject json = null;
+                    if(!Utils.filtrateCode(MainActivity.this,jsonBean)){
+                        Toast.makeText(MainActivity.this,errorMsg+"  错误码"+code,Toast.LENGTH_SHORT);
+                        return;
+                    }
+                    json = jsonBean.getJsonObject();
+                    if(json.optInt("success") == 1) {
+                        LogUtils.e(TAG, json + "");
+                        content = json.optString("content");
+                        url = json.optString("url");
+                        qrcode = json.optString("qrcode");
+                        new Thread(connectNet).start();
+                    }
+                    break;
+                case 1:
+                    if (bitmap != null) {
+                        Qr_code.setImageBitmap(bitmap);// 显示获取的二维码
+                    }
+                    break;
+            }
+        }
+    };
     private boolean isShare = false;
+    private Bitmap bitmap = null;
+    private String qrcode;
+    //获取二维码的线程
+    private Runnable connectNet = new Runnable(){
+        @Override
+        public void run() {
+            //取得的是byte数组, 从byte数组生成bitmap
+            byte[] data = new byte[0];
+            try {
+                data = HttpUtils.getImage(qrcode);
+                if (data != null) {
+                    bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);// bitmap
+                } else {
+
+                }
+                handler.sendEmptyMessage(1);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
+        //分享回调
+    /**
+     * 分享监听器
+     */
+    private SocializeListeners.SnsPostListener mShareListener = new SocializeListeners.SnsPostListener() {
+
+        @Override
+        public void onStart() {
+
+        }
+
+        @Override
+        public void onComplete(SHARE_MEDIA platform, int stCode,
+                               SocializeEntity entity) {
+            if (stCode == 200) {
+                Toast.makeText(MainActivity.this, "分享成功", Toast.LENGTH_SHORT)
+                        .show();
+            } else {
+//                Toast.makeText(MainActivity.this,
+//                        "分享失败 : error code : " + stCode, Toast.LENGTH_SHORT)
+//                        .show();
+            }
+        }
+    };
     /**
      * 初始化分享页面
      */
@@ -139,104 +222,90 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         wxcircle = (LinearLayout) findViewById(R.id.wxcircle);
         sina = (LinearLayout) findViewById(R.id.sina);
         rules = (TextView) findViewById(R.id.rules);
-
+        Qr_code = (ImageView) findViewById(R.id.Qr_code);
 
         configuration();
-        //分享回调
-        final SocializeListeners.SnsPostListener snsPost = new SocializeListeners.SnsPostListener() {
-            @Override
-            public void onStart() {
-                Log.e(TAG,Constants.GESTURES_PASSWORD+"");
-                isShare = true;
-                Toast.makeText(MainActivity.this, "开始分享.", Toast.LENGTH_SHORT).show();
-            }
 
-            @Override
-            public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
-//                if (eCode == 200) {
-//                    Toast.makeText(MainActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    String eMsg = "";
-//                    if (eCode == -101) {
-//                        eMsg = "没有授权";
-//                    }
-//                    Toast.makeText(MainActivity.this, "分享失败[" + eCode + "] " +
-//                            eMsg, Toast.LENGTH_SHORT).show();
-//                }
-            }
-        };
         View.OnClickListener share_click = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //分享的图片
-                UMImage image = new UMImage(MainActivity.this, R.mipmap.icon_bank);
+                UMImage image = new UMImage(MainActivity.this, R.mipmap.icon_logo);
                 switch (v.getId()){
                     case R.id.QQ:
-                        // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
-                        mController.postShare(MainActivity.this, SHARE_MEDIA.QQ, snsPost);
 
                         QQShareContent qqShareContent = new QQShareContent();
                         //设置分享文字
-                        qqShareContent.setShareContent("草根投资");
+                        qqShareContent.setShareContent(content);
                         //设置分享title
                         qqShareContent.setTitle("草根投资");
                         //设置分享图片
                         qqShareContent.setShareImage(image);
                         //设置点击分享内容的跳转链接
-                        qqShareContent.setTargetUrl("https://www.cgtz.com");
+                        qqShareContent.setTargetUrl(url);
                         mController.setShareMedia(qqShareContent);
+                        // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
+                        mController.postShare(MainActivity.this, SHARE_MEDIA.QQ, mShareListener);
                         break;
                     case R.id.qzone:
-                        // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
-                        mController.postShare(MainActivity.this, SHARE_MEDIA.QZONE, snsPost);
+
                         QZoneShareContent qzone = new QZoneShareContent();
                         //设置分享文字
-                        qzone.setShareContent("草根投资");
+                        qzone.setShareContent(content);
                         //设置点击消息的跳转URL
-                        qzone.setTargetUrl("https://www.cgtz.com");
+                        qzone.setTargetUrl(url);
                         //设置分享内容的标题
                         qzone.setTitle("草根投资");
                         //设置分享图片
                         qzone.setShareImage(image);
                         mController.setShareMedia(qzone);
+                        // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
+                        mController.postShare(MainActivity.this, SHARE_MEDIA.QZONE, mShareListener);
                         break;
                     case R.id.sms:
                         // 设置短信分享内容
                         SmsShareContent sms = new SmsShareContent();
-                        sms.setShareContent("草根投资https://www.cgtz.com");
-                        sms.setShareImage(image);
+                        sms.setShareContent(content);
                         mController.setShareMedia(sms);
+                        // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
+                        mController.postShare(MainActivity.this, SHARE_MEDIA.SMS, mShareListener);
                         break;
                     case R.id.wechat://微信
                         //设置微信好友分享内容
                         WeiXinShareContent weixinContent = new WeiXinShareContent();
                         //设置分享文字
-                        weixinContent.setShareContent("草根投资");
+                        weixinContent.setShareContent(content);
                         //设置title
                         weixinContent.setTitle("草根投资");
                         //设置分享内容跳转URL
-                        weixinContent.setTargetUrl("https://www.cgtz.com");
+                        weixinContent.setTargetUrl(url);
                         //设置分享图片
                         weixinContent.setShareImage(image);
                         mController.setShareMedia(weixinContent);
+                        // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
+                        mController.postShare(MainActivity.this, SHARE_MEDIA.WEIXIN, mShareListener);
                         break;
                     case R.id.wxcircle://朋友圈
                         //设置微信朋友圈分享内容
                         CircleShareContent circleMedia = new CircleShareContent();
-                        circleMedia.setShareContent("草根投资");
+                        circleMedia.setShareContent(content);
                         //设置朋友圈title
                         circleMedia.setTitle("草根投资");
                         circleMedia.setShareImage(image);
-                        circleMedia.setTargetUrl("https://www.cgtz.com");
+                        circleMedia.setTargetUrl(url);
                         mController.setShareMedia(circleMedia);
+                        // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
+                        mController.postShare(MainActivity.this, SHARE_MEDIA.WEIXIN_CIRCLE, mShareListener);
                         break;
                     case R.id.sina://新浪
                         //设置新浪SSO handler
                         mController.getConfig().setSsoHandler(new SinaSsoHandler());
                         // 设置分享内容
-                        mController.setShareContent("草根投资");
+                        mController.setShareContent(content);
                         //设置分享图片，参数2为本地图片的资源引用
                         mController.setShareMedia(image);
+                        // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
+                        mController.postShare(MainActivity.this, SHARE_MEDIA.SINA, mShareListener);
                         break;
                     case R.id.rules://分享规则
 
@@ -283,7 +352,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         // 添加QQ支持, 并且设置QQ分享内容的target url
         UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(MainActivity.this,
                 appId, appKey);
-        qqSsoHandler.setTargetUrl("https://www.cgtz.com");
         qqSsoHandler.addToSocialSDK();
 
         // 添加QZone平台
@@ -451,7 +519,11 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                 mViewPager.setCurrentItem(currIndex);
                 break;
             case R.id.left_menu_safe_center://安全中心
-                startActivity(new Intent(this,SafeCenterActivity.class));
+                if(Utils.isLogined()){//判断是否登录
+                    startActivity(new Intent(this,SafeCenterActivity.class));
+                }else{
+                    startActivity(new Intent(this,LoginActivity.class));
+                }
                 break;
             case R.id.left_menu_help_center://帮助中心
                 startActivity(new Intent(this,WebViewActivity.class)

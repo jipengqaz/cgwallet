@@ -83,6 +83,7 @@ public class Constants {
     public static final String URL_PROVINCES_CITIES_UPDATE = "api/getProvinceAndCities";//获取省市数据
     public static final String URL_API_STARTIMAGE = "api/startImage";//获取开机图片
     public static final String URL_BEFORE_PAY = "pay/BeforePay";//判断银行卡是否绑定接口
+    public static final String URL_SHARE_TIP ="account/GetShareTip";//获取分享内容和二维码
     public static final String URL_SELECTED_BANK= "api/GetAvailableBanks";//获取连连支付支持的银行卡接口
     public static final String URL_EWALLET_AFFIRMDO= "ewallet/Affirmdo";//草根钱包余额转入
     public static final String URL_EWALLET_AFFIRMREDIRECT= "ewallet/Affirmredirect";//e钱包第三方转入

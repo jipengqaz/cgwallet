@@ -65,7 +65,7 @@ public class Earnings_record extends BaseActivity implements ISplashView {
      */
     private void init() {
         presenter = new SplashPresenter(this);
-        width = AppUtil.getScreenDispaly(Earnings_record.this)[0];//获取宽度
+        width = AppUtil.getScreenDispaly(Earnings_record.this)[0]-20;//获取宽度
         listview= (RefreshAndLoadMoreListView) findViewById(R.id.record_listview);
         projectAdapter = new ProjectAdapter1();
         listview.setAdapter(projectAdapter);

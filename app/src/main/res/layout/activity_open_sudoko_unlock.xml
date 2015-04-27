@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/item_earnings_record_2_background"
+    >
     <LinearLayout
         android:layout_marginTop="20dp"
         android:background="@color/white"
