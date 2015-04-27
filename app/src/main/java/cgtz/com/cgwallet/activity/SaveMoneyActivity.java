@@ -64,6 +64,20 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
     private CheckBox checkbox;
     private LinearLayout linear;
     private int isSetTrade = 0;//是否设置了交易密码  0 未设置，1 设置过
+    private String useAccount;//使用账户金额
+    private String useBank;//使用银行卡支付金额
+    private int taskType = 0;// 接口访问的判断值
+    private boolean isRealleyName;//是否真正实名认证
+    private boolean isRelleyBank;//是否真正绑卡或者支持连连支付
+    private String name;//姓名
+    private String identity;//身份证号
+    private String bankName;//银行名称
+    private String bankCord;//银行卡号
+    private String payLimit;//银行卡单笔限额
+    private String bankId;//用户绑定的银行卡id
+    private String payLimitIntruduce;//银行卡单笔限额描述
+    private String bankTip;//银行给出的提示内容
+    private String lastBankCordNum;//银行卡后四位
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +109,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
      * 填充widget内容
      */
     private void fillWidget(){
-        if(TextUtils.isEmpty(assets)){
+        if(TextUtils.isEmpty(assets) || assets.equals("0.00")){
             assetsLayout.setVisibility(View.GONE);
             transferHintLayout.setVisibility(View.GONE);
         }else{
@@ -112,6 +126,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
     @Override
     protected void onResume() {
         super.onResume();
+        taskType = 0;
         presenter.didFinishLoading(this);
     }
 
@@ -175,10 +190,15 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                     //判断是否设置交易密码
                     if (isSetTrade == 1) {
                         //选择支付方式
-                        showSelectedPayType();
+                        if (!TextUtils.isEmpty(assets) && !assets.equals("0.00")
+                                && Double.parseDouble(saveMoney) > Double.parseDouble(assets)) {
+                            payMethod();
+                        } else {
+                            showSelectedPayType();
+                        }
                     } else {
                         //未设置交易密码
-                        Utils.makeToast(SaveMoneyActivity.this,"请设置交易密码");
+                        Utils.makeToast(SaveMoneyActivity.this, "请设置交易密码");
                     }
                 }
             }
@@ -238,13 +258,16 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
         balanceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                closeDialog();
                 if(checkbox.isChecked()){
                     //余额和银行卡支付
-
+                    useAccount = avaliableBalance.getText().toString().trim();
+                    useBank = bankCardMoney.getText().toString().trim();
+                    setBeforePay();
                 }else{
                     //银行卡支付
-
+                    useBank = bankCardMoney.getText().toString().trim();
+                    setBeforePay();
                 }
             }
         });
@@ -268,6 +291,11 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
             }
         });
         payTypeDialog.show();
+    }
+
+    private void setBeforePay(){
+        taskType = 1;
+        presenter.didFinishLoading(this);
     }
 
     private void closeDialog(){
@@ -299,13 +327,25 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
 
     @Override
     public void startNextActivity() {
-        HashMap<String,String> params = new HashMap();
-        params.put("user_id",Utils.getUserId());
-        params.put("token",Utils.getToken());
-        CustomTask task = new CustomTask(mHandler, Constants.WHAT_WALLET_DEPOSIT
-                ,Constants.URL_WALLET_DEPOSIT,
-                true,params,true);
-        task.execute();
+        if(taskType == 0){
+            //页面进入获取数据
+            HashMap<String,String> params = new HashMap();
+            params.put("user_id",Utils.getUserId());
+            params.put("token",Utils.getToken());
+            CustomTask task = new CustomTask(mHandler, Constants.WHAT_WALLET_DEPOSIT
+                    ,Constants.URL_WALLET_DEPOSIT,
+                    true,params,true);
+            task.execute();
+        }else if(taskType == 1){
+            //银行卡支付时，判断是否需要绑定银行卡
+            HashMap<String,String> params = new HashMap();
+            params.put("user_id",Utils.getUserId());
+            params.put("token",Utils.getToken());
+            CustomTask task = new CustomTask(mHandler, Constants.WHAT_BEFORE_PAY
+                    ,Constants.URL_BEFORE_PAY,
+                    true,params,true);
+            task.execute();
+        }
     }
 
     private Handler mHandler = new Handler(){
@@ -322,9 +362,9 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                 }
                 int action = msg.what;
                 hideProcessBar();
+                boolean flag = Utils.filtrateCode(SaveMoneyActivity.this,jsonBean);
                 switch (action){
                     case Constants.WHAT_WALLET_DEPOSIT:
-                        boolean flag = Utils.filtrateCode(SaveMoneyActivity.this,jsonBean);
                         if(flag && code == Constants.OPERATION_FAIL){//数据交互失败
                             Utils.makeToast(SaveMoneyActivity.this, errorMsg);
                         }else if(flag && code == Constants.OPERATION_SUCCESS){//数据交互成功
@@ -336,6 +376,45 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                             isSetTrade = jsonObject.optInt("payPassSet");//是否设置过交易密码
                             fillWidget();
                         }
+                        break;
+                    case Constants.WHAT_BEFORE_PAY://银行卡是否绑定
+                        if(flag){
+                            if(code == -1){
+                                //未设置交易密码
+                                Utils.makeToast(SaveMoneyActivity.this,errorMsg);
+                            }else if(code == -2){
+                                //未实名认证为绑卡
+                                Utils.makeToast(SaveMoneyActivity.this,errorMsg);
+                            }else if(code == -3){
+                                //未真正实名 未绑卡
+
+                                Utils.makeToast(SaveMoneyActivity.this,errorMsg);
+                            }else if(code == -4){
+                                //未真正实名 已绑卡 但是不支持连连
+                                Utils.makeToast(SaveMoneyActivity.this,errorMsg);
+                            }else if(code == -5){
+                                //未真正实名 已绑卡 支持连连 但未绑定连连
+                                Utils.makeToast(SaveMoneyActivity.this,errorMsg);
+                            }else if(code == -6){
+                                // 已真正实名认证  未绑卡
+                                Utils.makeToast(SaveMoneyActivity.this,errorMsg);
+                            }else if(code == -7){
+                                //已真正实名认证  已绑卡 不支持连连
+                                Utils.makeToast(SaveMoneyActivity.this,errorMsg);
+                            }else if(code == -8){
+                                //已真正实名认证  已绑卡 支持连连  但未绑定连连
+                                Utils.makeToast(SaveMoneyActivity.this,errorMsg);
+                            }else if(code == Constants.OPERATION_SUCCESS){
+                                //可以直接支付
+                                Utils.makeToast(SaveMoneyActivity.this,errorMsg);
+                            }else if(code == Constants.OPERATION_FAIL){
+                                //出错
+                                Utils.makeToast(SaveMoneyActivity.this,errorMsg);
+                            }
+                        }else{
+                            Utils.makeToast(SaveMoneyActivity.this,errorMsg);
+                        }
+
                         break;
                 }
             }catch (Exception e){
