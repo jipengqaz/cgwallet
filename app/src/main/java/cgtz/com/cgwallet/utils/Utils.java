@@ -1,11 +1,17 @@
 package cgtz.com.cgwallet.utils;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 import cgtz.com.cgwallet.MApplication;
+import cgtz.com.cgwallet.activity.LoginActivity;
 import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.utility.Constants;
 import cn.jpush.android.data.r;
@@ -170,10 +176,15 @@ public class Utils {
         LogUtils.i("JsonBean", "过滤code结果：" + jsonBean.getJsonString());
         int code = jsonBean.getCode();//code判断值
         String errorMsg = jsonBean.getError_msg();//错误信息
-        if(code == Constants.NO_DATA || code == Constants.IS_EVENT
-                || code == Constants.NEED_LOGIN_AGAIN
-                || code == Constants.SERVICE_MAINTAIN){
+        if(code == Constants.NO_DATA || code == Constants.IS_EVENT){
             Utils.makeToast(context,errorMsg);
+            return false;
+        }else if(code == Constants.NEED_LOGIN_AGAIN){//需要重新登录
+            context.startActivity(new Intent(context, LoginActivity.class));
+            ((Activity)context).finish();
+            return false;
+        }else if(code == Constants.SERVICE_MAINTAIN){//服务器正在维护
+
             return false;
         }else{
             return true;
@@ -200,6 +211,18 @@ public class Utils {
             return "";
         }else{
             return text.substring(0,3)+"*****"+text.substring(8);
+        }
+    }
+
+    public static void autoLogin(Context context,Handler handler){
+        String mobile = getUserPhone(context);
+        String pwd = getLoginPwd(context);
+        if(!TextUtils.isEmpty(mobile) && !TextUtils.isEmpty(pwd)){
+            HashMap<String,String> params = new HashMap<>();
+            params.put("username",mobile);
+            params.put("password", pwd);
+            CustomTask task = new CustomTask(handler,Constants.WHAT_LOGIN,Constants.URL_LOGIN,true,params,true);
+            task.execute();
         }
     }
 }

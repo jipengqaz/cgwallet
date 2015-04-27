@@ -1,149 +1,152 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@color/bg_center"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    <RelativeLayout
-        android:id="@+id/save_money_my_assets"
-        android:layout_marginTop="30dp"
-        android:background="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/height_save_money_figure">
-        <View
-            android:background="@color/bg_line"
-            android:layout_alignParentTop="true"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"/>
-        <TextView
-            android:layout_centerVertical="true"
-            android:text="草根账户余额"
-            android:layout_marginLeft="@dimen/save_moeny_marign_left"
-            android:textSize="@dimen/save_moeny_main_text"
-            android:textColor="@color/money_text_hint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/save_money_assets"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:text="1562 元"
-            android:layout_marginRight="@dimen/save_moeny_marign_left"
-            android:textSize="@dimen/save_moeny_main_text"
-            android:textColor="@color/money_asset_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <View
-            android:background="@color/bg_line"
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"/>
-    </RelativeLayout>
     <LinearLayout
-        android:id="@+id/save_money_transfer_hint"
-        android:layout_marginLeft="@dimen/save_moeny_marign_left"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
+        android:background="@color/bg_center"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:src="@mipmap/icon_money_hint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/save_money_assets_use"
-            android:text="银行卡资金可与草根账户余额一同转入"
-            android:layout_marginLeft="10dp"
-            android:textSize="@dimen/save_moeny_hint_text"
-            android:textColor="@color/money_tv_hint_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <RelativeLayout
-        android:layout_marginTop="30dp"
-        android:background="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/height_save_money_figure">
-        <View
-            android:background="@color/bg_line"
-            android:layout_alignParentTop="true"
+        android:layout_height="match_parent" >
+        <RelativeLayout
+            android:id="@+id/save_money_my_assets"
+            android:layout_marginTop="30dp"
+            android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"/>
-        <TextView
-            android:id="@+id/save_money_transfer_figure_hint"
-            android:layout_centerVertical="true"
-            android:text="转入余额"
+            android:layout_height="@dimen/height_save_money_figure">
+            <View
+                android:background="@color/bg_line"
+                android:layout_alignParentTop="true"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+            <TextView
+                android:layout_centerVertical="true"
+                android:text="草根账户余额"
+                android:layout_marginLeft="@dimen/save_moeny_marign_left"
+                android:textSize="@dimen/save_moeny_main_text"
+                android:textColor="@color/money_text_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/save_money_assets"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/save_moeny_marign_left"
+                android:textSize="@dimen/save_moeny_main_text"
+                android:textColor="@color/money_asset_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <View
+                android:background="@color/bg_line"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/save_money_transfer_hint"
             android:layout_marginLeft="@dimen/save_moeny_marign_left"
-            android:textSize="@dimen/save_moeny_main_text"
-            android:textColor="@color/money_text_hint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <EditText
-            android:id="@+id/et_save_figure"
-            android:layout_centerInParent="true"
-            android:background="@null"
-            android:layout_centerVertical="true"
-            android:textSize="@dimen/save_moeny_main_text"
-            android:textColor="@color/money_text_edit"
-            android:hint="建议转入整数金额"
-            android:textColorHint="@color/money_text_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <ImageView
-            android:id="@+id/delete_edit"
-            android:src="@mipmap/icon_delete_edit"
-            android:layout_marginRight="@dimen/save_moeny_marign_left"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <View
-            android:background="@color/bg_line"
-            android:layout_alignParentBottom="true"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"/>
-    </RelativeLayout>
-    <LinearLayout
-        android:layout_marginLeft="@dimen/save_moeny_marign_left"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/income_time_hint"
-            android:text="开始计算收益时间4月9日（星期四）"
-            android:textSize="@dimen/save_moeny_hint_text"
-            android:textColor="@color/money_tv_hint_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/icon_money_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/save_money_assets_use"
+                android:layout_marginLeft="10dp"
+                android:textSize="@dimen/save_moeny_hint_text"
+                android:textColor="@color/money_tv_hint_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_marginTop="30dp"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_save_money_figure">
+            <View
+                android:background="@color/bg_line"
+                android:layout_alignParentTop="true"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+            <TextView
+                android:id="@+id/save_money_transfer_figure_hint"
+                android:layout_centerVertical="true"
+                android:text="转入余额"
+                android:layout_marginLeft="@dimen/save_moeny_marign_left"
+                android:textSize="@dimen/save_moeny_main_text"
+                android:textColor="@color/money_text_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/et_save_figure"
+                android:numeric="integer"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/save_moeny_main_text"
+                android:textColor="@color/money_text_edit"
+                android:hint="建议转入整数金额"
+                android:textColorHint="@color/money_text_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/delete_edit"
+                android:src="@mipmap/icon_delete_edit"
+                android:layout_marginRight="@dimen/save_moeny_marign_left"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <View
+                android:background="@color/bg_line"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_marginLeft="@dimen/save_moeny_marign_left"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/income_time_hint"
+                android:textSize="@dimen/save_moeny_hint_text"
+                android:textColor="@color/money_tv_hint_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_marginLeft="@dimen/save_moeny_marign_left"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:src="@mipmap/icon_assets_safe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/safe_copywrite_hint"
-            android:text="平台资金账户由国有银行实时监管"
-            android:layout_marginLeft="10dp"
-            android:textSize="@dimen/save_moeny_hint_text"
-            android:textColor="@color/money_tv_hint_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_marginLeft="@dimen/save_moeny_marign_left"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/icon_assets_safe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/safe_copywrite_hint"
+                android:text="平台资金账户由国有银行实时监管"
+                android:layout_marginLeft="10dp"
+                android:textSize="@dimen/save_moeny_hint_text"
+                android:textColor="@color/money_tv_hint_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <Button
+            android:id="@+id/cofirm_save"
+            android:text="@string/save_money_button_text"
+            android:textSize="@dimen/button_text_size"
+            android:textColor="@color/button_text_not_enabled"
+            android:layout_margin="@dimen/save_moeny_marign_left"
+            android:background="@drawable/bg_button_no_enabled"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height" />
     </LinearLayout>
-    <Button
-        android:id="@+id/cofirm_save"
-        android:text="@string/save_money_button_text"
-        android:textSize="@dimen/button_text_size"
-        android:textColor="@color/button_text_not_enabled"
-        android:layout_margin="@dimen/save_moeny_marign_left"
-        android:background="@drawable/bg_button_no_enabled"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/button_height" />
-</LinearLayout>
+</ScrollView>

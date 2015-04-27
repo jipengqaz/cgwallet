@@ -16,14 +16,20 @@ import android.widget.LinearLayout;
 
 import com.umeng.analytics.MobclickAgent;
 
+import org.json.JSONObject;
+
 import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.ChangeLogHelper;
+import cgtz.com.cgwallet.utils.LogUtils;
+import cgtz.com.cgwallet.utils.MD5Util;
+import cgtz.com.cgwallet.utils.Utils;
 import cn.jpush.android.api.JPushInterface;
 
 public class StartActivity extends Activity {
@@ -31,7 +37,7 @@ public class StartActivity extends Activity {
     TurnHandler turnHandler;
     Handler timerHandler;
     private SwitchPagerTimerTask timerTask;
-    private long timerSpace = 4000;
+    private long timerSpace = 1500;
     private LinearLayout ll_start;
     private ImageView rl_start;
     private File file = new File(Constants.IMG_FILE_PATH);
@@ -47,7 +53,7 @@ public class StartActivity extends Activity {
             }
         };
         Timer timer = new Timer();
-        timer.schedule(task, 2000);
+        timer.schedule(task, 1500);
     }
 
     @Override
@@ -66,21 +72,25 @@ public class StartActivity extends Activity {
             rl_start.setImageResource(R.mipmap.loading);
             setAlpha(rl_start);
         }
+        turnHandler = new TurnHandler();
+        Utils.autoLogin(this,turnHandler);
         //跳转到   主界面
         getonLine();
     }
     private void getonLine(){
-        turnHandler = new TurnHandler();
         timerTask = new SwitchPagerTimerTask();
         timerHandler = new Handler();
         timerHandler.postDelayed(timerTask, timerSpace);
     }
+
+
     class SwitchPagerTimerTask implements Runnable {
         @Override
         public void run() {
             turnHandler.sendEmptyMessage(1);
         }
     }
+
     class TurnHandler extends android.os.Handler {
         @Override
         public void handleMessage(Message msg) {
@@ -91,6 +101,28 @@ public class StartActivity extends Activity {
                     startActivity(new Intent(StartActivity.this, MainActivity.class));
                 }
                 finish();
+            }else if(msg.what == Constants.WHAT_LOGIN){
+                try{
+                    JsonBean jsonBean = (JsonBean) msg.obj;
+                    int code = jsonBean.getCode();
+                    int action = msg.what;
+                    switch (action){
+                        case Constants.WHAT_LOGIN:
+                            boolean flag = Utils.filtrateCode(StartActivity.this,jsonBean);
+                            if(flag && code == Constants.OPERATION_SUCCESS){//数据交互成功
+                                JSONObject jsonObject = new JSONObject(jsonBean.getJsonString());
+                                JSONObject object = jsonObject.optJSONObject("info");
+                                String userId = object.optString("userId");
+                                String token = object.optString("token");
+                                Utils.saveUserId(userId);
+                                Utils.saveToken(token);
+                            }
+                            break;
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                    LogUtils.e(TAG, "activity数据异常");
+                }
             }
         }
     }
@@ -125,7 +157,7 @@ public class StartActivity extends Activity {
 
     private void setAlpha(View view){
         AlphaAnimation mHideAnimation = new AlphaAnimation(0.0f, 1.0f);//设置从不见到见
-        mHideAnimation.setDuration( 2000 );//设置渐现时间
+        mHideAnimation.setDuration( 1500 );//设置渐现时间
         mHideAnimation.setFillAfter( true );//设置保留动画完成时的样子
         view.startAnimation(mHideAnimation);//启动动画
     }

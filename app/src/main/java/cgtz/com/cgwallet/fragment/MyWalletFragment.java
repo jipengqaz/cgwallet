@@ -217,7 +217,7 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
             HashMap<String,String> params = new HashMap<>();
             params.put("user_id", Utils.getUserId());
             params.put("token", Utils.getToken());
-            CustomTask task = new CustomTask(mHandler, Constants.WHAT__WALLET_DETAIL
+            CustomTask task = new CustomTask(mHandler, Constants.WHAT_WALLET_DETAIL
                     ,Constants.URL_WALLET_DETAIL,true,params,true);
             task.execute();
         }
@@ -263,7 +263,7 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
                 }
                 int action = msg.what;
                 switch (action){
-                    case Constants.WHAT__WALLET_DETAIL:
+                    case Constants.WHAT_WALLET_DETAIL:
                         boolean flag = Utils.filtrateCode(getActivity(),jsonBean);
                         if(flag && code == Constants.OPERATION_FAIL){//数据交互失败
                             Utils.makeToast(getActivity(), errorMsg);

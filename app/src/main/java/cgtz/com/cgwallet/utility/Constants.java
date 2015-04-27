@@ -52,7 +52,8 @@ public class Constants {
     public static final int WHAT_LOGIN = 2015042315;//登录
     public static final int WHAT_GET_SECURITY_CODE = 2015042411;//验证码
     public static final int WHAT_REGISTER = 2015042414;//注册
-    public static final int WHAT__WALLET_DETAIL = 2015042418;//我的钱包
+    public static final int WHAT_WALLET_DETAIL = 2015042418;//我的钱包
+    public static final int WHAT_WALLET_DEPOSIT = 2015042709;////进入存钱页面获取数据
     public static final String URL_CG_WALLET_PROTOCOL = "http://d5ds88.cgtz.com/site/agreement/";
     public static final String URL_FEED_BACK = "site/feedBack";//意见反馈
     public static final String URL_INTEREST_HISTORY = "ewallet/InterestHistory";//收益历史
@@ -64,6 +65,7 @@ public class Constants {
     public static final String E_WALLET_LIST = "ewallet/list";//草根钱包转入转出数据
     public static final String AGAINLOGIN_URL = "account/checkPass";//判断登录密码接口
     public static final String URL_WALLET_DETAIL = "ewallet/detail";//我的钱包接口
+    public static final String URL_WALLET_DEPOSIT = "ewallet/deposit";//进入存钱页面获取数据
 
 
     /**

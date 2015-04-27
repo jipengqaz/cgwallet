@@ -14,12 +14,16 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.CustomTask;
+import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.ISplashView;
 import cgtz.com.cgwallet.widget.ProgressDialog;
@@ -41,6 +45,10 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
     private Button confirmSave;//确认存钱按钮
     private ProgressDialog progressDialog;
     private SplashPresenter presenter;
+    private String saveMoney;//输入的存钱金额
+    private String assetUseIntruduce;////余额的使用介绍
+    private String startCalculateTime;//计算收益时间
+    private String minSaveMoney;//起投金额
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +77,35 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
     }
 
     /**
+     * 填充widget内容
+     */
+    private void fillWidget(){
+        if(TextUtils.isEmpty(assets)){
+            assetsLayout.setVisibility(View.GONE);
+            transferHintLayout.setVisibility(View.GONE);
+        }else{
+            assetsLayout.setVisibility(View.VISIBLE);
+            transferHintLayout.setVisibility(View.VISIBLE);
+            assetsFigure.setText(assets + " 元");
+            transferHint.setText(assetUseIntruduce);
+        }
+        if(!TextUtils.isEmpty(startCalculateTime)){
+            incomeTimeHint.setText(startCalculateTime);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.didFinishLoading(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    /**
      * widget添加事件
      */
     private void setListener(){
@@ -94,7 +131,18 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                /**
+                 * 根据输入框中是否存在输入内容，来改变按钮的颜色和是否可点击
+                 */
+                if(TextUtils.isEmpty(s.toString().trim())){
+                    //按钮变为不可点击
+                    confirmSave.setEnabled(false);
+                    confirmSave.setBackgroundResource(R.drawable.bg_button_no_enabled);
+                }else{
+                    //按钮变为可点击
+                    confirmSave.setEnabled(true);
+                    confirmSave.setBackgroundColor(getResources().getColor(R.color.button_text_can_click));
+                }
             }
         });
         /**
@@ -134,8 +182,10 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
     @Override
     public void startNextActivity() {
         HashMap<String,String> params = new HashMap();
-        CustomTask task = new CustomTask(mHandler, Constants.WHAT_GET_SECURITY_CODE
-                ,Constants.URL_GET_SECURITY_CODE,
+        params.put("user_id",Utils.getUserId());
+        params.put("token",Utils.getToken());
+        CustomTask task = new CustomTask(mHandler, Constants.WHAT_WALLET_DEPOSIT
+                ,Constants.URL_WALLET_DEPOSIT,
                 true,params,true);
         task.execute();
     }
@@ -143,7 +193,39 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
     private Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
-
+            try{
+                JsonBean jsonBean = (JsonBean) msg.obj;
+                String objStr = jsonBean.getJsonString();
+                LogUtils.i(TAG,"数据："+objStr);
+                int code = jsonBean.getCode();
+                String errorMsg = jsonBean.getError_msg();
+                if(code == Constants.DATA_EVENT){
+                    hideProcessBar();
+                    Utils.makeToast(SaveMoneyActivity.this,Constants.ERROR_MSG_CODE+code);
+                    return;
+                }
+                int action = msg.what;
+                hideProcessBar();
+                switch (action){
+                    case Constants.WHAT_WALLET_DEPOSIT:
+                        boolean flag = Utils.filtrateCode(SaveMoneyActivity.this,jsonBean);
+                        if(flag && code == Constants.OPERATION_FAIL){//数据交互失败
+                            Utils.makeToast(SaveMoneyActivity.this, errorMsg);
+                        }else if(flag && code == Constants.OPERATION_SUCCESS){//数据交互成功
+                            JSONObject jsonObject = new JSONObject(jsonBean.getJsonString());
+                            assets = jsonObject.optString("capitalAccountBalance");//账户余额
+                            assetUseIntruduce = jsonObject.optString("tip");////余额的使用介绍
+                            startCalculateTime = jsonObject.optString("startInterestDay");//计算收益时间
+                            minSaveMoney = jsonObject.optString("min");//起投金额
+                            fillWidget();
+                        }
+                        break;
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+                hideProcessBar();
+                LogUtils.e(TAG, "handler 异常");
+            }
         }
     };
 }

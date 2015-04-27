@@ -88,4 +88,5 @@
     <color name="bg_money_button_no_edit">#d2d2d2</color>
     <color name="money_asset_text">#ff5400</color>
     <color name="button_text_not_enabled">#ffffff</color>
+    <color name="button_text_can_click">#21c184</color>
 </resources>
