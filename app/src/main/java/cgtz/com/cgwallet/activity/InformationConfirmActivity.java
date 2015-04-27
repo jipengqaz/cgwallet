@@ -13,6 +13,8 @@ public class InformationConfirmActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information_confirm);
+        setTitle("存钱");
+        showBack(true);
     }
 
 

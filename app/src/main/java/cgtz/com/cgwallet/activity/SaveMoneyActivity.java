@@ -177,11 +177,10 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                     //判断是否设置交易密码
                     if (isSetTrade == 1) {
                         //选择支付方式
-
                         showSelectedPayType();
                     } else {
                         //未设置交易密码
-
+                        Utils.makeToast(SaveMoneyActivity.this,"请设置交易密码");
                     }
                 }
             }
@@ -193,6 +192,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
      */
     private void payMethod(){
         Intent intent = new Intent();
+
     }
 
     /**
@@ -216,6 +216,8 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
             bankCardBtn = (Button) payDialogLayout.findViewById(R.id.dialog_payment_btn_bankcard);//取消按钮
             checkbox = (CheckBox) payDialogLayout.findViewById(R.id.yes_no_balance);//是否用余额支付选项
             linear = (LinearLayout) payDialogLayout.findViewById(R.id.yes_no_balance1);//是否用余额支付选项
+        }else{
+            closeDialog();
         }
 
         payMoney.setText(saveMoney);//支付金额
@@ -238,7 +240,13 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
         balanceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(checkbox.isChecked()){
+                    //余额和银行卡支付
 
+                }else{
+                    //银行卡支付
+
+                }
             }
         });
 
