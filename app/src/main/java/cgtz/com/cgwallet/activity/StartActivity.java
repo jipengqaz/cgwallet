@@ -95,7 +95,7 @@ public class StartActivity extends Activity {
         String imageUpdate = json.optString("imageUpdate");//启动图图片更新时间
         kefuUpdate = json.optString("kefuUpdate");//客服信息更新时间
         String provinceCityUpdate = json.optString("provinceCityUpdate");//分行信息更新时间
-        if(!map.get(Start_update_value.KEY_IMAGE_UPDATE).equals(imageUpdate)){
+        if(!map.get(Start_update_value.KEY_IMAGE_UPDATE).equals(imageUpdate) || !file.exists()){
             startService(new Intent(this, Image_download_Service.class).putExtra("imageUpdate", imageUpdate));//开启获取启动图的服务
         }
         if(!map.get(Start_update_value.KEY_KEFU_UPDATE).equals(kefuUpdate)){//判断是否更新客服数据文案
@@ -104,7 +104,6 @@ public class StartActivity extends Activity {
 
         if(!map.get(Start_update_value.KEY_CITY_UPDATE).equals(provinceCityUpdate)){
             startService(new Intent(this,Provinces_download_Service.class).putExtra("provinceCityUpdate",provinceCityUpdate));//开启获取银行分行信息的服务
-
         }
     }
     private String kefuUpdate;
