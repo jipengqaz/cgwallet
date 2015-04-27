@@ -140,15 +140,17 @@
             android:name=".activity.RegistNextActivity"
             android:label="@string/title_activity_regist_next" >
         </activity>
-        <activity android:name=".activity.OpenSudokoUnlockActivity"
-            />
+        <activity android:name=".activity.OpenSudokoUnlockActivity" />
+
         <receiver android:name=".receiver.Provinces_Observer" >
             <intent-filter>
                 <action android:name="provinces" />
             </intent-filter>
         </receiver>
-        <service android:name=".Service.Provinces_download_Service"/>
-        <service android:name=".Service.Image_download_Service"/>
+
+        <service android:name=".Service.Provinces_download_Service" />
+        <service android:name=".Service.Image_download_Service" />
+
         <activity
             android:name=".activity.SaveMoneyActivity"
             android:label="@string/title_activity_save_money" >
@@ -156,6 +158,10 @@
         <activity
             android:name=".activity.InformationConfirmActivity"
             android:label="@string/title_activity_information_confirm" >
+        </activity>
+        <activity
+            android:name=".activity.InProgressActivity"
+            android:label="@string/title_activity_in_progress" >
         </activity>
     </application>
 

@@ -121,6 +121,7 @@
     <orderEntry type="library" exported="" name="SocialSDK_WeiXin_1" level="project" />
     <orderEntry type="library" exported="" name="SocialSDK_Sina" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-22.0.0" level="project" />
+    <orderEntry type="library" exported="" name="securepay-lib" level="project" />
     <orderEntry type="library" exported="" name="SocialSDK_sms" level="project" />
   </component>
 </module>

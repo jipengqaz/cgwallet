@@ -16,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.tencent.open.utils.Util;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,7 +36,12 @@ import cgtz.com.cgwallet.utils.CustomTask;
 import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.MD5Util;
 import cgtz.com.cgwallet.utils.Utils;
+import cgtz.com.cgwallet.utils.llutils.BaseHelper;
+import cgtz.com.cgwallet.utils.llutils.Lianlian;
+import cgtz.com.cgwallet.utils.llutils.MobileSecurePayer;
+import cgtz.com.cgwallet.utils.llutils.PayOrder;
 import cgtz.com.cgwallet.view.ISplashView;
+import cgtz.com.cgwallet.widget.CustomDialog;
 import cgtz.com.cgwallet.widget.CustomEffectsDialog;
 import cgtz.com.cgwallet.widget.ProgressDialog;
 
@@ -79,10 +86,17 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
     private boolean noBank = true;//判断是否有可选银行列表
     private boolean b = false;//用于判断银行卡输入时加空格的
     private CustomEffectsDialog cDiaog;//
+    private CustomDialog customDialog;//连连回调的错误信息显示dialog
     private String tradePwd;//输入的交易密码
     private ProgressDialog progressDialog;
     private SplashPresenter presenter;
-
+    private int payType = 3;//第三方支付渠道
+    private String MD5_KEY;
+    private String no_order;
+    private String dt_order;
+    private String notifyUrl;
+    private String no_agree;
+    private PayOrder order = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -323,7 +337,6 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                     bankCard = edit_bankcard.getText().toString().trim().replaceAll(" ", "");//银行卡号
                 }
                 LogUtils.i(TAG, "name: " + name + " identity: " + identity);
-//                cap = invester_balance.getText().toString().trim();//使用账户余额支付的金额
                 if (!isRealleyName || !isRelleyBank) {
                     if (TextUtils.isEmpty(name)) {
                         Utils.makeToast(InformationConfirmActivity.this, "用户姓名错误");
@@ -365,9 +378,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                                 } else {
                                     //生成订单
                                     closeDialog();
-
-                                    /**根据不同的支付要求来进行支付**/
-//                                    paySelect(pay_method);
+                                    presenter.didFinishLoading(InformationConfirmActivity.this);
                                 }
                             }
                         });
@@ -403,8 +414,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                             } else {
                                 //生成订单
                                 closeDialog();
-                                /**根据不同的支付要求来进行支付**/
-//                                paySelect(pay_method);
+                                presenter.didFinishLoading(InformationConfirmActivity.this);
                             }
                         }
                     });
@@ -481,11 +491,11 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                     return;
                 }
                 int action = msg.what;
-                hideProcessBar();
                 JSONObject json = jsonBean.getJsonObject();
                 boolean flag = Utils.filtrateCode(InformationConfirmActivity.this,jsonBean);
                 switch (action){
                     case Constants.WHAT_SELECTED_BANK:
+                        hideProcessBar();
                         noBank = true;
                         if(flag){
                             JSONArray banks = json.optJSONArray("banks");
@@ -512,10 +522,12 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                         }
                         break;
                     case Constants.WHAT_EWALLET_AFFIRMDO://账户余额支付
+                        LogUtils.i(TAG,"账户余额支付: "+jsonBean.getJsonString());
+                        hideProcessBar();
                         if(flag){
-                            if(flag && code == Constants.OPERATION_FAIL){//数据交互失败
+                            if(code == Constants.OPERATION_FAIL){//数据交互失败
                                 Utils.makeToast(InformationConfirmActivity.this, errorMsg);
-                            }else if(flag && code == Constants.OPERATION_SUCCESS){//数据交互成功
+                            }else if(code == Constants.OPERATION_SUCCESS){//数据交互成功
                                 int paying = json.optInt("paying");
                                 if(paying == 1){
                                     //支付处理中
@@ -523,6 +535,163 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                                 }else if(paying == 0){
                                     //支付成功
 
+                                }
+                            }
+                        }
+                        break;
+                    case Constants.WHAT_EWALLET_AFFIRMREDIRECT:
+                        //草根钱包使用第三方支付生成订单返回结果数据
+                        LogUtils.i(TAG, "草根钱包使用第三方支付生成订单: " + jsonBean.getJsonString());
+                        if(flag){
+                            if(code == Constants.OPERATION_SUCCESS){//订单生成成功
+                                //连连支付流程
+                                String tradeNo = json.optString("tradeNo");//订单号
+                                HashMap<String,String> params = new HashMap<>();
+                                params.put("user_id", Utils.getUserId());
+                                params.put("token",Utils.getToken());
+                                params.put("money_order",saveMoney);//(订单金额)
+                                params.put("no_order",tradeNo);//订单编号
+                                params.put("valid_order","");//订单有效时间
+                                params.put("bank_id",bankId);//银行id
+                                params.put("card_number",bankCard);//银行卡号
+                                params.put("bank_name",bankName);//银行名称
+                                params.put("name",name);//姓名
+                                params.put("identity",identity);//身份证号
+                                if(!isRelleyBank){
+                                    params.put("is_recharge","1");//需要绑卡传1 已经绑卡了 传0
+                                }else{
+                                    params.put("is_recharge","0");//需要绑卡传1 已经绑卡了 传0
+                                }
+
+                                CustomTask task = new CustomTask(mHandler, Constants.WHAT_SIGNPORT
+                                        ,Constants.UTL_SIGNPORT,
+                                        true,params,true);
+                                task.execute();
+                            }else{
+                                Utils.makeToast(InformationConfirmActivity.this,errorMsg);
+                                hideProcessBar();
+                            }
+                        }
+                        break;
+                    case Constants.WHAT_SIGNPORT:
+                        LogUtils.i(TAG,"签名返回："+jsonBean.getJsonString());
+                        hideProcessBar();
+                        //签名获取成功
+                        MD5_KEY = json.optString("sign");
+                        no_order = json.optString("no_order");
+                        dt_order  = json.optString("dt_order");
+                        notifyUrl = json.optString("notifyUrl");
+                        bankTip = json.optString("bank_tip");
+                        no_agree = json.optString("no_agree");
+                        name  = json.optString("name");
+                        identity  = json.optString("identity");
+                        if(!TextUtils.isEmpty(no_agree)){
+                            flag = false;
+                        }else{
+                            flag = true;
+                        }
+                        order = Lianlian.constructPreCardPayOrder(
+                                flag, no_order, dt_order, notifyUrl, Utils.getUserId() + "",
+                                identity, name, useBank + ""
+                                , bankCard, MD5_KEY, no_agree
+                        );
+                        String content4Pay = BaseHelper.toJSONString(order);
+                        // 关键 content4Pay 用于提交到支付SDK的订单支付串，如遇到签名错误的情况，
+                        // 请将该信息帖给我们的技术支持
+                        LogUtils.i(InformationConfirmActivity.class.getSimpleName(), content4Pay);
+                        MobileSecurePayer msp = new MobileSecurePayer();
+                        boolean bRet = msp.pay(content4Pay, mHandler,
+                                cgtz.com.cgwallet.utils.llutils.Constants.RQF_PAY,
+                                InformationConfirmActivity.this, false);
+                        LogUtils.i(InformationConfirmActivity.class.getSimpleName(), String.valueOf(bRet));
+                        break;
+                    case cgtz.com.cgwallet.utils.llutils.Constants.RQF_PAY://连连sdk内容
+                            LogUtils.i(TAG, "连连sdk内容：" + msg.obj.toString());
+                            customDialog =
+                                    new CustomDialog(InformationConfirmActivity.this,R.style.loading_dialog2);
+                            JSONObject objContent = BaseHelper.string2JSON(msg.obj.toString());
+                            String retCode = objContent.optString("ret_code");
+                            String retMsg = objContent.optString("ret_msg");
+                            // 先判断状态码，状态码为 成功或处理中 的需要 验签
+                            if (cgtz.com.cgwallet.utils.llutils.Constants.RET_CODE_SUCCESS.equals(retCode)
+                                    || cgtz.com.cgwallet.utils.llutils.Constants.RET_CODE_PROCESS.equals(retCode)) {
+                                String resulPay = objContent
+                                        .optString("result_pay");
+                                if (cgtz.com.cgwallet.utils.llutils.Constants.RESULT_PAY_SUCCESS
+                                        .equalsIgnoreCase(resulPay)
+                                        || cgtz.com.cgwallet.utils.llutils.Constants.RESULT_PAY_PROCESSING
+                                        .equalsIgnoreCase(resulPay)) {
+                                    // TODO 支付成功后续处理
+//                                    if(runningDialog != null){
+//                                        runningDialog.setMessage("充值成功，正在确认投资记录");
+//                                        runningDialog.show();
+//                                    }
+                                    HashMap<String,String> params = new HashMap<>();
+                                    params.put("user_id",Utils.getUserId()+"");
+                                    params.put("token",Utils.getToken());
+                                    params.put("trade_no", no_order);
+                                    if(isRealleyName){
+                                        LogUtils.i(TAG,"isAuth is false");
+                                        params.put("name",name);
+                                        params.put("identity",identity);
+                                    }
+                                    CustomTask task = new CustomTask(mHandler, Constants.WHAT_BANKCARD_LLBIND
+                                            ,Constants.URL_BANKCARD_LLBIND,
+                                            true,params,true);
+                                    task.execute();
+                                } else {
+                                    customDialog.setMessage(retMsg);
+                                    customDialog.setConfirmBtnText("确认");
+                                    customDialog.show();
+                                    customDialog.setConfirmListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            closeDialog();
+                                            customDialog.dismiss();
+                                        }
+                                    });
+                                }
+                            } else {
+                                customDialog.setMessage(retMsg);
+                                customDialog.setConfirmBtnText("确认");
+                                customDialog.show();
+                                customDialog.setConfirmListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        closeDialog();
+                                        customDialog.dismiss();
+                                    }
+                                });
+                            }
+                        break;
+                    case Constants.WHAT_BANKCARD_LLBIND://预绑成功之后调用 用来银行卡绑定连连
+                        LogUtils.i(TAG,"预绑成功之后调用 用来银行卡绑定连连: "+jsonBean.getJsonString());
+                        if(flag){
+                            if(code == Constants.OPERATION_SUCCESS){//绑定成功
+                                HashMap<String,String> params = new HashMap<>();
+                                params.put("user_id",Utils.getUserId());
+                                params.put("token",Utils.getToken());
+                                params.put("tradeNo",no_order);
+                                CustomTask task = new CustomTask(mHandler, Constants.WHAT_PAYSTATUS
+                                        ,Constants.URL_PAYSTATUS,
+                                        true,params,true);
+                                task.execute();
+                            }else{
+                                Utils.makeToast(InformationConfirmActivity.this,errorMsg);
+                                hideProcessBar();
+                            }
+                        }
+                        break;
+                    case Constants.WHAT_PAYSTATUS://投资时连连通道银行卡充值成功后，返回值判断
+                        LogUtils.i(TAG,"连连通道银行卡充值成功后: "+jsonBean.getJsonString());
+                        hideProcessBar();
+                        if(flag){
+                            if(code == Constants.OPERATION_SUCCESS){
+                                int paying = json.optInt("paying");
+                                if(paying == 0){
+                                    //支付成功
+                                }else if(paying == 1){
+                                    //处理中
                                 }
                             }
                         }
@@ -586,7 +755,23 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                 task.execute();
             }else{
                 //使用到银行卡支付
-
+                //草根钱包支付
+                LogUtils.i(TAG, "草根钱包第三方支付");
+                HashMap<String,String> params = new HashMap<>();
+                params.put("user_id",Utils.getUserId());
+                params.put("token",Utils.getToken());
+                params.put("password", MD5Util.md5(tradePwd));//支付密码
+                params.put("cap",useAccount);//余额支付数值
+                params.put("amount",saveMoney);//转入金额
+                params.put("payneeded",useBank);//第三方支付金额
+                params.put("pay_method",payType+"");//第三方通道类型 3:连连支付
+                params.put("order_from","1");//订单来源 1:android 2:ios
+                params.put("bank_id",bankId);//银行id
+                params.put("card_no",bankCard);//银行卡号
+                CustomTask task = new CustomTask(mHandler, Constants.WHAT_EWALLET_AFFIRMREDIRECT
+                        ,Constants.URL_EWALLET_AFFIRMREDIRECT,
+                        true,params,true);
+                task.execute();
             }
         }
 

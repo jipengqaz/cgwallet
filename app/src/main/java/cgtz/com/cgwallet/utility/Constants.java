@@ -61,6 +61,10 @@ public class Constants {
     public static final int WHAT_BEFORE_PAY = 2015042714;//银行卡是否绑定
     public static final int WHAT_SELECTED_BANK = 2015042716;//获取银行列表
     public static final int WHAT_EWALLET_AFFIRMDO = 2015042717;//草根钱包余额存入
+    public static final int WHAT_EWALLET_AFFIRMREDIRECT= 2015042719;//e钱包第三方转入
+    public static final int WHAT_SIGNPORT = 2015042758;//连连支付支付签名接口
+    public static final int WHAT_BANKCARD_LLBIND = 2015042720;//预绑成功之后调用 用来银行卡绑定连连
+    public static final int WHAT_PAYSTATUS = 2015042759;//投资时银行卡充值成功后，获取投资记录是否生成
     /**88888888888888888888888888888888888888**/
     public static final String URL_CG_WALLET_PROTOCOL = "http://d5ds88.cgtz.com/site/agreement/";
     public static final String URL_FEED_BACK = "site/feedBack";//意见反馈
@@ -81,6 +85,10 @@ public class Constants {
     public static final String URL_BEFORE_PAY = "pay/BeforePay";//判断银行卡是否绑定接口
     public static final String URL_SELECTED_BANK= "api/GetAvailableBanks";//获取连连支付支持的银行卡接口
     public static final String URL_EWALLET_AFFIRMDO= "ewallet/Affirmdo";//草根钱包余额转入
+    public static final String URL_EWALLET_AFFIRMREDIRECT= "ewallet/Affirmredirect";//e钱包第三方转入
+    public static final String UTL_SIGNPORT = "pay/sign";//连连支付支付签名接口
+    public static final String URL_BANKCARD_LLBIND = "Bankcard/Llbind";//预绑成功之后调用 用来银行卡绑定连连的接口
+    public static final String URL_PAYSTATUS = "order/payStatus";//投资时银行卡充值成功后，获取投资记录是否生成
 
 
     /**
