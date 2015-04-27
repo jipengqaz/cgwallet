@@ -140,12 +140,15 @@
             android:name=".activity.RegistNextActivity"
             android:label="@string/title_activity_regist_next" >
         </activity>
-            />
-        <activity android:name=".activity.Earnings_record"
-            android:label = "@string/title_activity_Earnings_record"
-            />
         <activity android:name=".activity.OpenSudokoUnlockActivity"
             />
+        <receiver android:name=".receiver.Provinces_Observer" >
+            <intent-filter>
+                <action android:name="provinces" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".Service.Provinces_download_Service"/>
+        <service android:name=".Service.Image_download_Service"/>
     </application>
 
 </manifest>

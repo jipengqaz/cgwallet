@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/Service/Provinces_download_Service.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/E_wallet_record_activity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/OpenSudokoUnlockActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/SafeCenterActivity.java" charset="UTF-8" />
@@ -9,7 +10,9 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/data/E_records.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/fragment/E_all_records_fragment_1.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/fragment/ScreenSlidePageFragment.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/receiver/Provinces_Observer.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/utils/ChangeLogHelper.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/utils/DownloadingTask.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/view/RefreshAndLoadMoreListView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/view/ServerMainTainDialog.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/widget/ProgressDialog.java" charset="UTF-8" />
