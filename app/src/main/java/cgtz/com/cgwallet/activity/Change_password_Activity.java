@@ -8,8 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.umeng.analytics.MobclickAgent;
-
 import org.json.JSONObject;
 
 import cgtz.com.cgwallet.MApplication;
@@ -21,7 +19,6 @@ import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.MD5Util;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.widget.ProgressDialog;
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * 修改交易密码
@@ -189,15 +186,11 @@ public class Change_password_Activity extends BaseActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        JPushInterface.onResume(this);
-        MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        JPushInterface.onPause(this);
-        MobclickAgent.onPause(this);
     }
 
     @Override

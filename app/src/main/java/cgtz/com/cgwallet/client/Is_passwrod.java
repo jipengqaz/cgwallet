@@ -31,4 +31,17 @@ public class Is_passwrod {
                 true,maps,true);
         task.execute();
     }
+
+    public static void changLoginpwd(Handler handler, String originalpwd,String newpwd,String confirmpwd,int code){
+        Map<String, String> maps = new HashMap<String, String>();
+        maps.put("user_id", Utils.getUserId() + "");
+        maps.put("token", Utils.getToken() + "");
+        maps.put("old_password", MD5Util.md5(originalpwd));
+        maps.put("password", MD5Util.md5(newpwd));
+        maps.put("confirm_pass", MD5Util.md5(confirmpwd));
+        CustomTask task = new CustomTask(handler, code,
+                Constants.URL_CHANGE_LOGINPWD,
+                true,maps,true);
+        task.execute();
+    }
 }

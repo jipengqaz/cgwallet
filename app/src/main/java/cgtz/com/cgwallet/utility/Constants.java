@@ -93,6 +93,7 @@ public class Constants {
     public static final String URL_PAY_SETPASS = "pay/SetPass";//设置交易密码
     public static final String URL_GET_CODE = "pay/GetMobileCode";//获取修改交易密码的是的短信验证码
     public static final String URL_RESETPAYPASS= "pay/ResetPayPass";//重置交易密码
+    public static final String URL_CHANGE_LOGINPWD = "account/resetPassword";//修改登录密码
 
 
     /**

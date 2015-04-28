@@ -13,7 +13,7 @@ import cgtz.com.cgwallet.R;
  */
 public class SafeCenterActivity extends BaseActivity implements View.OnClickListener{
 
-    private RelativeLayout rl_personal_sodoko_unlock_change,Reset_Passwrod;//管理手势,修改交易密码
+    private RelativeLayout rl_personal_sodoko_unlock_change,Reset_Passwrod,rl_personal_loginpwd_change;//管理手势,修改交易密码,修改密码
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +28,8 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
     private void init() {
         rl_personal_sodoko_unlock_change = (RelativeLayout) findViewById(R.id.rl_personal_sodoko_unlock_change);
         Reset_Passwrod = (RelativeLayout) findViewById(R.id.Reset_Passwrod);
+        rl_personal_loginpwd_change = (RelativeLayout) findViewById(R.id.rl_personal_loginpwd_change);
+        rl_personal_loginpwd_change.setOnClickListener(this);
         Reset_Passwrod.setOnClickListener(this);
         rl_personal_sodoko_unlock_change.setOnClickListener(this);
     }
@@ -43,6 +45,10 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
             case R.id.Reset_Passwrod:
                 intent = new Intent(SafeCenterActivity.this,TradePwdActivity.class);
                 intent.putExtra("isSetTradePwd",true);
+                startActivity(intent);
+                break;
+            case R.id.rl_personal_loginpwd_change:
+                intent = new Intent(SafeCenterActivity.this,ChangeLoginPwdActivity.class);
                 startActivity(intent);
                 break;
         }

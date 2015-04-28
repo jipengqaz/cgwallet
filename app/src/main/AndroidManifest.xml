@@ -166,6 +166,7 @@
         <activity android:name=".activity.Change_password_Activity"/>
         <activity android:name=".activity.TradePwdActivity"/>
         <activity android:name=".activity.Modify_trade_password_Activity"/>
+        <activity android:name=".activity.ChangeLoginPwdActivity"/>
     </application>
 
 </manifest>
