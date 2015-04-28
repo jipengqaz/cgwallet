@@ -59,7 +59,7 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
         drawLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SafeCenterActivity.this,SaveMoneyActivity.class));
+                startActivity(new Intent(SafeCenterActivity.this, SaveMoneyActivity.class));
             }
         });
     }
@@ -68,8 +68,6 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()){
-            case R.id.rl_personal_sodoko_unlock_change://设置手势
-                if(Utils.isLogined()){
             case R.id.rl_personal_anthen://实名认证
                 startActivity(new Intent(this, SaveMoneyActivity.class)
                         .putExtra("fromName",true));
@@ -79,9 +77,10 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
                         .putExtra("fromBank",true));
 
                 break;
-            case R.id.rl_personal_sodoko_unlock_change:
-                intent = new Intent(SafeCenterActivity.this,OpenSudokoUnlockActivity.class);
-                startActivity(intent);
+            case R.id.rl_personal_sodoko_unlock_change://设置手势
+                if(Utils.isLogined()){
+                    intent = new Intent(SafeCenterActivity.this,OpenSudokoUnlockActivity.class);
+                    startActivity(intent);
                 }else{
                     startActivity(new Intent(SafeCenterActivity.this,LoginActivity.class));
                 }
