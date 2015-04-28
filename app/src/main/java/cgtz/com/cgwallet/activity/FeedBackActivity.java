@@ -18,6 +18,7 @@ import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.CustomTask;
 import cgtz.com.cgwallet.utils.Ke_Fu_data;
+import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.Start_update_value;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.ISplashView;
@@ -42,26 +43,33 @@ public class FeedBackActivity extends BaseActivity implements ISplashView{
     private Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
-            int what = msg.what;
-            JsonBean jsonBean = (JsonBean) msg.obj;
-            int code = jsonBean.getCode();
-            String errorMsg = jsonBean.getError_msg();
-            if(code == Constants.DATA_EVENT){
-                Utils.makeToast(FeedBackActivity.this,Constants.ERROR_MSG_CODE+code);
-                return;
-            }
-            switch (what){
-                case Constants.WHAT_FEED_BACK://意见反馈，服务器结果返回
-                    boolean flag = Utils.filtrateCode(FeedBackActivity.this,jsonBean);
-                    if(flag && code == Constants.OPERATION_FAIL){//数据交互失败
-                        Utils.makeToast(FeedBackActivity.this,errorMsg);
-                    }else if(flag && code == Constants.OPERATION_SUCCESS){//数据交互成功
-                        Utils.makeToast(FeedBackActivity.this,errorMsg);
-                        finish();
-                    }else{
-                        progressDialog.dismiss();
-                    }
-                    break;
+            try{
+                int what = msg.what;
+                JsonBean jsonBean = (JsonBean) msg.obj;
+                int code = jsonBean.getCode();
+                String errorMsg = jsonBean.getError_msg();
+                if(code == Constants.DATA_EVENT){
+                    hideProcessBar();
+                    Utils.makeToast(FeedBackActivity.this,Constants.ERROR_MSG_CODE+code);
+                    return;
+                }
+                switch (what){
+                    case Constants.WHAT_FEED_BACK://意见反馈，服务器结果返回
+                        boolean flag = Utils.filtrateCode(FeedBackActivity.this,jsonBean);
+                        if(flag && code == Constants.OPERATION_FAIL){//数据交互失败
+                            Utils.makeToast(FeedBackActivity.this,errorMsg);
+                        }else if(flag && code == Constants.OPERATION_SUCCESS){//数据交互成功
+                            Utils.makeToast(FeedBackActivity.this,errorMsg);
+                            finish();
+                        }else{
+                            Utils.makeToast(FeedBackActivity.this,errorMsg);
+                        }
+                        hideProcessBar();
+                        break;
+                }
+            }catch (Exception e){
+                LogUtils.e(TAG,"错误信息："+e.toString());
+                hideProcessBar();
             }
         }
     };

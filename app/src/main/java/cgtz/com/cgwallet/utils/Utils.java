@@ -296,4 +296,20 @@ public class Utils {
                 :
                 identity.substring(0,6)+"*********"+identity.substring(15);
     }
+    /**
+     * 获取带星的银行卡号
+     * @param bankcard
+     * @return
+     */
+    public static String getBankStart(String bankcard){
+        StringBuffer sb = new StringBuffer();
+        for(int a = 1;a <bankcard.length()-3;a++){
+            sb.append("*");
+            if(a % 4 == 0){
+                sb.append(" ");
+            }
+        }
+        sb.append(" "+bankcard.substring(bankcard.length()-4));
+        return sb.toString();
+    }
 }

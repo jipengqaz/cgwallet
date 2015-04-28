@@ -65,6 +65,7 @@ public class Constants {
     public static final int WHAT_SIGNPORT = 2015042758;//连连支付支付签名接口
     public static final int WHAT_BANKCARD_LLBIND = 2015042720;//预绑成功之后调用 用来银行卡绑定连连
     public static final int WHAT_PAYSTATUS = 2015042759;//投资时银行卡充值成功后，获取投资记录是否生成
+    public static final int WHAT_ACCOUNT_INFO = 2015042822;//获取个人信息及安全中心内容
     /**88888888888888888888888888888888888888**/
     public static final String URL_CG_WALLET_PROTOCOL = "http://d5ds88.cgtz.com/site/agreement/";
     public static final String URL_FEED_BACK = "site/feedBack";//意见反馈
@@ -94,6 +95,7 @@ public class Constants {
     public static final String URL_GET_CODE = "pay/GetMobileCode";//获取修改交易密码的是的短信验证码
     public static final String URL_RESETPAYPASS= "pay/ResetPayPass";//重置交易密码
     public static final String URL_CHANGE_LOGINPWD = "account/resetPassword";//修改登录密码
+    public static final String URL_ACCOUNT_INFO = "account/info";//获取个人信息及安全中心内容
 
 
     /**
