@@ -90,6 +90,9 @@ public class Constants {
     public static final String UTL_SIGNPORT = "pay/sign";//连连支付支付签名接口
     public static final String URL_BANKCARD_LLBIND = "Bankcard/Llbind";//预绑成功之后调用 用来银行卡绑定连连的接口
     public static final String URL_PAYSTATUS = "order/payStatus";//投资时银行卡充值成功后，获取投资记录是否生成
+    public static final String URL_PAY_SETPASS = "pay/SetPass";//设置交易密码
+    public static final String URL_GET_CODE = "pay/GetMobileCode";//获取修改交易密码的是的短信验证码
+    public static final String URL_RESETPAYPASS= "pay/ResetPayPass";//重置交易密码
 
 
     /**

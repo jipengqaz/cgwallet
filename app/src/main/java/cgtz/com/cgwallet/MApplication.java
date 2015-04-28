@@ -108,6 +108,15 @@ public class MApplication extends Application {
      */
     public synchronized static Activity getActivityByActivity(Activity activity){
         String name = activity.getClass().getName();
+       return getActivityByName(name);
+    }
+
+    /**
+     * 根据Acivity  name 获取想要的activity
+     * @param name
+     * @return
+     */
+    public synchronized static Activity getActivityByName(String name){
         int size = activities.size();
         for(int i=0;i<size;i++){
             Activity activity_ = activities.get(i);

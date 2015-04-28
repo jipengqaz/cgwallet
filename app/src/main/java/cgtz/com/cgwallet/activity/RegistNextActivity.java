@@ -12,8 +12,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.umeng.analytics.MobclickAgent;
-
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -28,7 +26,6 @@ import cgtz.com.cgwallet.utils.MD5Util;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.ISplashView;
 import cgtz.com.cgwallet.widget.ProgressDialog;
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * 注册输入密码页
@@ -196,14 +193,10 @@ public class RegistNextActivity extends BaseActivity implements ISplashView,View
     @Override
     protected void onResume() {
         super.onResume();
-        JPushInterface.onResume(this);
-        MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        JPushInterface.onPause(this);
-        MobclickAgent.onPause(this);
     }
 }

@@ -13,9 +13,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.umeng.analytics.MobclickAgent;
+
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.Utils;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * �自定义主activity
@@ -104,11 +107,15 @@ public class BaseActivity extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        JPushInterface.onResume(this);
+        MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        JPushInterface.onPause(this);
+        MobclickAgent.onPause(this);
         Constants.GESTURES_PASSWORD =false;
     }
 

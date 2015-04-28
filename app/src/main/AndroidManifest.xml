@@ -182,6 +182,9 @@
             android:name=".activity.SaveMoneySuccessActivity"
             android:label="@string/title_activity_save_money_success" >
         </activity>
+        <activity android:name=".activity.Change_password_Activity"/>
+        <activity android:name=".activity.TradePwdActivity"/>
+        <activity android:name=".activity.Modify_trade_password_Activity"/>
     </application>
 
 </manifest>

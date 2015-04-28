@@ -5,18 +5,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.umeng.analytics.MobclickAgent;
-
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * 安全中心
  */
 public class SafeCenterActivity extends BaseActivity implements View.OnClickListener{
 
-    private RelativeLayout rl_personal_sodoko_unlock_change;//管理手势
+    private RelativeLayout rl_personal_sodoko_unlock_change,Reset_Passwrod;//管理手势,修改交易密码
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +27,8 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
 
     private void init() {
         rl_personal_sodoko_unlock_change = (RelativeLayout) findViewById(R.id.rl_personal_sodoko_unlock_change);
+        Reset_Passwrod = (RelativeLayout) findViewById(R.id.Reset_Passwrod);
+        Reset_Passwrod.setOnClickListener(this);
         rl_personal_sodoko_unlock_change.setOnClickListener(this);
     }
 
@@ -41,19 +40,20 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
                 intent = new Intent(SafeCenterActivity.this,OpenSudokoUnlockActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.Reset_Passwrod:
+                intent = new Intent(SafeCenterActivity.this,TradePwdActivity.class);
+                intent.putExtra("isSetTradePwd",true);
+                startActivity(intent);
+                break;
         }
     }
     @Override
     protected void onResume() {
         super.onResume();
-        JPushInterface.onResume(this);
-        MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        JPushInterface.onPause(this);
-        MobclickAgent.onPause(this);
     }
 }

@@ -8,6 +8,7 @@
     <color name="top_title">#12e191</color>
     <color name="main_red">#fb5e4f</color>
     <color name="main_bg">#12e191</color>
+    <color name="main_bg_white">#f8f8f8</color>
     <color name="bg_center">#f5f5f5</color>
     <color name="main_comment">#606060</color>
     <color name="main_tips1">#262831</color>//tips1
@@ -97,4 +98,6 @@
     <color name="dialog_msg_color">#000000</color>
     <color name="comment_text">#555555</color>
     <color name="green">#999999</color>
+    <color name="bg_account_gred">#c1c2c2</color>
+    <color name="more_item_pressed">#ededed</color>
 </resources>
