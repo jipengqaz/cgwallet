@@ -186,6 +186,7 @@
         <activity android:name=".activity.TradePwdActivity"/>
         <activity android:name=".activity.Modify_trade_password_Activity"/>
         <activity android:name=".activity.ChangeLoginPwdActivity"/>
+        <activity android:name=".activity.Withdraw_money"/>
     </application>
 
 </manifest>
