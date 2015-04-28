@@ -25,6 +25,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.adapter.BankAdapter;
 import cgtz.com.cgwallet.bean.Bank;
@@ -51,7 +52,6 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
     private static final String TAG = "InformationConfirmActivity";
     private boolean onlyUseAccount;//是否余额充足支付
     private boolean isRealleyName;//是否真正实名认证
-//    private boolean isRelleyBank;//是否真正绑卡或者支持连连支付
     private boolean needEdit;//是否需要填写信息
     private String name;//姓名
     private String identity;//身份证号
@@ -101,11 +101,13 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
     private PayOrder order = null;
     private boolean fromName = false;//判断是否来自实名认证
     private boolean fromBank = false;//判断是否来自绑定银行卡
+    private String lianlianTest = "0.01";//测试时，连连支付金额
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information_confirm);
+        MApplication.registActivities(this);
         getIntentInfo();
         if(fromName && !fromBank){
             setTitle(Constants.TITLE_EDIT_NAME);
@@ -121,13 +123,34 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
         setListener();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        closeDialogs();
+    }
+
+    private void closeDialogs(){
+        hideProcessBar();
+        Utils.closeDialog(this,cDiaog);
+        Utils.closeDialog(this,customDialog);
+    }
+
     private void getIntentInfo(){
         needEdit = getIntent().getBooleanExtra("needEdit",true);//是否需要填写信息
         fromName = getIntent().getBooleanExtra("fromName",false);//是否来自实名认证
         fromBank = getIntent().getBooleanExtra("fromBank",false);//是否来自绑定银行卡
         onlyUseAccount = getIntent().getBooleanExtra("onlyUseAccount",false);//是否余额充足支付
-        isRealleyName = getIntent().getBooleanExtra("isRealleyName",false);//是否真正实名认证
-//        isRelleyBank = getIntent().getBooleanExtra("isRelleyBank",false);//是否真正绑卡或者支持连连支付
+        isRealleyName = getIntent().getBooleanExtra("isRealleyName", false);//是否真正实名认证
         name = getIntent().getStringExtra("name");//姓名
         identity = getIntent().getStringExtra("identity");//身份证号
         bankName = getIntent().getStringExtra("bankName");//银行名称
@@ -141,6 +164,9 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
         useAccount = getIntent().getStringExtra("useAccount");//使用的余额数值
         useBank = getIntent().getStringExtra("useBank");//使用的银行卡支付金额
         startCalculateTime = getIntent().getStringExtra("startCalculateTime");//开始计算收益时间
+        if(!Constants.IS_TEST){
+            lianlianTest = useBank;
+        }
     }
 
     /**初始化视图*/
@@ -240,69 +266,6 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                 }
             }
         }
-//        if(onlyUseAccount){
-//            //是否余额充足支付
-//            LogUtils.i(TAG, "余额充足支付，不显示个人信息");
-//            layout_need_edit.setVisibility(View.GONE);
-//            layout_neednot_edit.setVisibility(View.GONE);
-//            layoutAccountBank.setVisibility(View.GONE);
-//        }else{
-//            if(!isRealleyName || !isRelleyBank){
-//                //需要重新填写个人信息
-//                layout_need_edit.setVisibility(View.VISIBLE);
-//                layout_neednot_edit.setVisibility(View.GONE);
-//                if(!TextUtils.isEmpty(name)){
-//                    //输入或者显示用户姓名
-//                    if(isRealleyName){
-//                        edit_username.setText(Utils.getUserNameForStart(name));
-//                        edit_username.setEnabled(false);
-//                    }else{
-//                        edit_username.setText(name);
-//                        edit_username.setSelection(name.length());
-//                        edit_username.setEnabled(true);
-//                    }
-//                }
-//                if(!TextUtils.isEmpty(identity)){
-//                    //输入或显示身份证
-//                    if(isRealleyName){
-//                        edit_identity.setText(Utils.getUserIdentity(identity));
-//                        edit_identity.setEnabled(false);
-//                    }else{
-//                        edit_identity.setText(identity);
-//                        edit_identity.setSelection(identity.length());
-//                        edit_identity.setEnabled(true);
-//                    }
-//                }
-//                if(!TextUtils.isEmpty(bankName)){
-//                    //选择银行卡
-//                    text_bankname.setText(bankName);
-//                }
-//                if(!TextUtils.isEmpty(bankCard)){
-//                    //输入银行卡号
-//                    edit_bankcard.setText(bankCard);
-//                }
-//            }else{
-//                //不需要重新填写个人信息
-//                LogUtils.i(TAG,"不需要重新填写个人信息");
-//                if(onlyUseAccount){
-//                    //是否余额充足支付
-//                    LogUtils.i(TAG,"余额充足支付，不显示个人信息");
-//                    layout_need_edit.setVisibility(View.GONE);
-//                    layout_neednot_edit.setVisibility(View.GONE);
-//                }else{
-//                    //余额不充足
-//                    LogUtils.i(TAG,"余额不充足支付");
-//                    layout_need_edit.setVisibility(View.GONE);
-//                    layout_neednot_edit.setVisibility(View.VISIBLE);
-//                    invest_name.setText(TextUtils.isEmpty(name)?"":Utils.getUserNameForStart(name) );
-//                    invest_identity.setText(TextUtils.isEmpty(identity)?"":Utils.getUserIdentity(identity) );
-//                    invest_bankcard.setText(TextUtils.isEmpty(lastBankCordNum)?"":"尾号"+lastBankCordNum );
-//                    invest_bank_id.setText(TextUtils.isEmpty(bankName)?"":bankName);
-//                    backhint.setText(TextUtils.isEmpty(bankTip)?"":bankTip);
-//                }
-//            }
-//        }
-
 
         stilledMoney.setText(saveMoney+"");
         if(!TextUtils.isEmpty(payLimitIntruduce)
@@ -676,8 +639,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                         }
                         break;
                     case Constants.WHAT_EWALLET_AFFIRMDO://账户余额支付
-                        LogUtils.i(TAG,"账户余额支付: "+jsonBean.getJsonString());
-                        hideProcessBar();
+                        LogUtils.i(TAG, "账户余额支付: " + jsonBean.getJsonString());
                         if(flag){
                             if(code == Constants.OPERATION_FAIL){//数据交互失败
                                 Utils.makeToast(InformationConfirmActivity.this, errorMsg);
@@ -685,12 +647,14 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                                 int paying = json.optInt("paying");
                                 if(paying == 1){
                                     //支付处理中
+                                    hideProcessBar();
                                     startActivity(new Intent(InformationConfirmActivity.this,
                                             InProgressActivity.class)
                                             .putExtra("isSaveAt",true));//跳转到处理中
                                     finish();
                                 }else if(paying == 0){
                                     //支付成功
+                                    hideProcessBar();
                                     startActivity(new Intent(InformationConfirmActivity.this,
                                             SaveMoneySuccessActivity.class)
                                             .putExtra("saveMoney",saveMoney)
@@ -698,6 +662,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                                     finish();
                                 }
                             }else{
+                                hideProcessBar();
                                 Utils.makeToast(InformationConfirmActivity.this,errorMsg);
                             }
                         }
@@ -712,7 +677,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                                 HashMap<String,String> params = new HashMap<>();
                                 params.put("user_id", Utils.getUserId());
                                 params.put("token",Utils.getToken());
-                                params.put("money_order",useBank);//(订单金额)
+                                params.put("money_order",lianlianTest);//(订单金额)
                                 params.put("no_order",tradeNo);//订单编号
                                 params.put("valid_order","");//订单有效时间
                                 params.put("bank_id",bankId);//银行id
@@ -755,7 +720,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                         }
                         order = Lianlian.constructPreCardPayOrder(
                                 flag, no_order, dt_order, notifyUrl, Utils.getUserId() + "",
-                                identity, name, useBank + ""
+                                identity, name, lianlianTest + ""
                                 , bankCard, MD5_KEY, no_agree
                         );
                         String content4Pay = BaseHelper.toJSONString(order);
@@ -787,13 +752,13 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                         }
                         break;
                     case Constants.WHAT_PAYSTATUS://投资时连连通道银行卡充值成功后，返回值判断
-                        LogUtils.i(TAG,"连连通道银行卡充值成功后: "+jsonBean.getJsonString());
-                        hideProcessBar();
+                        LogUtils.i(TAG, "连连通道银行卡充值成功后: " + jsonBean.getJsonString());
                         if(flag){
                             if(code == Constants.OPERATION_SUCCESS){
                                 int paying = json.optInt("paying");
                                 if(paying == 0){
                                     //支付成功
+                                    hideProcessBar();
                                     startActivity(new Intent(InformationConfirmActivity.this,
                                             SaveMoneySuccessActivity.class)
                                             .putExtra("startCalculateTime", startCalculateTime)
@@ -801,12 +766,14 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                                     finish();
                                 }else if(paying == 1){
                                     //处理中
+                                    hideProcessBar();
                                     startActivity(new Intent(InformationConfirmActivity.this,
                                             InProgressActivity.class)
                                             .putExtra("isSaveAt",true));//跳转到支付处理中
                                     finish();
                                 }
                             }else{
+                                hideProcessBar();
                                 Utils.makeToast(InformationConfirmActivity.this,errorMsg);
                             }
                         }

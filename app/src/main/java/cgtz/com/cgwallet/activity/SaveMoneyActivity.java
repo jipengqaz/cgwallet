@@ -154,6 +154,18 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
         super.onPause();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        closeDialogs();
+    }
+
+    private void closeDialogs(){
+        hideProcessBar();
+        Utils.closeDialog(this,dialog);
+        Utils.closeDialog(this,payTypeDialog);
+    }
+
     /**
      * widget添加事件
      */

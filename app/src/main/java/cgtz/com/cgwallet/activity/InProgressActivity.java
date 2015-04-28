@@ -23,6 +23,7 @@ public class InProgressActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_in_progress);
+        MApplication.registActivities(this);//存储该activity
         isSaveAt = getIntent().getBooleanExtra("isSaveAt",true);//是否存钱页面跳转，true是的，false不是
         if(isSaveAt){
             setTitle("存钱");
