@@ -62,25 +62,24 @@
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bank_9.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/banned_click.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_change_pwd.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_change_pwd.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_check_invest.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_custom_progressdialog.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_dialog_tradepwd.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_input.9.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_invest_money_edit.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_remond_btn_nomal.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_remond_btn_pressed.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_sodoko_login_edit.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/loading_bg.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/button_bg_green_inverse.9.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/button_bg_green_normal.9.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/loading_bg2.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/more_item_bg.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_bind_bank_card.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_choose_bank_card.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_e_record.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_open_sudoko_unlock.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_screen_slide.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_start.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/custom_progressdialog.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_screen_slide_page.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/itme_e_wallet_1.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/layout_tradepwd.xml" charset="GBK" />

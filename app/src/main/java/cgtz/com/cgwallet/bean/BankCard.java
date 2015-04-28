@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 import cgtz.com.cgwallet.R;
 
+
 /**
  * 银行卡信息
  * Created by hehe on 14/9/25.
@@ -46,12 +47,12 @@ public class BankCard implements Serializable {
         cardHolder = json.optString("cardHolder");
         card_id = json.optString("card_id");
         bankId = json.optString("bankId");
-        llMark = json.optInt("llMark");//������ʶ
-        umpMark = json.optInt("umpMark");//������ʶ
+        llMark = json.optInt("llMark");//连连标识
+        umpMark = json.optInt("umpMark");//联动标识
     }
 
     /**
-     * ��ݲ�ͬ����id��ȡ��Ӧ��ͼ��
+     * 根据不同银行id获取对应的图标
      * @param bankid
      * @return
      */

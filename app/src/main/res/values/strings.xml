@@ -114,6 +114,9 @@
     <string name="text_change_pwd_confirmnewpwd">确认新密码</string>
     <string name="text_change_pwd_confirmchange">确定修改</string>
     <string name="error_exception">小草犯困了，休息一会</string>
-
+    <string name="withdraw_money_text">储蓄卡</string>
+    <string name="withdraw_money_text_1">草根钱包金额：</string>
+    <string name="withdraw_money">确认取出</string>
+    <string name="error_msg_notradepwd">请先设置交易密码</string>
 
 </resources>

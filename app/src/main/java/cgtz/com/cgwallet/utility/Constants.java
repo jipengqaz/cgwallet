@@ -65,6 +65,9 @@ public class Constants {
     public static final int WHAT_SIGNPORT = 2015042758;//连连支付支付签名接口
     public static final int WHAT_BANKCARD_LLBIND = 2015042720;//预绑成功之后调用 用来银行卡绑定连连
     public static final int WHAT_PAYSTATUS = 2015042759;//投资时银行卡充值成功后，获取投资记录是否生成
+    public static final int WHAT_WITHDRAW = 2015042817;//取钱页面进入判断识别码
+    public static final int WHAT_UPDATE_BANK = 2015042823;//完善银行卡信息
+    public static final int WHAT_BRANCH = 2015042843;//获取城市分行
     /**88888888888888888888888888888888888888**/
     public static final String URL_CG_WALLET_PROTOCOL = "http://d5ds88.cgtz.com/site/agreement/";
     public static final String URL_FEED_BACK = "site/feedBack";//意见反馈
@@ -94,6 +97,10 @@ public class Constants {
     public static final String URL_GET_CODE = "pay/GetMobileCode";//获取修改交易密码的是的短信验证码
     public static final String URL_RESETPAYPASS= "pay/ResetPayPass";//重置交易密码
     public static final String URL_CHANGE_LOGINPWD = "account/resetPassword";//修改登录密码
+    public static final String URL_E_WALLET_REDEEM = "ewallet/redeem";//进入取钱界面判断接口
+    public static final String URL_DO_WITHDRAW = "account/doWithDraw";//取钱接口
+    public static final String URL_UPDATE_BANK = "Bankcard/update";//银行卡信息完善接口
+    public static final String URL_BRANCH = "api/getBranch";//获取分行信息
 
 
     /**
