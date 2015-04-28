@@ -625,7 +625,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                                 HashMap<String,String> params = new HashMap<>();
                                 params.put("user_id", Utils.getUserId());
                                 params.put("token",Utils.getToken());
-                                params.put("money_order",saveMoney);//(订单金额)
+                                params.put("money_order",useBank);//(订单金额)
                                 params.put("no_order",tradeNo);//订单编号
                                 params.put("valid_order","");//订单有效时间
                                 params.put("bank_id",bankId);//银行id
@@ -681,7 +681,6 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                                 InformationConfirmActivity.this, false);
                         LogUtils.i(InformationConfirmActivity.class.getSimpleName(), String.valueOf(bRet));
                         break;
-
                     case Constants.WHAT_BANKCARD_LLBIND://预绑成功之后调用 用来银行卡绑定连连
                         LogUtils.i(TAG,"预绑成功之后调用 用来银行卡绑定连连: "+jsonBean.getJsonString());
                         if(flag){
