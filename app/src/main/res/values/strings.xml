@@ -109,6 +109,10 @@
     <string name="error_pwd_length">输入密码长度错误</string>
     <string name="error_two_pwd_not_same">两次输入密码不一致</string>
     <string name="error_login_pwd_same">交易密码与登录密码不能一致</string>
+    <string name="text_change_pwd_originalpwd">原登录密码</string>
+    <string name="text_change_pwd_newpwd">新密码</string>
+    <string name="text_change_pwd_confirmnewpwd">确认新密码</string>
+    <string name="text_change_pwd_confirmchange">确定修改</string>
     <string name="error_exception">小草犯困了，休息一会</string>
 
 

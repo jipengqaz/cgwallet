@@ -9,7 +9,7 @@ import cgtz.com.cgwallet.R;
 
 
 /**
- * ������ά���У���ʾdialog
+ * 服务器维护dialog
  * Created by Administrator on 2015/1/19.
  */
 public class ServerMainTainDialog extends Dialog {

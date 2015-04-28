@@ -47,7 +47,7 @@ public class Modify_trading_password {
         params.put("password", MD5Util.md5(password));
         params.put("mobile_code", mobile_code);
         CustomTask task = new CustomTask(handler, code,
-                Constants.URL_GET_CODE,
+                Constants.URL_RESETPAYPASS,
                 true,params,true);
         task.execute();
     }

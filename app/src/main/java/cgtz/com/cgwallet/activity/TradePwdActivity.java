@@ -25,7 +25,7 @@ import cgtz.com.cgwallet.utils.CustomTask;
 import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.MD5Util;
 import cgtz.com.cgwallet.utils.Utils;
-import cgtz.com.cgwallet.view.ServerMainTainDialog;
+import cgtz.com.cgwallet.widget.ProgressDialog;
 
 /**
  * 设置交易密码页面
@@ -39,7 +39,7 @@ public class TradePwdActivity extends BaseActivity {
     private Button trade_pwd_confirm;
     private LinearLayout layout_seted_trade_pwd;
     private boolean isSetTradePwd;
-    private ServerMainTainDialog dialog;
+    private ProgressDialog dialog;
 
     /**
      * Activity被系统杀死时被调用.
@@ -60,6 +60,7 @@ public class TradePwdActivity extends BaseActivity {
         }else{
             isSetTradePwd = getIntent().getBooleanExtra("isSetTradePwd", false);//用于判断是否不设交易密码
         }
+        showBack(true);
         if(isSetTradePwd){
             setTitle("交易密码");
             setRightText("修改");
@@ -130,10 +131,11 @@ public class TradePwdActivity extends BaseActivity {
                     Utils.makeToast(TradePwdActivity.this, getString(R.string.error_login_pwd_same));
                 } else {
                     if (dialog == null) {
-                        dialog = new ServerMainTainDialog(TradePwdActivity.this, R.style.loading_dialog);
+                        dialog = new ProgressDialog(TradePwdActivity.this, R.style.loading_dialog);
                     } else if (dialog.isShowing()) {
                         dialog.dismiss();
                     }
+                    dialog.setMessage("...");
                     dialog.show();
                     Map<String, String> maps = new HashMap<String, String>();
                     maps.put("user_id", Utils.getUserId());
