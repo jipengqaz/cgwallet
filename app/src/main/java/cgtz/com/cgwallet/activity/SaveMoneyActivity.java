@@ -194,7 +194,8 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                     if (isSetTrade == 1) {
                         //选择支付方式
                         if (!TextUtils.isEmpty(assets) && !assets.equals("0.00")
-                                && Double.parseDouble(saveMoney) > Double.parseDouble(assets)) {
+                                && Double.parseDouble(saveMoney) <= Double.parseDouble(assets)) {
+                            useAccount = saveMoney;
                             payMethod();
                         } else {
                             showSelectedPayType();
@@ -228,6 +229,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
         intent.putExtra("useAccount",useAccount);//使用的余额数值
         intent.putExtra("useBank",useBank);//使用的银行卡支付金额
         intent.putExtra("onlyUseAccount",onlyUseAccount);//是否余额充足支付
+        intent.putExtra("startCalculateTime",startCalculateTime);//收益开始计算时间
         startActivity(intent);
     }
 
@@ -451,7 +453,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                                 //未设置交易密码
                                 isRealleyName = false;//是否真正实名认证
                                 isRelleyBank = false;//是否真正绑卡或者支持连连支付
-
+                                startActivity(new Intent(SaveMoneyActivity.this,TradePwdActivity.class));
                             }else if(code == -2){
                                 //未实名认证为绑卡
                                 isRealleyName = false;//是否真正实名认证

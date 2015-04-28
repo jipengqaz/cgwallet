@@ -467,7 +467,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
      */
     private void lineToRight(){
         LineAnimTask task = new LineAnimTask();
-        task.execute(30);
+        task.execute(50);
     }
 
     /**
@@ -475,7 +475,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
      */
     private void lineToLeft(){
         LineAnimTask task = new LineAnimTask();
-        task.execute(-30);
+        task.execute(-50);
 
     }
 
@@ -501,7 +501,9 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         super.onResume();
         if(!MApplication.isGoLogin() && TextUtils.isEmpty(Utils.getToken())){
             LogUtils.i(TAG,"MApplication.goLogin 为 true");
-            currIndex = 0;
+            layoutClick(R.id.layout_cg_wallet);
+            setLeftMenuInfo(0);//未登录
+//            currIndex = 0;
 //            mViewPager.setCurrentItem(currIndex);
         }
         String userMobile = Utils.getUserPhone(this);

@@ -75,7 +75,7 @@
             <TextView
                 android:id="@+id/save_money_transfer_figure_hint"
                 android:layout_centerVertical="true"
-                android:text="转入余额"
+                android:text="存钱余额"
                 android:layout_marginLeft="@dimen/save_moeny_marign_left"
                 android:textSize="@dimen/save_moeny_main_text"
                 android:textColor="@color/money_text_hint"
@@ -113,6 +113,12 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <TextView
+                android:text="开始计算收益时间"
+                android:textSize="@dimen/save_moeny_hint_text"
+                android:textColor="@color/money_tv_hint_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/income_time_hint"
                 android:textSize="@dimen/save_moeny_hint_text"

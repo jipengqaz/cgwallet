@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.umeng.analytics.MobclickAgent;
 
+import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.Utils;
@@ -35,6 +36,7 @@ public class BaseActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MApplication.registActivities(this);
         initBar();
     }
 
