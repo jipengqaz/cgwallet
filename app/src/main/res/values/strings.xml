@@ -103,10 +103,12 @@
     <string name="text_trade_pwd_hint">交易密码在存钱、取钱中使用</string>
     <string name="text_confirm">确定</string>
     <string name="text_seted_trade_pwd_hint1">您已经设置了交易密码</string>
+    <string name="Reset_Passwrod">修改交易密码</string>
     <string name="please_edite_pwd">请输入交易密码</string>
     <string name="error_pwd_length">输入密码长度错误</string>
     <string name="error_two_pwd_not_same">两次输入密码不一致</string>
     <string name="error_login_pwd_same">交易密码与登录密码不能一致</string>
+    <string name="error_exception">小草犯困了，休息一会</string>
 
 
 </resources>

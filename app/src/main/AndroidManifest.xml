@@ -163,6 +163,9 @@
             android:name=".activity.InProgressActivity"
             android:label="@string/title_activity_in_progress" >
         </activity>
+        <activity android:name=".activity.Change_password_Activity"/>
+        <activity android:name=".activity.TradePwdActivity"/>
+        <activity android:name=".activity.Modify_trade_password_Activity"/>
     </application>
 
 </manifest>

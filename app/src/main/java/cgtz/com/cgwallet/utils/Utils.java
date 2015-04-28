@@ -169,6 +169,14 @@ public class Utils {
         Toast.makeText(context,msg,Toast.LENGTH_LONG).show();
     }
     /**
+     * 显示toast信息
+     * @param context
+     * @param msg
+     */
+    public static void makeToast_short(Context context,String msg){
+        Toast.makeText(context,msg,Toast.LENGTH_SHORT).show();
+    }
+    /**
      * 判断SD卡是否存在
      * @return
      */

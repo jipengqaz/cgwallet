@@ -17,16 +17,16 @@ import cgtz.com.cgwallet.utils.Utils;
 public class Is_passwrod {
 
     /**
-     * 判断密码是否正确
+     * 判断登录密码是否正确
      * @param handler
-     * @param passwrod
+     * @param passwrod 登录密码
      */
-    public static void isPasswrod(Handler handler,String passwrod){
+    public static void isPasswrod(Handler handler,String passwrod,int code){
         Map<String,String> maps = new HashMap<String, String>();
         maps.put("user_id", Utils.getUserId()+"");
         maps.put("token",Utils.getToken()+"");
         maps.put("password", MD5Util.md5(passwrod));
-        CustomTask task = new CustomTask(handler, 0,
+        CustomTask task = new CustomTask(handler, code,
                 Constants.AGAINLOGIN_URL,
                 true,maps,true);
         task.execute();

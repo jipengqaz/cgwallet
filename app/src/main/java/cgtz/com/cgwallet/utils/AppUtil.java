@@ -69,7 +69,7 @@ public class AppUtil {
             public void onClick(View view) {
                 errorHint.setVisibility(View.VISIBLE);
                 errorHint.setText("正在判断登录密码...");
-                Is_passwrod.isPasswrod(mHandler, login_pwd.getText().toString());
+                Is_passwrod.isPasswrod(mHandler, login_pwd.getText().toString(),0);
             }
         });
     }
