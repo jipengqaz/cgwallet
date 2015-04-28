@@ -57,10 +57,11 @@
             </RelativeLayout>
             <Button
                 android:id="@+id/btn_regist_next"
+                android:enabled="false"
                 android:layout_marginTop="50dp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_16sp"
-                android:background="@color/bg_regist_button"
+                android:background="@drawable/bg_button_no_enabled"
                 android:text="@string/hint_regist_next"
                 android:layout_width="match_parent"
                 android:layout_height="42dp" />

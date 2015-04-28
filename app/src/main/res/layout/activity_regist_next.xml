@@ -60,10 +60,11 @@
                 android:layout_height="wrap_content" />
             <Button
                 android:id="@+id/btn_regist"
+                android:enabled="false"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_16sp"
-                android:background="@color/bg_regist_finish_normal"
+                android:background="@drawable/bg_button_no_enabled"
                 android:text="@string/text_regist_finish"
                 android:layout_width="match_parent"
                 android:layout_height="42dp" />
