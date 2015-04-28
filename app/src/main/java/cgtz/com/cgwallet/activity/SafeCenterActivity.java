@@ -87,7 +87,7 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
         drawLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SafeCenterActivity.this, SaveMoneyActivity.class));
+                startActivity(new Intent(SafeCenterActivity.this, Withdraw_money.class));
             }
         });
     }

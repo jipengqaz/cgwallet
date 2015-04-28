@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.activity.BindBankActivity;
+import cgtz.com.cgwallet.activity.LoginActivity;
 import cgtz.com.cgwallet.activity.SaveMoneyActivity;
 import cgtz.com.cgwallet.activity.TradePwdActivity;
 import cgtz.com.cgwallet.activity.WebViewActivity;
@@ -387,7 +388,13 @@ public class CgWalletFragment extends BaseFragment implements ISplashView,View.O
                 Withdraw_money_Client.getWithdraw_money(mHandler,Constants.WHAT_WITHDRAW);
                 break;
             case R.id.layout_save://存钱
-                startActivity(new Intent(getActivity(), SaveMoneyActivity.class));
+                if(Utils.isLogined()){
+                    startActivity(new Intent(getActivity(), SaveMoneyActivity.class));
+                }else{
+                    Utils.makeToast(getActivity(),"请先登录");
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
+
                 break;
             case R.id.cg_wallet_link1://第一个特色布局
                 link_name = null;//获取的特色文案

@@ -56,7 +56,7 @@ public class MenuMoreActivity extends BaseActivity implements View.OnClickListen
         drawLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MenuMoreActivity.this,SaveMoneyActivity.class));
+                startActivity(new Intent(MenuMoreActivity.this,Withdraw_money.class));
             }
         });
     }
