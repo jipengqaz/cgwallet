@@ -20,7 +20,7 @@ import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.client.Is_passwrod;
 import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.Utils;
-import cgtz.com.cgwallet.view.ServerMainTainDialog;
+import cgtz.com.cgwallet.widget.ProgressDialog;
 import cn.jpush.android.api.JPushInterface;
 
 /**
@@ -31,7 +31,7 @@ public class Modify_trade_password_Activity extends BaseActivity {
     private String TAG = "Modify_trade_password_Activity";
     private EditText pwd_edit;//密码输入框
     private Button next_step;//下一步按钮
-    private ServerMainTainDialog dialog;
+    private ProgressDialog dialog;
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -91,7 +91,7 @@ public class Modify_trade_password_Activity extends BaseActivity {
             public void onClick(View v) {
                 if(pwd_edit.getText().toString().length()>=6){
                     if(dialog == null){
-                        dialog = new ServerMainTainDialog(Modify_trade_password_Activity.this,R.style.loading_dialog);
+                        dialog = new ProgressDialog(Modify_trade_password_Activity.this,R.style.loading_dialog);
                     }
                     dialog.show();
                     Is_passwrod.isPasswrod(handler, pwd_edit.getText().toString(), 111);

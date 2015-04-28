@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/Service/Provinces_download_Service.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/ChangeLoginPwdActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/Change_password_Activity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/E_wallet_record_activity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/Modify_trade_password_Activity.java" charset="UTF-8" />
@@ -60,13 +61,16 @@
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bank_8.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bank_9.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/banned_click.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_change_pwd.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_check_invest.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_custom_progressdialog.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_dialog_tradepwd.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_input.9.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_invest_money_edit.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_remond_btn_nomal.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_remond_btn_pressed.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_sodoko_login_edit.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/loading_bg.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/loading_bg2.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/more_item_bg.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_choose_bank_card.xml" charset="GBK" />
@@ -75,6 +79,7 @@
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_screen_slide.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_start.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/custom_progressdialog.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_screen_slide_page.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/itme_e_wallet_1.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/layout_tradepwd.xml" charset="GBK" />

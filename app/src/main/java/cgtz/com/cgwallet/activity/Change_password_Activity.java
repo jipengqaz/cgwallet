@@ -20,7 +20,7 @@ import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.MD5Util;
 import cgtz.com.cgwallet.utils.Utils;
-import cgtz.com.cgwallet.view.ServerMainTainDialog;
+import cgtz.com.cgwallet.widget.ProgressDialog;
 import cn.jpush.android.api.JPushInterface;
 
 /**
@@ -33,7 +33,7 @@ public class Change_password_Activity extends BaseActivity{
     private Button send_message,determine;//短信验证码获取   和确定按钮
     private String TAG = "Change_password_Activity";
     private int mCount = 60;
-    private ServerMainTainDialog dialog;
+    private ProgressDialog dialog;
     private Handler mHandler = new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,7 +144,7 @@ public class Change_password_Activity extends BaseActivity{
                     Utils.makeToast_short(Change_password_Activity.this, "验证码输入位数不对");
                 } else {
                     if (dialog == null) {
-                        dialog = new ServerMainTainDialog(Change_password_Activity.this, R.style.loading_dialog);
+                        dialog = new ProgressDialog(Change_password_Activity.this, R.style.loading_dialog);
                     }
                     dialog.show();
                     Modify_trading_password.ResetPayPass(new Handler() {
