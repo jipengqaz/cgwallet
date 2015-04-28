@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
@@ -14,6 +15,8 @@ import cgtz.com.cgwallet.R;
 public class SafeCenterActivity extends BaseActivity implements View.OnClickListener{
     private RelativeLayout needNameLayout;
     private RelativeLayout needBankLayout;
+    private TextView saveLayout;
+    private TextView drawLayout;
 
     private RelativeLayout rl_personal_sodoko_unlock_change,Reset_Passwrod;//管理手势,修改交易密码
     @Override
@@ -36,6 +39,26 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
         rl_personal_sodoko_unlock_change.setOnClickListener(this);
         needBankLayout.setOnClickListener(this);
         needNameLayout.setOnClickListener(this);
+        SaveOrDrawMoney();
+    }
+    /**
+     * 跳转存钱和取钱页面
+     */
+    private void SaveOrDrawMoney(){
+        saveLayout = (TextView) findViewById(R.id.layout_save_money);
+        drawLayout = (TextView) findViewById(R.id.layout_draw_money);
+        saveLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SafeCenterActivity.this,SaveMoneyActivity.class));
+            }
+        });
+        drawLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SafeCenterActivity.this,SaveMoneyActivity.class));
+            }
+        });
     }
 
     @Override

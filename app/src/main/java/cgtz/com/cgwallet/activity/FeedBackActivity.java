@@ -17,6 +17,8 @@ import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.CustomTask;
+import cgtz.com.cgwallet.utils.Ke_Fu_data;
+import cgtz.com.cgwallet.utils.Start_update_value;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.ISplashView;
 import cgtz.com.cgwallet.widget.ProgressDialog;
@@ -73,7 +75,7 @@ public class FeedBackActivity extends BaseActivity implements ISplashView{
         presenter = new SplashPresenter(this);
         MApplication.registActivities(this);//存储该activity
         TextView ke_fu= (TextView) findViewById(R.id.ke_fu);
-//        ke_fu.setText(KeFu_Share.getSaveKefu(this));
+        ke_fu.setText(Ke_Fu_data.getContent(this));
         feed_advise= (EditText) findViewById(R.id.feed_advise);
         feed_send= (Button) findViewById(R.id.feed_send);
         setListener();
@@ -168,8 +170,8 @@ public class FeedBackActivity extends BaseActivity implements ISplashView{
     public void startNextActivity() {
         //服务器数据交互操作
         HashMap<String,String> maps = new HashMap<>();
-        maps.put("user_id","191800033066");
-        maps.put("token","CzjBA6gam5rasbbur9GExoUToYAw_xnI7BoKVl6blto");
+        maps.put("user_id",Utils.getUserId());
+        maps.put("token",Utils.getToken());
         maps.put("advise",editMsg);
         maps.put("source","1");
         CustomTask task = new CustomTask(mHandler, Constants.WHAT_FEED_BACK,

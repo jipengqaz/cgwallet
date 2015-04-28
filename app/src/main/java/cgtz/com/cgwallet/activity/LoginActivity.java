@@ -22,6 +22,7 @@ import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.CustomTask;
+import cgtz.com.cgwallet.utils.Ke_Fu_data;
 import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.MD5Util;
 import cgtz.com.cgwallet.utils.Utils;
@@ -101,6 +102,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
         btnLogin = (Button) findViewById(R.id.login_button_finish);//登录按钮
         tvRegistAccount = (TextView) findViewById(R.id.tv_regist_account);//注册账户
         tvForgetPwd = (TextView) findViewById(R.id.tv_forget_pwd);//忘记密码
+        tvServicePhone.setText(Ke_Fu_data.getPhone(this));
         changeLoginLayout();
     }
 

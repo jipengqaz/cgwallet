@@ -39,6 +39,7 @@ public class Change_password_Activity extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("修改交易密码");
+        showBack(true);
         setContentView(R.layout.activity_change_password);
         MApplication.registActivities(this);//存储该activity
         init();
