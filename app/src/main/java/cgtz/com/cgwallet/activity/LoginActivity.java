@@ -202,6 +202,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
         public void handleMessage(Message msg) {
             try{
                 JsonBean jsonBean = (JsonBean) msg.obj;
+                LogUtils.i(TAG,"登录返回内容："+jsonBean.getJsonString());
                 int code = jsonBean.getCode();
                 String errorMsg = jsonBean.getError_msg();
                 if(code == Constants.DATA_EVENT){

@@ -8,7 +8,7 @@ import android.widget.TextView;
 import cgtz.com.cgwallet.R;
 
 /**
- * 存钱或取钱结果页面
+ * 存钱结果页面
  */
 public class SaveMoneySuccessActivity extends BaseActivity {
     private TextView saveFigure;
@@ -24,8 +24,6 @@ public class SaveMoneySuccessActivity extends BaseActivity {
         isSaveAt = getIntent().getBooleanExtra("isSaveAt",true);//是否存钱页面跳转，true是的，false不是
         if(isSaveAt){
             setTitle("存钱结果");
-        }else{
-            setTitle("取钱结果");
         }
         initViews();
     }

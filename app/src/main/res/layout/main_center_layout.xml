@@ -11,20 +11,27 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/activity_title_height"
         />
-    <RelativeLayout
-        android:id="@+id/main_conter_layout"
+    <include layout="@layout/layout_center_fragment"
         android:layout_below="@+id/top_title_layout"
         android:layout_above="@+id/transfer_layout"
         android:gravity="center"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <android.support.v4.view.ViewPager
-            android:layout_centerInParent="true"
-            android:id="@+id/main_conter_viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        />
+    <!--<LinearLayout-->
+        <!--android:id="@+id/main_conter_layout"-->
+        <!--android:layout_below="@+id/top_title_layout"-->
+        <!--android:layout_above="@+id/transfer_layout"-->
+        <!--android:gravity="center"-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--&lt;!&ndash;<android.support.v4.view.ViewPager&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_centerInParent="true"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/main_conter_viewpager"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="match_parent"/>&ndash;&gt;-->
+    <!--</LinearLayout>-->
     <include layout="@layout/layout_bottom_wallet_item"
         android:id="@+id/transfer_layout"
         android:layout_alignParentBottom="true"
@@ -40,17 +47,9 @@
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/wallet_bottom_line_selected"
-            android:layout_weight="1"
             android:scaleType="fitXY"
             android:src="@mipmap/icon_line_selected"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <ImageView
-            android:scaleType="fitXY"
-            android:id="@+id/wallet_bottom_line_normal"
-            android:layout_weight="1"
-            android:src="@mipmap/icon_line_normal"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
 </RelativeLayout>

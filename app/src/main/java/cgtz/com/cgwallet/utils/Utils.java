@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.activity.LoginActivity;
+import cgtz.com.cgwallet.activity.MainActivity;
 import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.utility.Constants;
 
@@ -200,7 +201,9 @@ public class Utils {
             return false;
         }else if(code == Constants.NEED_LOGIN_AGAIN){//需要重新登录
             context.startActivity(new Intent(context, LoginActivity.class));
-            ((Activity)context).finish();
+            if(!MainActivity.class.getName().equals(((Activity)context).getClass().getName())){
+                ((Activity)context).finish();
+            }
             return false;
         }else if(code == Constants.SERVICE_MAINTAIN){//服务器正在维护
 

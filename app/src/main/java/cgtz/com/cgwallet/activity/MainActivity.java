@@ -3,11 +3,14 @@ package cgtz.com.cgwallet.activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
@@ -70,7 +73,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private LinearLayout layoutMyWallet;//底部的我的钱包
     private ImageView showLeftButton;
     private ImageView showRightButton;
-    private ViewPager mViewPager;
+//    private ViewPager mViewPager;
     private LinearLayout menuSafeCenter;//安全中心
     private LinearLayout menuHelpCenter;//帮助中心
     private LinearLayout menuMore;//更多
@@ -84,8 +87,12 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private CgWalletFragment cgWalletFragment;
     private MyWalletFragment myWalletFragment;
     private ImageView bottomLineSelected;//底部的白线
-    private ImageView bottomLineNormal;//底部的
     private LinearLayout layoutBottom;//底部的选项
+    private FragmentManager fragmentManager;
+    private Fragment[] fragments;
+    private LinearLayout centerWallet;
+    private int screenWith;
+    private LinearLayout.LayoutParams params;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,10 +101,13 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         setContentView(R.layout.activity_main);
         MApplication.registActivities(this);//存储该activity
         splashPresenter = new SplashPresenter(this);
+        fragmentManager = getSupportFragmentManager();
+        screenWith = getResources().getDisplayMetrics().widthPixels;
         initViews();
-        initFragment();
+        setFragment();
+//        initFragment();
         setViewLinstener();
-        bidirSldingLayout.setScrollEvent(mViewPager);
+//        bidirSldingLayout.setScrollEvent(centerWallet);
         showLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -388,14 +398,15 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     }
 
     private void initViews(){
+        centerWallet = (LinearLayout) findViewById(R.id.center_wallet);//钱包外部布局
         layoutCgWallet = (LinearLayout) findViewById(R.id.layout_cg_wallet);//底部的草根钱包
         layoutMyWallet = (LinearLayout) findViewById(R.id.layout_my_wallet);//底部的我的钱包
         bidirSldingLayout = (BidirSlidingLayout) findViewById(R.id.custom_sliding_layout);
         conter_menu_layout = (RelativeLayout) findViewById(R.id.content);
         showLeftButton = (ImageView) findViewById(R.id.show_left_button);
         showRightButton = (ImageView) findViewById(R.id.show_right_button);
-        main_conter_layout = (RelativeLayout) findViewById(R.id.main_conter_layout);
-        mViewPager = (ViewPager) findViewById(R.id.main_conter_viewpager);
+//        main_conter_layout = (RelativeLayout) findViewById(R.id.main_conter_layout);
+//        mViewPager = (ViewPager) findViewById(R.id.main_conter_viewpager);
         tvLogin = (TextView) findViewById(R.id.tv_goToLogin);
         menuSafeCenter = (LinearLayout) findViewById(R.id.left_menu_safe_center);
         menuHelpCenter = (LinearLayout) findViewById(R.id.left_menu_help_center);
@@ -404,7 +415,9 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         layotExit = (LinearLayout) findViewById(R.id.left_menu_login_out);
         layoutBottom = (LinearLayout) findViewById(R.id.layout_bottom);
         bottomLineSelected = (ImageView) findViewById(R.id.wallet_bottom_line_selected);//底部的选中
-        bottomLineNormal = (ImageView) findViewById(R.id.wallet_bottom_line_normal);//底部的未选中
+        params = (LinearLayout.LayoutParams) bottomLineSelected.getLayoutParams();
+        params.width = screenWith/2;
+        bottomLineSelected.setLayoutParams(params);
     }
 
     private void setViewLinstener(){
@@ -417,17 +430,70 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         layoutMyWallet.setOnClickListener(this);//底部的我的钱包
     }
 
+    /**
+     * 初始化fragment
+     */
+    private void setFragment(){
+        fragments = new Fragment[2];
+        fragments[0] = fragmentManager.findFragmentById(R.id.menu_center_fragment1);
+        fragments[1] = fragmentManager.findFragmentById(R.id.menu_center_fragment2);
+        cgWalletFragment = (CgWalletFragment) fragments[0];
+        myWalletFragment = (MyWalletFragment) fragments[1];
+        fragmentManager.beginTransaction().hide(fragments[1]).hide(fragments[0]).show(fragments[0]).commit();
+    }
+
+    public void layoutClick(int type){
+        switch (type){
+            case R.id.layout_cg_wallet://显示草根钱包页面
+                fragmentManager.beginTransaction()
+                        .hide(fragments[0])
+                        .hide(fragments[1])
+                        .show(fragments[0]).commit();
+                lineToLeft();
+                break;
+            case R.id.layout_my_wallet://显示我的钱包页面
+                fragmentManager.beginTransaction()
+                        .hide(fragments[0])
+                        .hide(fragments[1])
+                        .show(fragments[1]).commit();
+                lineToRight();
+                myWalletFragment.setData(true);
+                break;
+        }
+    }
+
+    /**
+     * 滑动到右边
+     */
+    private void lineToRight(){
+        LineAnimTask task = new LineAnimTask();
+        task.execute(30);
+    }
+
+    /**
+     * 滑动到左边
+     */
+    private void lineToLeft(){
+        LineAnimTask task = new LineAnimTask();
+        task.execute(-30);
+
+    }
+
     private void initFragment(){
         listFms = new ArrayList<>();
         cgWalletFragment = new CgWalletFragment();
         myWalletFragment = new MyWalletFragment();
-        listFms.add(cgWalletFragment);
-        listFms.add(myWalletFragment);
-        mViewPager.setAdapter(new MFragmentPagerAdater(getSupportFragmentManager(), listFms));
-        mViewPager.setCurrentItem(0);
-        mViewPager.setOnPageChangeListener(new MyOnPageChangeListener());
-        bidirSldingLayout.setMovedLeft(true);
-        bidirSldingLayout.setMovedRight(false);
+//        FragmentTransaction transaction = fragmentManager.beginTransaction();
+//        transaction.replace(R.id.menu_center_fragment, cgWalletFragment);
+//        transaction.addToBackStack(null);
+//        transaction.commit();
+//        listFms.add(cgWalletFragment);
+//        listFms.add(myWalletFragment);
+//        mViewPager.setAdapter(new MFragmentPagerAdater(getSupportFragmentManager(), listFms));
+//        mViewPager.setCurrentItem(0);
+//        mViewPager.setOnPageChangeListener(new MyOnPageChangeListener());
+//        bidirSldingLayout.setMovedLeft(true);
+//        bidirSldingLayout.setMovedRight(false);
     }
 
     @Override
@@ -436,7 +502,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         if(!MApplication.isGoLogin() && TextUtils.isEmpty(Utils.getToken())){
             LogUtils.i(TAG,"MApplication.goLogin 为 true");
             currIndex = 0;
-            mViewPager.setCurrentItem(currIndex);
+//            mViewPager.setCurrentItem(currIndex);
         }
         String userMobile = Utils.getUserPhone(this);
         String userId = Utils.getUserId();
@@ -514,11 +580,13 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         switch (v.getId()){
             case R.id.layout_cg_wallet://显示草根钱包页面
                 currIndex = 0;
-                mViewPager.setCurrentItem(currIndex);
+                layoutClick(v.getId());
+//                mViewPager.setCurrentItem(currIndex);
                 break;
             case R.id.layout_my_wallet://显示我的钱包页面
                 currIndex = 1;
-                mViewPager.setCurrentItem(currIndex);
+                layoutClick(v.getId());
+//                mViewPager.setCurrentItem(currIndex);
                 break;
             case R.id.left_menu_safe_center://安全中心
                 if(Utils.isLogined()){//判断是否登录
@@ -591,6 +659,50 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             startActivity(intent);
         }else{
 //            Utils.makeToast(this, "手势密码");
+        }
+    }
+
+    class LineAnimTask extends AsyncTask<Integer, Integer, Integer> {
+
+        @Override
+        protected Integer doInBackground(Integer... speed) {
+            int leftMargin = params.leftMargin;
+            // 根据传入的速度来滚动界面，当滚动到达边界值时，跳出循环。
+            while (true) {
+                leftMargin = leftMargin + speed[0];
+                if(leftMargin > screenWith/2){
+                    leftMargin = screenWith/2;
+                    break;
+                }
+                if(leftMargin < 0){
+                    leftMargin = 0;
+                    break;
+                }
+                publishProgress(leftMargin);
+                // 为了要有滚动效果产生，每次循环使线程睡眠一段时间，这样肉眼才能够看到滚动动画。
+                sleep(15);
+            }
+            return leftMargin;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... leftMargin) {
+            params.leftMargin = leftMargin[0];
+            bottomLineSelected.setLayoutParams(params);
+        }
+
+        @Override
+        protected void onPostExecute(Integer leftMargin) {
+            params.leftMargin = leftMargin;
+            bottomLineSelected.setLayoutParams(params);
+        }
+    }
+
+    private void sleep(int time){
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
