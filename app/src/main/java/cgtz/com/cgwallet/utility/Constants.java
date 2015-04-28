@@ -107,4 +107,6 @@ public class Constants {
             + File.separator + Constants.COMPANY_FILEDIR + "/download/"+IMG_FILE_NAME;
     public static final String PROVINCES = "provinces";//存储省市的文件
     public static final String PROVINCES_XML = "provinces_xml";//存储省的key
+    public static final String TITLE_BIND_BANK = "银行卡绑定";//
+    public static final String TITLE_EDIT_NAME = "实名认证";//
 }

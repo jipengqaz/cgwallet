@@ -12,6 +12,8 @@ import cgtz.com.cgwallet.R;
  * 安全中心
  */
 public class SafeCenterActivity extends BaseActivity implements View.OnClickListener{
+    private RelativeLayout needNameLayout;
+    private RelativeLayout needBankLayout;
 
     private RelativeLayout rl_personal_sodoko_unlock_change,Reset_Passwrod;//管理手势,修改交易密码
     @Override
@@ -26,16 +28,29 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
     }
 
     private void init() {
+        needNameLayout = (RelativeLayout) findViewById(R.id.rl_personal_anthen);
+        needBankLayout = (RelativeLayout) findViewById(R.id.rl_personal_bankcardbinding);
         rl_personal_sodoko_unlock_change = (RelativeLayout) findViewById(R.id.rl_personal_sodoko_unlock_change);
         Reset_Passwrod = (RelativeLayout) findViewById(R.id.Reset_Passwrod);
         Reset_Passwrod.setOnClickListener(this);
         rl_personal_sodoko_unlock_change.setOnClickListener(this);
+        needBankLayout.setOnClickListener(this);
+        needNameLayout.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()){
+            case R.id.rl_personal_anthen://实名认证
+                startActivity(new Intent(this, SaveMoneyActivity.class)
+                        .putExtra("fromName",true));
+                break;
+            case R.id.rl_personal_bankcardbinding://绑定银行卡
+                startActivity(new Intent(this, SaveMoneyActivity.class)
+                        .putExtra("fromBank",true));
+
+                break;
             case R.id.rl_personal_sodoko_unlock_change:
                 intent = new Intent(SafeCenterActivity.this,OpenSudokoUnlockActivity.class);
                 startActivity(intent);

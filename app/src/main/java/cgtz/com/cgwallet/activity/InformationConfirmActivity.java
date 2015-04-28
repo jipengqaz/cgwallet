@@ -106,10 +106,16 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information_confirm);
-        setTitle("存钱");
+        getIntentInfo();
+        if(fromName && !fromBank){
+            setTitle(Constants.TITLE_EDIT_NAME);
+        }else if(!fromName && fromBank){
+            setTitle(Constants.TITLE_BIND_BANK);
+        }else{
+            setTitle("存钱");
+        }
         showBack(true);
         presenter = new SplashPresenter(this);
-        getIntentInfo();
         initViews();
         fillWidget();
         setListener();
@@ -425,8 +431,8 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                     }
                     bankName = text_bankname.getText().toString().trim();//银行名称
                     bankCard = edit_bankcard.getText().toString().trim().replaceAll(" ", "");//银行卡号
-                    LogUtils.i(TAG, "name: " + name + " identity: " + identity+" bankName: "+bankName+
-                                    " bankCard: "+bankCard);
+                    LogUtils.i(TAG, "name: " + name + " identity: " + identity + " bankName: " + bankName +
+                            " bankCard: "+bankCard);
                     if (TextUtils.isEmpty(name)) {
                         Utils.makeToast(InformationConfirmActivity.this, "用户姓名错误");
                     } else if (TextUtils.isEmpty(identity) || identity.length() < 14

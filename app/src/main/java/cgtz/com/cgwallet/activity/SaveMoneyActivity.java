@@ -94,9 +94,9 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
         fromName = getIntent().getBooleanExtra("fromName",false);
         fromBank = getIntent().getBooleanExtra("fromBank",false);
         if(fromName && !fromBank){
-            setTitle("实名认证");
+            setTitle(Constants.TITLE_EDIT_NAME);
         }else if(!fromName && fromBank){
-            setTitle("银行卡绑定");
+            setTitle(Constants.TITLE_BIND_BANK);
         }else{
             setTitle("存钱");
         }
@@ -248,6 +248,9 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
         intent.putExtra("onlyUseAccount",onlyUseAccount);//是否余额充足支付
         intent.putExtra("startCalculateTime",startCalculateTime);//收益开始计算时间
         intent.putExtra("needEdit",needEdit);//是否需要填写信息
+        intent.putExtra("fromBank",fromBank);//收益开始计算时间
+        intent.putExtra("fromName",fromName);//是否需要填写信息
+
         startActivity(intent);
     }
 
