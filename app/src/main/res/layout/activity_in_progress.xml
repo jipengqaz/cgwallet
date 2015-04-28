@@ -1,42 +1,75 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@color/bg_center"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
+    android:layout_height="match_parent">
     <LinearLayout
-        android:layout_marginTop="50dp"
-        android:gravity="center"
+        android:background="@color/bg_center"
         android:orientation="vertical"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content">
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/icon_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_progress"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/button_text_can_click"
+                android:textSize="@dimen/text_size_14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_progress_banner"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/green"
+                android:textSize="@dimen/text_size_14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_margin="30dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="46dp">
+            <TextView
+                android:id="@+id/look_save_record"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="查看存钱记录"
+                android:textSize="@dimen/text_size_16sp"
+                android:textColor="@color/button_text_can_click"
+                android:background="@mipmap/icon_look_record"
+                android:layout_width="wrap_content"
+                android:layout_height="46dp" />
+            <View
+                android:layout_width="20dp"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:id="@+id/go_to_wallet"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="查看我的钱包"
+                android:textSize="@dimen/text_size_16sp"
+                android:textColor="@color/white"
+                android:background="@mipmap/icon_go_wallet"
+                android:layout_width="wrap_content"
+                android:layout_height="46dp" />
+        </LinearLayout>
         <ImageView
-            android:src="@mipmap/icon_progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_progress"
-            android:layout_marginTop="15dp"
-            android:textColor="@color/button_text_can_click"
-            android:textSize="@dimen/text_size_14sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_progress_banner"
-            android:layout_marginTop="15dp"
-            android:textColor="@color/green"
-            android:textSize="@dimen/text_size_14sp"
+            android:layout_marginTop="50dp"
+            android:src="@mipmap/wallet_slogan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-    <Button
-        android:id="@+id/button_progress"
-        android:text="知道了"
-        android:textSize="@dimen/text_size_16sp"
-        android:textColor="@color/white"
-        android:layout_margin="30dp"
-        android:background="@color/button_text_can_click"
-        android:layout_width="match_parent"
-        android:layout_height="46dp" />
-</LinearLayout>
+</ScrollView>
+

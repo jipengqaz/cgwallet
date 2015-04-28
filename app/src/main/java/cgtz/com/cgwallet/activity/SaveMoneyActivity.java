@@ -22,6 +22,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
@@ -86,6 +87,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save_money);
+        MApplication.registActivities(this);
         setTitle("存钱");
         showBack(true);
         presenter = new SplashPresenter(this);

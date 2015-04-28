@@ -19,7 +19,6 @@ public class SaveMoneySuccessActivity extends BaseActivity {
     private TextView calculateTime;
     private TextView lookSaveRecord;//查看存钱记录
     private TextView goToWallet;//查看我的钱包
-    private ImageView imgProgress;
     private String startCalculateTime;//开始计算收益时间
     private String saveMoney;//存钱数值
 
@@ -38,7 +37,6 @@ public class SaveMoneySuccessActivity extends BaseActivity {
     private void initViews(){
         saveFigure = (TextView) findViewById(R.id.tv_save_figure);
         calculateTime = (TextView) findViewById(R.id.tv_calculate_time);
-        imgProgress = (ImageView) findViewById(R.id.iv_progress);
         lookSaveRecord = (TextView) findViewById(R.id.look_save_record);//查看存钱记录
         goToWallet = (TextView) findViewById(R.id.go_to_wallet);//查看我的钱包
         if(!TextUtils.isEmpty(saveMoney)){
