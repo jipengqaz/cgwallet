@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,12 +40,7 @@ public class ChangeLoginPwdActivity extends BaseActivity {
         setContentView(R.layout.activity_change_loginpwd);
         MApplication.registActivities(this);
         init();
-        setBackListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        showBack(true);
         dialog = new ProgressDialog(this,R.style.loading_dialog);
         setViesListener();
     }
@@ -88,7 +82,6 @@ public class ChangeLoginPwdActivity extends BaseActivity {
                 } else {
                     dialog.setMessage("密码修改中...");
                     dialog.show();
-                    Log.e(TAG, originalpwd + "      " + newpwd+"   "+confirmpwd);
                     Is_passwrod.changLoginpwd(mHandler, originalpwd, newpwd, confirmpwd, 11);
                 }
             }

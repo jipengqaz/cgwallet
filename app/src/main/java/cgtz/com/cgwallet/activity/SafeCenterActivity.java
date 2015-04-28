@@ -7,6 +7,7 @@ import android.widget.RelativeLayout;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.utils.Utils;
 
 /**
  * 安全中心
@@ -38,18 +39,30 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()){
-            case R.id.rl_personal_sodoko_unlock_change:
+            case R.id.rl_personal_sodoko_unlock_change://设置手势
+                if(Utils.isLogined()){
                 intent = new Intent(SafeCenterActivity.this,OpenSudokoUnlockActivity.class);
                 startActivity(intent);
+                }else{
+                    startActivity(new Intent(SafeCenterActivity.this,LoginActivity.class));
+                }
                 break;
-            case R.id.Reset_Passwrod:
+            case R.id.Reset_Passwrod://修改交易密码
+                if(Utils.isLogined()){
                 intent = new Intent(SafeCenterActivity.this,TradePwdActivity.class);
                 intent.putExtra("isSetTradePwd",true);
                 startActivity(intent);
+                }else{
+                    startActivity(new Intent(SafeCenterActivity.this,LoginActivity.class));
+                }
                 break;
-            case R.id.rl_personal_loginpwd_change:
+            case R.id.rl_personal_loginpwd_change://修改登录密码
+                if(Utils.isLogined()){
                 intent = new Intent(SafeCenterActivity.this,ChangeLoginPwdActivity.class);
                 startActivity(intent);
+                }else{
+                    startActivity(new Intent(SafeCenterActivity.this,LoginActivity.class));
+                }
                 break;
         }
     }
