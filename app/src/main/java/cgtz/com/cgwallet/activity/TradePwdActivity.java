@@ -60,6 +60,12 @@ public class TradePwdActivity extends BaseActivity {
         }else{
             isSetTradePwd = getIntent().getBooleanExtra("isSetTradePwd", false);//用于判断是否不设交易密码
         }
+        setBackListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         if(isSetTradePwd){
             setTitle("交易密码");
             setRightText("修改");

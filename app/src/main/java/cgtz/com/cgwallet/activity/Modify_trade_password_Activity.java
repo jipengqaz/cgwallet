@@ -70,6 +70,12 @@ public class Modify_trade_password_Activity extends BaseActivity {
         setTitle("修改交易密码");
         setContentView(R.layout.activity_modify_trade_password);
         MApplication.registActivities(this);//存储该activity
+        setBackListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         init();
     }
 
