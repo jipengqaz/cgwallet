@@ -2,112 +2,116 @@
     android:background="@mipmap/bg_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    <LinearLayout
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="50dp"
-        android:orientation="vertical"
-        android:gravity="center"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/iv_no_phone"
-            android:src="@mipmap/icon_login_top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
         <LinearLayout
-            android:id="@+id/layout_have_phone"
-            android:visibility="gone"
-            android:gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="50dp"
             android:orientation="vertical"
-            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
-                android:src="@mipmap/icon_login_avater"
+                android:id="@+id/iv_no_phone"
+                android:src="@mipmap/icon_login_top"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/tv_login_phone"
+            <LinearLayout
+                android:id="@+id/layout_have_phone"
+                android:visibility="gone"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@mipmap/icon_login_avater"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_login_phone"
+                    android:layout_marginTop="30dp"
+                    android:textSize="@dimen/login_welcome_text"
+                    android:textColor="@color/login_phone_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
                 android:layout_marginTop="30dp"
-                android:text="151******23"
-                android:textSize="@dimen/login_welcome_text"
-                android:textColor="@color/login_phone_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_marginTop="30dp"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/login_edit_phone"
-                android:maxLength="11"
-                android:numeric="integer"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/login_edit_text"
-                android:background="@drawable/bg_login_edit"
-                android:drawableLeft="@mipmap/icon_login_phone"
-                android:drawablePadding="10dp"
-                android:paddingLeft="@dimen/draw_padding"
-                android:hint="@string/login_edit_hint_text"
-                android:textColorHint="@color/login_edit_hint"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/height_login_edit" />
-            <EditText
-                android:id="@+id/login_edit_pwd"
-                android:password="true"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/login_edit_text"
-                android:background="@drawable/bg_login_edit"
-                android:drawableLeft="@mipmap/icon_login_pwd"
-                android:drawablePadding="10dp"
-                android:paddingLeft="@dimen/draw_padding"
-                android:hint="@string/login_edit_pwd_hint_text"
-                android:digits="@string/pwd_digits"
-                android:textColorHint="@color/login_edit_hint"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/login_edit_phone"
+                    android:maxLength="11"
+                    android:numeric="integer"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/login_edit_text"
+                    android:background="@drawable/bg_login_edit"
+                    android:drawableLeft="@mipmap/icon_login_phone"
+                    android:drawablePadding="10dp"
+                    android:paddingLeft="@dimen/draw_padding"
+                    android:hint="@string/login_edit_hint_text"
+                    android:textColorHint="@color/login_edit_hint"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_login_edit" />
+                <EditText
+                    android:id="@+id/login_edit_pwd"
+                    android:password="true"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/login_edit_text"
+                    android:background="@drawable/bg_login_edit"
+                    android:drawableLeft="@mipmap/icon_login_pwd"
+                    android:drawablePadding="10dp"
+                    android:paddingLeft="@dimen/draw_padding"
+                    android:hint="@string/login_edit_pwd_hint_text"
+                    android:textColorHint="@color/login_edit_hint"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_login_edit" />
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:text="@string/hint_can_login"
+                    android:textSize="@dimen/login_edit_text"
+                    android:textColor="@color/login_hint_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <Button
+                android:id="@+id/login_button_finish"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/bg_login_button"
+                android:text="@string/login_button_next"
+                android:textSize="@dimen/login_btn_text"
+                android:textColor="@color/login_btn_text"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/height_login_edit" />
-            <TextView
+                android:layout_height="42dp" />
+            <LinearLayout
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="30dp"
-                android:text="@string/hint_can_login"
-                android:textSize="@dimen/login_edit_text"
-                android:textColor="@color/login_hint_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_marginBottom="100dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="@string/hint_service_text"
+                    android:textSize="@dimen/login_edit_text"
+                    android:textColor="@color/login_hint_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_show_service_phone"
+                    android:text="400-877-0809"
+                    android:textSize="@dimen/login_edit_text"
+                    android:textColor="@color/login_hint_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
         </LinearLayout>
-        <Button
-            android:id="@+id/login_button_finish"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/bg_login_button"
-            android:text="@string/login_button_next"
-            android:textSize="@dimen/login_btn_text"
-            android:textColor="@color/login_btn_text"
-            android:layout_width="match_parent"
-            android:layout_height="42dp" />
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:text="@string/hint_service_text"
-                android:textSize="@dimen/login_edit_text"
-                android:textColor="@color/login_hint_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/tv_show_service_phone"
-                android:text="400-877-0809"
-                android:textSize="@dimen/login_edit_text"
-                android:textColor="@color/login_hint_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
     <LinearLayout
+        android:id="@+id/bottom_layout"
         android:layout_alignParentBottom="true"
         android:background="@color/bg_login_bottom"
         android:orientation="horizontal"

@@ -205,6 +205,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                     } else {
                         //未设置交易密码
                         Utils.makeToast(SaveMoneyActivity.this, "请设置交易密码");
+                        startActivity(new Intent(SaveMoneyActivity.this,TradePwdActivity.class));
                     }
                 }
             }

@@ -132,6 +132,11 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
         saveMoney = getIntent().getStringExtra("saveMoney");//存入金额
         useAccount = getIntent().getStringExtra("useAccount");//使用的余额数值
         useBank = getIntent().getStringExtra("useBank");//使用的银行卡支付金额
+        if(Constants.IS_TEST){
+            useBank = "0.01";
+            saveMoney = "0.01";
+            useAccount = "0.00";
+        }
         startCalculateTime = getIntent().getStringExtra("startCalculateTime");//开始计算收益时间
     }
 
@@ -625,6 +630,8 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                                             .putExtra("startCalculateTime", startCalculateTime));//跳转到支付成功页面
                                     finish();
                                 }
+                            }else{
+                                Utils.makeToast(InformationConfirmActivity.this,errorMsg);
                             }
                         }
                         break;
@@ -732,6 +739,8 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                                             .putExtra("isSaveAt",true));//跳转到支付处理中
                                     finish();
                                 }
+                            }else{
+                                Utils.makeToast(InformationConfirmActivity.this,errorMsg);
                             }
                         }
                         break;
@@ -774,7 +783,6 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
         /**
          *  填写个人信息时支付
          */
-        if(!isRealleyName || !isRelleyBank){
             /**
              * 判断是否只使用余额支付
              */
@@ -812,7 +820,6 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                         true,params,true);
                 task.execute();
             }
-        }
 
     }
 }

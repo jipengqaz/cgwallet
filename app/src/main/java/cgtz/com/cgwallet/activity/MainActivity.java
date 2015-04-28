@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -21,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tencent.open.utils.Util;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.bean.SocializeEntity;
@@ -102,6 +104,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         MApplication.registActivities(this);//存储该activity
         splashPresenter = new SplashPresenter(this);
         fragmentManager = getSupportFragmentManager();
+
         screenWith = getResources().getDisplayMetrics().widthPixels;
         initViews();
         setFragment();
@@ -135,7 +138,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                 }
             }
         });
-
         initShare();
     }
     //获取友盟分享变量
@@ -452,14 +454,19 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                 lineToLeft();
                 break;
             case R.id.layout_my_wallet://显示我的钱包页面
-                fragmentManager.beginTransaction()
-                        .hide(fragments[0])
-                        .hide(fragments[1])
-                        .show(fragments[1]).commit();
-                lineToRight();
-                myWalletFragment.setData(true);
+                if(!Utils.isLogined()){
+                    startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                }else{
+                    fragmentManager.beginTransaction()
+                            .hide(fragments[0])
+                            .hide(fragments[1])
+                            .show(fragments[1]).commit();
+                    lineToRight();
+                    myWalletFragment.setData(true);
+                }
                 break;
         }
+
     }
 
     /**
@@ -499,19 +506,19 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     protected void onResume() {
         super.onResume();
-        if(!MApplication.isGoLogin() && TextUtils.isEmpty(Utils.getToken())){
-            LogUtils.i(TAG,"MApplication.goLogin 为 true");
-            layoutClick(R.id.layout_cg_wallet);
-            setLeftMenuInfo(0);//未登录
-//            currIndex = 0;
-//            mViewPager.setCurrentItem(currIndex);
-        }
+//        if(!MApplication.isGoLogin() && TextUtils.isEmpty(Utils.getToken())){
+//            LogUtils.i(TAG, "MApplication.goLogin 为 true");
+//            if(fragmentManager != null){
+//                layoutClick(R.id.layout_cg_wallet);
+//            }
+//
+//            setLeftMenuInfo(0);//未登录
+////            currIndex = 0;
+////            mViewPager.setCurrentItem(currIndex);
+//        }
         String userMobile = Utils.getUserPhone(this);
-        String userId = Utils.getUserId();
-        String token = Utils.getToken();
-        String loginPwd = Utils.getLoginPwd(this);
-        if(!TextUtils.isEmpty(userMobile) && !TextUtils.isEmpty(userId)
-                && !TextUtils.isEmpty(token) && !TextUtils.isEmpty(loginPwd)){
+        LogUtils.i(TAG,"islogin: "+ Utils.isLogined() + " mobile: "+Utils.getUserPhone(this));
+        if(Utils.isLogined() && !TextUtils.isEmpty(userMobile)){
             tvShowLoginMobile.setText(Utils.getHasStarsMobile(userMobile));
             setLeftMenuInfo(1);//已登录
         }else{
@@ -662,6 +669,11 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         }else{
 //            Utils.makeToast(this, "手势密码");
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
     }
 
     class LineAnimTask extends AsyncTask<Integer, Integer, Integer> {
