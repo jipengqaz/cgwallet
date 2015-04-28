@@ -67,8 +67,12 @@ public class OpenSudokoUnlockActivity extends BaseActivity {
         tv_openLock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(flag){
                 Intent intent = new Intent(OpenSudokoUnlockActivity.this,GestureEditActivity.class);
                 startActivity(intent);
+                }else{
+                    Utils.removePassWord(OpenSudokoUnlockActivity.this,Utils.getUserPhone(OpenSudokoUnlockActivity.this));
+                }
             }
         });
         /**
