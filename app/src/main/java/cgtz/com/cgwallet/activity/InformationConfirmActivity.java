@@ -51,7 +51,8 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
     private static final String TAG = "InformationConfirmActivity";
     private boolean onlyUseAccount;//是否余额充足支付
     private boolean isRealleyName;//是否真正实名认证
-    private boolean isRelleyBank;//是否真正绑卡或者支持连连支付
+//    private boolean isRelleyBank;//是否真正绑卡或者支持连连支付
+    private boolean needEdit;//是否需要填写信息
     private String name;//姓名
     private String identity;//身份证号
     private String bankName;//银行名称
@@ -115,11 +116,12 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
     }
 
     private void getIntentInfo(){
+        needEdit = getIntent().getBooleanExtra("needEdit",true);//是否需要填写信息
         fromName = getIntent().getBooleanExtra("fromName",false);//是否来自实名认证
         fromBank = getIntent().getBooleanExtra("fromBank",false);//是否来自绑定银行卡
         onlyUseAccount = getIntent().getBooleanExtra("onlyUseAccount",false);//是否余额充足支付
         isRealleyName = getIntent().getBooleanExtra("isRealleyName",false);//是否真正实名认证
-        isRelleyBank = getIntent().getBooleanExtra("isRelleyBank",false);//是否真正绑卡或者支持连连支付
+//        isRelleyBank = getIntent().getBooleanExtra("isRelleyBank",false);//是否真正绑卡或者支持连连支付
         name = getIntent().getStringExtra("name");//姓名
         identity = getIntent().getStringExtra("identity");//身份证号
         bankName = getIntent().getStringExtra("bankName");//银行名称
@@ -132,11 +134,6 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
         saveMoney = getIntent().getStringExtra("saveMoney");//存入金额
         useAccount = getIntent().getStringExtra("useAccount");//使用的余额数值
         useBank = getIntent().getStringExtra("useBank");//使用的银行卡支付金额
-        if(Constants.IS_TEST){
-            useBank = "0.01";
-            saveMoney = "0.01";
-            useAccount = "0.00";
-        }
         startCalculateTime = getIntent().getStringExtra("startCalculateTime");//开始计算收益时间
     }
 
@@ -166,20 +163,23 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
     }
 
     private void fillWidget(){
+        /**
+         * 判断是否余额充足支付
+         */
         if(onlyUseAccount){
-            //是否余额充足支付
+            //余额充足
             LogUtils.i(TAG, "余额充足支付，不显示个人信息");
             layout_need_edit.setVisibility(View.GONE);
             layout_neednot_edit.setVisibility(View.GONE);
             layoutAccountBank.setVisibility(View.GONE);
+
         }else{
-            if(fromName || fromBank){
-                layoutAccountBank.setVisibility(View.GONE);
-                saveMoney = "0.1";
-            }else{
-                layoutAccountBank.setVisibility(View.VISIBLE);
-            }
-            if(!isRealleyName || !isRelleyBank){
+            /**
+             * 判断是否需要填写信息，来显示不同布局
+             * true 需要填写信息
+             * false 不需要填写信息
+             */
+            if(needEdit){
                 //需要重新填写个人信息
                 layout_need_edit.setVisibility(View.VISIBLE);
                 layout_neednot_edit.setVisibility(View.GONE);
@@ -234,6 +234,68 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                 }
             }
         }
+//        if(onlyUseAccount){
+//            //是否余额充足支付
+//            LogUtils.i(TAG, "余额充足支付，不显示个人信息");
+//            layout_need_edit.setVisibility(View.GONE);
+//            layout_neednot_edit.setVisibility(View.GONE);
+//            layoutAccountBank.setVisibility(View.GONE);
+//        }else{
+//            if(!isRealleyName || !isRelleyBank){
+//                //需要重新填写个人信息
+//                layout_need_edit.setVisibility(View.VISIBLE);
+//                layout_neednot_edit.setVisibility(View.GONE);
+//                if(!TextUtils.isEmpty(name)){
+//                    //输入或者显示用户姓名
+//                    if(isRealleyName){
+//                        edit_username.setText(Utils.getUserNameForStart(name));
+//                        edit_username.setEnabled(false);
+//                    }else{
+//                        edit_username.setText(name);
+//                        edit_username.setSelection(name.length());
+//                        edit_username.setEnabled(true);
+//                    }
+//                }
+//                if(!TextUtils.isEmpty(identity)){
+//                    //输入或显示身份证
+//                    if(isRealleyName){
+//                        edit_identity.setText(Utils.getUserIdentity(identity));
+//                        edit_identity.setEnabled(false);
+//                    }else{
+//                        edit_identity.setText(identity);
+//                        edit_identity.setSelection(identity.length());
+//                        edit_identity.setEnabled(true);
+//                    }
+//                }
+//                if(!TextUtils.isEmpty(bankName)){
+//                    //选择银行卡
+//                    text_bankname.setText(bankName);
+//                }
+//                if(!TextUtils.isEmpty(bankCard)){
+//                    //输入银行卡号
+//                    edit_bankcard.setText(bankCard);
+//                }
+//            }else{
+//                //不需要重新填写个人信息
+//                LogUtils.i(TAG,"不需要重新填写个人信息");
+//                if(onlyUseAccount){
+//                    //是否余额充足支付
+//                    LogUtils.i(TAG,"余额充足支付，不显示个人信息");
+//                    layout_need_edit.setVisibility(View.GONE);
+//                    layout_neednot_edit.setVisibility(View.GONE);
+//                }else{
+//                    //余额不充足
+//                    LogUtils.i(TAG,"余额不充足支付");
+//                    layout_need_edit.setVisibility(View.GONE);
+//                    layout_neednot_edit.setVisibility(View.VISIBLE);
+//                    invest_name.setText(TextUtils.isEmpty(name)?"":Utils.getUserNameForStart(name) );
+//                    invest_identity.setText(TextUtils.isEmpty(identity)?"":Utils.getUserIdentity(identity) );
+//                    invest_bankcard.setText(TextUtils.isEmpty(lastBankCordNum)?"":"尾号"+lastBankCordNum );
+//                    invest_bank_id.setText(TextUtils.isEmpty(bankName)?"":bankName);
+//                    backhint.setText(TextUtils.isEmpty(bankTip)?"":bankTip);
+//                }
+//            }
+//        }
 
 
         stilledMoney.setText(saveMoney+"");
@@ -355,7 +417,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
         btn_finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!onlyUseAccount && (!isRealleyName || !isRelleyBank)) {
+                if (!onlyUseAccount && needEdit) {
                     //需要重新填写个人信息
                     if (!isRealleyName) {
                         name = edit_username.getText().toString().trim();
@@ -363,9 +425,8 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                     }
                     bankName = text_bankname.getText().toString().trim();//银行名称
                     bankCard = edit_bankcard.getText().toString().trim().replaceAll(" ", "");//银行卡号
-                }
-                LogUtils.i(TAG, "name: " + name + " identity: " + identity);
-                if (!onlyUseAccount && (!isRealleyName || !isRelleyBank)) {
+                    LogUtils.i(TAG, "name: " + name + " identity: " + identity+" bankName: "+bankName+
+                                    " bankCard: "+bankCard);
                     if (TextUtils.isEmpty(name)) {
                         Utils.makeToast(InformationConfirmActivity.this, "用户姓名错误");
                     } else if (TextUtils.isEmpty(identity) || identity.length() < 14
@@ -373,9 +434,9 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                         Utils.makeToast(InformationConfirmActivity.this, "用户身份证号信息错误");
                     } else if (TextUtils.isEmpty(saveMoney)) {
                         Utils.makeToast(InformationConfirmActivity.this, "支付金额错误");
-                    } else if (!isRelleyBank && TextUtils.isEmpty(bankName)) {
+                    } else if (TextUtils.isEmpty(bankName)) {
                         Utils.makeToast(InformationConfirmActivity.this, "银行信息填写错误");
-                    } else if (!isRelleyBank && !TextUtils.isEmpty(payLimit) &&
+                    } else if (!TextUtils.isEmpty(payLimit) &&
                             Double.parseDouble(saveMoney) > Double.parseDouble(payLimit)) {
                         Utils.makeToast(InformationConfirmActivity.this, "该银行卡单笔最高可支付" + payLimit + "万元");
                     } else {
@@ -653,7 +714,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                                 params.put("bank_name",bankName);//银行名称
                                 params.put("name",name);//姓名
                                 params.put("identity",identity);//身份证号
-                                if(!isRelleyBank){
+                                if(needEdit){
                                     params.put("is_recharge","1");//需要绑卡传1 已经绑卡了 传0
                                 }else{
                                     params.put("is_recharge","0");//需要绑卡传1 已经绑卡了 传0

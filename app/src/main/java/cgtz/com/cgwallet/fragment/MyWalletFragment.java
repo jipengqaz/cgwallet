@@ -232,12 +232,14 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
         switch (id){
             case R.id.layout_auther://实名认证
                 if(TextUtils.isEmpty(identity)){
-                    startActivity(new Intent(getActivity(), SafeCenterActivity.class));
+                    startActivity(new Intent(getActivity(), SaveMoneyActivity.class)
+                    .putExtra("fromName",true));
                 }
                 break;
             case R.id.layout_bank://绑定银行卡
                 if(TextUtils.isEmpty(bankCord)){
-                    startActivity(new Intent(getActivity(), SafeCenterActivity.class));
+                    startActivity(new Intent(getActivity(), SaveMoneyActivity.class)
+                            .putExtra("fromBank",true));
                 }
                 break;
             case R.id.layout_draw://取钱
