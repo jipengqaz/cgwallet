@@ -23,7 +23,10 @@ import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.activity.E_wallet_record_activity;
 import cgtz.com.cgwallet.activity.Earnings_record;
+import cgtz.com.cgwallet.activity.InformationConfirmActivity;
 import cgtz.com.cgwallet.activity.LoginActivity;
+import cgtz.com.cgwallet.activity.SafeCenterActivity;
+import cgtz.com.cgwallet.activity.SaveMoneyActivity;
 import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
@@ -228,12 +231,19 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
         int id = v.getId();
         switch (id){
             case R.id.layout_auther://实名认证
+                if(TextUtils.isEmpty(identity)){
+                    startActivity(new Intent(getActivity(), SafeCenterActivity.class));
+                }
                 break;
             case R.id.layout_bank://绑定银行卡
+                if(TextUtils.isEmpty(bankCord)){
+                    startActivity(new Intent(getActivity(), SafeCenterActivity.class));
+                }
                 break;
             case R.id.layout_draw://取钱
                 break;
             case R.id.layout_save://存钱
+                startActivity(new Intent(getActivity(), SaveMoneyActivity.class));
                 break;
             case R.id.layout_draw_record://取钱记录
                 startActivity(new Intent(getActivity(),E_wallet_record_activity.class));
@@ -242,6 +252,7 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
                 startActivity(new Intent(getActivity(),E_wallet_record_activity.class));
                 break;
             case R.id.wallet_assets_layout://我的资产layout
+                startActivity(new Intent(getActivity(),E_wallet_record_activity.class));
                 break;
             case R.id.wallet_accumulative_layout://累计收益layout
                 startActivity(new Intent(getActivity(), Earnings_record.class));

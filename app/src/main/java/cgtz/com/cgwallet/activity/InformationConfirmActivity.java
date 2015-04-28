@@ -1,6 +1,7 @@
 package cgtz.com.cgwallet.activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -82,6 +83,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
     private LinearLayout bank_layout;//银行信息布局
     private TextView invester_bank_pay;//银行卡支付金额
     private TextView invester_balance;//余额支付金额
+    private LinearLayout layoutAccountBank;//余额支付和银行卡支付的布局
     private ArrayList<Bank> list = new ArrayList<Bank>();//存放银行名称的
     private boolean noBank = true;//判断是否有可选银行列表
     private boolean b = false;//用于判断银行卡输入时加空格的
@@ -97,6 +99,8 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
     private String notifyUrl;
     private String no_agree;
     private PayOrder order = null;
+    private boolean fromName = false;//判断是否来自实名认证
+    private boolean fromBank = false;//判断是否来自绑定银行卡
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +116,8 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
     }
 
     private void getIntentInfo(){
+        fromName = getIntent().getBooleanExtra("fromName",false);//是否来自实名认证
+        fromBank = getIntent().getBooleanExtra("fromBank",false);//是否来自绑定银行卡
         onlyUseAccount = getIntent().getBooleanExtra("onlyUseAccount",false);//是否余额充足支付
         isRealleyName = getIntent().getBooleanExtra("isRealleyName",false);//是否真正实名认证
         isRelleyBank = getIntent().getBooleanExtra("isRelleyBank",false);//是否真正绑卡或者支持连连支付
@@ -132,6 +138,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
     /**初始化视图*/
     private void initViews(){
 //        UtilityUtils.setPossession_TextView(this);//设置文案  资金安全
+        layoutAccountBank = (LinearLayout) findViewById(R.id.investment_payment);
         invester_bank_pay = (TextView) findViewById(R.id.invester_bank_pay);//银行卡支付金额
         invester_balance = (TextView) findViewById(R.id.invester_balance);//余额支付金额
         bank_layout = (LinearLayout) findViewById(R.id.bank_layout);//银行卡信息布局
@@ -154,6 +161,12 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
     }
 
     private void fillWidget(){
+        if(fromName || fromBank){
+            layoutAccountBank.setVisibility(View.GONE);
+            saveMoney = "1";
+        }else{
+            layoutAccountBank.setVisibility(View.VISIBLE);
+        }
         if(!isRealleyName || !isRelleyBank){
             //需要重新填写个人信息
             layout_need_edit.setVisibility(View.VISIBLE);
@@ -480,8 +493,67 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
         @Override
         public void handleMessage(Message msg) {
             try{
-                isRealleyName = false;//是否真正实名认证
-                isRelleyBank = false;//是否真正绑卡或者支持连连支付
+                if(msg.what == cgtz.com.cgwallet.utils.llutils.Constants.RQF_PAY){
+                    //连连sdk内容
+                    LogUtils.i(TAG, "连连sdk内容：" + msg.obj.toString());
+                    customDialog =
+                            new CustomDialog(InformationConfirmActivity.this,R.style.loading_dialog2);
+                    JSONObject objContent = BaseHelper.string2JSON(msg.obj.toString());
+                    String retCode = objContent.optString("ret_code");
+                    String retMsg = objContent.optString("ret_msg");
+                    // 先判断状态码，状态码为 成功或处理中 的需要 验签
+                    if (cgtz.com.cgwallet.utils.llutils.Constants.RET_CODE_SUCCESS.equals(retCode)
+                            || cgtz.com.cgwallet.utils.llutils.Constants.RET_CODE_PROCESS.equals(retCode)) {
+                        String resulPay = objContent
+                                .optString("result_pay");
+                        if (cgtz.com.cgwallet.utils.llutils.Constants.RESULT_PAY_SUCCESS
+                                .equalsIgnoreCase(resulPay)
+                                || cgtz.com.cgwallet.utils.llutils.Constants.RESULT_PAY_PROCESSING
+                                .equalsIgnoreCase(resulPay)) {
+                            // TODO 支付成功后续处理
+//                                    if(runningDialog != null){
+//                                        runningDialog.setMessage("充值成功，正在确认投资记录");
+//                                        runningDialog.show();
+//                                    }
+                            HashMap<String,String> params = new HashMap<>();
+                            params.put("user_id",Utils.getUserId()+"");
+                            params.put("token",Utils.getToken());
+                            params.put("trade_no", no_order);
+                            if(isRealleyName){
+                                LogUtils.i(TAG,"isAuth is false");
+                                params.put("name",name);
+                                params.put("identity",identity);
+                            }
+                            CustomTask task = new CustomTask(mHandler, Constants.WHAT_BANKCARD_LLBIND
+                                    ,Constants.URL_BANKCARD_LLBIND,
+                                    true,params,true);
+                            task.execute();
+                        } else {
+                            customDialog.setMessage(retMsg);
+                            customDialog.setConfirmBtnText("确认");
+                            customDialog.show();
+                            customDialog.setConfirmListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    closeDialog();
+                                    customDialog.dismiss();
+                                }
+                            });
+                        }
+                    } else {
+                        customDialog.setMessage(retMsg);
+                        customDialog.setConfirmBtnText("确认");
+                        customDialog.show();
+                        customDialog.setConfirmListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                closeDialog();
+                                customDialog.dismiss();
+                            }
+                        });
+                    }
+                    return;
+                }
                 JsonBean jsonBean = (JsonBean) msg.obj;
                 int code = jsonBean.getCode();
                 String errorMsg = jsonBean.getError_msg();
@@ -531,10 +603,14 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                                 int paying = json.optInt("paying");
                                 if(paying == 1){
                                     //支付处理中
-
+                                    startActivity(new Intent(InformationConfirmActivity.this,
+                                            InProgressActivity.class)
+                                            .putExtra("isSaveAt",true));//是否从存钱页面跳转
                                 }else if(paying == 0){
                                     //支付成功
-
+                                    startActivity(new Intent(InformationConfirmActivity.this,
+                                            SaveMoneySuccessActivity.class)
+                                            .putExtra("isSaveAt",true));//是否从存钱页面跳转
                                 }
                             }
                         }
@@ -549,7 +625,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                                 HashMap<String,String> params = new HashMap<>();
                                 params.put("user_id", Utils.getUserId());
                                 params.put("token",Utils.getToken());
-                                params.put("money_order",saveMoney);//(订单金额)
+                                params.put("money_order",useBank);//(订单金额)
                                 params.put("no_order",tradeNo);//订单编号
                                 params.put("valid_order","");//订单有效时间
                                 params.put("bank_id",bankId);//银行id
@@ -605,65 +681,6 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                                 InformationConfirmActivity.this, false);
                         LogUtils.i(InformationConfirmActivity.class.getSimpleName(), String.valueOf(bRet));
                         break;
-                    case cgtz.com.cgwallet.utils.llutils.Constants.RQF_PAY://连连sdk内容
-                            LogUtils.i(TAG, "连连sdk内容：" + msg.obj.toString());
-                            customDialog =
-                                    new CustomDialog(InformationConfirmActivity.this,R.style.loading_dialog2);
-                            JSONObject objContent = BaseHelper.string2JSON(msg.obj.toString());
-                            String retCode = objContent.optString("ret_code");
-                            String retMsg = objContent.optString("ret_msg");
-                            // 先判断状态码，状态码为 成功或处理中 的需要 验签
-                            if (cgtz.com.cgwallet.utils.llutils.Constants.RET_CODE_SUCCESS.equals(retCode)
-                                    || cgtz.com.cgwallet.utils.llutils.Constants.RET_CODE_PROCESS.equals(retCode)) {
-                                String resulPay = objContent
-                                        .optString("result_pay");
-                                if (cgtz.com.cgwallet.utils.llutils.Constants.RESULT_PAY_SUCCESS
-                                        .equalsIgnoreCase(resulPay)
-                                        || cgtz.com.cgwallet.utils.llutils.Constants.RESULT_PAY_PROCESSING
-                                        .equalsIgnoreCase(resulPay)) {
-                                    // TODO 支付成功后续处理
-//                                    if(runningDialog != null){
-//                                        runningDialog.setMessage("充值成功，正在确认投资记录");
-//                                        runningDialog.show();
-//                                    }
-                                    HashMap<String,String> params = new HashMap<>();
-                                    params.put("user_id",Utils.getUserId()+"");
-                                    params.put("token",Utils.getToken());
-                                    params.put("trade_no", no_order);
-                                    if(isRealleyName){
-                                        LogUtils.i(TAG,"isAuth is false");
-                                        params.put("name",name);
-                                        params.put("identity",identity);
-                                    }
-                                    CustomTask task = new CustomTask(mHandler, Constants.WHAT_BANKCARD_LLBIND
-                                            ,Constants.URL_BANKCARD_LLBIND,
-                                            true,params,true);
-                                    task.execute();
-                                } else {
-                                    customDialog.setMessage(retMsg);
-                                    customDialog.setConfirmBtnText("确认");
-                                    customDialog.show();
-                                    customDialog.setConfirmListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            closeDialog();
-                                            customDialog.dismiss();
-                                        }
-                                    });
-                                }
-                            } else {
-                                customDialog.setMessage(retMsg);
-                                customDialog.setConfirmBtnText("确认");
-                                customDialog.show();
-                                customDialog.setConfirmListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        closeDialog();
-                                        customDialog.dismiss();
-                                    }
-                                });
-                            }
-                        break;
                     case Constants.WHAT_BANKCARD_LLBIND://预绑成功之后调用 用来银行卡绑定连连
                         LogUtils.i(TAG,"预绑成功之后调用 用来银行卡绑定连连: "+jsonBean.getJsonString());
                         if(flag){
@@ -690,8 +707,14 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                                 int paying = json.optInt("paying");
                                 if(paying == 0){
                                     //支付成功
+                                    startActivity(new Intent(InformationConfirmActivity.this,
+                                            SaveMoneySuccessActivity.class)
+                                            .putExtra("isSaveAt",true));//是否从存钱页面跳转
                                 }else if(paying == 1){
                                     //处理中
+                                    startActivity(new Intent(InformationConfirmActivity.this,
+                                            InProgressActivity.class)
+                                            .putExtra("isSaveAt",true));//是否从存钱页面跳转
                                 }
                             }
                         }

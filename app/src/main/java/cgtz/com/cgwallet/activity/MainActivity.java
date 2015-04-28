@@ -439,9 +439,11 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             mViewPager.setCurrentItem(currIndex);
         }
         String userMobile = Utils.getUserPhone(this);
+        String userId = Utils.getUserId();
         String token = Utils.getToken();
         String loginPwd = Utils.getLoginPwd(this);
-        if(!TextUtils.isEmpty(userMobile) && !TextUtils.isEmpty(token) && !TextUtils.isEmpty(loginPwd)){
+        if(!TextUtils.isEmpty(userMobile) && !TextUtils.isEmpty(userId)
+                && !TextUtils.isEmpty(token) && !TextUtils.isEmpty(loginPwd)){
             tvShowLoginMobile.setText(Utils.getHasStarsMobile(userMobile));
             setLeftMenuInfo(1);//已登录
         }else{

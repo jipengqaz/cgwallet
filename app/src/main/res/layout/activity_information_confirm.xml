@@ -402,14 +402,7 @@
                 android:textSize="12sp"
                 android:textColor="#999999"
                 />
-            <TextView
-                android:id="@+id/tv_banner"
-                android:drawableLeft="@mipmap/icon_assets_safe"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:text="@string/banner_text"
-                android:textSize="@dimen/text_bank_hint"
-                android:textColor="@color/invest_start_text1"
+            <include layout="@layout/layout_banner_green"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"/>
         </LinearLayout>

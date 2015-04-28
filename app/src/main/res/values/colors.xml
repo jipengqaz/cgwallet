@@ -96,6 +96,8 @@
     <color name="invest_start_text2">#898989</color>
     <color name="background_recharge">#ffd3d3</color>
     <color name="dialog_msg_color">#000000</color>
+    <color name="comment_text">#555555</color>
+    <color name="green">#999999</color>
     <color name="bg_account_gred">#c1c2c2</color>
     <color name="more_item_pressed">#ededed</color>
 </resources>

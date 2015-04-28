@@ -30,6 +30,7 @@ import cgtz.com.cgwallet.utils.CustomTask;
 import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.ISplashView;
+import cgtz.com.cgwallet.widget.CustomEffectsDialog;
 import cgtz.com.cgwallet.widget.ProgressDialog;
 
 /**
@@ -78,6 +79,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
     private String payLimitIntruduce;//银行卡单笔限额描述
     private String bankTip;//银行给出的提示内容
     private String lastBankCordNum;//银行卡后四位
+    private CustomEffectsDialog dialog;
 
 
     @Override
@@ -277,12 +279,12 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
             @Override
             public void onClick(View v) {
                 closeDialog();
-                if(checkbox.isChecked()){
+                if (checkbox.isChecked()) {
                     //余额和银行卡支付
                     useAccount = avaliableBalance.getText().toString().trim();
                     useBank = bankCardMoney.getText().toString().trim();
                     setBeforePay();
-                }else{
+                } else {
                     //银行卡支付
                     useBank = bankCardMoney.getText().toString().trim();
                     setBeforePay();
@@ -293,18 +295,18 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
         checkbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkbox.isChecked()){//选中使用账户余额
-                    if(Double.parseDouble(saveMoney) > Double.parseDouble(assets)){
+                if (checkbox.isChecked()) {//选中使用账户余额
+                    if (Double.parseDouble(saveMoney) > Double.parseDouble(assets)) {
                         onlyUseAccount = false;
-                        String bankNeedPay = (Double.parseDouble(saveMoney) - Double.parseDouble(assets))*1.0+"";
+                        String bankNeedPay = (Double.parseDouble(saveMoney) - Double.parseDouble(assets)) * 1.0 + "";
                         avaliableBalance.setText(assets);//使用账户金额
                         bankCardMoney.setText(bankNeedPay);//银行卡支付金额
-                    }else{
+                    } else {
                         onlyUseAccount = true;
                         avaliableBalance.setText(saveMoney);//使用账户金额
                         bankCardMoney.setText("0.00");//银行卡支付金额
                     }
-                }else{//未选中使用账户余额
+                } else {//未选中使用账户余额
                     avaliableBalance.setText("0.00");//使用账户金额
                     bankCardMoney.setText(saveMoney);
                 }
@@ -319,7 +321,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
     }
 
     private void closeDialog(){
-        Utils.closeDialog(this,payTypeDialog);
+        Utils.closeDialog(this, payTypeDialog);
     }
 
     @Override
@@ -366,6 +368,49 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                     true,params,true);
             task.execute();
         }
+    }
+
+    private void beforePayDialog(final JSONObject json){
+        dialog = CustomEffectsDialog.getInstans(this);
+        dialog.withTitle(null);
+        dialog.withMessage(json.optString("msg"));
+        dialog.withMessageColor(getResources().getColor(R.color.dialog_msg_color));
+        dialog.withBtnLineColor(R.color.bg_line);
+        dialog.withBtnContentLineColor(R.color.bg_line);
+        dialog.withButton1Text("暂不绑卡");
+        dialog.withButton2Text("绑定新卡");
+        dialog.withButton1TextColor(getResources().getColor(R.color.comment_text));
+        dialog.withButton2TextColor(getResources().getColor(R.color.main_blue));
+        dialog.withButton1Click(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                payTypeDialog.dismiss();
+            }
+        });
+        dialog.withButton2Click(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                //不支持连连，需要重新绑定
+                if(json.optInt("success") == -4){
+                    //未真正实名 已绑卡 但是不支持连连
+                    isRealleyName = false;
+                    isRelleyBank = false;
+                    name = json.optString("name");//用户姓名
+                    identity = json.optString("identity");//用户身份证号
+                    payMethod();
+                }else if(json.optInt("success") == -7){
+                    //已真正实名认证  已绑卡 不支持连连
+                    isRealleyName = true;
+                    isRelleyBank = false;
+                    name = json.optString("name");//用户姓名
+                    identity = json.optString("identity");//用户身份证号
+                    payMethod();
+                }
+            }
+        });
+        dialog.show();
     }
 
     private Handler mHandler = new Handler(){
@@ -423,7 +468,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                                 //未真正实名 已绑卡 但是不支持连连
                                 isRealleyName = false;//是否真正实名认证
                                 isRelleyBank = false;//是否真正绑卡或者支持连连支付
-
+                                beforePayDialog(json);
                             }else if(code == -5){
                                 //未真正实名 已绑卡 支持连连 但未绑定连连
                                 isRealleyName = false;//是否真正实名认证
@@ -445,7 +490,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                                 payMethod();
                             }else if(code == -7){
                                 //已真正实名认证  已绑卡 不支持连连
-
+                                beforePayDialog(json);
                             }else if(code == -8){
                                 //已真正实名认证  已绑卡 支持连连  但未绑定连连
                                 isRealleyName = true;//是否真正实名认证
