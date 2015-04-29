@@ -14,10 +14,21 @@ public class MApplication extends Application {
     private static String user_id ="";
     public static boolean goLogin = true;//登录页面是否按了返回键
     public static boolean isSetTrade = false;//记录登录后，返回的是否设置了交易密码
+    public static String channeel;//渠道类别
+    public static String jpushRegistid;//极光推送注册id
+    public static String imiId;//手机设备号
 
     @Override
     public void onCreate() {
         super.onCreate();
+    }
+
+    public static String getImiId() {
+        return imiId;
+    }
+
+    public static void setImiId(String imiId) {
+        MApplication.imiId = imiId;
     }
 
     public static boolean isGoLogin() {
@@ -34,6 +45,22 @@ public class MApplication extends Application {
 
     public static void setIsSetTrade(boolean isSetTrade) {
         MApplication.isSetTrade = isSetTrade;
+    }
+
+    public static String getChannel() {
+        return channeel;
+    }
+
+    public static void setChannel(String channeel) {
+        MApplication.channeel = channeel;
+    }
+
+    public static String getJpushRegistid() {
+        return jpushRegistid;
+    }
+
+    public static void setJpushRegistid(String jpushRegistid) {
+        MApplication.jpushRegistid = jpushRegistid;
     }
 
     /**

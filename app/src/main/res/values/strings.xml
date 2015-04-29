@@ -118,5 +118,8 @@
     <string name="withdraw_money_text_1">草根钱包金额：</string>
     <string name="withdraw_money">确认取出</string>
     <string name="error_msg_notradepwd">请先设置交易密码</string>
+    <string name="update_tip_title">更新提示</string>
+    <string name="update_tip_button">更新</string>
+    <string name="update_tip_button_cancel">取消</string>
 
 </resources>

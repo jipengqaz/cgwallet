@@ -3,6 +3,8 @@ package cgtz.com.cgwallet.utils;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.content.Intent;
 import android.os.Handler;
@@ -215,6 +217,10 @@ public class Utils {
         }
     }
 
+    /**
+     * 服务器维护弹窗
+     * @param context
+     */
     public static void maintainDialog(Context context){
         final ServerMainTainDialog maintainDialog =
                 ServerMainTainDialog.getInstans(context);
@@ -328,5 +334,21 @@ public class Utils {
         }
         sb.append(" "+bankcard.substring(bankcard.length()-4));
         return sb.toString();
+    }
+
+    /**
+     * 获取版本号
+     * @return 当前应用的版本号
+     */
+    public static String getVersion(Context context) {
+        try {
+            PackageManager manager = context.getPackageManager();
+            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+            String version = info.versionName;
+            return version;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "0";
+        }
     }
 }

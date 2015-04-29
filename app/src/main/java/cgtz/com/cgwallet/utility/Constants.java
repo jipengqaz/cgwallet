@@ -21,6 +21,17 @@ public class Constants {
                                     (IS_DEVELOP?OFFLINE_HTTP_DEVELOP:OFFLINE_HTTP_TEST);//测试服务器路径
     public static final String ONLINE_HTTP = "";//线上服务器路径
     public static final String VERSION = "";//版本号
+
+    public static final String TEST_VERSION_UPDATE =
+            "http://192.168.10.188:45680/version/app/WalletVersion";//测试服务器，版本更新
+    public static final String TWO_NIGHT_VERSION_UPDATE =
+            "http://115.29.245.28:42111/version/app/WalletVersion";//28环境，版本更新
+    public static final String ONLINE_VERSION_UPDATE =
+            "https://d5ds88.cgtz.com/version/app/WalletVersion";//线上版本更新
+    public static final String VERSION_UPDATE = IS_TEST?
+                                    (IS_28?TWO_NIGHT_VERSION_UPDATE:TEST_VERSION_UPDATE)
+                                    :ONLINE_VERSION_UPDATE;//版本更新
+
     public static final int DATA_EVENT = 201501;//服务器返回的json数据解析异常
     public static final int NO_DATA = 201502;//服务器没有数据返回
     public static final int IS_EVENT = 201503;//服务器访问超时或者http访问异常
@@ -69,7 +80,9 @@ public class Constants {
     public static final int WHAT_WITHDRAW = 2015042817;//取钱页面进入判断识别码
     public static final int WHAT_UPDATE_BANK = 2015042823;//完善银行卡信息
     public static final int WHAT_BRANCH = 2015042843;//获取城市分行
+    public static final int WHAT_VERSION_UPDATE = 20150000;//版本更新
     /**88888888888888888888888888888888888888**/
+    public static final String URL_SERVER_MAINTAIN = "android/Maintain";//服务器是否维护的判断接口
     public static final String URL_CG_WALLET_PROTOCOL = "http://d5ds88.cgtz.com/site/agreement/";
     public static final String URL_FEED_BACK = "site/feedBack";//意见反馈
     public static final String URL_INTEREST_HISTORY = "ewallet/InterestHistory";//收益历史

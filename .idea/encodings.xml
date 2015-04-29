@@ -35,7 +35,7 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/widget/CustomDialog.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/widget/CustomEffectsDialog.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/widget/ProgressDialog.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/widget/ServerMainTainDialog.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/widget/ServerMainTainDialog.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/anim/translate_effect.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/anim/translate_effect_exit.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bank_1.png" charset="GBK" />
@@ -89,6 +89,7 @@
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/list_loadmore_foot.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/list_refresh_head.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/sodoko_unlock_pwd_dialog.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/update_tip.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/bg_custom_progressdialog.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/checkbox_normal.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/checkbox_pressed.png" charset="GBK" />

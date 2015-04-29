@@ -33,6 +33,7 @@ import cgtz.com.cgwallet.utility.Constants;
  */
 public class HttpUtils {
     private static int timeout = 30*1000;//连接超时时间
+    private static int getTimeOut = 3 * 1000;//get请求超时时间
     /**
      * 通过http post 提交数据
      * @param url  访问路径
@@ -95,8 +96,8 @@ public class HttpUtils {
             conn = (HttpURLConnection)new URL(url).openConnection();
             conn.setDoInput(true);// 打开输入流，以便从服务器获取数据
             conn.setDoOutput(true);// 打开输出流，以便向服务器提交数据
-            conn.setConnectTimeout(timeout); // 设置连接超时时间
-            conn.setReadTimeout(timeout); //设置返回超时时间,下面要对超时进行处理
+            conn.setConnectTimeout(getTimeOut); // 设置连接超时时间
+            conn.setReadTimeout(getTimeOut); //设置返回超时时间,下面要对超时进行处理
             conn.setRequestMethod("GET");
             conn.connect();
             int response = conn.getResponseCode(); // 获得服务器的响应码
@@ -217,8 +218,8 @@ public class HttpUtils {
             conn = (HttpsURLConnection)new URL(url).openConnection();
             conn.setDoInput(true);// 打开输入流，以便从服务器获取数据
             conn.setDoOutput(true);// 打开输出流，以便向服务器提交数据
-            conn.setConnectTimeout(timeout); // 设置连接超时时间
-            conn.setReadTimeout(timeout); //设置返回超时时间,下面要对超时进行处理
+            conn.setConnectTimeout(getTimeOut); // 设置连接超时时间
+            conn.setReadTimeout(getTimeOut); //设置返回超时时间,下面要对超时进行处理
             conn.setRequestMethod("GET");
             conn.connect();
             int response = conn.getResponseCode(); // 获得服务器的响应码
