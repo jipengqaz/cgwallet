@@ -95,6 +95,10 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private LinearLayout centerWallet;
     private int screenWith;
     private LinearLayout.LayoutParams params;
+    private ImageView cgWalletIcon;
+    private ImageView myWalletIcon;
+    private TextView cgWalletText;
+    private TextView myWalletText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -400,6 +404,10 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     }
 
     private void initViews(){
+        cgWalletIcon = (ImageView) findViewById(R.id.cg_wallet_icon);
+        myWalletIcon = (ImageView) findViewById(R.id.my_wallet_icon);
+        cgWalletText = (TextView) findViewById(R.id.cg_wallet_text);
+        myWalletText = (TextView) findViewById(R.id.my_wallet_text);
         centerWallet = (LinearLayout) findViewById(R.id.center_wallet);//钱包外部布局
         layoutCgWallet = (LinearLayout) findViewById(R.id.layout_cg_wallet);//底部的草根钱包
         layoutMyWallet = (LinearLayout) findViewById(R.id.layout_my_wallet);//底部的我的钱包
@@ -473,6 +481,12 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
      * 滑动到右边
      */
     private void lineToRight(){
+        cgWalletIcon.setImageResource(R.mipmap.icon_cg_wallet_normal);
+        myWalletIcon.setImageResource(R.mipmap.icon_my_wallet_selected);
+        cgWalletText.setTextColor(getResources().getColor(R.color.layout_bottom_transfer_right_text));
+        myWalletText.setTextColor(getResources().getColor(R.color.layout_bottom_transfer_left_text));
+        layoutCgWallet.setBackgroundResource(R.mipmap.bg_wallet_normal);
+        layoutMyWallet.setBackgroundResource(R.mipmap.bg_wallet_selected);
         LineAnimTask task = new LineAnimTask();
         task.execute(50);
     }
@@ -481,6 +495,12 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
      * 滑动到左边
      */
     private void lineToLeft(){
+        cgWalletIcon.setImageResource(R.mipmap.icon_wallet);
+        myWalletIcon.setImageResource(R.mipmap.icon_my_wallet);
+        cgWalletText.setTextColor(getResources().getColor(R.color.layout_bottom_transfer_left_text));
+        myWalletText.setTextColor(getResources().getColor(R.color.layout_bottom_transfer_right_text));
+        layoutCgWallet.setBackgroundResource(R.mipmap.bg_wallet_selected);
+        layoutMyWallet.setBackgroundResource(R.mipmap.bg_wallet_normal);
         LineAnimTask task = new LineAnimTask();
         task.execute(-50);
 
