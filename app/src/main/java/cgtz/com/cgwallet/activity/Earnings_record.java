@@ -28,6 +28,7 @@ import cgtz.com.cgwallet.utils.AppUtil;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.ISplashView;
 import cgtz.com.cgwallet.view.RefreshAndLoadMoreListView;
+import cgtz.com.cgwallet.widget.ProgressDialog;
 
 /**
  * 我的收益记录
@@ -40,6 +41,7 @@ public class Earnings_record extends BaseActivity implements ISplashView {
     private ArrayList<Map> projects;
     private int PAGE_SIZE=10;
     private static boolean aaa = false;//判断是否刷新
+    private ProgressDialog progressDialog;
 
     private  String TAG = "Earnings_record";
     private int page =0;
@@ -71,6 +73,10 @@ public class Earnings_record extends BaseActivity implements ISplashView {
         listview.setOnItemClickListener(projectAdapter);//记录单击事件
         listview.setOnRefreshListener(projectAdapter);//刷新
         listview.loadMore();
+        if(progressDialog == null){
+            progressDialog = new ProgressDialog(this,R.style.loading_dialog);
+        }
+        Utils.SaveOrDrawMoney(this, progressDialog);
     }
     @Override
     protected void onDestroy() {

@@ -17,6 +17,8 @@ import java.util.List;
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.fragment.E_all_records_fragment_1;
+import cgtz.com.cgwallet.utils.Utils;
+import cgtz.com.cgwallet.widget.ProgressDialog;
 
 /**
  * 草根钱包  转入转出流水
@@ -49,11 +51,10 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
     private E_all_records_fragment_1 e_all_records_fragment;
     private E_all_records_fragment_1 e_all_records_fragment1;
     private E_all_records_fragment_1 e_all_records_fragment2;
-
-
-
+    private ProgressDialog progressDialog;
     //屏幕宽度
     int screenWidth;
+
 
     //当前选中项
     private int currenttab = 0;
@@ -77,6 +78,10 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
         green_sliders = findViewById(R.id.green_sliders);
         RelativeLayout.LayoutParams imageParams=new RelativeLayout.LayoutParams(screenWidth/3, ViewGroup.LayoutParams.WRAP_CONTENT);
         green_sliders.setLayoutParams(imageParams);
+        if(progressDialog == null){
+            progressDialog = new ProgressDialog(this,R.style.loading_dialog);
+        }
+        Utils.SaveOrDrawMoney(this, progressDialog);
 
 
         buttonOne.setOnClickListener(this);
