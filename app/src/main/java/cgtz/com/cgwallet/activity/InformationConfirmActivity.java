@@ -99,8 +99,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
     private String notifyUrl;
     private String no_agree;
     private PayOrder order = null;
-    private boolean fromName = false;//判断是否来自实名认证
-    private boolean fromBank = false;//判断是否来自绑定银行卡
+    private boolean fromsave;//是否过来  绑卡的
     private String lianlianTest = "0.01";//测试时，连连支付金额
 
     @Override
@@ -109,9 +108,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
         setContentView(R.layout.activity_information_confirm);
         MApplication.registActivities(this);
         getIntentInfo();
-        if(fromName && !fromBank){
-            setTitle(Constants.TITLE_EDIT_NAME);
-        }else if(!fromName && fromBank){
+        if(fromsave){
             setTitle(Constants.TITLE_BIND_BANK);
         }else{
             setTitle("存钱");
@@ -146,9 +143,8 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
     }
 
     private void getIntentInfo(){
-        needEdit = getIntent().getBooleanExtra("needEdit",true);//是否需要填写信息
-        fromName = getIntent().getBooleanExtra("fromName",false);//是否来自实名认证
-        fromBank = getIntent().getBooleanExtra("fromBank",false);//是否来自绑定银行卡
+        needEdit = getIntent().getBooleanExtra("needEdit",true);//是否过来  绑卡的
+        fromsave = getIntent().getBooleanExtra("fromsave",false);//是否来自实名认证
         onlyUseAccount = getIntent().getBooleanExtra("onlyUseAccount",false);//是否余额充足支付
         isRealleyName = getIntent().getBooleanExtra("isRealleyName", false);//是否真正实名认证
         name = getIntent().getStringExtra("name");//姓名
