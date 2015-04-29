@@ -83,13 +83,13 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
             case R.id.rl_personal_anthen://实名认证
                 if(nameIcon.getVisibility() == View.VISIBLE){
                     startActivity(new Intent(this, SaveMoneyActivity.class)
-                            .putExtra("fromName",true));
+                            .putExtra("fromsave",true));
                 }
                 break;
             case R.id.rl_personal_bankcardbinding://绑定银行卡
                 if(bankIcon.getVisibility() == View.VISIBLE){
                     startActivity(new Intent(this, SaveMoneyActivity.class)
-                            .putExtra("fromBank",true));
+                            .putExtra("fromsave",true));
                 }
                 break;
             case R.id.rl_personal_sodoko_unlock_change://设置手势

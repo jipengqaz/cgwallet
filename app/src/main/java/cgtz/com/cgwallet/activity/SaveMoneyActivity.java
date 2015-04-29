@@ -123,6 +123,8 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
     private void fillWidget(){
         if(fromsave){//判断是否是来绑卡的   是的话设置默认投资  1元
             editFigure.setText("1");
+            editFigure.setSelection(editFigure.getText().toString().trim().length());
+            assets = "0.00";
         }
         if(TextUtils.isEmpty(assets) || assets.equals("0.00")){
             assetsLayout.setVisibility(View.GONE);
@@ -479,6 +481,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                         }
                         break;
                     case Constants.WHAT_BEFORE_PAY://银行卡是否绑定
+                        LogUtils.i(TAG,"银行卡是否绑定: "+jsonBean.getJsonString());
                         JSONObject json = jsonBean.getJsonObject();
                         if(flag){
                             if(code == -1){

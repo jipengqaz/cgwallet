@@ -701,34 +701,40 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                     case Constants.WHAT_SIGNPORT:
                         LogUtils.i(TAG,"签名返回："+jsonBean.getJsonString());
                         hideProcessBar();
-                        //签名获取成功
-                        MD5_KEY = json.optString("sign");
-                        no_order = json.optString("no_order");
-                        dt_order  = json.optString("dt_order");
-                        notifyUrl = json.optString("notifyUrl");
-                        bankTip = json.optString("bank_tip");
-                        no_agree = json.optString("no_agree");
-                        name  = json.optString("name");
-                        identity  = json.optString("identity");
-                        if(!TextUtils.isEmpty(no_agree)){
-                            flag = false;
-                        }else{
-                            flag = true;
+                        if(flag){
+                            if(code == Constants.OPERATION_SUCCESS){
+                                //签名获取成功
+                                MD5_KEY = json.optString("sign");
+                                no_order = json.optString("no_order");
+                                dt_order  = json.optString("dt_order");
+                                notifyUrl = json.optString("notifyUrl");
+                                bankTip = json.optString("bank_tip");
+                                no_agree = json.optString("no_agree");
+                                name  = json.optString("name");
+                                identity  = json.optString("identity");
+                                if(!TextUtils.isEmpty(no_agree)){
+                                    flag = false;
+                                }else{
+                                    flag = true;
+                                }
+                                order = Lianlian.constructPreCardPayOrder(
+                                        flag, no_order, dt_order, notifyUrl, Utils.getUserId() + "",
+                                        identity, name, lianlianTest + ""
+                                        , bankCard, MD5_KEY, no_agree
+                                );
+                                String content4Pay = BaseHelper.toJSONString(order);
+                                // 关键 content4Pay 用于提交到支付SDK的订单支付串，如遇到签名错误的情况，
+                                // 请将该信息帖给我们的技术支持
+                                LogUtils.i(InformationConfirmActivity.class.getSimpleName(), content4Pay);
+                                MobileSecurePayer msp = new MobileSecurePayer();
+                                boolean bRet = msp.pay(content4Pay, mHandler,
+                                        cgtz.com.cgwallet.utils.llutils.Constants.RQF_PAY,
+                                        InformationConfirmActivity.this, false);
+                                LogUtils.i(InformationConfirmActivity.class.getSimpleName(), String.valueOf(bRet));
+                            }else{
+                                Utils.makeToast(InformationConfirmActivity.this,errorMsg);
+                            }
                         }
-                        order = Lianlian.constructPreCardPayOrder(
-                                flag, no_order, dt_order, notifyUrl, Utils.getUserId() + "",
-                                identity, name, lianlianTest + ""
-                                , bankCard, MD5_KEY, no_agree
-                        );
-                        String content4Pay = BaseHelper.toJSONString(order);
-                        // 关键 content4Pay 用于提交到支付SDK的订单支付串，如遇到签名错误的情况，
-                        // 请将该信息帖给我们的技术支持
-                        LogUtils.i(InformationConfirmActivity.class.getSimpleName(), content4Pay);
-                        MobileSecurePayer msp = new MobileSecurePayer();
-                        boolean bRet = msp.pay(content4Pay, mHandler,
-                                cgtz.com.cgwallet.utils.llutils.Constants.RQF_PAY,
-                                InformationConfirmActivity.this, false);
-                        LogUtils.i(InformationConfirmActivity.class.getSimpleName(), String.valueOf(bRet));
                         break;
                     case Constants.WHAT_BANKCARD_LLBIND://预绑成功之后调用 用来银行卡绑定连连
                         LogUtils.i(TAG,"预绑成功之后调用 用来银行卡绑定连连: "+jsonBean.getJsonString());
