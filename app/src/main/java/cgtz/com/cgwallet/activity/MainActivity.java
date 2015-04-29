@@ -11,7 +11,6 @@ import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
@@ -22,8 +21,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.tencent.open.utils.Util;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.socialize.bean.HandlerRequestCode;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.bean.SocializeEntity;
 import com.umeng.socialize.controller.UMServiceFactory;
@@ -48,7 +47,6 @@ import java.util.ArrayList;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
-import cgtz.com.cgwallet.adapter.MFragmentPagerAdater;
 import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.client.Get_share_content;
 import cgtz.com.cgwallet.fragment.CgWalletFragment;
@@ -243,21 +241,26 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             public void onClick(View v) {
                 //分享的图片
                 UMImage image = new UMImage(MainActivity.this, R.mipmap.icon_logo);
+                boolean aa ;
                 switch (v.getId()){
                     case R.id.QQ:
-
-                        QQShareContent qqShareContent = new QQShareContent();
-                        //设置分享文字
-                        qqShareContent.setShareContent(content);
-                        //设置分享title
-                        qqShareContent.setTitle("草根投资");
-                        //设置分享图片
-                        qqShareContent.setShareImage(image);
-                        //设置点击分享内容的跳转链接
-                        qqShareContent.setTargetUrl(url);
-                        mController.setShareMedia(qqShareContent);
-                        // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
-                        mController.postShare(MainActivity.this, SHARE_MEDIA.QQ, mShareListener);
+                        //判断是否有安装
+                        aa = mController.getConfig().getSsoHandler(HandlerRequestCode.QZONE_REQUEST_CODE).isClientInstalled();
+                        if(aa){
+                            QQShareContent qqShareContent = new QQShareContent();
+                            //设置分享文字
+                            qqShareContent.setShareContent(content);
+                            //设置分享title
+                            qqShareContent.setTitle("草根投资");
+                            //设置分享图片
+                            qqShareContent.setShareImage(image);
+                            //设置点击分享内容的跳转链接
+                            qqShareContent.setTargetUrl(url);
+                            mController.setShareMedia(qqShareContent);
+                            // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
+                            mController.postShare(MainActivity.this, SHARE_MEDIA.QQ, mShareListener);
+                        }else{
+                        }
                         break;
                     case R.id.qzone:
 
