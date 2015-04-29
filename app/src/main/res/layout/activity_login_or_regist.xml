@@ -49,6 +49,7 @@
                     android:numeric="integer"
                     android:gravity="center_vertical"
                     android:textSize="@dimen/login_edit_text"
+                    android:textColor="@color/login_edit_hint"
                     android:background="@drawable/bg_login_edit"
                     android:drawableLeft="@mipmap/icon_login_phone"
                     android:drawablePadding="10dp"
@@ -63,12 +64,13 @@
                     android:layout_marginTop="5dp"
                     android:gravity="center_vertical"
                     android:textSize="@dimen/login_edit_text"
+                    android:textColor="@color/login_edit_pwd_hint"
                     android:background="@drawable/bg_login_edit"
                     android:drawableLeft="@mipmap/icon_login_pwd"
                     android:drawablePadding="10dp"
                     android:paddingLeft="@dimen/draw_padding"
                     android:hint="@string/login_edit_pwd_hint_text"
-                    android:textColorHint="@color/login_edit_hint"
+                    android:textColorHint="@color/login_edit_pwd_hint"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_login_edit" />
                 <TextView
@@ -104,7 +106,7 @@
                 <TextView
                     android:id="@+id/tv_show_service_phone"
                     android:textSize="@dimen/login_edit_text"
-                    android:textColor="@color/login_hint_text"
+                    android:textColor="@color/login_hint_service_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>

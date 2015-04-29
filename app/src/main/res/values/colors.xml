@@ -65,11 +65,13 @@
     <color name="bg_my_wallet">#eeeeee</color>
     <color name="item_earnings_record_2_2">#d1d1d1</color>
     <color name="item_earnings_record_2_background">#f1f1f1</color>
-    <color name="login_edit_hint">#0abb7a</color>
-    <color name="login_hint_text">#6df6c3</color>
-    <color name="bg_login_bottom">#0cc580</color>
+    <color name="login_edit_hint">#ffffff</color>
+    <color name="login_edit_pwd_hint">#c2f1df</color>
+    <color name="login_hint_text">#05fc9f</color>
+    <color name="login_hint_service_text">#09e894</color>
+    <color name="bg_login_bottom">#2dbc89</color>
     <color name="bg_green_line">#09b376</color>
-    <color name="hint_regist_account">#038254</color>
+    <color name="hint_regist_account">#c2f1df</color>
     <color name="hint_regist_edit">#cccccc</color>
     <color name="bg_get_security_code">#d2d2d2</color>
     <color name="bg_regist_button">#d2d2d2</color>
