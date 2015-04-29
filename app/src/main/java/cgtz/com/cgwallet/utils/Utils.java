@@ -7,6 +7,7 @@ import android.os.Environment;
 import android.content.Intent;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -16,6 +17,7 @@ import cgtz.com.cgwallet.activity.LoginActivity;
 import cgtz.com.cgwallet.activity.MainActivity;
 import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.utility.Constants;
+import cgtz.com.cgwallet.widget.ServerMainTainDialog;
 
 /**
  * 工具类
@@ -206,11 +208,26 @@ public class Utils {
             }
             return false;
         }else if(code == Constants.SERVICE_MAINTAIN){//服务器正在维护
-
+            maintainDialog(context);
             return false;
         }else{
             return true;
         }
+    }
+
+    public static void maintainDialog(Context context){
+        final ServerMainTainDialog maintainDialog =
+                ServerMainTainDialog.getInstans(context);
+        maintainDialog.setCancelable(false);
+        maintainDialog.setCanceledOnTouchOutside(false);
+        maintainDialog.withMaintainIconClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                maintainDialog.dismiss();
+                System.exit(0);
+            }
+        });
+        maintainDialog.show();
     }
 
     /**
