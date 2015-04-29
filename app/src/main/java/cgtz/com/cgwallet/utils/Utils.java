@@ -389,11 +389,12 @@ public class Utils {
         context.findViewById(R.id.box).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(imm != null && imm.isActive()){
+                if (imm != null && imm.isActive()) {
                     imm.hideSoftInputFromWindow(context.getCurrentFocus().getWindowToken(),
                             InputMethodManager.HIDE_NOT_ALWAYS);
                 }
             }
         });
     }
+
 }

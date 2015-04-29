@@ -60,7 +60,7 @@
     <dimen name="my_wallet_another_size">14sp</dimen>
     <dimen name="height_login_bottom">48dp</dimen>
     <dimen name="draw_padding">15dp</dimen>
-    <dimen name="height_login_edit">40dp</dimen>
+    <dimen name="height_login_edit">46dp</dimen>
     <dimen name="hint_regist_mobile">12sp</dimen>
     <dimen name="height_save_money_figure">60dp</dimen>
     <dimen name="save_moeny_main_text">14sp</dimen>
@@ -72,4 +72,5 @@
     <dimen name="dimen_paybank_top_text_width">100dp</dimen>
     <dimen name="investment_backcard_nib_width">80dp</dimen>
     <dimen name="investment_backcard_nib_marginleft">10dp</dimen>
+    <dimen name="hint_show_edits_mobile">18sp</dimen>
 </resources>

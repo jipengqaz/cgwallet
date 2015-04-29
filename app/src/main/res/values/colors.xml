@@ -102,4 +102,6 @@
     <color name="green">#999999</color>
     <color name="bg_account_gred">#c1c2c2</color>
     <color name="more_item_pressed">#ededed</color>
+    <color name="hint_show_edits_mobile">#04955d</color>
+    <color name="bg_show_edits_mobile">#7eeac3</color>
 </resources>

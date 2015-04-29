@@ -1,9 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/box"
+
     android:background="@mipmap/bg_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
     <ScrollView
+        android:id="@+id/box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -56,6 +57,15 @@
                     android:paddingLeft="@dimen/draw_padding"
                     android:hint="@string/login_edit_hint_text"
                     android:textColorHint="@color/login_edit_hint"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_login_edit" />
+                <TextView
+                    android:id="@+id/show_edits_mobile"
+                    android:visibility="gone"
+                    android:gravity="center"
+                    android:background="@color/bg_show_edits_mobile"
+                    android:textColor="@color/hint_show_edits_mobile"
+                    android:textSize="@dimen/hint_show_edits_mobile"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_login_edit" />
                 <EditText

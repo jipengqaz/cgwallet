@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +45,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
     private Button btnLogin;//登录按钮
     private TextView tvRegistAccount;//注册账户
     private TextView tvForgetPwd;//忘记密码
+    private TextView showEditsMobile;//显示输入的手机号码
     private SplashPresenter presenter;
     private ProgressDialog progressDialog;
     private boolean showHavePhone = false;
@@ -102,6 +105,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
         btnLogin = (Button) findViewById(R.id.login_button_finish);//登录按钮
         tvRegistAccount = (TextView) findViewById(R.id.tv_regist_account);//注册账户
         tvForgetPwd = (TextView) findViewById(R.id.tv_forget_pwd);//忘记密码
+        showEditsMobile = (TextView) findViewById(R.id.show_edits_mobile);//显示输入的手机号
         tvServicePhone.setText(Ke_Fu_data.getPhone(this));
         changeLoginLayout();
     }
@@ -128,6 +132,28 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
         btnLogin.setOnClickListener(this);
         tvRegistAccount.setOnClickListener(this);
         tvForgetPwd.setOnClickListener(this);
+        etLoginPhone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(TextUtils.isEmpty(charSequence.toString().trim())){
+                    showEditsMobile.setVisibility(View.GONE);
+                    showEditsMobile.setText("");
+                }else{
+                    showEditsMobile.setVisibility(View.VISIBLE);
+                    showEditsMobile.setText(charSequence.toString().trim());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     @Override
