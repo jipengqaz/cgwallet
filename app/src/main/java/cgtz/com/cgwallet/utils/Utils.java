@@ -10,15 +10,20 @@ import android.content.Intent;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
 
 import cgtz.com.cgwallet.MApplication;
+import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.activity.LoginActivity;
 import cgtz.com.cgwallet.activity.MainActivity;
+import cgtz.com.cgwallet.activity.SaveMoneyActivity;
 import cgtz.com.cgwallet.bean.JsonBean;
+import cgtz.com.cgwallet.client.Withdraw_money_Client;
 import cgtz.com.cgwallet.utility.Constants;
+import cgtz.com.cgwallet.widget.ProgressDialog;
 import cgtz.com.cgwallet.widget.ServerMainTainDialog;
 
 /**
@@ -350,5 +355,26 @@ public class Utils {
             e.printStackTrace();
             return "0";
         }
+    }
+
+    /**
+     * 跳转存钱和取钱页面
+     */
+    public static void SaveOrDrawMoney(final Activity context, final ProgressDialog progressDialog){
+
+        TextView saveLayout = (TextView) context.findViewById(R.id.layout_save_money);
+        TextView drawLayout= (TextView) context.findViewById(R.id.layout_draw_money);
+        saveLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, SaveMoneyActivity.class));
+            }
+        });
+        drawLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Withdraw_money_Client.getWithdraw_money(context, Constants.WHAT_WITHDRAW, progressDialog);
+            }
+        });
     }
 }

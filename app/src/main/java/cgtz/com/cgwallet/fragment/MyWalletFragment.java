@@ -22,6 +22,7 @@ import cgtz.com.cgwallet.activity.Earnings_record;
 import cgtz.com.cgwallet.activity.LoginActivity;
 import cgtz.com.cgwallet.activity.SaveMoneyActivity;
 import cgtz.com.cgwallet.bean.JsonBean;
+import cgtz.com.cgwallet.client.Withdraw_money_Client;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.CustomTask;
@@ -236,7 +237,7 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
                 break;
             case R.id.layout_draw://取钱
                 if(Utils.isLogined()){
-//                    Withdraw_money_Client.getWithdraw_money(mHandler, Constants.WHAT_WITHDRAW);
+                    Withdraw_money_Client.getWithdraw_money(getActivity(), Constants.WHAT_WITHDRAW, progressDialog);
                 }else{
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                 }

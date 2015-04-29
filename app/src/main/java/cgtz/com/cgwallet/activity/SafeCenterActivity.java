@@ -17,6 +17,7 @@ import java.util.HashMap;
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.bean.JsonBean;
+import cgtz.com.cgwallet.client.Withdraw_money_Client;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.CustomTask;
@@ -32,8 +33,6 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
     private static final String TAG = "SafeCenterActivity";
     private RelativeLayout needNameLayout;
     private RelativeLayout needBankLayout;
-    private TextView saveLayout;
-    private TextView drawLayout;
     private TextView nameLayout;
     private TextView bankLayout;
     private ImageView nameIcon;
@@ -50,6 +49,7 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
         setTitle("安全中心");
         showBack(true);
         presenter = new SplashPresenter(this);
+
         init();
         presenter.didFinishLoading(this);
     }
@@ -70,26 +70,10 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
         rl_personal_sodoko_unlock_change.setOnClickListener(this);
         needBankLayout.setOnClickListener(this);
         needNameLayout.setOnClickListener(this);
-        SaveOrDrawMoney();
-    }
-    /**
-     * 跳转存钱和取钱页面
-     */
-    private void SaveOrDrawMoney(){
-        saveLayout = (TextView) findViewById(R.id.layout_save_money);
-        drawLayout = (TextView) findViewById(R.id.layout_draw_money);
-        saveLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SafeCenterActivity.this,SaveMoneyActivity.class));
-            }
-        });
-        drawLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SafeCenterActivity.this, Withdraw_money.class));
-            }
-        });
+        if(progressDialog == null){
+            progressDialog = new ProgressDialog(this,R.style.loading_dialog);
+        }
+        Utils.SaveOrDrawMoney(this, progressDialog);
     }
 
     @Override

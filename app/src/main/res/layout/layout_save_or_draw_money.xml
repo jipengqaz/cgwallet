@@ -13,16 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
-            android:id="@+id/layout_save_money"
+            android:id="@+id/layout_draw_money"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/transfer_input"
+            android:text="@string/transfer_output"
             android:textColor="@color/save_or_draw_money_layout_text"
             android:textSize="@dimen/save_or_draw_money_layout_text"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
         <TextView
-            android:id="@+id/layout_draw_money"
+            android:id="@+id/layout_save_money"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/transfer_input"

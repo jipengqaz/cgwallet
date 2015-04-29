@@ -12,6 +12,7 @@ import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.utils.Ke_Fu_data;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.widget.CustomEffectsDialog;
+import cgtz.com.cgwallet.widget.ProgressDialog;
 
 /**
  * 更多页面
@@ -21,8 +22,7 @@ public class MenuMoreActivity extends BaseActivity implements View.OnClickListen
     private RelativeLayout feedBack;//意见反馈
     private RelativeLayout contactMine;//联系我们
     private CustomEffectsDialog ceffectDialog;
-    private TextView saveLayout;
-    private TextView drawLayout;
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,27 +38,10 @@ public class MenuMoreActivity extends BaseActivity implements View.OnClickListen
         aboutMine = (RelativeLayout) findViewById(R.id.about_mine);
         feedBack = (RelativeLayout) findViewById(R.id.feed_back);
         contactMine = (RelativeLayout) findViewById(R.id.contact_mine);
-        SaveOrDrawMoney();
-    }
-
-    /**
-     * 跳转存钱和取钱页面
-     */
-    private void SaveOrDrawMoney(){
-        saveLayout = (TextView) findViewById(R.id.layout_save_money);
-        drawLayout = (TextView) findViewById(R.id.layout_draw_money);
-        saveLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MenuMoreActivity.this,SaveMoneyActivity.class));
-            }
-        });
-        drawLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MenuMoreActivity.this,Withdraw_money.class));
-            }
-        });
+        if(progressDialog == null){
+            progressDialog = new ProgressDialog(this,R.style.loading_dialog);
+        }
+        Utils.SaveOrDrawMoney(this, progressDialog);
     }
 
     private void setListener(){
