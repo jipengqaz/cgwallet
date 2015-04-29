@@ -73,7 +73,7 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
             registMobile.setText(mobile);
             registMobile.setSelection(mobile.length());
         }
-
+        Utils.closeInputMethod(this);
         securityCode.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

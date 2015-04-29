@@ -102,6 +102,7 @@ public class TradePwdActivity extends BaseActivity {
      * 视图添加事件
      */
     private void setViewListener(){
+        Utils.closeInputMethod(this);//关闭输入键盘
         /**
          * 点击屏幕，消失键盘
          */

@@ -77,6 +77,7 @@ public class Modify_trade_password_Activity extends BaseActivity {
     private void init(){
         pwd_edit = (EditText) findViewById(R.id.pwd_edit);
         next_step = (Button) findViewById(R.id.next_step);
+        Utils.closeInputMethod(this);//关闭输入键盘
 
         next_step.setOnClickListener(new View.OnClickListener() {
             @Override

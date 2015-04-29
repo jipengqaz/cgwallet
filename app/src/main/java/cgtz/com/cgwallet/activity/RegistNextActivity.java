@@ -69,6 +69,7 @@ public class RegistNextActivity extends BaseActivity implements ISplashView,View
         showPwd.setOnClickListener(this);
         registBtn.setOnClickListener(this);
         lookProtocol.setOnClickListener(this);
+        Utils.closeInputMethod(this);//关闭输入键盘
 
         registPwd.addTextChangedListener(new TextWatcher() {
             @Override

@@ -3,7 +3,9 @@ package cgtz.com.cgwallet.activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -91,6 +93,7 @@ public class FeedBackActivity extends BaseActivity implements ISplashView{
     }
 
     private void setListener(){
+        Utils.closeInputMethod(this);
         feed_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,9 +105,9 @@ public class FeedBackActivity extends BaseActivity implements ISplashView{
                 }
             }
         });
-//        feed_advise.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+        feed_advise.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 //                String str = s.toString();
 //                if(!resetText){
 //                    char codePoint = str.charAt(start-1);
@@ -118,20 +121,26 @@ public class FeedBackActivity extends BaseActivity implements ISplashView{
 //                }else{
 //                    resetText = false;
 //                }
-//            }
-//
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 //                if(!resetText) {
 //                    tmp = s.toString();//这里用s.toString()而不直接用s是因为如果用s，那么，tmp和s在内存中指向的是同一个地址，s改变了，tmp也就改变了，那么表情过滤就失败了
 //                }
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });//设置判断
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(TextUtils.isEmpty(editable.toString().trim())){
+                    feed_send.setEnabled(false);
+                    feed_send.setBackgroundResource(R.drawable.bg_button_no_enabled);
+                }else{
+                    feed_send.setEnabled(true);
+                    feed_send.setBackgroundColor(getResources().getColor(R.color.button_text_can_click));
+                }
+            }
+        });//设置判断
     }
 
     @Override

@@ -1,9 +1,11 @@
 package cgtz.com.cgwallet.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -110,6 +112,7 @@ public class Change_password_Activity extends BaseActivity{
      * 填充控件   和添加事件
      */
     private void control(){
+        Utils.closeInputMethod(this);
         send_message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

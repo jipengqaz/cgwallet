@@ -170,6 +170,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
      * widget添加事件
      */
     private void setListener(){
+        Utils.closeInputMethod(this);//关闭输入键盘
         deleteEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

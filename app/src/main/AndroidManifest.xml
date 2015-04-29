@@ -22,39 +22,47 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.READ_SMS" />
 
     <application
         android:name=".MApplication"
+        android:screenOrientation="portrait"
         android:allowBackup="true"
         android:icon="@mipmap/icon_logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".activity.StartActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".activity.MainActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_main" />
         <activity
             android:name=".activity.ScreenSlideActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_ScreenSlideActivity" />
         <activity
             android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
             android:label="@string/title_activity_login_or_regist" >
         </activity>
         <activity
             android:name=".activity.GestureEditActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name=".activity.GestureVerifyActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
             android:theme="@android:style/Theme.NoTitleBar" />
         <!-- ###################注册SDK使用的Activity###################### -->
         <!-- 分享编辑页 -->
@@ -83,6 +91,7 @@
         </activity>
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
@@ -107,40 +116,54 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".activity.SafeCenterActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activity.WebViewActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activity.MenuMoreActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activity.AboutCompanyActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activity.FeedBackActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_feed_back" >
         </activity>
         <activity
             android:name=".activity.E_wallet_record_activity"
+            android:windowSoftInputMode="stateHidden"
             android:label="@string/title_activity_e_all"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.Earnings_record"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_Earnings_record" />
         <activity
             android:name=".activity.RegistActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activity.RegistNextActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
             android:label="@string/title_activity_regist_next" >
         </activity>
-        <activity android:name=".activity.OpenSudokoUnlockActivity" />
+        <activity android:name=".activity.OpenSudokoUnlockActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
 
         <receiver android:name=".receiver.Provinces_Observer" >
             <intent-filter>
@@ -153,14 +176,20 @@
 
         <activity
             android:name=".activity.SaveMoneyActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
             android:label="@string/title_activity_save_money" >
         </activity>
         <activity
             android:name=".activity.InformationConfirmActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
             android:label="@string/title_activity_information_confirm" >
         </activity>
         <activity
             android:name=".activity.InProgressActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
             android:label="@string/title_activity_in_progress" >
         </activity>
         <!-- 连连支付服务 -->
@@ -180,13 +209,24 @@
         <!-- 连连支付结束 -->
         <activity
             android:name=".activity.SaveMoneySuccessActivity"
+            android:windowSoftInputMode="stateHidden"
             android:label="@string/title_activity_save_money_success" >
         </activity>
-        <activity android:name=".activity.Change_password_Activity"/>
-        <activity android:name=".activity.TradePwdActivity"/>
-        <activity android:name=".activity.Modify_trade_password_Activity"/>
-        <activity android:name=".activity.ChangeLoginPwdActivity"/>
-        <activity android:name=".activity.Withdraw_money"/>
+        <activity android:name=".activity.Change_password_Activity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activity.TradePwdActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activity.Modify_trade_password_Activity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activity.ChangeLoginPwdActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activity.Withdraw_money"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
     </application>
 
 </manifest>

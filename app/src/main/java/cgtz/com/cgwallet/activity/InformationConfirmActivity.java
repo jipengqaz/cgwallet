@@ -288,6 +288,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
     }
 
     private void setListener(){
+        Utils.closeInputMethod(this);//关闭输入键盘
         /**edittext添加空格
          *
          */

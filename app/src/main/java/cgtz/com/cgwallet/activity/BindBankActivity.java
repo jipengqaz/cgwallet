@@ -1,12 +1,14 @@
 package cgtz.com.cgwallet.activity;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +23,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.adapter.BankAdapter;
 import cgtz.com.cgwallet.bean.Bank;
@@ -53,11 +56,14 @@ public class BindBankActivity extends BaseActivity implements View.OnClickListen
     private TextView testview;//存放点击的控件
     private Button ensure_btn;//选择银行确定
     private ListView listview;
+    private InputMethodManager imm;//软键盘
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("完善银行卡");
+        MApplication.registActivities(this);
         setContentView(R.layout.activity_bind_bank_card);
+        imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         init();
         assignment();
     }
@@ -86,6 +92,15 @@ public class BindBankActivity extends BaseActivity implements View.OnClickListen
         bank_image = (ImageView) findViewById(R.id.bank_image);//银行卡图标
         card_id = (TextView) findViewById(R.id.card_id);//显示身份证和姓名的
         back_text_1 = (TextView) findViewById(R.id.back_text_1);//文案
+        findViewById(R.id.box).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(imm != null && imm.isActive()){
+                    imm.hideSoftInputFromWindow(BindBankActivity.this.getCurrentFocus().getWindowToken(),
+                            InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+            }
+        });
     }
     /**
      * 解析Json数字

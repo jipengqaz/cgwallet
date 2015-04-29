@@ -124,6 +124,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
     }
 
     private void setListener(){
+        Utils.closeInputMethod(this);//关闭输入键盘
         btnLogin.setOnClickListener(this);
         tvRegistAccount.setOnClickListener(this);
         tvForgetPwd.setOnClickListener(this);

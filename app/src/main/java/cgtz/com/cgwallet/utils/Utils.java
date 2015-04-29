@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.activity.LoginActivity;
 import cgtz.com.cgwallet.activity.MainActivity;
+import cgtz.com.cgwallet.activity.RegistActivity;
 import cgtz.com.cgwallet.activity.SaveMoneyActivity;
 import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.client.Withdraw_money_Client;
@@ -374,6 +376,23 @@ public class Utils {
             @Override
             public void onClick(View view) {
                 Withdraw_money_Client.getWithdraw_money(context, Constants.WHAT_WITHDRAW, progressDialog);
+            }
+        });
+    }
+
+    /**
+     * 点击屏幕，关闭输入键盘
+     * @param context
+     */
+    public static void closeInputMethod(final Activity context){
+        final InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        context.findViewById(R.id.box).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(imm != null && imm.isActive()){
+                    imm.hideSoftInputFromWindow(context.getCurrentFocus().getWindowToken(),
+                            InputMethodManager.HIDE_NOT_ALWAYS);
+                }
             }
         });
     }

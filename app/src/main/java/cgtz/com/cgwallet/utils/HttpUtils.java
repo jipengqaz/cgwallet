@@ -117,7 +117,6 @@ public class HttpUtils {
             return "event";
         }finally{
             conn.disconnect();
-            conn = null;
         }
         return str;
     }

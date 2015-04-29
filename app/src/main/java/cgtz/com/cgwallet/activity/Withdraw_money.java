@@ -1,6 +1,5 @@
 package cgtz.com.cgwallet.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,11 +9,9 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONObject;
@@ -47,8 +44,6 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
     private TextView available_balance;//可取金额
     private TextView bank_tail,bank_name;//银行卡尾号，银行名
     private ImageView bank_icon;//银行图标
-    private LinearLayout withdraw_box;
-    private InputMethodManager imm;
     private String withdrawAmount;//输入的提现金额;
     private ProgressDialog pDialog;
     @Override
@@ -88,8 +83,7 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
         bank_tail = (TextView) findViewById(R.id.bank_tail);
         bank_name = (TextView) findViewById(R.id.bank_name);
         bank_icon = (ImageView) findViewById(R.id.bank_icon);
-        withdraw_box = (LinearLayout) findViewById(R.id.withdraw_box);
-        imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);//获取输入键盘
+        Utils.closeInputMethod(this);//关闭输入键盘
     }
 
     /**
@@ -109,11 +103,6 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
         }
         delete_edit.setOnClickListener(this);
         apply_withdraw.setOnClickListener(this);
-
-        /**
-         * 屏幕点击，隐藏键盘
-         */
-        withdraw_box.setOnClickListener(this);
 
         with_draw_num.addTextChangedListener(new TextWatcher() {
             @Override
@@ -173,11 +162,6 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
         case R.id.delete_edit://清空输入框数据
             with_draw_num.setText("");
             delete_edit.setVisibility(View.GONE);
-            break;
-        case R.id.withdraw_box:
-            if (imm != null && imm.isActive()) {
-                imm.hideSoftInputFromWindow(withdraw_box.getWindowToken(), 0);
-            }
             break;
         case R.id.apply_withdraw:
             withdrawAmount = with_draw_num.getText().toString();
