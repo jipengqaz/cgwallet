@@ -74,6 +74,29 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
             registMobile.setSelection(mobile.length());
         }
         Utils.closeInputMethod(this);
+        registMobile.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(editable.toString().trim().length()==11){
+                    getSecurityCode.setEnabled(true);
+                    getSecurityCode.setBackgroundResource(R.color.main_bg);
+                }else{
+                    getSecurityCode.setEnabled(false);
+                    getSecurityCode.setBackgroundResource(R.color.bg_get_security_code);
+                }
+            }
+        });
+
         securityCode.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -135,11 +158,12 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
                 if(action == GET_CODE_TIME){
                     if(CODE_TIME == 0){
                         getSecurityCode.setText(getResources().getString(R.string.hint_regist_get_security_code));
-                        getSecurityCode.setTextColor(getResources().getColor(R.color.black));
+                        getSecurityCode.setBackgroundResource(R.color.main_bg);
                         getSecurityCode.setEnabled(true);
                     }else{
                         --CODE_TIME;
                         LogUtils.i(TAG, "时间time：" + CODE_TIME);
+                        getSecurityCode.setBackgroundResource(R.color.bg_get_security_code);
                         getSecurityCode.setText(CODE_TIME + TIME_MSG);
                         mHandler.sendEmptyMessageDelayed(GET_CODE_TIME, 1000);
                     }
@@ -165,7 +189,12 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
                                 Utils.makeToast(RegistActivity.this,mobile_code);
                             }
                         }else if(flag && code == 2){
-                            Utils.makeToast(RegistActivity.this, "手机号已注册，请直接登录");
+                            mHandler.removeMessages(GET_CODE_TIME);
+                            CODE_TIME = 60;
+                            getSecurityCode.setText(getResources().getString(R.string.hint_regist_get_security_code));
+                            getSecurityCode.setBackgroundResource(R.color.main_bg);
+                            getSecurityCode.setEnabled(true);
+                            Utils.makeToast(RegistActivity.this, "手机号已注册，请直接输入");
                         }
                         hideProcessBar();
                         break;
@@ -203,7 +232,7 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
     @Override
     public void startNextActivity() {
         getSecurityCode.setText(CODE_TIME + TIME_MSG);
-        getSecurityCode.setTextColor(getResources().getColor(R.color.white));
+//        getSecurityCode.setTextColor(getResources().getColor(R.color.white));
         getSecurityCode.setEnabled(false);
         mHandler.sendEmptyMessageDelayed(GET_CODE_TIME,1000);
         HashMap<String,String> params = new HashMap();

@@ -46,11 +46,12 @@
                     android:layout_width="120dp"
                     android:layout_height="match_parent" />
                 <TextView
+                    android:enabled="false"
                     android:id="@+id/tv_regist_get_security_code"
                     android:layout_alignParentRight="true"
                     android:gravity="center"
                     android:textSize="@dimen/hint_regist_mobile"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:text="@string/hint_regist_get_security_code"
                     android:background="@color/bg_get_security_code"
                     android:layout_width="120dp"
