@@ -6,38 +6,28 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.activity.E_wallet_record_activity;
 import cgtz.com.cgwallet.activity.Earnings_record;
-import cgtz.com.cgwallet.activity.InformationConfirmActivity;
 import cgtz.com.cgwallet.activity.LoginActivity;
-import cgtz.com.cgwallet.activity.SafeCenterActivity;
 import cgtz.com.cgwallet.activity.SaveMoneyActivity;
-import cgtz.com.cgwallet.activity.Withdraw_money;
 import cgtz.com.cgwallet.bean.JsonBean;
-import cgtz.com.cgwallet.client.Withdraw_money_Client;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.CustomTask;
 import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.Utils;
-import cgtz.com.cgwallet.view.BidirSlidingLayout;
 import cgtz.com.cgwallet.view.ISplashView;
-import cgtz.com.cgwallet.widget.MScrollView;
 import cgtz.com.cgwallet.widget.ProgressDialog;
 
 /**
@@ -246,7 +236,7 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
                 break;
             case R.id.layout_draw://取钱
                 if(Utils.isLogined()){
-                    Withdraw_money_Client.getWithdraw_money(mHandler, Constants.WHAT_WITHDRAW);
+//                    Withdraw_money_Client.getWithdraw_money(mHandler, Constants.WHAT_WITHDRAW);
                 }else{
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                 }
