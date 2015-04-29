@@ -81,8 +81,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
     private String bankTip;//银行给出的提示内容
     private String lastBankCordNum;//银行卡后四位
     private CustomEffectsDialog dialog;
-    private boolean fromName;//来自实名认证
-    private boolean fromBank;//来自绑卡
+    private boolean fromsave;//是否过来  绑卡的
     private boolean needEdit;//是否需要填写信息 true yes, false no
 
 
@@ -91,11 +90,8 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save_money);
         MApplication.registActivities(this);
-        fromName = getIntent().getBooleanExtra("fromName",false);
-        fromBank = getIntent().getBooleanExtra("fromBank",false);
-        if(fromName && !fromBank){
-            setTitle(Constants.TITLE_EDIT_NAME);
-        }else if(!fromName && fromBank){
+        fromsave = getIntent().getBooleanExtra("fromsave",false);
+        if( fromsave){
             setTitle(Constants.TITLE_BIND_BANK);
         }else{
             setTitle("存钱");
@@ -125,8 +121,8 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
      * 填充widget内容
      */
     private void fillWidget(){
-        if(fromBank || fromName){
-            assets = "0.00";
+        if(fromsave){//判断是否是来绑卡的   是的话设置默认投资  1元
+            editFigure.setText("1");
         }
         if(TextUtils.isEmpty(assets) || assets.equals("0.00")){
             assetsLayout.setVisibility(View.GONE);
@@ -261,8 +257,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
         intent.putExtra("onlyUseAccount",onlyUseAccount);//是否余额充足支付
         intent.putExtra("startCalculateTime",startCalculateTime);//收益开始计算时间
         intent.putExtra("needEdit",needEdit);//是否需要填写信息
-        intent.putExtra("fromBank",fromBank);//收益开始计算时间
-        intent.putExtra("fromName",fromName);//是否需要填写信息
+        intent.putExtra("fromsave",fromsave);//是否过来  绑卡的
 
         startActivity(intent);
     }
