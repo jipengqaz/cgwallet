@@ -144,7 +144,6 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
             int code = jsonBean.getCode();
             String errorMsg = jsonBean.getError_msg();
             if(!Utils.filtrateCode(Withdraw_money.this,jsonBean)){
-                Utils.makeToast(Withdraw_money.this, errorMsg + "  错误码" + code);
                 return;
             }
             JSONObject json = jsonBean.getJsonObject();

@@ -56,7 +56,6 @@ public class Withdraw_money_Client {
                 int code = jsonBean.getCode();
                 String errorMsg = jsonBean.getError_msg();
                 if(!Utils.filtrateCode(context,jsonBean)){
-                    Utils.makeToast(context, errorMsg + "  错误码" + code);
                     return;
                 }
                 JSONObject json = jsonBean.getJsonObject();

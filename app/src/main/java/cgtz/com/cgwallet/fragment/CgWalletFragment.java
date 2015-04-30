@@ -1,6 +1,5 @@
 package cgtz.com.cgwallet.fragment;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -157,7 +156,6 @@ public class CgWalletFragment extends BaseFragment implements ISplashView,View.O
                 int code = jsonBean.getCode();
                 String errorMsg = jsonBean.getError_msg();
                 if(!Utils.filtrateCode(getActivity(),jsonBean)){
-                    Utils.makeToast(getActivity(), errorMsg + "  错误码" + code);
                     return;
                 }
                 int action = msg.what;

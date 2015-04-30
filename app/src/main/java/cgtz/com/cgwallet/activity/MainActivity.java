@@ -10,14 +10,10 @@ import android.os.Message;
 import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,7 +52,6 @@ import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.HttpUtils;
 import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.Utils;
-import cgtz.com.cgwallet.view.BidirSlidingLayout;
 import cgtz.com.cgwallet.view.ISplashView;
 import cgtz.com.cgwallet.widget.ProgressDialog;
 import cgtz.com.cgwallet.widget.SlidingMenu;
@@ -139,7 +134,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                     String errorMsg = jsonBean.getError_msg();
                     JSONObject json = null;
                     if(!Utils.filtrateCode(MainActivity.this,jsonBean)){
-                        Toast.makeText(MainActivity.this,errorMsg+"  错误码"+code,Toast.LENGTH_SHORT);
                         return;
                     }
                     json = jsonBean.getJsonObject();
@@ -246,6 +240,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                             // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
                             mController.postShare(MainActivity.this, SHARE_MEDIA.QQ, mShareListener);
                         }else{
+                            Utils.makeToast(MainActivity.this,"您为安装QQ,请安装后分享！");
                         }
                         break;
                     case R.id.qzone:

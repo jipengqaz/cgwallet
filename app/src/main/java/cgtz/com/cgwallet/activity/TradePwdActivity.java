@@ -10,7 +10,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -160,7 +159,6 @@ public class TradePwdActivity extends BaseActivity {
             String errorMsg = jsonBean.getError_msg();
             JSONObject json = null;
             if(!Utils.filtrateCode(TradePwdActivity.this,jsonBean)){
-                Toast.makeText(TradePwdActivity.this, errorMsg + "  错误码" + code, Toast.LENGTH_SHORT);
                 return;
             }
             json = jsonBean.getJsonObject();

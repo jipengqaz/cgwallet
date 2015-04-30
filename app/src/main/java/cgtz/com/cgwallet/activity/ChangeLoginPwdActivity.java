@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -101,7 +100,6 @@ public class ChangeLoginPwdActivity extends BaseActivity {
             String errorMsg = jsonBean.getError_msg();
             JSONObject json = null;
             if(!Utils.filtrateCode(ChangeLoginPwdActivity.this,jsonBean)){
-                Toast.makeText(ChangeLoginPwdActivity.this, errorMsg + "  错误码" + code, Toast.LENGTH_SHORT);
                 return;
             }
             try {
