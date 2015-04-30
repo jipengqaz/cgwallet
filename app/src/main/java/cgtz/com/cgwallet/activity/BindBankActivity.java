@@ -64,8 +64,17 @@ public class BindBankActivity extends BaseActivity implements View.OnClickListen
         MApplication.registActivities(this);
         setContentView(R.layout.activity_bind_bank_card);
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        provinces_list = new ArrayList<Bank>();
+        cities_list = new ArrayList<Bank>();
+        bank_list = new ArrayList<Bank>();
         init();
         assignment();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setProvinces_cities();//把省给取出来
     }
 
     private void assignment() {
@@ -95,12 +104,19 @@ public class BindBankActivity extends BaseActivity implements View.OnClickListen
         findViewById(R.id.box).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(imm != null && imm.isActive()){
+                if (imm != null && imm.isActive()) {
                     imm.hideSoftInputFromWindow(BindBankActivity.this.getCurrentFocus().getWindowToken(),
                             InputMethodManager.HIDE_NOT_ALWAYS);
                 }
             }
         });
+    }
+    /**
+     * 把省和市放在ArrayList里
+     * */
+    public void setProvinces_cities(){
+        preferences= this.getSharedPreferences(Constants.PROVINCES, Context.MODE_PRIVATE);
+        provinces_list = getProvince(provinces_list,Constants.PROVINCES_XML,preferences);
     }
     /**
      * 解析Json数字
@@ -231,6 +247,8 @@ public class BindBankActivity extends BaseActivity implements View.OnClickListen
             }
         }
     };
+
+
     /**
      选择弹出框
      */
