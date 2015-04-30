@@ -9,7 +9,10 @@ import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
+import com.nineoldandroids.view.ViewHelper;
+
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.ScreenUtils;
 
 
@@ -206,34 +209,35 @@ public class SlidingMenu extends HorizontalScrollView{
 	@Override
 	protected void onScrollChanged(int x, int y, int oldx, int oldy){
 		super.onScrollChanged(x, y, oldx, oldy);
-//		if(isLeft){
-//			float scale = x * 1.0f / mMenuWidth;
+		if(isLeft){
+			float scale = x * 1.0f / mMenuWidth;
+			float leftScale = 1 - 0.3f * scale;
+			float rightScale = 0.8f + scale * 0.2f;
+			LogUtils.i("Sliding","左: leftScale: "+leftScale+" rightScale: "+rightScale+" open: "+isOpen);
+			ViewHelper.setScaleX(mMenu, leftScale);
+			ViewHelper.setScaleY(mMenu, leftScale);
+			ViewHelper.setAlpha(mMenu, 0.6f + 0.4f * (1 - scale));
+			ViewHelper.setTranslationX(mMenu, mMenuWidth * scale * 0.6f);
+
+			ViewHelper.setPivotX(mContent, 0);
+			ViewHelper.setPivotY(mContent, mContent.getHeight() / 2);
+			ViewHelper.setScaleX(mContent, rightScale);
+			ViewHelper.setScaleY(mContent, rightScale);
+		}
+		else{
+//			float scale = x * 1.0f / (mScreenWidth+mMenuWidth);
 //			float leftScale = 1 - 0.3f * scale;
 //			float rightScale = 0.8f + scale * 0.2f;
-//
-//			ViewHelper.setScaleX(mMenu, leftScale);
-//			ViewHelper.setScaleY(mMenu, leftScale);
-//			ViewHelper.setAlpha(mMenu, 0.6f + 0.4f * (1 - scale));
-//			ViewHelper.setTranslationX(mMenu, mMenuWidth * scale * 0.6f);
-//
-//			ViewHelper.setPivotX(mContent, 0);
-//			ViewHelper.setPivotY(mContent, mContent.getHeight() / 2);
-//			ViewHelper.setScaleX(mContent, rightScale);
-//			ViewHelper.setScaleY(mContent, rightScale);
-//		}else{
-//			float scale = x * 1.0f / mScreenWidth;
-//			float leftScale = 1 - 0.3f * scale;
-//			float rightScale = 0.8f + scale * 0.2f;
-//
-//			ViewHelper.setScaleX(mRightMenu, rightScale);
-//			ViewHelper.setScaleY(mRightMenu, rightScale);
-//			ViewHelper.setAlpha(mRightMenu, 0.6f + 0.4f * (1 - scale));
-//			ViewHelper.setTranslationX(mRightMenu, mScreenWidth * scale * 0.6f);
-//
-//			ViewHelper.setPivotX(mContent, 0);
-//			ViewHelper.setPivotY(mContent, mContent.getHeight() / 2);
+//			LogUtils.i("Sliding","右：leftScale: "+leftScale+" rightScale: "+rightScale);
 //			ViewHelper.setScaleX(mContent, leftScale);
 //			ViewHelper.setScaleY(mContent, leftScale);
-//		}
+//			ViewHelper.setAlpha(mContent, 0.6f + 0.4f * (1 - scale));
+//			ViewHelper.setTranslationX(mContent, mScreenWidth+mMenuWidth * scale * 0.6f);
+//
+//			ViewHelper.setPivotX(mRightMenu, 0);
+//			ViewHelper.setPivotY(mRightMenu, mRightMenu.getHeight() / 2);
+//			ViewHelper.setScaleX(mRightMenu, rightScale);
+//			ViewHelper.setScaleY(mRightMenu, rightScale);
+		}
 	}
 }

@@ -61,6 +61,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.0.0'
+    compile files('libs/nineoldandroids-2.4.0.jar')
 }
 // 为了增加libs中的.so文件
 task copyNativeLibs(type: Copy) {
