@@ -6,7 +6,6 @@ import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -74,7 +73,6 @@ public class Change_password_Activity extends BaseActivity{
                     String errorMsg = jsonBean.getError_msg();
                     JSONObject json = null;
                     if(!Utils.filtrateCode(Change_password_Activity.this,jsonBean)){
-                        Toast.makeText(Change_password_Activity.this, errorMsg + "  错误码" + code, Toast.LENGTH_SHORT);
                         return;
                     }
                     json = jsonBean.getJsonObject();
@@ -156,7 +154,6 @@ public class Change_password_Activity extends BaseActivity{
                                 String errorMsg = jsonBean.getError_msg();
                                 JSONObject json = null;
                                 if (!Utils.filtrateCode(Change_password_Activity.this, jsonBean)) {
-                                    Toast.makeText(Change_password_Activity.this, errorMsg + "  错误码" + code, Toast.LENGTH_SHORT);
                                     return;
                                 }
                                 json = jsonBean.getJsonObject();

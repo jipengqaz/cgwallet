@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.bean.JsonBean;
+import cgtz.com.cgwallet.client.Get_share_content;
 import cgtz.com.cgwallet.fragment.CgWalletFragment;
 import cgtz.com.cgwallet.fragment.MyWalletFragment;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
@@ -133,7 +134,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                     String errorMsg = jsonBean.getError_msg();
                     JSONObject json = null;
                     if(!Utils.filtrateCode(MainActivity.this,jsonBean)){
-                        Toast.makeText(MainActivity.this,errorMsg+"  错误码"+code,Toast.LENGTH_SHORT);
                         return;
                     }
                     json = jsonBean.getJsonObject();

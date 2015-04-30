@@ -208,7 +208,6 @@ public class BindBankActivity extends BaseActivity implements View.OnClickListen
             int code = jsonBean.getCode();
             String errorMsg = jsonBean.getError_msg();
             if(!Utils.filtrateCode(BindBankActivity.this,jsonBean)){
-                Utils.makeToast(BindBankActivity.this, errorMsg + "  错误码" + code);
                 return;
             }
             int action = msg.what;
