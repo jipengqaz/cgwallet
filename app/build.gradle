@@ -15,7 +15,7 @@ android {
         releaseConfig{
             storeFile file("cgwallet.jks")
             storePassword KEYSTORE_PASSWORD
-            keyAlias "walletrelease"
+            keyAlias "wallet"
             keyPassword KEY_PASSWORD
         }
     }

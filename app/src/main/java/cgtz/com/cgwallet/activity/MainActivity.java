@@ -59,6 +59,7 @@ import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.BidirSlidingLayout;
 import cgtz.com.cgwallet.view.ISplashView;
 import cgtz.com.cgwallet.widget.ProgressDialog;
+import cgtz.com.cgwallet.widget.SlidingMenu;
 import cn.jpush.android.api.JPushInterface;
 
 /**
@@ -66,14 +67,10 @@ import cn.jpush.android.api.JPushInterface;
  */
 public class MainActivity extends FragmentActivity implements ISplashView,View.OnClickListener{
     private static final String TAG = "MainActivity";
-    private BidirSlidingLayout bidirSldingLayout;
-    private RelativeLayout conter_menu_layout;
-    private RelativeLayout main_conter_layout;
     private LinearLayout layoutCgWallet;//底部的草根钱包
     private LinearLayout layoutMyWallet;//底部的我的钱包
     private ImageView showLeftButton;
     private ImageView showRightButton;
-//    private ViewPager mViewPager;
     private LinearLayout menuSafeCenter;//安全中心
     private LinearLayout menuHelpCenter;//帮助中心
     private LinearLayout menuMore;//更多
@@ -96,6 +93,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private ImageView myWalletIcon;
     private TextView cgWalletText;
     private TextView myWalletText;
+    private SlidingMenu mMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,34 +106,17 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         screenWith = getResources().getDisplayMetrics().widthPixels;
         initViews();
         setFragment();
-//        initFragment();
         setViewLinstener();
-        bidirSldingLayout.setScrollEvent(findViewById(R.id.center_wallet));
         showLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (bidirSldingLayout.isLeftLayoutVisible()) {
-                    bidirSldingLayout.scrollToContentFromLeftMenu();
-                } else {
-                    bidirSldingLayout.initShowLeftState();
-                    bidirSldingLayout.scrollToLeftMenu();
-                }
+                mMenu.toggle();
             }
         });
         showRightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (bidirSldingLayout.isRightLayoutVisible()) {
-                        bidirSldingLayout.scrollToContentFromRightMenu();
-                } else {
-                    if(Utils.isLogined()) {
-                    Get_share_content.getContent(handler);
-                    bidirSldingLayout.initShowRightState();
-                    bidirSldingLayout.scrollToRightMenu();
-                    }else{
-                        startActivity(new Intent(MainActivity.this,LoginActivity.class));
-                    }
-                }
+                mMenu.showRightMenu();
             }
         });
         initShare();
@@ -405,6 +386,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     }
 
     private void initViews(){
+        mMenu = (SlidingMenu) findViewById(R.id.id_menu);
         cgWalletIcon = (ImageView) findViewById(R.id.cg_wallet_icon);
         myWalletIcon = (ImageView) findViewById(R.id.my_wallet_icon);
         cgWalletText = (TextView) findViewById(R.id.cg_wallet_text);
@@ -412,12 +394,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         centerWallet = (LinearLayout) findViewById(R.id.center_wallet);//钱包外部布局
         layoutCgWallet = (LinearLayout) findViewById(R.id.layout_cg_wallet);//底部的草根钱包
         layoutMyWallet = (LinearLayout) findViewById(R.id.layout_my_wallet);//底部的我的钱包
-        bidirSldingLayout = (BidirSlidingLayout) findViewById(R.id.custom_sliding_layout);
-        conter_menu_layout = (RelativeLayout) findViewById(R.id.content);
         showLeftButton = (ImageView) findViewById(R.id.show_left_button);
         showRightButton = (ImageView) findViewById(R.id.show_right_button);
-//        main_conter_layout = (RelativeLayout) findViewById(R.id.main_conter_layout);
-//        mViewPager = (ViewPager) findViewById(R.id.main_conter_viewpager);
         tvLogin = (TextView) findViewById(R.id.tv_goToLogin);
         menuSafeCenter = (LinearLayout) findViewById(R.id.left_menu_safe_center);
         menuHelpCenter = (LinearLayout) findViewById(R.id.left_menu_help_center);

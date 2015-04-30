@@ -21,6 +21,8 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/receiver/Provinces_Observer.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/utils/ChangeLogHelper.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/utils/DownloadingTask.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/utils/L.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/utils/ScreenUtils.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/utils/llutils/Base64.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/utils/llutils/BaseHelper.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/utils/llutils/Constants.java" charset="UTF-8" />
@@ -38,6 +40,7 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/widget/CustomEffectsDialog.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/widget/ProgressDialog.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/widget/ServerMainTainDialog.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/widget/SlidingMenu.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/anim/translate_effect.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/anim/translate_effect_exit.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bank_1.png" charset="GBK" />
