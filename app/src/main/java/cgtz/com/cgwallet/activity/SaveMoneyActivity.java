@@ -112,7 +112,6 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
         editFigure = (EditText) findViewById(R.id.et_save_figure);//输入金额
         deleteEdit = (ImageView) findViewById(R.id.delete_edit);//删除输入内容
         incomeTimeHint = (TextView) findViewById(R.id.income_time_hint);//收益开始时间
-        safeCopyWrite = (TextView) findViewById(R.id.safe_copywrite_hint);//安全文案
         confirmSave = (Button) findViewById(R.id.cofirm_save);//确认存钱按钮
     }
 
