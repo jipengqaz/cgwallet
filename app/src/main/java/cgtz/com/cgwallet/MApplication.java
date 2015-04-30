@@ -158,6 +158,21 @@ public class MApplication extends Application {
     }
 
     /**
+     * 关掉  传入activity  name以外的说有activity
+     * @param name
+     */
+    public synchronized  static void finishAllActivitys(String name){
+        if(activities != null){
+            int size = activities.size();
+            for(int i=0;i<size;i++){
+                Activity activity = activities.get(i);
+                if(!activity.isFinishing() && activity.getClass().getName() != name){
+                    activity.finish();
+                }
+            }
+        }
+    }
+    /**
      * 关掉所有Activity
      */
     public synchronized static void finishAllActivitys(){
