@@ -84,9 +84,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private CgWalletFragment cgWalletFragment;
     private MyWalletFragment myWalletFragment;
     private ImageView bottomLineSelected;//底部的白线
-    private LinearLayout layoutBottom;//底部的选项
     private Fragment[] fragments;
-    private LinearLayout centerWallet;
     private int screenWith;
     private LinearLayout.LayoutParams params;
     private ImageView cgWalletIcon;
@@ -391,7 +389,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         myWalletIcon = (ImageView) findViewById(R.id.my_wallet_icon);
         cgWalletText = (TextView) findViewById(R.id.cg_wallet_text);
         myWalletText = (TextView) findViewById(R.id.my_wallet_text);
-        centerWallet = (LinearLayout) findViewById(R.id.center_wallet);//钱包外部布局
         layoutCgWallet = (LinearLayout) findViewById(R.id.layout_cg_wallet);//底部的草根钱包
         layoutMyWallet = (LinearLayout) findViewById(R.id.layout_my_wallet);//底部的我的钱包
         showLeftButton = (ImageView) findViewById(R.id.show_left_button);
@@ -402,7 +399,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         menuMore = (LinearLayout) findViewById(R.id.left_menu_more);
         tvShowLoginMobile = (TextView) findViewById(R.id.tv_show_login_mobile);
         layotExit = (LinearLayout) findViewById(R.id.left_menu_login_out);
-        layoutBottom = (LinearLayout) findViewById(R.id.layout_bottom);
         bottomLineSelected = (ImageView) findViewById(R.id.wallet_bottom_line_selected);//底部的选中
         params = (LinearLayout.LayoutParams) bottomLineSelected.getLayoutParams();
         params.width = screenWith/2;
@@ -487,22 +483,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 
     }
 
-    private void initFragment(){
-        listFms = new ArrayList<>();
-        cgWalletFragment = new CgWalletFragment();
-        myWalletFragment = new MyWalletFragment();
-//        FragmentTransaction transaction = fragmentManager.beginTransaction();
-//        transaction.replace(R.id.menu_center_fragment, cgWalletFragment);
-//        transaction.addToBackStack(null);
-//        transaction.commit();
-//        listFms.add(cgWalletFragment);
-//        listFms.add(myWalletFragment);
-//        mViewPager.setAdapter(new MFragmentPagerAdater(getSupportFragmentManager(), listFms));
-//        mViewPager.setCurrentItem(0);
-//        mViewPager.setOnPageChangeListener(new MyOnPageChangeListener());
-//        bidirSldingLayout.setMovedLeft(true);
-//        bidirSldingLayout.setMovedRight(false);
-    }
 
     @Override
     protected void onResume() {
@@ -511,8 +491,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             LogUtils.i(TAG, "MApplication.goLogin 为 true");
             layoutClick(R.id.layout_cg_wallet);
             setLeftMenuInfo(0);//未登录
-//            currIndex = 0;
-//            mViewPager.setCurrentItem(currIndex);
         }else{
             if(currIndex == 2){
                 myWalletFragment.setData(true);
@@ -592,12 +570,10 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             case R.id.layout_cg_wallet://显示草根钱包页面
                 currIndex = 0;
                 layoutClick(v.getId());
-//                mViewPager.setCurrentItem(currIndex);
                 break;
             case R.id.layout_my_wallet://显示我的钱包页面
                 currIndex = 1;
                 layoutClick(v.getId());
-//                mViewPager.setCurrentItem(currIndex);
                 break;
             case R.id.left_menu_safe_center://安全中心
                 if(Utils.isLogined()){//判断是否登录
@@ -624,47 +600,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         }
     }
 
-    /**
-     * viewpager页面变化监听器
-     */
-    public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener{
-
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            currIndex = position;
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-        }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if(isShare){
-            isShare = false;
-        }else{
-        Constants.GESTURES_PASSWORD = true;
-        }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onRestart();
-        if(Utils.getLockPassword(this, Utils.getUserPhone(this))!=""&& Constants.GESTURES_PASSWORD && Utils.getUserId() != ""){
-            Intent intent  = new Intent();
-            intent.setClass(this,GestureVerifyActivity.class);
-            startActivity(intent);
-        }else{
-//            Utils.makeToast(this, "手势密码");
-        }
-    }
 
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
