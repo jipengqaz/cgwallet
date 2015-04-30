@@ -47,7 +47,6 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
     private EditText editFigure;//输入金额
     private ImageView deleteEdit;//删除输入内容
     private TextView incomeTimeHint;//收益开始时间
-    private TextView safeCopyWrite;//安全文案
     private Button confirmSave;//确认存钱按钮
     private ProgressDialog progressDialog;
     private SplashPresenter presenter;
@@ -105,6 +104,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
      * 初始化widget
      */
     private void initViews(){
+        Utils.safeCopyWrite(this);//设置安全文案
         assetsLayout = (RelativeLayout) findViewById(R.id.save_money_my_assets);//账户余额布局
         assetsFigure = (TextView) findViewById(R.id.save_money_assets);//账户余额数字
         transferHintLayout = (LinearLayout) findViewById(R.id.save_money_transfer_hint);//

@@ -84,6 +84,7 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
         bank_name = (TextView) findViewById(R.id.bank_name);
         bank_icon = (ImageView) findViewById(R.id.bank_icon);
         Utils.closeInputMethod(this);//关闭输入键盘
+        Utils.safeCopyWrite(this);//设置安全文案
     }
 
     /**
@@ -114,9 +115,15 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
                 String str = charSequence.toString();
                 if(str.length()>0){
+                //按钮变为可点击
+                    apply_withdraw.setEnabled(true);
+                    apply_withdraw.setBackgroundColor(R.drawable.bg_button_preed);
+
                     delete_edit.setVisibility(View.VISIBLE);
                 }else{
                     delete_edit.setVisibility(View.GONE);
+                    apply_withdraw.setBackgroundResource(R.drawable.bg_button_no_enabled);
+                    apply_withdraw.setEnabled(true);
                 }
             }
 

@@ -1,12 +1,10 @@
 package cgtz.com.cgwallet.activity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -51,6 +49,7 @@ public class ChangeLoginPwdActivity extends BaseActivity {
      * 初始化视图
      */
     private void init(){
+        Utils.safeCopyWrite(this);//设置安全文案
         et_originalpwd = (EditText) findViewById(R.id.et_originalpwd);
         et_newlpwd = (EditText) findViewById(R.id.et_newlpwd);
         et_confirmlpwd = (EditText) findViewById(R.id.et_confirmlpwd);
