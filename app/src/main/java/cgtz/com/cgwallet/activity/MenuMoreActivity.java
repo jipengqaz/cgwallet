@@ -1,5 +1,6 @@
 package cgtz.com.cgwallet.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.Ke_Fu_data;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.widget.CustomEffectsDialog;
@@ -55,10 +57,17 @@ public class MenuMoreActivity extends BaseActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.about_mine://关于我们
-                startActivity(new Intent(MenuMoreActivity.this,AboutCompanyActivity.class));
+                startActivity(new Intent(this, WebViewActivity.class)
+                        .putExtra("url", Constants.URL_WALLET_SLOGAN)
+                        .putExtra("title", "草根钱包介绍"));
                 break;
             case R.id.feed_back://意见反馈
-                startActivity(new Intent(MenuMoreActivity.this,FeedBackActivity.class));
+                if(Utils.isLogined()){
+                    Utils.makeToast(this,Constants.NEED_LOGIN);
+                    startActivity(new Intent(MenuMoreActivity.this, LoginActivity.class));
+                }else{
+                    startActivity(new Intent(MenuMoreActivity.this,FeedBackActivity.class));
+                }
                 break;
             case R.id.contact_mine://联系我们
                 if(ceffectDialog == null){
