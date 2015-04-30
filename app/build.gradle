@@ -12,14 +12,8 @@ android {
         versionName "1.0.0"
     }
     signingConfigs{
-        debugConfig{
-            storeFile file("cgwallet.jsk")
-            storePassword KEYSTORE_PASSWORD
-            keyAlias "walletrelease"
-            keyPassword KEY_PASSWORD
-        }
         releaseConfig{
-            storeFile file("cgwallet.jsk")
+            storeFile file("cgwallet.jks")
             storePassword KEYSTORE_PASSWORD
             keyAlias "walletrelease"
             keyPassword KEY_PASSWORD
