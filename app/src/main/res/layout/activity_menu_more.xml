@@ -7,8 +7,24 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <LinearLayout
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/logo"
             android:layout_marginTop="30dp"
+            android:scaleType="center"
+            />
+        <TextView
+            android:id="@+id/version"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/hint_regist_pwd_introduce"
+            android:text="当前版本："
+            android:gravity="center"
+            />
+        <LinearLayout
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_safe_center"
@@ -22,13 +38,21 @@
                 android:background="@drawable/bg_safe_center_click"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/more_item_height">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_wallet_money"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "@dimen/more_item_icon_right_marign"
+                    />
                 <TextView
-                    android:layout_marginLeft="@dimen/more_item_left_marign"
+                    android:layout_marginLeft="55dp"
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/safe_center_text"
-                    android:text="关于我们"/>
+                    android:textColor="@color/code_333333"
+                    android:text="关于草根钱包"/>
                 <ImageView
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
@@ -47,12 +71,20 @@
                 android:background="@drawable/bg_safe_center_click"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/more_item_height">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_asdf"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "@dimen/more_item_icon_right_marign"
+                    />
                 <TextView
-                    android:layout_marginLeft="@dimen/more_item_left_marign"
+                    android:layout_marginLeft="55dp"
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/safe_center_text"
+                    android:textColor="@color/code_333333"
                     android:text="意见反馈"/>
                 <ImageView
                     android:layout_centerVertical="true"
@@ -72,12 +104,20 @@
                 android:id="@+id/contact_mine"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/more_item_height">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_phone"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "@dimen/more_item_icon_right_marign"
+                    />
                 <TextView
-                    android:layout_marginLeft="@dimen/more_item_left_marign"
+                    android:layout_marginLeft="55dp"
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_size_16sp"
+                    android:textColor="@color/code_333333"
                     android:text="联系我们"/>
                 <ImageView
                     android:layout_centerVertical="true"
@@ -94,8 +134,12 @@
                 android:layout_height="0.5dp"/>
         </LinearLayout>
     </LinearLayout>
-    <include layout="@layout/layout_save_or_draw_money"
+    <include layout="@layout/layout_banner_black"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="35dp"
         android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/save_or_draw_money_layout_height"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </RelativeLayout>
