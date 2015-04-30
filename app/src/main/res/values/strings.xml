@@ -121,5 +121,7 @@
     <string name="update_tip_title">更新提示</string>
     <string name="update_tip_button">更新</string>
     <string name="update_tip_button_cancel">取消</string>
+    <string name="jpush_message_button">进入草根钱包</string>
+    <string name="jpush_message_text_hint">草根钱包欢迎您</string>
 
 </resources>

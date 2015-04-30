@@ -105,6 +105,11 @@ public class StartActivity extends Activity {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+        MainActivity activity = (MainActivity) MApplication.getActivityByName(MainActivity.class.getName());
+        if( activity != null && !activity.isFinishing()){
+            finish();
+            return;
+        }
 
         turnHandler = new TurnHandler();
         handler = new MHandler();
@@ -310,18 +315,8 @@ public class StartActivity extends Activity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             try {
-                if(result == null){
+                if(TextUtils.isEmpty(result) || result.equals("event")){
                     getonLine();
-                    return;
-                }
-                LogUtils.i("startActivity","版本号返回值："+result);
-                if(result.equals("")){
-                    Utils.makeToast(StartActivity.this, Constants.IS_EVENT_MSG);
-                    finish();
-                }else if(result.equals("event")){
-                    CustomTask task = new CustomTask(handler,Constants.HANDLER_SERVER_MAINTAIN,
-                            Constants.URL_SERVER_MAINTAIN,false,null,false);
-                    task.execute();
                 }else{
                     JSONObject json = new JSONObject(result);
                     if(json!=null) {
