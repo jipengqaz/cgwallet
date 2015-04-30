@@ -114,7 +114,12 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         showRightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mMenu.showRightMenu();
+                if(Utils.isLogined()) {
+                    mMenu.showRightMenu();
+                    Get_share_content.getContent(handler);
+                }else{
+                    startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                }
             }
         });
         initShare();
@@ -436,6 +441,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         .hide(fragments[1])
                         .show(fragments[0]).commit();
                 lineToLeft();
+                cgWalletFragment.setData();
                 break;
             case R.id.layout_my_wallet://显示我的钱包页面
                 if(!Utils.isLogined()){
@@ -487,11 +493,12 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     protected void onResume() {
         super.onResume();
-        if(Utils.isLogined()){
-            LogUtils.i(TAG, "MApplication.goLogin 为 true");
+        if(!Utils.isLogined()){
+            LogUtils.i(TAG, "Utils.isLogined 为 true");
             layoutClick(R.id.layout_cg_wallet);
             setLeftMenuInfo(0);//未登录
         }else{
+            LogUtils.i(TAG,"Utils.isLogined 为 false");
             if(currIndex == 2){
                 myWalletFragment.setData(true);
             }

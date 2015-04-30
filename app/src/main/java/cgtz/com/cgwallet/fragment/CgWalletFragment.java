@@ -110,7 +110,9 @@ public class CgWalletFragment extends BaseFragment implements ISplashView,View.O
      * 获取页面数据
      */
     public void setData(){
-        presenter.didFinishLoading(getActivity());
+        if(TextUtils.isEmpty(rate)){
+            presenter.didFinishLoading(getActivity());
+        }
     }
 
 
