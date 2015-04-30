@@ -487,7 +487,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     protected void onResume() {
         super.onResume();
-        if(Utils.isLogined() && TextUtils.isEmpty(Utils.getToken())){
+        if(Utils.isLogined()){
             LogUtils.i(TAG, "MApplication.goLogin 为 true");
             layoutClick(R.id.layout_cg_wallet);
             setLeftMenuInfo(0);//未登录
