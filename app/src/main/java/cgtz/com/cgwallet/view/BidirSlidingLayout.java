@@ -143,9 +143,6 @@ public class BidirSlidingLayout extends RelativeLayout implements OnTouchListene
 	 */
 	private VelocityTracker mVelocityTracker;
 
-	private boolean isMovedRight = false;//判断viewpager是否移动到最右边
-
-	private boolean isMovedLeft = false;//判断viewpager是否移动到最左边
 
 	/**
 	 * 重写BidirSlidingLayout的构造函数，其中获取了屏幕的宽度和touchSlop的值。
@@ -168,14 +165,6 @@ public class BidirSlidingLayout extends RelativeLayout implements OnTouchListene
 	public void setScrollEvent(View bindView) {
 		mBindView = bindView;
 		mBindView.setOnTouchListener(this);
-	}
-
-	public void setMovedRight(boolean flag){
-		this.isMovedRight = flag;
-	}
-
-	public void setMovedLeft(boolean flag){
-		this.isMovedLeft = flag;
 	}
 
 	/**
@@ -298,16 +287,16 @@ public class BidirSlidingLayout extends RelativeLayout implements OnTouchListene
 				checkLeftMenuBorder();
 				contentLayout.setLayoutParams(contentLayoutParams);
 				break;
-//			case SHOW_RIGHT_MENU:
-//				contentLayoutParams.leftMargin = moveDistanceX;
-//				checkRightMenuBorder();
-//				contentLayout.setLayoutParams(contentLayoutParams);
-//				break;
-//			case HIDE_RIGHT_MENU:
-//				contentLayoutParams.leftMargin = -rightMenuLayoutParams.width + moveDistanceX;
-//				checkRightMenuBorder();
-//				contentLayout.setLayoutParams(contentLayoutParams);
-//				break;
+			case SHOW_RIGHT_MENU:
+				contentLayoutParams.leftMargin = moveDistanceX;
+				checkRightMenuBorder();
+				contentLayout.setLayoutParams(contentLayoutParams);
+				break;
+			case HIDE_RIGHT_MENU:
+				contentLayoutParams.leftMargin = -rightMenuLayoutParams.width + moveDistanceX;
+				checkRightMenuBorder();
+				contentLayout.setLayoutParams(contentLayoutParams);
+				break;
 			default:
 				break;
 			}
@@ -353,10 +342,10 @@ public class BidirSlidingLayout extends RelativeLayout implements OnTouchListene
 				// 当左侧菜单显示时，如果用户点击一下内容部分，则直接滚动到内容界面
 				scrollToContentFromLeftMenu();
 			}
-//			else if (upDistanceX < touchSlop && isRightMenuVisible) {
-//				// 当右侧菜单显示时，如果用户点击一下内容部分，则直接滚动到内容界面
-//				scrollToContentFromRightMenu();
-//			}
+			else if (upDistanceX < touchSlop && isRightMenuVisible) {
+				// 当右侧菜单显示时，如果用户点击一下内容部分，则直接滚动到内容界面
+				scrollToContentFromRightMenu();
+			}
 			recycleVelocityTracker();
 			break;
 		}
@@ -385,32 +374,30 @@ public class BidirSlidingLayout extends RelativeLayout implements OnTouchListene
 	 */
 	private void checkSlideState(int moveDistanceX, int moveDistanceY) {
 		if (isLeftMenuVisible) {
-			if (!isSliding && Math.abs(moveDistanceX) >= touchSlop && moveDistanceX < 0
-					&& isMovedLeft && !isMovedRight) {
+			if (!isSliding && Math.abs(moveDistanceX) >= touchSlop && moveDistanceX < 0) {
 				isSliding = true;
 				slideState = HIDE_LEFT_MENU;
 			}
 		}
-//		else if (isRightMenuVisible) {
-//			if (!isSliding && Math.abs(moveDistanceX) >= touchSlop && moveDistanceX > 0
-//					&& !isMovedLeft && isMovedRight) {
-//				isSliding = true;
-//				slideState = HIDE_RIGHT_MENU;
-//			}
-//		}
+		else if (isRightMenuVisible) {
+			if (!isSliding && Math.abs(moveDistanceX) >= touchSlop && moveDistanceX > 0) {
+				isSliding = true;
+				slideState = HIDE_RIGHT_MENU;
+			}
+		}
 		else {
 			if (!isSliding && Math.abs(moveDistanceX) >= touchSlop && moveDistanceX > 0
-					&& Math.abs(moveDistanceY) < touchSlop && isMovedLeft && !isMovedRight) {
+					&& Math.abs(moveDistanceY) < touchSlop) {
 				isSliding = true;
 				slideState = SHOW_LEFT_MENU;
 				initShowLeftState();
 			}
-//			else if (!isSliding && Math.abs(moveDistanceX) >= touchSlop && moveDistanceX < 0
-//					&& Math.abs(moveDistanceY) < touchSlop && !isMovedLeft && isMovedRight) {
-//				isSliding = true;
-//				slideState = SHOW_RIGHT_MENU;
-//				initShowRightState();
-//			}
+			else if (!isSliding && Math.abs(moveDistanceX) >= touchSlop && moveDistanceX < 0
+					&& Math.abs(moveDistanceY) < touchSlop ) {
+				isSliding = true;
+				slideState = SHOW_RIGHT_MENU;
+				initShowRightState();
+			}
 		}
 	}
 

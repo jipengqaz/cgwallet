@@ -112,7 +112,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         setFragment();
 //        initFragment();
         setViewLinstener();
-//        bidirSldingLayout.setScrollEvent(centerWallet);
+        bidirSldingLayout.setScrollEvent(findViewById(R.id.center_wallet));
         showLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -658,13 +658,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         @Override
         public void onPageSelected(int position) {
             currIndex = position;
-            if(position == 1){
-                bidirSldingLayout.setMovedRight(true);
-                bidirSldingLayout.setMovedLeft(false);
-            }else if(position == 0){
-                bidirSldingLayout.setMovedLeft(true);
-                bidirSldingLayout.setMovedRight(false);
-            }
         }
 
         @Override
