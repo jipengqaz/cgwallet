@@ -90,7 +90,7 @@ public class Withdraw_money_Client {
                     //老用户的实名认证，联系客服修改为最新的实名认证
                     Utils.makeToast(context, json.optString("msg"));
                 } else if (success == -6) {//已绑卡  未完善信息
-                    LogUtils.i("MineFragment", json + "");
+                    LogUtils.i(TAG, json + "");
                     Utils.makeToast(context, json.optString("msg"));
                     Intent intent = new Intent(context, BindBankActivity.class);
                     intent.putExtra("perfect", false);
@@ -102,6 +102,7 @@ public class Withdraw_money_Client {
                     intent.putExtra("bankName", json.optJSONObject("list").optString("bankName"));//银行
                     intent.putExtra("bank_id", json.optJSONObject("list").optInt("bank_id"));
                     context.startActivity(intent);
+                    LogUtils.e(TAG,"aaaaaaa");
                 } else if (success == -7){//还没设置交易密码
                     Utils.makeToast(context,
                             context.getString(R.string.error_msg_notradepwd));

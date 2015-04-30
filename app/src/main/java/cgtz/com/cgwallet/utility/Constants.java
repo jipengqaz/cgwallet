@@ -114,7 +114,7 @@ public class Constants {
     public static final String URL_CHANGE_LOGINPWD = "account/resetPassword";//修改登录密码
     public static final String URL_ACCOUNT_INFO = "account/info";//获取个人信息及安全中心内容
     public static final String URL_E_WALLET_REDEEM = "ewallet/redeem";//进入取钱界面判断接口
-    public static final String URL_DO_WITHDRAW = "account/doWithDraw";//取钱接口
+    public static final String URL_DO_WITHDRAW = "ewallet/redeem";//取钱接口
     public static final String URL_UPDATE_BANK = "Bankcard/update";//银行卡信息完善接口
     public static final String URL_BRANCH = "api/getBranch";//获取分行信息
 

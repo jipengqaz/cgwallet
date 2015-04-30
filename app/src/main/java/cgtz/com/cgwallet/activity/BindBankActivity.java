@@ -80,12 +80,18 @@ public class BindBankActivity extends BaseActivity implements View.OnClickListen
     private void assignment() {
         with_draw_num.setFocusable(false);
         bank_name.setFocusable(false);
+        bank_image.setFocusable(false);
         back_text_1.setText(getIntent().getStringExtra("tip"));//设置文案
         with_draw_num.setText(getIntent().getStringExtra("starBankAccount"));//设置银行卡号
         bank_name.setText(getIntent().getStringExtra("bankName"));//设置银行名
         bank_image.setImageResource(BankCard.getBankIcon(getIntent().getIntExtra("bank_id", 0)));
         bank_image.setVisibility(View.VISIBLE);//显示银行图标
         card_id.setText(getIntent().getStringExtra("starName") + "（" + getIntent().getStringExtra("starIdentity") + "）");//设置用户信息
+
+        province.setOnClickListener(this);
+        the_city.setOnClickListener(this);
+        bank.setOnClickListener(this);
+        determine.setOnClickListener(this);
     }
 
     /**

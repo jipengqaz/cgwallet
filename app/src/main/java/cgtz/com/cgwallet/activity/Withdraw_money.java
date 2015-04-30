@@ -117,8 +117,7 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
                 if(str.length()>0){
                 //按钮变为可点击
                     apply_withdraw.setEnabled(true);
-                    apply_withdraw.setBackgroundColor(R.drawable.bg_button_preed);
-
+                    apply_withdraw.setBackgroundResource(R.drawable.bg_button_preed);
                     delete_edit.setVisibility(View.VISIBLE);
                 }else{
                     delete_edit.setVisibility(View.GONE);
@@ -205,7 +204,7 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
                             Utils.makeToast(Withdraw_money.this, "请输入交易密码");
                         } else {
                             if (pDialog ==null) {
-                                pDialog = new ProgressDialog(Withdraw_money.this);
+                                pDialog = new ProgressDialog(Withdraw_money.this, R.style.loading_dialog);
                             }
                             pDialog.show();
                             Withdraw_money_Client.getMoney(handler, withdrawAmount, card.getCard_id(), tradepwd,1);

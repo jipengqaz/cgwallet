@@ -74,7 +74,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_tips1"
                         android:textSize="@dimen/text_size_14sp"
-                        android:text="选择银行"
+                        android:text="绑定银行"
                         android:layout_marginLeft="20dp" />
                     <ImageView
                         android:id="@+id/bank_image"
