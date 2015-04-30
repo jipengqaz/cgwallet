@@ -83,6 +83,8 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
                     changeLoginLayout();
                     setRightText("切换账户");
                     showHavePhone = false;
+                    showEditsMobile.setVisibility(View.GONE);
+                    showEditsMobile.setText("");
                 } else {
                     MApplication.setGoLogin(false);
                     finish();

@@ -67,6 +67,7 @@
     <color name="item_earnings_record_2_background">#f1f1f1</color>
     <color name="login_edit_hint">#ffffff</color>
     <color name="login_edit_pwd_hint">#c2f1df</color>
+    <color name="login_edit_hint_color">#0abb7a</color>
     <color name="login_hint_text">#05fc9f</color>
     <color name="login_hint_service_text">#09e894</color>
     <color name="bg_login_bottom">#2dbc89</color>
