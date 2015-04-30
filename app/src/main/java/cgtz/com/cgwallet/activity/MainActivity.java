@@ -88,7 +88,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private MyWalletFragment myWalletFragment;
     private ImageView bottomLineSelected;//底部的白线
     private LinearLayout layoutBottom;//底部的选项
-    private FragmentManager fragmentManager;
     private Fragment[] fragments;
     private LinearLayout centerWallet;
     private int screenWith;
@@ -105,7 +104,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         setContentView(R.layout.activity_main);
         MApplication.registActivities(this);//存储该activity
         splashPresenter = new SplashPresenter(this);
-        fragmentManager = getSupportFragmentManager();
 
         screenWith = getResources().getDisplayMetrics().widthPixels;
         initViews();
@@ -448,17 +446,18 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
      */
     private void setFragment(){
         fragments = new Fragment[2];
-        fragments[0] = fragmentManager.findFragmentById(R.id.menu_center_fragment1);
-        fragments[1] = fragmentManager.findFragmentById(R.id.menu_center_fragment2);
+        fragments[0] = getSupportFragmentManager().findFragmentById(R.id.menu_center_fragment1);
+        fragments[1] = getSupportFragmentManager().findFragmentById(R.id.menu_center_fragment2);
         cgWalletFragment = (CgWalletFragment) fragments[0];
         myWalletFragment = (MyWalletFragment) fragments[1];
-        fragmentManager.beginTransaction().hide(fragments[1]).hide(fragments[0]).show(fragments[0]).commit();
+        getSupportFragmentManager().beginTransaction().hide(fragments[1]).hide(fragments[0]).show(fragments[0]).commit();
     }
 
     public void layoutClick(int type){
         switch (type){
             case R.id.layout_cg_wallet://显示草根钱包页面
-                fragmentManager.beginTransaction()
+                currIndex = 1;
+                getSupportFragmentManager().beginTransaction()
                         .hide(fragments[0])
                         .hide(fragments[1])
                         .show(fragments[0]).commit();
@@ -468,7 +467,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                 if(!Utils.isLogined()){
                     startActivity(new Intent(MainActivity.this,LoginActivity.class));
                 }else{
-                    fragmentManager.beginTransaction()
+                    currIndex = 2;
+                    getSupportFragmentManager().beginTransaction()
                             .hide(fragments[0])
                             .hide(fragments[1])
                             .show(fragments[1]).commit();
@@ -529,19 +529,20 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     protected void onResume() {
         super.onResume();
-//        if(!MApplication.isGoLogin() && TextUtils.isEmpty(Utils.getToken())){
-//            LogUtils.i(TAG, "MApplication.goLogin 为 true");
-//            if(fragmentManager != null){
-//                layoutClick(R.id.layout_cg_wallet);
-//            }
-//
-//            setLeftMenuInfo(0);//未登录
-////            currIndex = 0;
-////            mViewPager.setCurrentItem(currIndex);
-//        }
+        if(Utils.isLogined() && TextUtils.isEmpty(Utils.getToken())){
+            LogUtils.i(TAG, "MApplication.goLogin 为 true");
+            layoutClick(R.id.layout_cg_wallet);
+            setLeftMenuInfo(0);//未登录
+//            currIndex = 0;
+//            mViewPager.setCurrentItem(currIndex);
+        }else{
+            if(currIndex == 2){
+                myWalletFragment.setData(true);
+            }
+        }
         String userMobile = Utils.getUserPhone(this);
-        LogUtils.i(TAG,"islogin: "+ Utils.isLogined() + " mobile: "+Utils.getUserPhone(this));
-        if(Utils.isLogined() && !TextUtils.isEmpty(userMobile)){
+        LogUtils.i(TAG, "islogin: " + Utils.isLogined() + " mobile: " + Utils.getUserPhone(this));
+        if(Utils.isLogined()){
             tvShowLoginMobile.setText(Utils.getHasStarsMobile(userMobile));
             setLeftMenuInfo(1);//已登录
         }else{
