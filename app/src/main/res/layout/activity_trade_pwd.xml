@@ -133,9 +133,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-    <include layout="@layout/layout_banner"
+    <include layout="@layout/layout_banner_black"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="35dp"
         android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </RelativeLayout>

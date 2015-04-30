@@ -1,11 +1,9 @@
 package cgtz.com.cgwallet.activity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -101,6 +99,7 @@ public class Change_password_Activity extends BaseActivity{
      * 初始化控件
      */
     private void init(){
+        Utils.safeCopyWrite(this);//设置安全文案
         password_1 = (EditText) findViewById(R.id.password_1);
         password_2 = (EditText) findViewById(R.id.password_2);
         code = (EditText) findViewById(R.id.code);

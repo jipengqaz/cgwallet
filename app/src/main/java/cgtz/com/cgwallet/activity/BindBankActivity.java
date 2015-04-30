@@ -92,6 +92,7 @@ public class BindBankActivity extends BaseActivity implements View.OnClickListen
      * 初始化控件
      */
     private void init() {
+        Utils.safeCopyWrite(this);//设置安全文案
         bank_name = (TextView) findViewById(R.id.bank_name);//选择银行
         with_draw_num = (EditText) findViewById(R.id.with_draw_num);//银行卡号
         province = (TextView) findViewById(R.id.province);//省

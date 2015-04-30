@@ -84,6 +84,7 @@ public class TradePwdActivity extends BaseActivity {
      * 初始化视图
      */
     private void initView(){
+        Utils.safeCopyWrite(this);//设置安全文案
         trade_pwd_parent = (LinearLayout) findViewById(R.id.trade_pwd_parent);
         et_trade_pwd = (EditText) findViewById(R.id.trade_pwd);
         et_trade_pwd_again = (EditText) findViewById(R.id.trade_pwd_again);
