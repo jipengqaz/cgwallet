@@ -177,3 +177,17 @@
 -keep class com.umeng.socialize.sensor.**
 -keep class com.tencent.mm.sdk.modelmsg.WXMediaMessage {*;}
 -keep class com.tencent.mm.sdk.modelmsg.** implements com.tencent.mm.sdk.modelmsg.WXMediaMessage$IMediaObject {*;}
+
+# 移除所有使用android.util.log类中的e(),d(),i(),v()方法的地方
+-assumenosideeffects class android.util.log{
+    public static *** e(...);
+    public static *** d(...);
+    public static *** i(...);
+    public static *** v(...);
+}
+
+
+
+
+
+
