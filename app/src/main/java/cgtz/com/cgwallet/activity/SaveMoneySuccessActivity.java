@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.utility.Constants;
+import cgtz.com.cgwallet.utils.Utils;
 
 /**
  * 存钱结果页面
@@ -21,6 +23,7 @@ public class SaveMoneySuccessActivity extends BaseActivity {
     private TextView goToWallet;//查看我的钱包
     private String startCalculateTime;//开始计算收益时间
     private String saveMoney;//存钱数值
+    private ImageView walletSlogan;//草根钱包介绍
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,7 @@ public class SaveMoneySuccessActivity extends BaseActivity {
         calculateTime = (TextView) findViewById(R.id.tv_calculate_time);
         lookSaveRecord = (TextView) findViewById(R.id.look_save_record);//查看存钱记录
         goToWallet = (TextView) findViewById(R.id.go_to_wallet);//查看我的钱包
+        walletSlogan = (ImageView) findViewById(R.id.iv_slogan);//钱包口号
         if(!TextUtils.isEmpty(saveMoney)){
             saveFigure.setText(saveMoney);
         }
@@ -52,6 +56,8 @@ public class SaveMoneySuccessActivity extends BaseActivity {
      * 添加事件
      */
     private void setListener(){
+        Utils.goToSloganIntruduce(this,walletSlogan);
+
         //查看存钱记录
         lookSaveRecord.setOnClickListener(new View.OnClickListener() {
             @Override

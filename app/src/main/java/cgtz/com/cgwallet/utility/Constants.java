@@ -82,6 +82,7 @@ public class Constants {
     public static final int WHAT_BRANCH = 2015042843;//获取城市分行
     public static final int WHAT_VERSION_UPDATE = 20150000;//版本更新
     /**88888888888888888888888888888888888888**/
+    public static final String URL_WALLET_SLOGAN = "https://d5ds88.cgtz.com/version/notice/wallet";//草根钱包介绍
     public static final String URL_SERVER_MAINTAIN = "android/Maintain";//服务器是否维护的判断接口
     public static final String URL_CG_WALLET_PROTOCOL = "http://d5ds88.cgtz.com/site/agreement/";
     public static final String URL_FEED_BACK = "site/feedBack";//意见反馈

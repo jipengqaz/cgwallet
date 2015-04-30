@@ -22,6 +22,7 @@ import cgtz.com.cgwallet.activity.LoginActivity;
 import cgtz.com.cgwallet.activity.MainActivity;
 import cgtz.com.cgwallet.activity.RegistActivity;
 import cgtz.com.cgwallet.activity.SaveMoneyActivity;
+import cgtz.com.cgwallet.activity.WebViewActivity;
 import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.client.Withdraw_money_Client;
 import cgtz.com.cgwallet.utility.Constants;
@@ -393,6 +394,21 @@ public class Utils {
                     imm.hideSoftInputFromWindow(context.getCurrentFocus().getWindowToken(),
                             InputMethodManager.HIDE_NOT_ALWAYS);
                 }
+            }
+        });
+    }
+    /**
+     * 草根钱包介绍
+     */
+    public static void goToSloganIntruduce(final Context context,View view){
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, WebViewActivity.class)
+                        .putExtra("url", Constants.URL_WALLET_SLOGAN)
+                        .putExtra("title", "草根钱包介绍"));
+                MApplication.destroyActivity(MApplication.getActivityByName(SaveMoneyActivity.class.getName()));
+                ((Activity)context).finish();
             }
         });
     }

@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.utils.Utils;
 
 /**
  * 处理中页面
@@ -18,6 +20,7 @@ public class InProgressActivity extends BaseActivity {
     private TextView progresBanner;
     private TextView lookSaveRecord;//查看存钱记录
     private TextView goToWallet;//查看我的钱包
+    private ImageView walletSlogan;//草根钱包介绍
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,7 @@ public class InProgressActivity extends BaseActivity {
         progresBanner = (TextView) findViewById(R.id.tv_progress_banner);
         lookSaveRecord = (TextView) findViewById(R.id.look_save_record);//查看存钱记录
         goToWallet = (TextView) findViewById(R.id.go_to_wallet);//查看我的钱包
+        walletSlogan = (ImageView) findViewById(R.id.iv_slogan);//钱包口号
         if(isSaveAt){
             progressText.setText("存钱处理中...");
             progresBanner.setText("请稍后查看钱包资金");
@@ -52,7 +56,9 @@ public class InProgressActivity extends BaseActivity {
      * 添加事件
      */
     private void setLinstener(){
-//查看存钱记录
+
+        Utils.goToSloganIntruduce(this, walletSlogan);
+        //查看存钱记录
         lookSaveRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -52,9 +52,9 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
     private ProgressDialog progressDialog;
     private SplashPresenter presenter;
     private String saveMoney;//输入的存钱金额
-    private String assetUseIntruduce;////余额的使用介绍
-    private String startCalculateTime;//计算收益时间
-    private String minSaveMoney;//起投金额
+    private String assetUseIntruduce="";////余额的使用介绍
+    private String startCalculateTime="";//计算收益时间
+    private String minSaveMoney = "1";//起投金额
     private Dialog payTypeDialog;//选择支付方式
     private Button balanceBtn;
     private Button bankCardBtn;
@@ -70,7 +70,6 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
     private int taskType = 0;// 接口访问的判断值
     private boolean onlyUseAccount = true;//是否余额充足支付
     private boolean isRealleyName;//是否真正实名认证
-    private boolean isRelleyBank;//是否真正绑卡或者支持连连支付
     private String name;//姓名
     private String identity;//身份证号
     private String bankName;//银行名称
@@ -243,7 +242,6 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
     private void payMethod(){
         Intent intent = new Intent(this,InformationConfirmActivity.class);
         intent.putExtra("isRealleyName",isRealleyName);//是否真正实名认证
-//        intent.putExtra("isRelleyBank",isRelleyBank);//是否真正绑卡或者支持连连支付
         intent.putExtra("name",name);//姓名
         intent.putExtra("identity",identity);//身份证号
         intent.putExtra("bankName",bankName);//银行名称
@@ -430,7 +428,6 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                     //未真正实名 已绑卡 但是不支持连连
                     needEdit = true;
                     isRealleyName = false;
-//                    isRelleyBank = false;
                     name = json.optString("name");//用户姓名
                     identity = json.optString("identity");//用户身份证号
                     payMethod();
@@ -438,7 +435,6 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                     //已真正实名认证  已绑卡 不支持连连
                     needEdit = true;
                     isRealleyName = true;
-//                    isRelleyBank = false;
                     name = json.optString("name");//用户姓名
                     identity = json.optString("identity");//用户身份证号
                     payMethod();
@@ -454,7 +450,6 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
             try{
                 needEdit = true;
                 isRealleyName = false;//是否真正实名认证
-                isRelleyBank = false;//是否真正绑卡或者支持连连支付
                 JsonBean jsonBean = (JsonBean) msg.obj;
                 int code = jsonBean.getCode();
                 String errorMsg = jsonBean.getError_msg();
@@ -488,19 +483,16 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                                 //未设置交易密码
                                 needEdit = true;
                                 isRealleyName = false;//是否真正实名认证
-                                isRelleyBank = false;//是否真正绑卡或者支持连连支付
                                 startActivity(new Intent(SaveMoneyActivity.this,TradePwdActivity.class));
                             }else if(code == -2){
                                 //未实名认证未绑卡
                                 needEdit = true;
                                 isRealleyName = false;//是否真正实名认证
-                                isRelleyBank = false;//是否真正绑卡或者支持连连支付
                                 payMethod();
                             }else if(code == -3){
                                 //未真正实名 未绑卡
                                 needEdit = true;
                                 isRealleyName = false;//是否真正实名认证
-                                isRelleyBank = false;//是否真正绑卡或者支持连连支付
                                 name = json.optString("name");//姓名
                                 identity = json.optString("identity");//身份证号
                                 payMethod();
@@ -511,7 +503,6 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                                 //未真正实名 已绑卡 支持连连 但未绑定连连
                                 needEdit = true;//是否需要填写信息
                                 isRealleyName = false;//是否真正实名认证
-                                isRelleyBank = false;//是否真正绑卡或者支持连连支付
                                 name = json.optString("name");//姓名
                                 identity = json.optString("identity");//身份证号
                                 bankName = json.optString("bankName");//银行名称
@@ -524,7 +515,6 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                                 // 已真正实名认证  未绑卡
                                 needEdit = true;//是否需要填写信息
                                 isRealleyName = true;//是否真正实名认证
-                                isRelleyBank = false;//是否真正绑卡或者支持连连支付
                                 name  = json.optString("name");//姓名
                                 identity = json.optString("identity");//身份证号
                                 payMethod();
@@ -535,7 +525,6 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                                 //已真正实名认证  已绑卡 支持连连  但未绑定连连
                                 needEdit = true;//是否需要填写信息
                                 isRealleyName = true;//是否真正实名认证
-                                isRelleyBank = false;//是否真正绑卡或者支持连连支付
                                 name = json.optString("name");//姓名
                                 identity = json.optString("identity");//身份证号
                                 bankName = json.optString("bankName");//银行名称
@@ -548,7 +537,6 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                                 //可以直接支付
                                 needEdit = false;//是否需要填写信息
                                 isRealleyName = true;//是否真正实名认证
-                                isRelleyBank = true;//是否真正绑卡或者支持连连支付
                                 name = json.optString("name");//姓名
                                 identity = json.optString("identity");//身份证号
                                 bankName = json.optString("bankName");//银行名称
@@ -563,7 +551,6 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                                 //出错
                                 needEdit = true;//是否需要填写信息
                                 isRealleyName = false;//是否真正实名认证
-                                isRelleyBank = false;//是否真正绑卡或者支持连连支付
                                 Utils.makeToast(SaveMoneyActivity.this,errorMsg);
                             }
                         }else{

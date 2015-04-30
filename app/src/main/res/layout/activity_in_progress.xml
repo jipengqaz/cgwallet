@@ -65,11 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="46dp" />
         </LinearLayout>
-        <ImageView
-            android:layout_marginTop="50dp"
-            android:src="@mipmap/wallet_slogan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <include layout="@layout/layout_wallet_slogan"/>
     </LinearLayout>
 </ScrollView>
 
