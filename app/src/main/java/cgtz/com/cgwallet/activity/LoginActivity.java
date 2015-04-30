@@ -7,6 +7,7 @@ import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -86,8 +87,8 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
                     showEditsMobile.setVisibility(View.GONE);
                     showEditsMobile.setText("");
                 } else {
-                    MApplication.setGoLogin(false);
-                    finish();
+
+                    backMain();
                 }
             }
         });
@@ -142,10 +143,10 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(TextUtils.isEmpty(charSequence.toString().trim())){
+                if (TextUtils.isEmpty(charSequence.toString().trim())) {
                     showEditsMobile.setVisibility(View.GONE);
                     showEditsMobile.setText("");
-                }else{
+                } else {
                     showEditsMobile.setVisibility(View.VISIBLE);
                     showEditsMobile.setText(charSequence.toString().trim());
                 }
@@ -276,5 +277,20 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+    /**
+     * 用于关闭处理main以外的activity
+     */
+    private void backMain(){
+        MApplication.setGoLogin(false);
+        MApplication.finishAllActivitys(MainActivity.class.getName());//关掉除了主页面以外的所有页面
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            backMain();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
