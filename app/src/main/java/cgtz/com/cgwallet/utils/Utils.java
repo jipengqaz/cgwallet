@@ -125,6 +125,7 @@ public class Utils {
         MApplication.setIsSetTrade(false);
     }
 
+
     /**
      * 设置用户手机号   中间4位为*号
      * @param phoneNumber  手机号吗

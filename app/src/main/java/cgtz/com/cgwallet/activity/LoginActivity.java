@@ -59,6 +59,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
         showBack(true);
         MApplication.registActivities(this);//存储该activity
         beforeMobile = Utils.getUserPhone(this);
+        Utils.loginExit(this);
         if(TextUtils.isEmpty(beforeMobile)){
             setRightText(null);
         }else{
