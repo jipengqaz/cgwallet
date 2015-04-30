@@ -6,13 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.utils.Ke_Fu_data;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.widget.CustomEffectsDialog;
-import cgtz.com.cgwallet.widget.ProgressDialog;
 
 /**
  * 更多页面
@@ -22,7 +22,7 @@ public class MenuMoreActivity extends BaseActivity implements View.OnClickListen
     private RelativeLayout feedBack;//意见反馈
     private RelativeLayout contactMine;//联系我们
     private CustomEffectsDialog ceffectDialog;
-    private ProgressDialog progressDialog;
+    private TextView version;//版本号
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,16 +38,16 @@ public class MenuMoreActivity extends BaseActivity implements View.OnClickListen
         aboutMine = (RelativeLayout) findViewById(R.id.about_mine);
         feedBack = (RelativeLayout) findViewById(R.id.feed_back);
         contactMine = (RelativeLayout) findViewById(R.id.contact_mine);
-        if(progressDialog == null){
-            progressDialog = new ProgressDialog(this,R.style.loading_dialog);
-        }
-        Utils.SaveOrDrawMoney(this, progressDialog);
+        version = (TextView) findViewById(R.id.version);
+        Utils.safeCopyWrite(this);//设置安全文案
     }
 
     private void setListener(){
         aboutMine.setOnClickListener(this);
         feedBack.setOnClickListener(this);
         contactMine.setOnClickListener(this);
+        version.setText("当前版本：" + Utils.getVersion(this));
+        version.setOnClickListener(this);
     }
 
 
@@ -92,8 +92,25 @@ public class MenuMoreActivity extends BaseActivity implements View.OnClickListen
                 });
                 ceffectDialog.show();
                 break;
+            case R.id.version:
+
+                long currentTime = System.currentTimeMillis();
+                if ((currentTime - touchTime) >= waitTime || iii<=10) {
+                    if((currentTime - touchTime) >= waitTime){
+                        iii = 0;
+                    }
+                    iii+=1;
+                    touchTime = currentTime;
+                } else {
+                    touchTime = 0;
+                    Toast.makeText(this, "渠道号："+Utils.getChannelName(this)+"   版本code："+Utils.getVersion1(this), Toast.LENGTH_SHORT).show();
+                }
+                break;
         }
     }
+    int iii = 0;
+    long waitTime = 1000;
+    long touchTime = 0;
     @Override
     protected void onResume() {
         super.onResume();

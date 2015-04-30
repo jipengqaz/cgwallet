@@ -83,8 +83,7 @@ public class Withdraw_money_Client {
                 } else if (success == -4) {//未实名认证
                     Utils.makeToast(context, json.optString("msg"));
                     context.startActivity(new Intent(context, SaveMoneyActivity.class)
-                            .putExtra("bindFee", json.optString("bindFee"))
-                            .putExtra("success", success));
+                            .putExtra("fromsave", true));
                 } else if (success == 0) {
                     Utils.makeToast(context, json.optString("msg"));
                 } else if (success == -5) {
@@ -113,10 +112,7 @@ public class Withdraw_money_Client {
                     name = json.optString("name");//姓名
                     identity = json.optString("identity");//身份证号
                     context.startActivity(new Intent(context, SaveMoneyActivity.class)
-                            .putExtra("bindFee", json.optString("bindFee"))
-                            .putExtra("success", success)
-                            .putExtra("name", name)
-                            .putExtra("identity", identity));
+                            .putExtra("fromsave", true));
                 }else if(success == -9){
                     //未真正实名认证  已绑卡但是不支持连连
                     beforePayDialog(json);
@@ -128,22 +124,13 @@ public class Withdraw_money_Client {
                     bankName = json.optJSONObject("list").optString("bankName");
                     bankCard = json.optJSONObject("list").optString("fullCardNumber");
                     context.startActivity(new Intent(context, SaveMoneyActivity.class)
-                            .putExtra("bindFee", json.optString("bindFee"))
-                            .putExtra("success", success)
-                            .putExtra("name", name)
-                            .putExtra("identity", identity)
-                            .putExtra("bank_id", bank_id)
-                            .putExtra("bankName", bankName)
-                            .putExtra("bankCard", bankCard));
+                            .putExtra("fromsave", true));
                 }else if(success == -11){
                     //真正实名认证,未绑卡
                     name = json.optString("name");//姓名
                     identity = json.optString("identity");//身份证号
                     context.startActivity(new Intent(context, SaveMoneyActivity.class)
-                            .putExtra("bindFee", json.optString("bindFee"))
-                            .putExtra("success", success)
-                            .putExtra("name", name)
-                            .putExtra("identity", identity));
+                            .putExtra("fromsave", true));
                 }else if(success == -12){
                     //真正实名认证  已绑卡但是不支持连连
                     beforePayDialog(json);
@@ -155,13 +142,7 @@ public class Withdraw_money_Client {
                     bankName = json.optJSONObject("list").optString("bankName");
                     bankCard = json.optJSONObject("list").optString("fullCardNumber");
                     context.startActivity(new Intent(context, SaveMoneyActivity.class)
-                            .putExtra("bindFee", json.optString("bindFee"))
-                            .putExtra("success", json.optInt("success"))
-                            .putExtra("name", name)
-                            .putExtra("identity", identity)
-                            .putExtra("bank_id", bank_id)
-                            .putExtra("bankName", bankName)
-                            .putExtra("bankCard", bankCard));
+                            .putExtra("fromsave", true));
                 }else {
                     Utils.makeToast(context, json.optString("msg"));
                 }
@@ -198,19 +179,13 @@ public class Withdraw_money_Client {
                     name = json.optString("name");//姓名
                     identity = json.optString("identity");//身份证号
                     context.startActivity(new Intent(context, SaveMoneyActivity.class)
-                            .putExtra("bindFee", json.optString("bindFee"))
-                            .putExtra("success", json.optInt("success"))
-                            .putExtra("name", name)
-                            .putExtra("identity", identity));
+                            .putExtra("fromsave", true));
                 }else if(json.optInt("success") == -12){
                     //真正实名认证  已绑卡但是不支持连连
                     name = json.optString("name");//姓名
                     identity = json.optString("identity");//身份证号
                     context.startActivity(new Intent(context, SaveMoneyActivity.class)
-                            .putExtra("bindFee", json.optString("bindFee"))
-                            .putExtra("success", json.optInt("success"))
-                            .putExtra("name", name)
-                            .putExtra("identity", identity));
+                            .putExtra("fromsave", true));
                 }
             }
         });

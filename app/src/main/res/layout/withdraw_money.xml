@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools = "http://schemas.android.com/tools"
     android:id="@+id/box"
     android:background="@color/main_bg_white"
@@ -46,7 +46,7 @@
             android:layout_alignBottom="@id/bank_icon"
             android:layout_marginBottom="5dp"
             android:textSize="@dimen/text_size_13sp"
-            android:textColor="@color/bg_money_button_no_edit"
+            android:textColor="@color/money_tv_hint_text"
             />
         <TextView
             android:id="@+id/bank_tail"
@@ -57,7 +57,7 @@
             android:layout_alignBottom="@id/text"
             android:layout_marginLeft="20dp"
             android:textSize="@dimen/text_size_13sp"
-            android:textColor="@color/bg_money_button_no_edit"
+            android:textColor="@color/money_tv_hint_text"
             />
         <View
             android:background="@color/bg_line"
@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/withdraw_money_text_1"
-            android:textColor="@color/bg_money_button_no_edit"
+            android:textColor="@color/money_tv_hint_text"
             android:textSize="@dimen/save_moeny_main_text"
             />
         <TextView
@@ -141,7 +141,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="@dimen/save_moeny_marign_left"
-        android:textColor="@color/bg_money_button_no_edit"
+        android:textColor="@color/money_tv_hint_text"
         android:textSize="@dimen/save_moeny_main_text"
         tools:text = "最快0秒转出"
         />
@@ -151,7 +151,8 @@
         android:textSize="@dimen/button_text_size"
         android:textColor="@color/button_text_not_enabled"
         android:layout_margin="@dimen/save_moeny_marign_left"
-        android:background="@drawable/bg_button_preed"
+        android:editable="false"
+        android:background="@drawable/bg_button_no_enabled"
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_height" />
     <TextView
@@ -159,8 +160,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="转出免手续费，每日可转出1次"
-        android:textColor="@color/bg_money_button_no_edit"
+        android:textColor="@color/money_tv_hint_text"
         android:gravity="center"
         />
     </LinearLayout>
-</ScrollView>
+    <include layout="@layout/layout_banner_black"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

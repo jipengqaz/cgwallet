@@ -3,10 +3,11 @@ package cgtz.com.cgwallet.utils;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Environment;
-import android.content.Intent;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
@@ -20,7 +21,6 @@ import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.activity.LoginActivity;
 import cgtz.com.cgwallet.activity.MainActivity;
-import cgtz.com.cgwallet.activity.RegistActivity;
 import cgtz.com.cgwallet.activity.SaveMoneyActivity;
 import cgtz.com.cgwallet.activity.WebViewActivity;
 import cgtz.com.cgwallet.bean.JsonBean;
@@ -396,6 +396,62 @@ public class Utils {
                 }
             }
         });
+    }
+
+    /**
+     * 设置安全信息
+     * @param context
+     */
+    public static void safeCopyWrite(Activity context){
+        TextView text = (TextView) context.findViewById(R.id.tv_banner);
+        if(text!=null){
+        text.setText(Ke_Fu_data.getSafe(context));
+        }
+    }
+
+    /**
+     * 获取渠道名
+     * @param ctx 此处习惯性的设置为activity，实际上context就可以
+     * @return 如果没有获取成功，那么返回值为空
+     */
+    public static String getChannelName(Activity ctx) {
+        if (ctx == null) {
+            return null;
+        }
+        String channelName = null;
+        try {
+            PackageManager packageManager = ctx.getPackageManager();
+            if (packageManager != null) {
+                //注意此处为ApplicationInfo 而不是 ActivityInfo,因为友盟设置的meta-data是在application标签中，而不是某activity标签中，所以用ApplicationInfo
+                ApplicationInfo applicationInfo = packageManager.getApplicationInfo(ctx.getPackageName(), PackageManager.GET_META_DATA);
+                if (applicationInfo != null) {
+                    if (applicationInfo.metaData != null) {
+                        channelName = applicationInfo.metaData.getString("UMENG_CHANNEL");
+                    }
+                }
+
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return channelName;
+    }
+
+
+    /**
+     2  * 获取版本code
+     3  * @return 当前应用的版本code
+     4  */
+    public static int getVersion1(Context context) {
+        try {
+            PackageManager manager = context.getPackageManager();
+            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+            int version = info.versionCode;
+            return version;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
     /**
      * 草根钱包介绍
