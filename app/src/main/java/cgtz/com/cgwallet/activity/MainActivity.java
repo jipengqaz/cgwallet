@@ -1,5 +1,7 @@
 package cgtz.com.cgwallet.activity;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,6 +12,7 @@ import android.os.Message;
 import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -503,6 +506,10 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+    }
 
     @Override
     protected void onResume() {
@@ -512,7 +519,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             layoutClick(R.id.layout_cg_wallet);
             setLeftMenuInfo(0);//未登录
         }else{
-            LogUtils.i(TAG,"Utils.isLogined 为 false");
+            LogUtils.i(TAG, "Utils.isLogined 为 false");
             if(currIndex == 2){
                 myWalletFragment.setData(true);
             }
@@ -525,10 +532,44 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         }else{
             setLeftMenuInfo(0);//未登录
         }
-        JPushInterface.onResume(this);
-        MobclickAgent.onResume(this);
+        if(Utils.getisLockPassWord(this,Utils.getUserPhone(this)) == 1){//判断该账号是否是第一次登录该手机
+        Utils.saveisLockPassWord(this,Utils.getUserPhone(this),2);
+        setPassWord();
     }
+    JPushInterface.onResume(this);
+    MobclickAgent.onResume(this);
+}
+    /**
+     * 设置是否使用手势密码
+     * */
+    private void setPassWord(){
+        LayoutInflater mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout = mInflater.inflate(R.layout.dialog_firstlogin_setlock,null);
+        TextView leftView = (TextView) layout.findViewById(R.id.tv_first_login_left);
+        TextView rightView = (TextView) layout.findViewById(R.id.tv_first_login_right);
 
+        final Dialog dialog =
+                new Dialog(this,R.style.loading_dialog2);
+        dialog.setContentView(layout);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+        leftView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        rightView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                Intent lockIntent = new Intent(MainActivity.this, GestureEditActivity.class);
+                startActivity(lockIntent);
+            }
+        });
+    }
     @Override
     protected void onPause() {
         super.onPause();

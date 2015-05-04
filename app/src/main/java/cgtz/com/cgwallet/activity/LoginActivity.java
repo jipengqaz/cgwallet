@@ -259,6 +259,9 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
                             Utils.saveToken(token);
                             Utils.saveMobile(LoginActivity.this, mobile);
                             Utils.saveLoginPwd(LoginActivity.this, MD5Util.md5(loginPwd));
+                            if(Utils.getisLockPassWord(LoginActivity.this,mobile)==0){
+                                Utils.saveisLockPassWord(LoginActivity.this,mobile,1);
+                            }
                             hideProcessBar();
                             finish();
                         }

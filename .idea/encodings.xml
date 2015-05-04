@@ -87,6 +87,7 @@
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_start.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_test_jpush.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_firstlogin_setlock.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_screen_slide_page.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/itme_e_wallet_1.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/layout_server_maintain.xml" charset="GBK" />

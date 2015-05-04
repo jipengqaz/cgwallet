@@ -175,6 +175,28 @@ public class Utils {
     }
 
     /**
+     *
+     * 存储登录后是否是否提示用户过设置手势密码
+     * @param context
+     * @param phone
+     * @return
+     */
+    public static void  saveisLockPassWord(Context context,String phone,int  isLock){
+        SharedUtils sharedUtils = new SharedUtils(context,Constants.CONFIG_GESTURE);
+        sharedUtils.saveInt(phone + "isLock", isLock);
+    }
+    /**
+     *
+     * 获取登录后是否是否提示用户过设置手势密码
+     * @param context
+     * @param phone
+     * @return int 返回0 是该账户没有在该手机登录过    1是登录了  没有提示设置过手势   2是已经提示过了
+     */
+    public static int getisLockPassWord(Context context,String phone){
+        SharedUtils sharedUtils = new SharedUtils(context,Constants.CONFIG_GESTURE);
+        return sharedUtils.getFloat(phone + "isLock", 0);
+    }
+    /**
      * 显示toast信息
      * @param context
      * @param msg

@@ -123,5 +123,8 @@
     <string name="update_tip_button_cancel">取消</string>
     <string name="jpush_message_button">进入草根钱包</string>
     <string name="jpush_message_text_hint">草根钱包欢迎您</string>
+    <string name="text_first_setlock_msg">设置手势密码更安全</string>
+    <string name="text_first_setlock_btnleft">以后再说</string>
+    <string name="text_first_setlock_btnright">立即设置</string>
 
 </resources>

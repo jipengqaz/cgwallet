@@ -43,6 +43,7 @@
             android:name=".activity.MainActivity"
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait"
+            android:launchMode="singleTop"
             android:label="@string/title_activity_main" />
         <activity
             android:name=".activity.ScreenSlideActivity"
