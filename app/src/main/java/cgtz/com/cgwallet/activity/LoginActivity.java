@@ -76,6 +76,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
                 showHavePhone = true;//重新填写手机号
                 setRightText(null);//重新填写手机号
                 etLoginPwd.setText("");
+                etLoginPhone.requestFocus();//使手机输入框 获得焦点
             }
         });
         setBackListener(new View.OnClickListener() {
