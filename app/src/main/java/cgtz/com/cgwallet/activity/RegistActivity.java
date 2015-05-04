@@ -72,6 +72,13 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
         if(beforeMobile){
             registMobile.setText(mobile);
             registMobile.setSelection(mobile.length());
+            if(mobile.length()==11){//设置获取验证码按钮可点
+                getSecurityCode.setEnabled(true);
+                getSecurityCode.setBackgroundResource(R.color.main_bg);
+            }else{
+                getSecurityCode.setEnabled(false);
+                getSecurityCode.setBackgroundResource(R.color.bg_get_security_code);
+            }
         }
         Utils.closeInputMethod(this);
         registMobile.addTextChangedListener(new TextWatcher() {
@@ -135,6 +142,7 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
                 break;
             case R.id.btn_regist_next://下一步
                 mobile  = registMobile.getText().toString().trim();
+                mobile_code = securityCode.getText().toString().trim();
                 if(TextUtils.isEmpty(mobile)){
                     Utils.makeToast(this,"请输入注册手机号");
                 }else if(TextUtils.isEmpty(mobile_code)){
@@ -185,8 +193,8 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
                         }else if(flag && code == Constants.OPERATION_SUCCESS){//数据交互成功
                             JSONObject jsonObject = new JSONObject(jsonBean.getJsonString());
                             if(Constants.IS_TEST){
-                                mobile_code = jsonObject.optString("mobile_code");
-                                Utils.makeToast(RegistActivity.this,mobile_code);
+//                                mobile_code = jsonObject.optString("mobile_code");
+                                Utils.makeToast(RegistActivity.this,jsonObject.optString("mobile_code"));
                             }
                         }else if(flag && code == 2){
                             mHandler.removeMessages(GET_CODE_TIME);
