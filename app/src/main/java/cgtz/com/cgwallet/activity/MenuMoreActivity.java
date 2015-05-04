@@ -47,7 +47,7 @@ public class MenuMoreActivity extends BaseActivity implements View.OnClickListen
         aboutMine.setOnClickListener(this);
         feedBack.setOnClickListener(this);
         contactMine.setOnClickListener(this);
-        version.setText("当前版本：V" + Utils.getVersion(this));
+        version.setText("当前版本：v" + Utils.getVersion(this));
         version.setOnClickListener(this);
     }
 

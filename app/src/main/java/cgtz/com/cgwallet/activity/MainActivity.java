@@ -402,7 +402,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 
     private void initViews(){
         TextView version = (TextView) findViewById(R.id.version);
-        version.setText("V"+Constants.VERSION);
+        version.setText("v"+Constants.VERSION);
         mMenu = (SlidingMenu) findViewById(R.id.id_menu);
         cgWalletIcon = (ImageView) findViewById(R.id.cg_wallet_icon);
         myWalletIcon = (ImageView) findViewById(R.id.my_wallet_icon);
@@ -605,7 +605,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                 break;
             case R.id.left_menu_help_center://帮助中心
                 startActivity(new Intent(this,WebViewActivity.class)
-                .putExtra("url","https://d5ds88.cgtz.com/version/notice/FAQ")
+                .putExtra("url","https://d5ds88.cgtz.com/version/e/detail")
                 .putExtra("title","帮助中心"));
                 break;
             case R.id.left_menu_more://更多
