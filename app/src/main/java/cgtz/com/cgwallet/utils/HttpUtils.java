@@ -25,6 +25,7 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.utility.Constants;
 
 /**
@@ -254,9 +255,9 @@ public class HttpUtils {
     public static StringBuffer getRequestData(Map<String, String> params,String encode) {
         StringBuffer stringBuffer = new StringBuffer(); // 存储封装好的请求体信息
         stringBuffer.append(Constants.service_date);//向服务器传递全局数据
-//        stringBuffer.append("device_id="+ CGApp.getApp().getDeviceId()+"&");//向服务器发送设备号
-//        stringBuffer.append("channel="+ CGApp.getApp().getChannel()+"&");//向服务器发送渠道号
-//        stringBuffer.append("device_serial_id="+ CGApp.getApp().getImi_id()+"&");//向服务器发送手机本身的设备号
+        stringBuffer.append("device_id="+MApplication.getJpushRegistid()+"&");//向服务器发送设备号
+        stringBuffer.append("channel="+ MApplication.getChannel()+"&");//向服务器发送渠道号
+        stringBuffer.append("device_serial_id="+MApplication.getImiId()+"&");//向服务器发送手机本身的设备号
 //        stringBuffer.append(Constants.latitude+"="+CGApp.getApp().getLatitude()+"&");//向服务器发送经度
 //        stringBuffer.append(Constants.longitude+"="+CGApp.getApp().getLongitude()+"&");//向服务器发送纬度
         try {

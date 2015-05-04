@@ -1,6 +1,5 @@
 package cgtz.com.cgwallet.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -48,7 +47,7 @@ public class MenuMoreActivity extends BaseActivity implements View.OnClickListen
         aboutMine.setOnClickListener(this);
         feedBack.setOnClickListener(this);
         contactMine.setOnClickListener(this);
-        version.setText("当前版本：" + Utils.getVersion(this));
+        version.setText("当前版本：V" + Utils.getVersion(this));
         version.setOnClickListener(this);
     }
 

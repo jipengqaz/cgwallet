@@ -43,6 +43,8 @@
                     android:textColor="@color/hint_regist_edit"
                     android:padding="10dp"
                     android:background="@drawable/bg_regist_edit"
+                    android:maxLength="6"
+                    android:inputType="number"
                     android:layout_width="120dp"
                     android:layout_height="match_parent" />
                 <TextView

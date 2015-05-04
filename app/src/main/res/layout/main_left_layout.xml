@@ -149,6 +149,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:id="@+id/version"
                         android:gravity="right"
                         android:text="v1.0"
                         android:textSize="@dimen/left_layout_text_size"

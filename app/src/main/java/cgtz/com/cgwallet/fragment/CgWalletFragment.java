@@ -141,7 +141,7 @@ public class CgWalletFragment extends BaseFragment implements ISplashView,View.O
     @Override
     public void startNextActivity() {
         CustomTask task = new CustomTask(mHandler, Constants.WHAT_WALLET_MAIN
-                ,Constants.OFFLINE_HTTP,false,null,false);
+                ,Constants.OFFLINE_HTTP,true,null,false);
         task.execute();
     }
 
@@ -194,11 +194,16 @@ public class CgWalletFragment extends BaseFragment implements ISplashView,View.O
         int id = v.getId();
         switch (id){
             case R.id.layout_draw://取钱
-                if(progressDialog ==null){
-                    progressDialog = new ProgressDialog(getActivity());
+                if(Utils.isLogined()){
+                    if(progressDialog ==null){
+                        progressDialog = new ProgressDialog(getActivity());
+                    }
+                    progressDialog.show();
+                    Withdraw_money_Client.getWithdraw_money(getActivity(),Constants.WHAT_WITHDRAW,progressDialog);
+                }else{
+                    Utils.makeToast(getActivity(),"请先登录");
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
                 }
-                progressDialog.show();
-                Withdraw_money_Client.getWithdraw_money(getActivity(),Constants.WHAT_WITHDRAW,progressDialog);
                 break;
             case R.id.layout_save://存钱
                 if(Utils.isLogined()){

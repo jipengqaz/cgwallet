@@ -24,11 +24,8 @@ import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.umeng.analytics.MobclickAgent;
-
-import org.json.JSONObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,22 +35,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.MemoryHandler;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
-import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.Service.Image_download_Service;
 import cgtz.com.cgwallet.Service.Provinces_download_Service;
 import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.client.Get_data;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.ChangeLogHelper;
-import cgtz.com.cgwallet.utils.CustomTask;
 import cgtz.com.cgwallet.utils.HttpUtils;
-import cgtz.com.cgwallet.utils.LogUtils;
-import cgtz.com.cgwallet.utils.MD5Util;
-import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.utils.Ke_Fu_data;
 import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.Start_update_value;
@@ -92,6 +83,7 @@ public class StartActivity extends Activity {
         MobclickAgent.setDebugMode(Constants.IS_TEST);
         MobclickAgent.updateOnlineConfig(this);
         MApplication.registActivities(this);//存储该activity
+
         MApplication.setJpushRegistid(JPushInterface.getRegistrationID(getApplicationContext()));
         try {
             ApplicationInfo info = this.getPackageManager()
@@ -265,7 +257,7 @@ public class StartActivity extends Activity {
                 return;
             }
             try {
-                LogUtils.e(TAG, "1111" + jsonBean.getJsonString() + "     " + errorMsg + "   " + code + Utils.filtrateCode(StartActivity.this, jsonBean));
+                LogUtils.e(TAG,   jsonBean.getJsonString() + "     " + errorMsg + "   " + code + Utils.filtrateCode(StartActivity.this, jsonBean));
                 json = new JSONObject(jsonBean.getJsonString());
             } catch (JSONException e) {
                 e.printStackTrace();

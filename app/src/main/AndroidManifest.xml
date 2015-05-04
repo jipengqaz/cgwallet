@@ -106,7 +106,7 @@
                 <action android:name="cn.jpush.android.ui.PushActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="cgtz.com.cgtz" />
+                <category android:name="cgtz.com.cgwallet" />
             </intent-filter>
         </activity>
         <!-- Required SDK核心功能 -->
@@ -132,7 +132,7 @@
             <intent-filter android:priority="1000" > <!-- since 1.3.5 -->
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
                 <!-- since 1.3.5 -->
-                <category android:name="cgtz.com.cgtz" />
+                <category android:name="cgtz.com.cgwallet" />
                 <!-- since 1.3.5 -->
             </intent-filter>
             <!-- since 1.3.5 -->
@@ -161,7 +161,7 @@
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" /> <!-- Required  用户打开自定义通知栏的intent -->
                 <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" /> <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
                 <action android:name="cn.jpush.android.intent.CONNECTION" /> <!-- 接收网络变化 连接/断开 since 1.6.3 -->
-                <category android:name="cgtz.com.cgtz" />
+                <category android:name="cgtz.com.cgwallet" />
             </intent-filter>
         </receiver>
         <!-- Required. For publish channel feature -->
@@ -176,7 +176,7 @@
         <!--
         Required. AppKey copied from Portal
         弃用的，暂作测试的 key： 2d7a2f65ec5138e1a1965313
-        正式key: 597c87047522b92d2f7f42c2
+        正式key: 534fc704862629a0dcf26550
         -->
         <meta-data
             android:name="JPUSH_APPKEY"

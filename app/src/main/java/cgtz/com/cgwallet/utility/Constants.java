@@ -8,6 +8,7 @@ import java.io.File;
  * Created by Administrator on 2015/4/11.
  */
 public class Constants {
+    public static final String version = "1.0.0";
     public static final String version_ = "100";
     public static final String ENCONDING = "UTF-8";
     public static final String colors  ="#e44d42";//手势密码提示文案颜色
@@ -20,7 +21,9 @@ public class Constants {
     public static final String OFFLINE_HTTP = IS_28?OFFLINE_HTTP_28:
                                     (IS_DEVELOP?OFFLINE_HTTP_DEVELOP:OFFLINE_HTTP_TEST);//测试服务器路径
     public static final String ONLINE_HTTP = "";//线上服务器路径
-    public static final String VERSION = "";//版本号
+    public static final String VERSION = version+(IS_TEST?
+            (IS_28?"-28":"-dev")
+            :"");//版本号
 
     public static final String TEST_VERSION_UPDATE =
             "http://192.168.10.188:45680/version/app/WalletVersion";//测试服务器，版本更新
@@ -48,7 +51,7 @@ public class Constants {
     public static final String LOGIN_USER_ID = "user_id";//登录后的userid
     public static final String LOGIN_TOKEN = "token";//登录后的token
     public static final String ERROR_MSG_CODE = "错误码";//内容解析错误
-    public static final String service_date = "mobileOS=android&";//向服务器全局数据
+    public static final String service_date = "version="+version+"&mobileOS=android&";//向服务器全局数据
 
     public static boolean GESTURES_PASSWORD = true;//用于判断是否输入手势密码
 

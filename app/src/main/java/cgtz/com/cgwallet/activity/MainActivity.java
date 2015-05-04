@@ -225,7 +225,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                 switch (v.getId()){
                     case R.id.QQ:
                         //判断是否有安装
-                        aa = mController.getConfig().getSsoHandler(HandlerRequestCode.QZONE_REQUEST_CODE).isClientInstalled();
+                        aa = mController.getConfig().getSsoHandler(HandlerRequestCode.QQ_REQUEST_CODE).isClientInstalled();
                         if(aa){
                             QQShareContent qqShareContent = new QQShareContent();
                             //设置分享文字
@@ -244,7 +244,9 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         }
                         break;
                     case R.id.qzone:
-
+                        //判断是否有安装
+                        aa = mController.getConfig().getSsoHandler(HandlerRequestCode.QZONE_REQUEST_CODE).isClientInstalled();
+                        if(aa){
                         QZoneShareContent qzone = new QZoneShareContent();
                         //设置分享文字
                         qzone.setShareContent(content);
@@ -257,6 +259,9 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         mController.setShareMedia(qzone);
                         // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
                         mController.postShare(MainActivity.this, SHARE_MEDIA.QZONE, mShareListener);
+                        }else{
+                            Utils.makeToast(MainActivity.this,"您未安装,请安装后分享！");
+                        }
                         break;
                     case R.id.sms:
                         // 设置短信分享内容
@@ -267,6 +272,9 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         mController.postShare(MainActivity.this, SHARE_MEDIA.SMS, mShareListener);
                         break;
                     case R.id.wechat://微信
+                        //判断是否有安装
+                        aa = mController.getConfig().getSsoHandler(HandlerRequestCode.WX_REQUEST_CODE).isClientInstalled();
+                        if(aa){
                         //设置微信好友分享内容
                         WeiXinShareContent weixinContent = new WeiXinShareContent();
                         //设置分享文字
@@ -280,8 +288,14 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         mController.setShareMedia(weixinContent);
                         // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
                         mController.postShare(MainActivity.this, SHARE_MEDIA.WEIXIN, mShareListener);
+                        }else{
+                            Utils.makeToast(MainActivity.this,"您未安装,请安装后分享！");
+                        }
                         break;
                     case R.id.wxcircle://朋友圈
+                        //判断是否有安装
+                        aa = mController.getConfig().getSsoHandler(HandlerRequestCode.WX_CIRCLE_REQUEST_CODE).isClientInstalled();
+                        if(aa){
                         //设置微信朋友圈分享内容
                         CircleShareContent circleMedia = new CircleShareContent();
                         circleMedia.setShareContent(content);
@@ -292,6 +306,9 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         mController.setShareMedia(circleMedia);
                         // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
                         mController.postShare(MainActivity.this, SHARE_MEDIA.WEIXIN_CIRCLE, mShareListener);
+                        }else{
+                            Utils.makeToast(MainActivity.this,"您未安装,请安装后分享！");
+                        }
                         break;
                     case R.id.sina://新浪
                         //设置新浪SSO handler
@@ -384,6 +401,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     }
 
     private void initViews(){
+        TextView version = (TextView) findViewById(R.id.version);
+        version.setText("V"+Constants.VERSION);
         mMenu = (SlidingMenu) findViewById(R.id.id_menu);
         cgWalletIcon = (ImageView) findViewById(R.id.cg_wallet_icon);
         myWalletIcon = (ImageView) findViewById(R.id.my_wallet_icon);
