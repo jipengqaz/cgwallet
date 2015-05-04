@@ -49,7 +49,7 @@
             android:visibility="gone"
             android:id="@+id/save_money_transfer_hint"
             android:layout_marginLeft="@dimen/save_moeny_marign_left"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -91,7 +91,7 @@
                 android:background="@null"
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/save_moeny_main_text"
-                android:textColor="@color/money_text_edit"
+                android:textColor="@color/money_asset_text"
                 android:hint="建议转入整数金额"
                 android:textColorHint="@color/money_text_edit"
                 android:layout_width="wrap_content"
@@ -101,6 +101,7 @@
                 android:src="@mipmap/icon_delete_edit"
                 android:layout_marginRight="@dimen/save_moeny_marign_left"
                 android:layout_alignParentRight="true"
+                android:visibility="gone"
                 android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

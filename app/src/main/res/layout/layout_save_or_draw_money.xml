@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/bg_center"
+    android:background="@color/white"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="@dimen/save_or_draw_money_layout_height">
@@ -22,6 +22,11 @@
             android:textSize="@dimen/save_or_draw_money_layout_text"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="@color/bg_line"
+            />
         <TextView
             android:id="@+id/layout_save_money"
             android:layout_weight="1"

@@ -130,7 +130,6 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
         layoutSaveRecord.setOnClickListener(this);//存钱记录
         assetsLayout.setOnClickListener(this);//我的资产layout
         accumulativeLayout.setOnClickListener(this);//累计收益layout
-        walletAccumulative.setOnClickListener(this);//累计收益
     }
 
     /**

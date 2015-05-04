@@ -115,7 +115,7 @@
             android:background="@null"
             android:layout_centerVertical="true"
             android:textSize="@dimen/save_moeny_main_text"
-            android:textColor="@color/money_text_edit"
+            android:textColor="@color/money_asset_text"
             android:hint="建议取出整数金额"
             android:textColorHint="@color/money_text_edit"
             android:layout_width="wrap_content"

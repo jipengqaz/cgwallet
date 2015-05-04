@@ -116,7 +116,7 @@
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_size_16sp"
+                    android:textSize="@dimen/text_size_14sp"
                     android:textColor="@color/code_333333"
                     android:text="联系我们"/>
                 <ImageView
