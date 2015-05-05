@@ -327,7 +327,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                     case R.id.rules://分享规则
                         startActivity(new Intent(MainActivity.this, WebViewActivity.class)
                                 .putExtra("url", "https://d5ds88.cgtz.com/version/notice/rule")
-                                .putExtra("title", "帮助中心"));
+                                .putExtra("title", "推荐规则"));
                         break;
                 }
             }
