@@ -74,6 +74,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private LinearLayout menuMore;//更多
     private TextView tvLogin;//未登录显示文案或者显示登录的手机号
     private TextView tvShowLoginMobile;//显示登录的手机号
+    private ImageView image_Login;//登录上面的图片
     private LinearLayout layotExit;//退出登录
     private SplashPresenter splashPresenter;
     private ArrayList<Fragment> listFms;
@@ -420,6 +421,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         menuHelpCenter = (LinearLayout) findViewById(R.id.left_menu_help_center);
         menuMore = (LinearLayout) findViewById(R.id.left_menu_more);
         tvShowLoginMobile = (TextView) findViewById(R.id.tv_show_login_mobile);
+        image_Login = (ImageView) findViewById(R.id.image_Login);
         layotExit = (LinearLayout) findViewById(R.id.left_menu_login_out);
         bottomLineSelected = (ImageView) findViewById(R.id.wallet_bottom_line_selected);//底部的选中
         params = (LinearLayout.LayoutParams) bottomLineSelected.getLayoutParams();
@@ -618,10 +620,12 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         if(type == 1){//已登录
             layotExit.setVisibility(View.VISIBLE);
             tvShowLoginMobile.setVisibility(View.VISIBLE);
+            image_Login.setImageResource(R.mipmap.icon_yes_login);
             tvLogin.setVisibility(View.GONE);
         }else if(type == 0){//未登录
             layotExit.setVisibility(View.GONE);
             tvShowLoginMobile.setVisibility(View.GONE);
+            image_Login.setImageResource(R.mipmap.icon_no_login);
             tvLogin.setVisibility(View.VISIBLE);
         }
     }

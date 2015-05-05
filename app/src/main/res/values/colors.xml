@@ -64,6 +64,7 @@
     <color name="my_wallet_today_earning_hint">#ffffff</color>
     <color name="my_wallet_earning_text">#898989</color>
     <color name="my_wallet_earning_num_text">#536962</color>
+    <color name="bg_bine">#53c599</color>
     <color name="bg_my_wallet">#eeeeee</color>
     <color name="item_earnings_record_2_2">#d1d1d1</color>
     <color name="item_earnings_record_2_background">#f1f1f1</color>
