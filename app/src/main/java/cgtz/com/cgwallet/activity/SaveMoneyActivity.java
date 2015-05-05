@@ -196,10 +196,12 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                     //按钮变为不可点击
                     confirmSave.setEnabled(false);
                     confirmSave.setBackgroundResource(R.drawable.bg_button_no_enabled);
+                    deleteEdit.setVisibility(View.GONE);
                 } else {
                     //按钮变为可点击
                     confirmSave.setEnabled(true);
-                    confirmSave.setBackgroundColor(getResources().getColor(R.color.button_text_can_click));
+                    confirmSave.setBackgroundResource(R.drawable.bg_button_preed);
+                    deleteEdit.setVisibility(View.VISIBLE);
                 }
             }
         });
