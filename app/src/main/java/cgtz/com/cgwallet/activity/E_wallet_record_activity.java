@@ -105,7 +105,7 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
         switch (currenttab){//改变选中项的背景
             case 0:
                 buttonOne.setBackgroundResource(R.color.white);
-                buttonOne.setTextColor(getResources().getColor(R.color.investment_details_green));
+                buttonOne.setTextColor(getResources().getColor(R.color.save_or_draw_money_layout_text));
                 break;
         }
 
@@ -162,15 +162,15 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
         switch(moveToTab){//改变选中项的颜色
             case 0:
                 buttonOne.setBackgroundResource(R.color.white);
-                buttonOne.setTextColor(getResources().getColor(R.color.investment_details_green));
+                buttonOne.setTextColor(getResources().getColor(R.color.save_or_draw_money_layout_text));
                 break;
             case 1:
                 buttonTwo.setBackgroundResource(R.color.white);
-                buttonTwo.setTextColor(getResources().getColor(R.color.investment_details_green));
+                buttonTwo.setTextColor(getResources().getColor(R.color.save_or_draw_money_layout_text));
                 break;
             case 2:
                 button3.setBackgroundResource(R.color.white);
-                button3.setTextColor(getResources().getColor(R.color.investment_details_green));
+                button3.setTextColor(getResources().getColor(R.color.save_or_draw_money_layout_text));
         }
         switch (currenttab){//改变上一个选中项的颜色
             case 0:

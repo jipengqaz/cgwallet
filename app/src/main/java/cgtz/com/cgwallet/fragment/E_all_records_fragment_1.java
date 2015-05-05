@@ -199,10 +199,10 @@ public class E_all_records_fragment_1 extends BaseFragment implements ISplashVie
                     holder.time.setText(inves.getTime());
                     if (inves.getAmount() > 0) {
                         holder.money.setText("+" + inves.getAmount());
-                        holder.money.setTextColor(getResources().getColor(R.color.rouncColor));
+                        holder.money.setTextColor(getResources().getColor(R.color.money_asset_text));
                     } else {
                         holder.money.setText(inves.getAmount() + "");
-                        holder.money.setTextColor(getResources().getColor(R.color.investment_details_green));
+                        holder.money.setTextColor(getResources().getColor(R.color.save_or_draw_money_layout_text));
                     }
                     if (inves.getProgress().equals("1")) {
                         holder.state.setVisibility(View.VISIBLE);

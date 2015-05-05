@@ -139,10 +139,10 @@
         android:id="@+id/text_tip2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="@dimen/save_moeny_marign_left"
         android:textColor="@color/money_tv_hint_text"
-        android:textSize="@dimen/save_moeny_main_text"
+        android:textSize="@dimen/save_moeny_hint_text"
         tools:text = "最快0秒转出"
         />
     <Button
@@ -150,6 +150,7 @@
         android:text="@string/withdraw_money"
         android:textSize="@dimen/button_text_size"
         android:textColor="@color/button_text_not_enabled"
+        android:layout_marginTop="10dp"
         android:layout_margin="@dimen/save_moeny_marign_left"
         android:editable="false"
         android:background="@drawable/bg_button_no_enabled"

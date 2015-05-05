@@ -22,11 +22,6 @@
             android:textSize="@dimen/save_or_draw_money_layout_text"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="match_parent"
-            android:background="@color/bg_line"
-            />
         <TextView
             android:id="@+id/layout_save_money"
             android:layout_weight="1"
