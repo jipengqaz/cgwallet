@@ -21,7 +21,9 @@
             android:textColor="@color/save_or_draw_money_layout_text"
             android:textSize="@dimen/save_or_draw_money_layout_text"
             android:layout_width="0dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_btn_a"
+            />
         <TextView
             android:id="@+id/layout_save_money"
             android:layout_weight="1"
@@ -30,6 +32,7 @@
             android:textColor="@color/save_or_draw_money_layout_text"
             android:textSize="@dimen/save_or_draw_money_layout_text"
             android:layout_width="0dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_btn_a"/>
     </LinearLayout>
 </LinearLayout>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -52,7 +53,12 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
     private boolean showHavePhone = false;
     private String loginPhone;//登录手机号
     private String loginPwd;//登录密码
+    private ImageView showPwd;//是否显示密码
     private String beforeMobile;//之前登录过的手机号
+    private boolean isChecked = false;//设置是否显示密码
+    private ImageView empty,empty_phone;//清空数据
+    private LinearLayout phone_layout;//手机输入框布局
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +78,8 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
             public void onClick(View v) {
                 ivNoPhone.setVisibility(View.VISIBLE);
                 layoutHavePhone.setVisibility(View.GONE);
-                etLoginPhone.setVisibility(View.VISIBLE);
+//                etLoginPhone.setVisibility(View.VISIBLE);
+                phone_layout.setVisibility(View.VISIBLE);
                 showHavePhone = true;//重新填写手机号
                 setRightText(null);//重新填写手机号
                 etLoginPwd.setText("");
@@ -111,6 +118,10 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
         tvRegistAccount = (TextView) findViewById(R.id.tv_regist_account);//注册账户
         tvForgetPwd = (TextView) findViewById(R.id.tv_forget_pwd);//忘记密码
         showEditsMobile = (TextView) findViewById(R.id.show_edits_mobile);//显示输入的手机号
+        showPwd = (ImageView) findViewById(R.id.iv_show_pwd);//是否显示密码
+        empty = (ImageView) findViewById(R.id.empty);//清空密码输入框数据
+        empty_phone = (ImageView) findViewById(R.id.empty_phone);//清空手机输入空数据
+        phone_layout = (LinearLayout) findViewById(R.id.phone_layout);//手机输入框布局
         tvServicePhone.setText(Ke_Fu_data.getPhone(this));
         changeLoginLayout();
     }
@@ -123,11 +134,13 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
             setRightText(null);
             ivNoPhone.setVisibility(View.VISIBLE);
             layoutHavePhone.setVisibility(View.GONE);
-            etLoginPhone.setVisibility(View.VISIBLE);
+//            etLoginPhone.setVisibility(View.VISIBLE);
+            phone_layout.setVisibility(View.VISIBLE);
         }else{//登录过，已有手机号
             ivNoPhone.setVisibility(View.GONE);
             layoutHavePhone.setVisibility(View.VISIBLE);
-            etLoginPhone.setVisibility(View.GONE);
+//            etLoginPhone.setVisibility(View.GONE);
+            phone_layout.setVisibility(View.GONE);
             tvLoginPhone.setText(Utils.getHasStarsMobile(beforeMobile));
         }
     }
@@ -137,6 +150,32 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
         btnLogin.setOnClickListener(this);
         tvRegistAccount.setOnClickListener(this);
         tvForgetPwd.setOnClickListener(this);
+        showPwd.setOnClickListener(this);
+        empty.setOnClickListener(this);
+        empty_phone.setOnClickListener(this);
+        etLoginPwd.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String str = s.toString();
+                if(str.length()>0){
+                    //按钮变为可点击
+                    empty.setVisibility(View.VISIBLE);
+                }else{
+                    empty.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         etLoginPhone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -148,9 +187,11 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
                 if (TextUtils.isEmpty(charSequence.toString().trim())) {
                     showEditsMobile.setVisibility(View.GONE);
                     showEditsMobile.setText("");
+                    empty_phone.setVisibility(View.GONE);
                 } else {
                     showEditsMobile.setVisibility(View.VISIBLE);
                     showEditsMobile.setText(charSequence.toString().trim());
+                    empty_phone.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -197,6 +238,28 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
     public void onClick(View v) {
         int id = v.getId();
         switch (id){
+            case R.id.empty_phone://清空手机输入框数据
+                etLoginPhone.setText("");
+                break;
+            case R.id.empty://清空密码输入框数据
+                etLoginPwd.setText("");
+                break;
+            case R.id.iv_show_pwd://是否显示密码
+//                registPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                if(isChecked){//判断现在密码显示状态，正在可见状态
+                    //变为不可见
+                    showPwd.setImageResource(R.mipmap.icon_regist_no_show_password);
+                    etLoginPwd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    etLoginPwd.setSelection(etLoginPwd.getText().toString().length());
+                    isChecked = false;
+                }else{//正在不可见状态
+                    //变为可见
+                    showPwd.setImageResource(R.mipmap.icon_regist_show_password);
+                    etLoginPwd.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    etLoginPwd.setSelection(etLoginPwd.getText().toString().length());
+                    isChecked = true;
+                }
+                break;
             case R.id.tv_regist_account://注册用户
                 startActivity(new Intent(LoginActivity.this,RegistActivity.class));
                 break;
