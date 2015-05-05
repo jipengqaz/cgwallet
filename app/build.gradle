@@ -50,7 +50,7 @@ android {
     }
 
     productFlavors {
-        cgtz {}
+        cgwallet {}
     }
 
     productFlavors.all { flavor ->

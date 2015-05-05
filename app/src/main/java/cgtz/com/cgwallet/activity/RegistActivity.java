@@ -122,7 +122,7 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
                     registNext.setBackgroundResource(R.drawable.bg_button_no_enabled);
                 }else{
                     registNext.setEnabled(true);
-                    registNext.setBackgroundColor(getResources().getColor(R.color.button_text_can_click));
+                    registNext.setBackgroundResource(R.drawable.bg_button_preed);
                 }
             }
         });
@@ -173,6 +173,7 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
                         LogUtils.i(TAG, "时间time：" + CODE_TIME);
                         getSecurityCode.setBackgroundResource(R.color.bg_get_security_code);
                         getSecurityCode.setText(CODE_TIME + TIME_MSG);
+                        getSecurityCode.setEnabled(false);
                         mHandler.sendEmptyMessageDelayed(GET_CODE_TIME, 1000);
                     }
                     return;
@@ -189,6 +190,11 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
                     case Constants.WHAT_GET_SECURITY_CODE:
                         boolean flag = Utils.filtrateCode(RegistActivity.this,jsonBean);
                         if(flag && code == Constants.OPERATION_FAIL){//数据交互失败
+                            mHandler.removeMessages(GET_CODE_TIME);
+                            CODE_TIME = 60;
+                            getSecurityCode.setText(getResources().getString(R.string.hint_regist_get_security_code));
+                            getSecurityCode.setBackgroundResource(R.color.main_bg);
+                            getSecurityCode.setEnabled(true);
                             Utils.makeToast(RegistActivity.this, errorMsg);
                         }else if(flag && code == Constants.OPERATION_SUCCESS){//数据交互成功
                             JSONObject jsonObject = new JSONObject(jsonBean.getJsonString());

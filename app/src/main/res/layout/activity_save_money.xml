@@ -16,7 +16,7 @@
             android:layout_marginTop="30dp"
             android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_save_money_figure">
+            android:layout_height="@dimen/height_edit">
             <View
                 android:background="@color/bg_line"
                 android:layout_alignParentTop="true"
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/save_money_assets_use"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
                 android:textSize="@dimen/save_moeny_hint_text"
                 android:textColor="@color/money_tv_hint_text"
                 android:layout_width="wrap_content"
@@ -69,7 +69,7 @@
             android:layout_marginTop="30dp"
             android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_save_money_figure">
+            android:layout_height="@dimen/height_edit">
             <View
                 android:background="@color/bg_line"
                 android:layout_alignParentTop="true"
