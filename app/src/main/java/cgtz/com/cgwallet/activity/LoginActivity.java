@@ -78,7 +78,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
             public void onClick(View v) {
                 ivNoPhone.setVisibility(View.VISIBLE);
                 layoutHavePhone.setVisibility(View.GONE);
-//                etLoginPhone.setVisibility(View.VISIBLE);
+                etLoginPhone.setVisibility(View.VISIBLE);
                 phone_layout.setVisibility(View.VISIBLE);
                 showHavePhone = true;//重新填写手机号
                 setRightText(null);//重新填写手机号
@@ -134,12 +134,12 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
             setRightText(null);
             ivNoPhone.setVisibility(View.VISIBLE);
             layoutHavePhone.setVisibility(View.GONE);
-//            etLoginPhone.setVisibility(View.VISIBLE);
+            etLoginPhone.setVisibility(View.VISIBLE);
             phone_layout.setVisibility(View.VISIBLE);
         }else{//登录过，已有手机号
             ivNoPhone.setVisibility(View.GONE);
             layoutHavePhone.setVisibility(View.VISIBLE);
-//            etLoginPhone.setVisibility(View.GONE);
+            etLoginPhone.setVisibility(View.GONE);
             phone_layout.setVisibility(View.GONE);
             tvLoginPhone.setText(Utils.getHasStarsMobile(beforeMobile));
         }
