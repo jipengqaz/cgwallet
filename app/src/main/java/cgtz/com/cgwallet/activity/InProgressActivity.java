@@ -3,7 +3,6 @@ package cgtz.com.cgwallet.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -48,7 +47,7 @@ public class InProgressActivity extends BaseActivity {
             progresBanner.setText("请稍后查看钱包资金");
         }else{
             progressText.setText("取钱处理中...");
-            progresBanner.setText("最快0秒，最晚一个工作日内转出\n敬请关注草根账户可用余额");
+            progresBanner.setText("最快0秒，最晚一个工作日内转出");
         }
     }
 
