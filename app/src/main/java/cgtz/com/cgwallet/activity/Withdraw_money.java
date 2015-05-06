@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import org.json.JSONObject;
 
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 import cgtz.com.cgwallet.MApplication;
@@ -88,6 +89,8 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
         bank_icon = (ImageView) findViewById(R.id.bank_icon);
         Utils.closeInputMethod(this);//关闭输入键盘
         Utils.safeCopyWrite(this);//设置安全文案
+
+        df.setRoundingMode(RoundingMode.FLOOR);
     }
 
     /**
