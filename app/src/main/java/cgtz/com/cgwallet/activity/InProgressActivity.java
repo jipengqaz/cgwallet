@@ -20,6 +20,7 @@ public class InProgressActivity extends BaseActivity {
     private TextView lookSaveRecord;//查看存钱记录
     private TextView goToWallet;//查看我的钱包
     private ImageView walletSlogan;//草根钱包介绍
+    private int choose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +30,10 @@ public class InProgressActivity extends BaseActivity {
         isSaveAt = getIntent().getBooleanExtra("isSaveAt",true);//是否存钱页面跳转，true是的，false不是
         if(isSaveAt){
             setTitle("存钱");
+            choose = 1;
         }else{
             setTitle("取钱");
+            choose = 2;
         }
         initViews();
         setLinstener();
@@ -62,7 +65,7 @@ public class InProgressActivity extends BaseActivity {
         lookSaveRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(InProgressActivity.this,E_wallet_record_activity.class));
+                startActivity(new Intent(InProgressActivity.this,E_wallet_record_activity.class).putExtra("choose",choose));
                 MApplication.destroyActivity(MApplication.getActivityByName(SaveMoneyActivity.class.getName()));
                 finish();
             }

@@ -252,10 +252,10 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
                 }
                 break;
             case R.id.layout_draw_record://取钱记录
-                startActivity(new Intent(getActivity(),E_wallet_record_activity.class));
+                startActivity(new Intent(getActivity(),E_wallet_record_activity.class).putExtra("choose",2));
                 break;
             case R.id.layout_save_record://存钱记录
-                startActivity(new Intent(getActivity(),E_wallet_record_activity.class));
+                startActivity(new Intent(getActivity(),E_wallet_record_activity.class).putExtra("choose",1));
                 break;
             case R.id.wallet_assets_layout://我的资产layout
                 startActivity(new Intent(getActivity(),E_wallet_record_activity.class));

@@ -110,6 +110,8 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
         }
 
         viewpager.setAdapter(new MyFrageStatePagerAdapter(getSupportFragmentManager()));
+
+        changeView(getIntent().getIntExtra("choose",0));
     }
     /**
      * 定义自己的ViewPager适配器
