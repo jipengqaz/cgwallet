@@ -142,16 +142,26 @@
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"/>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="@dimen/save_moeny_marign_left"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@mipmap/icon_money_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/text_tip2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="@dimen/save_moeny_marign_left"
+        android:layout_marginLeft="6dp"
         android:textColor="@color/money_tv_hint_text"
         android:textSize="@dimen/save_moeny_hint_text"
         tools:text = "最快0秒转出"
         />
+    </LinearLayout>
     <Button
         android:id="@+id/apply_withdraw"
         android:text="@string/withdraw_money"
