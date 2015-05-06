@@ -61,7 +61,7 @@ public class MenuMoreActivity extends BaseActivity implements View.OnClickListen
                         .putExtra("title", "草根钱包介绍"));
                 break;
             case R.id.feed_back://意见反馈
-                if(Utils.isLogined()){
+                if(!Utils.isLogined()){
                     Utils.makeToast(this,Constants.NEED_LOGIN);
                     startActivity(new Intent(MenuMoreActivity.this, LoginActivity.class));
                 }else{

@@ -23,7 +23,7 @@
                 android:id="@+id/feed_advise"
                 android:layout_width="match_parent"
                 android:layout_height="200dip"
-                android:hint="感谢你对草根投资的关注，您的意见我们一定认真听取!"
+                android:hint="@string/feed_hint"
                 android:gravity="top"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
@@ -45,6 +45,7 @@
                 android:gravity="center"
                 android:text="提交"
                 android:enabled="false"
+                android:background="@drawable/bg_button_no_enabled"
                 />
 
             <TextView

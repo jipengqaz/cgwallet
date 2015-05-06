@@ -21,7 +21,6 @@ import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.CustomTask;
 import cgtz.com.cgwallet.utils.Ke_Fu_data;
 import cgtz.com.cgwallet.utils.LogUtils;
-import cgtz.com.cgwallet.utils.Start_update_value;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.ISplashView;
 import cgtz.com.cgwallet.widget.ProgressDialog;
@@ -108,36 +107,37 @@ public class FeedBackActivity extends BaseActivity implements ISplashView{
         feed_advise.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                String str = s.toString();
-//                if(!resetText){
-//                    char codePoint = str.charAt(start-1);
-//                    if(isEmojiCharacter(codePoint)){
-//                        resetText = true;
-//                        //是表情符号就将文本还原为输入表情符号之前的内容
-//                        feed_advise.setText(tmp);
-//                        feed_advise.setSelection(tmp.length());
-//                        Utils.makeToast(FeedBackActivity.this, "不支持表情输入");
-//                    }
-//                }else{
-//                    resetText = false;
-//                }
+                String str = s.toString();
+                if (!resetText && start<str.length()) {//start<str.length()判断用户是否是删除了输入的数据
+                        char codePoint = str.charAt(start);
+                        if (isEmojiCharacter(codePoint)) {
+                            resetText = true;
+                            //是表情符号就将文本还原为输入表情符号之前的内容
+                            feed_advise.setText(tmp);
+                            LogUtils.e(TAG, tmp.length() + "");
+                            feed_advise.setSelection(tmp.length());
+                            Utils.makeToast(FeedBackActivity.this, "不支持表情输入");
+                    }
+                } else {
+                    resetText = false;
+                }
             }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//                if(!resetText) {
-//                    tmp = s.toString();//这里用s.toString()而不直接用s是因为如果用s，那么，tmp和s在内存中指向的是同一个地址，s改变了，tmp也就改变了，那么表情过滤就失败了
-//                }
+                if (!resetText || s.toString().length()<=start) {//s.toString().length()<=start 判断用户是否是删除了输入的数据
+                    tmp = s.toString();//这里用s.toString()而不直接用s是因为如果用s，那么，tmp和s在内存中指向的是同一个地址，s改变了，tmp也就改变了，那么表情过滤就失败了
+                }
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(TextUtils.isEmpty(editable.toString().trim())){
+                if (TextUtils.isEmpty(editable.toString().trim())) {
                     feed_send.setEnabled(false);
                     feed_send.setBackgroundResource(R.drawable.bg_button_no_enabled);
-                }else{
+                } else {
                     feed_send.setEnabled(true);
-                    feed_send.setBackgroundColor(getResources().getColor(R.color.button_text_can_click));
+                    feed_send.setBackgroundResource(R.drawable.bg_button_preed);
                 }
             }
         });//设置判断
