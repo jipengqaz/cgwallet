@@ -129,7 +129,7 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
                     empty_phone.setVisibility(View.GONE);
                 }
 
-                if (editable.toString().trim().length() == 11) {
+                if (editable.toString().trim().length() == 11 && CODE_TIME == 60) {
                     getSecurityCode.setEnabled(true);
                     getSecurityCode.setBackgroundResource(R.color.main_bg);
                 } else {
@@ -185,7 +185,7 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
 
     private void setButton(){
         if(securityCode.getText().toString().length() == 6 && registPwd.getText().toString().length()>=6
-                && registMobile.getText().toString().length() == 11){
+                && registMobile.getText().toString().length() == 11 ){
             registBtn.setEnabled(true);
             registBtn.setBackgroundResource(R.drawable.bg_button_preed);
 
@@ -282,6 +282,7 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
                         getSecurityCode.setText(getResources().getString(R.string.hint_regist_get_security_code));
                         getSecurityCode.setBackgroundResource(R.color.main_bg);
                         getSecurityCode.setEnabled(true);
+                        CODE_TIME = 60;
                     }else{
                         --CODE_TIME;
                         LogUtils.i(TAG, "时间time：" + CODE_TIME);
@@ -304,25 +305,20 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
                     case Constants.WHAT_GET_SECURITY_CODE://获取验证码
                         boolean flag = Utils.filtrateCode(RegistActivity.this,jsonBean);
                         if(flag && code == Constants.OPERATION_FAIL){//数据交互失败
-                            mHandler.removeMessages(GET_CODE_TIME);
-                            CODE_TIME = 60;
-                            getSecurityCode.setText(getResources().getString(R.string.hint_regist_get_security_code));
-                            getSecurityCode.setBackgroundResource(R.color.main_bg);
-                            getSecurityCode.setEnabled(true);
                             Utils.makeToast(RegistActivity.this, errorMsg);
                         }else if(flag && code == Constants.OPERATION_SUCCESS){//数据交互成功
                             JSONObject jsonObject = new JSONObject(jsonBean.getJsonString());
+                            getSecurityCode.setText(CODE_TIME + TIME_MSG);
+                            getSecurityCode.setEnabled(false);
+                            mHandler.sendEmptyMessageDelayed(GET_CODE_TIME, 1000);
                             if(Constants.IS_TEST){
 //                                mobile_code = jsonObject.optString("mobile_code");
                                 Utils.makeToast(RegistActivity.this,jsonObject.optString("mobile_code"));
                             }
                         }else if(flag && code == 2){
-                            mHandler.removeMessages(GET_CODE_TIME);
-                            CODE_TIME = 60;
-                            getSecurityCode.setText(getResources().getString(R.string.hint_regist_get_security_code));
-                            getSecurityCode.setBackgroundResource(R.color.main_bg);
-                            getSecurityCode.setEnabled(true);
-                            Utils.makeToast(RegistActivity.this, "手机号已注册，请直接输入");
+                            Utils.makeToast(RegistActivity.this, "手机号已注册，请直接登录");
+                            setResult(100,getIntent().putExtra("mobile",registMobile.getText().toString().trim()));
+                            finish();
                         }
                         hideProcessBar();
                         break;
@@ -392,10 +388,10 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
         switch (is){
             case 1:
             //获取验证码
-            getSecurityCode.setText(CODE_TIME + TIME_MSG);
-//        getSecurityCode.setTextColor(getResources().getColor(R.color.white));
-            getSecurityCode.setEnabled(false);
-            mHandler.sendEmptyMessageDelayed(GET_CODE_TIME, 1000);
+//            getSecurityCode.setText(CODE_TIME + TIME_MSG);
+////        getSecurityCode.setTextColor(getResources().getColor(R.color.white));
+//            getSecurityCode.setEnabled(false);
+//            mHandler.sendEmptyMessageDelayed(GET_CODE_TIME, 1000);
             params = new HashMap();
             params.put("mobile", mobile);
             task = new CustomTask(mHandler, Constants.WHAT_GET_SECURITY_CODE

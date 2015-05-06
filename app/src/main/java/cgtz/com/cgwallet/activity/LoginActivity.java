@@ -59,6 +59,20 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
     private ImageView empty,empty_phone;//清空数据
     private LinearLayout phone_layout;//手机输入框布局
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 100){//用于用户注册时    已注册账号  直接返回该页面  并输入手机号
+            ivNoPhone.setVisibility(View.VISIBLE);
+            layoutHavePhone.setVisibility(View.GONE);
+            etLoginPhone.setVisibility(View.VISIBLE);
+            phone_layout.setVisibility(View.VISIBLE);
+            showHavePhone = true;//重新填写手机号
+            setRightText(null);//重新填写手机号
+            etLoginPwd.setText("");
+            etLoginPhone.setText(data.getStringExtra("mobile"));
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -261,7 +275,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
                 }
                 break;
             case R.id.tv_regist_account://注册用户
-                startActivity(new Intent(LoginActivity.this,RegistActivity.class));
+                startActivityForResult(new Intent(LoginActivity.this,RegistActivity.class),100);
                 break;
             case R.id.login_button_finish://登录
                 if(etLoginPhone.getVisibility() == View.VISIBLE){//判断手机号填写控件是否隐藏
