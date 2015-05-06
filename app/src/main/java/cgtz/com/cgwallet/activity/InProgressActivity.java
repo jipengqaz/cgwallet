@@ -51,7 +51,7 @@ public class InProgressActivity extends BaseActivity {
         }else{
             progressText.setText("取钱处理中...");
             lookSaveRecord.setText("查看取钱记录");
-            progresBanner.setText("最快0秒，最晚一个工作日内转出");
+            progresBanner.setText("资金将在１－２个工作日内到达您银行卡");
         }
     }
 
