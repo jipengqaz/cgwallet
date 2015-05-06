@@ -47,6 +47,7 @@ public class InProgressActivity extends BaseActivity {
             progresBanner.setText("请稍后查看钱包资金");
         }else{
             progressText.setText("取钱处理中...");
+            lookSaveRecord.setText("查看取钱记录");
             progresBanner.setText("最快0秒，最晚一个工作日内转出");
         }
     }
