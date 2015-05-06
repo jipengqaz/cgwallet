@@ -62,7 +62,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 100){//用于用户注册时    已注册账号  直接返回该页面  并输入手机号
+        if(resultCode == 10){//用于用户注册时    已注册账号  直接返回该页面  并输入手机号
             ivNoPhone.setVisibility(View.VISIBLE);
             layoutHavePhone.setVisibility(View.GONE);
             etLoginPhone.setVisibility(View.VISIBLE);

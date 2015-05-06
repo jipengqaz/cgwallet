@@ -317,7 +317,7 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
                             }
                         }else if(flag && code == 2){
                             Utils.makeToast(RegistActivity.this, "手机号已注册，请直接登录");
-                            setResult(100,getIntent().putExtra("mobile",registMobile.getText().toString().trim()));
+                            setResult(10,getIntent().putExtra("mobile",registMobile.getText().toString().trim()));
                             finish();
                         }
                         hideProcessBar();
