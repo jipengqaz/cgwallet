@@ -61,6 +61,7 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
     private String bankCord;//银行卡号
     private int screenWidth;
     private boolean goLogin = false;//判断是否去登录的标志
+    private LinearLayout today_earnings;//今日收益
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         screenWidth = getResources().getDisplayMetrics().widthPixels;
@@ -92,6 +93,7 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
         walletBankCord = (TextView) view.findViewById(R.id.wallet_bank_card);//银行卡号
         walletNoIdentity = (TextView) view.findViewById(R.id.wallet_no_identity);//未实名认证
         walletNoBank = (TextView) view.findViewById(R.id.wallet_no_bank);//未绑卡
+        today_earnings = (LinearLayout) view.findViewById(R.id.today_earnings);//今日收益
     }
 
     /**
@@ -130,6 +132,7 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
         layoutSaveRecord.setOnClickListener(this);//存钱记录
         assetsLayout.setOnClickListener(this);//我的资产layout
         accumulativeLayout.setOnClickListener(this);//累计收益layout
+        today_earnings.setOnClickListener(this);//今日收益layout
     }
 
     /**
@@ -257,6 +260,7 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
             case R.id.wallet_assets_layout://我的资产layout
                 startActivity(new Intent(getActivity(),E_wallet_record_activity.class));
                 break;
+            case R.id.today_earnings://今日收益和累计收益是同一个页面  所有  不用break
             case R.id.wallet_accumulative_layout://累计收益layout
                 startActivity(new Intent(getActivity(), Earnings_record.class));
                 break;

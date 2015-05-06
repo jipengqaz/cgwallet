@@ -98,7 +98,7 @@
     <color name="button_text_not_enabled">#ffffff</color>
     <color name="button_text_can_click">#21c184</color>
     <color name="remond_btn_bg">#07bf05</color>
-    <color name="remond_btn_bg_pressed">#29a600</color>
+    <color name="remond_btn_bg_pressed">@color/save_or_draw_money_layout_text</color>
     <color name="invest_start_text1">#a9a9a9</color>
     <color name="invest_start_text2">#898989</color>
     <color name="background_recharge">#ffd3d3</color>

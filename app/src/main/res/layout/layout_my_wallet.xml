@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
+                android:id="@+id/today_earnings"
                 android:background="@mipmap/bg_my_wallet_top"
                 android:gravity="center"
                 android:orientation="vertical"

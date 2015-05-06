@@ -94,6 +94,7 @@
                 android:textColor="@color/money_asset_text"
                 android:hint="建议转入整数金额"
                 android:textColorHint="@color/money_text_edit"
+                android:maxLength="10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <ImageView

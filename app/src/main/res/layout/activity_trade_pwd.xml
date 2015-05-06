@@ -109,7 +109,7 @@
         <Button
             android:id="@+id/trade_pwd_confirm"
             android:layout_marginTop="20dp"
-            android:background="@drawable/bg_remond_selector"
+            android:background="@drawable/bg_button_preed"
             android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="48dp"

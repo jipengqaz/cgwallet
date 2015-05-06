@@ -150,7 +150,7 @@
             android:gravity="center"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_16sp"
-            android:background="@drawable/bg_remond_selector"
+            android:background="@drawable/bg_button_preed"
             android:layout_margin="10dp"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
