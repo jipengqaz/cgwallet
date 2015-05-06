@@ -64,7 +64,7 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
         setContentView(R.layout.activity_e_record);
         MApplication.registActivities(this);//存储该activity
         showBack(true);
-        setTitle("草根钱包");
+        setTitle("钱包资金流水");
         init();
     }
     /**
