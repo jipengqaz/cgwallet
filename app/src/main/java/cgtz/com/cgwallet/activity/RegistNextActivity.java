@@ -30,7 +30,7 @@ import cgtz.com.cgwallet.view.ISplashView;
 import cgtz.com.cgwallet.widget.ProgressDialog;
 
 /**
- * 注册输入密码页
+ * 注册输入密码页  现在未用
  */
 public class RegistNextActivity extends BaseActivity implements ISplashView,View.OnClickListener {
     private EditText registPwd;//密码输入框

@@ -116,9 +116,9 @@ public class MenuMoreActivity extends BaseActivity implements View.OnClickListen
                 break;
         }
     }
-    int iii = 0;
-    long waitTime = 1000;
-    long touchTime = 0;
+    private int iii = 0;
+    private long waitTime = 1000;
+    private long touchTime = 0;
     @Override
     protected void onResume() {
         super.onResume();

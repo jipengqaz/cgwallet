@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.bean.BankCard;
@@ -46,6 +48,7 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
     private ImageView bank_icon;//银行图标
     private String withdrawAmount;//输入的提现金额;
     private ProgressDialog pDialog;
+    private DecimalFormat df = new DecimalFormat("#0");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,8 +116,22 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                String str = charSequence.toString();
+                String str = charSequence.toString().trim();
                 if(str.length()>0){
+                    int num = Integer.parseInt(str);
+                    if(num >Double.parseDouble(capitalBalance)){//判断取钱金额是否大于本金   是的话  把取钱金额设为本金
+                        String  test = df.format(Double.parseDouble(capitalBalance));
+                        with_draw_num.setText(test);
+                        with_draw_num.setSelection(test.length());
+                        Utils.makeToast_short(Withdraw_money.this,"取出金额不能大于本金");
+                    }
+                    if(str.length()>1){
+                        if(str.subSequence(0, 1).equals("0")){//判断是否大于0
+                            with_draw_num.setText(str.substring(1));
+                            with_draw_num.setSelection(str.substring(1).length());
+                        }
+                    }
+
                 //按钮变为可点击
                     apply_withdraw.setEnabled(true);
                     apply_withdraw.setBackgroundResource(R.drawable.bg_button_preed);
@@ -124,6 +141,7 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
                     apply_withdraw.setBackgroundResource(R.drawable.bg_button_no_enabled);
                     apply_withdraw.setEnabled(true);
                 }
+
             }
 
             @Override
@@ -154,7 +172,7 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
             }else if(status.equals("-1")){
                 Utils.makeToast(Withdraw_money.this, json.optString("msg"));
             } else if(status.equals("1")) {
-                Utils.makeToast(Withdraw_money.this, json.optString("msg"));
+//                Utils.makeToast(Withdraw_money.this, json.optString("msg"));
                 /**提现请求成功， 跳转提现成功页面*/
                 startActivity(new Intent(Withdraw_money.this, InProgressActivity.class).putExtra("isSaveAt",false));
                 finish();
