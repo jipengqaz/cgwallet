@@ -49,7 +49,7 @@
         android:textSize="@dimen/text_size_16sp"/>
 
     <Button
-        android:background="@drawable/bg_remond_selector"
+        android:background="@drawable/bg_button_preed"
         android:layout_margin="20dp"
         android:id="@+id/btn_change_confirm"
         android:layout_width="match_parent"
