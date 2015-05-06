@@ -69,10 +69,6 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
         rl_personal_sodoko_unlock_change.setOnClickListener(this);
         needBankLayout.setOnClickListener(this);
         needNameLayout.setOnClickListener(this);
-        if(progressDialog == null){
-            progressDialog = new ProgressDialog(this,R.style.loading_dialog);
-        }
-        Utils.SaveOrDrawMoney(this, progressDialog);
     }
 
     @Override
