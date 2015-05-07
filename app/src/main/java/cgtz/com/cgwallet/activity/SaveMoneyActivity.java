@@ -159,8 +159,8 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
 
     private void closeDialogs(){
         hideProcessBar();
-        Utils.closeDialog(this,dialog);
-        Utils.closeDialog(this,payTypeDialog);
+        Utils.closeDialog(this, dialog);
+        Utils.closeDialog(this, payTypeDialog);
     }
 
     /**
@@ -185,6 +185,9 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.length() >= 10){
+                    Utils.makeToast(SaveMoneyActivity.this,"最大投资额不能超过9999999999元");
+                }
 
             }
 
@@ -284,6 +287,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                             .inflate(R.layout.layout_pay_type, null);
             payTypeDialog = new Dialog(this, R.style.loading_dialog2);
             payTypeDialog.setContentView(payDialogLayout);
+            payTypeDialog.setCanceledOnTouchOutside(false);
             payMoney = (TextView) payDialogLayout.findViewById(R.id.dialog_payment_paymoney);//支付金额
             avaliableBalance =
                     (TextView) payDialogLayout.findViewById(R.id.dialog_payment_avaliable_balance);//账户余额
@@ -309,8 +313,10 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
             bankCardMoney.setText(bankNeedPay);//银行卡支付金额
         }else{
             onlyUseAccount = true;
-            avaliableBalance.setText(saveMoney);//使用账户金额
+            avaliableBalance.setText(assets);//使用账户金额
+//            avaliableBalance.setText(saveMoney);//使用账户金额
             bankCardMoney.setText("0.00");//银行卡支付金额
+            bankCardLayout.setVisibility(View.GONE);
         }
 
         bankCardBtn.setOnClickListener(new View.OnClickListener() {
@@ -347,14 +353,19 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                         String bankNeedPay = df.format(Double.parseDouble(saveMoney) - Double.parseDouble(assets));
                         avaliableBalance.setText(assets);//使用账户金额
                         bankCardMoney.setText(bankNeedPay);//银行卡支付金额
+                        bankCardLayout.setVisibility(View.VISIBLE);//显示银行卡布局
                     } else {
                         onlyUseAccount = true;
-                        avaliableBalance.setText(saveMoney);//使用账户金额
+                        bankCardLayout.setVisibility(View.GONE);//隐藏银行卡布局
+//                        avaliableBalance.setText(saveMoney);//使用账户金额
+                        avaliableBalance.setText(assets);//使用账户金额
                         bankCardMoney.setText("0.00");//银行卡支付金额
                     }
                 } else {//未选中使用账户余额
                     onlyUseAccount = false;
-                    avaliableBalance.setText("0.00");//使用账户金额
+                    bankCardLayout.setVisibility(View.VISIBLE);
+//                    avaliableBalance.setText("0.00");//使用账户金额
+                    avaliableBalance.setText(assets);//使用账户金额
                     bankCardMoney.setText(saveMoney);
                 }
             }

@@ -133,6 +133,10 @@ public class E_all_records_fragment_1 extends BaseFragment implements ISplashVie
                 super.handleMessage(msg);
                 try {
                     JsonBean jsonBean = (JsonBean) msg.obj;
+                    if(!Utils.filtrateCode(getActivity(),jsonBean)){
+                        listview.onRefreshComplete();
+                        return;
+                    }
                     JSONObject json = new JSONObject(jsonBean.getJsonString());
                     Log.e(TAG, type + "返回列表数据" + json);
                     if(json.optString("success").equals("1")) {

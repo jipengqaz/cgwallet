@@ -116,6 +116,10 @@ public class Earnings_record extends BaseActivity implements ISplashView {
 
                 try {
                     JsonBean jsonBean = (JsonBean) msg.obj;
+                    if(!Utils.filtrateCode(Earnings_record.this,jsonBean)){
+                        listview.onRefreshComplete();
+                        return;
+                    }
                     JSONObject json = new JSONObject(jsonBean.getJsonString());
                     Log.e(TAG, "json" + jsonBean.getJsonString());
                     if(json.optString("success").equals("1")) {
