@@ -38,6 +38,7 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
     private ImageView bankIcon;
     private SplashPresenter presenter;
     private ProgressDialog progressDialog;
+    private TextView is_pay_passwrod;
 
     private RelativeLayout rl_personal_sodoko_unlock_change,Reset_Passwrod,rl_personal_loginpwd_change;//管理手势,修改交易密码,修改密码
     @Override
@@ -63,6 +64,7 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
         bankLayout = (TextView) findViewById(R.id.tv_personal_center_no_binding);
         nameIcon = (ImageView) findViewById(R.id.name_icon);
         bankIcon = (ImageView) findViewById(R.id.bank_icon);
+        is_pay_passwrod = (TextView) findViewById(R.id.is_pay_passwrod);
 
         rl_personal_loginpwd_change.setOnClickListener(this);
         Reset_Passwrod.setOnClickListener(this);
@@ -247,6 +249,10 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
                                 nameIcon.setVisibility(View.GONE);
                                 bankIcon.setVisibility(View.VISIBLE);
                                 needNameLayout.setEnabled(false);
+                            }
+                            is_pay_passwrod.setVisibility(View.VISIBLE);
+                            if(json.optInt("isPayPassSet") == 1){
+                                is_pay_passwrod.setText("已设置");
                             }
                             hideProcessBar();
                         }else{
