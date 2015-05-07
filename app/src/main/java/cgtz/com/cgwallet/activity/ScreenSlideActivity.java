@@ -34,7 +34,7 @@ public class ScreenSlideActivity extends FragmentActivity {
     /**
      * The number of pages (wizard steps) to show in this demo.
      */
-    private static final int NUM_PAGES = 4;
+    private static final int NUM_PAGES = 3;
     private boolean flag = false;
     private int index = 0;
 
@@ -75,15 +75,15 @@ public class ScreenSlideActivity extends FragmentActivity {
         mPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i2) {
-                if(index == 4 && i2 > 0){
+                if(index == 3 && i2 > 0){
                     index = i;
                 }
-                if(index == 4 && i2 == 0){
+                if(index == 3 && i2 == 0){
                     ChangeLogHelper.saveAppVersion(ScreenSlideActivity.this);
                     openMain();
                 }
-                if(i == 3 && i2 ==0){
-                    index = 4;
+                if(i == 2 && i2 ==0){
+                    index = 3;
                 }
             }
 

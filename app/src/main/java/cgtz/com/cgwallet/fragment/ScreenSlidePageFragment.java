@@ -28,7 +28,7 @@ public class ScreenSlidePageFragment extends Fragment {
             R.mipmap.icon_guid_first,
             R.mipmap.icon_guid_second,
             R.mipmap.icon_guid_third,
-            R.mipmap.icon_guid_fourth
+//            R.mipmap.icon_guid_fourth
     };
 
     static View.OnClickListener listener;
