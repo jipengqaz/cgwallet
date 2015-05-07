@@ -87,6 +87,9 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
                 if(bankIcon.getVisibility() == View.VISIBLE){
                     startActivity(new Intent(this, SaveMoneyActivity.class)
                             .putExtra("fromsave",true));
+                }else{//跳到绑定银行卡列表页面
+                    startActivity(new Intent(this, BankCardListActivity.class)
+                            .putExtra("person",true));
                 }
                 break;
             case R.id.rl_personal_sodoko_unlock_change://设置手势
@@ -200,7 +203,7 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
                                                 + Utils.getBankStart(json.optString("starCardNumber"))));
                                 nameIcon.setVisibility(View.VISIBLE);
                                 bankIcon.setVisibility(View.GONE);
-                                needBankLayout.setEnabled(false);
+//                                needBankLayout.setEnabled(false);
                             }else if(code == -4){//已真正实名认证，未绑卡
                                 nameLayout.setText(Html.fromHtml(
                                         Utils.getUserNameForStart(json.optString("starName")) + "<br/>"
@@ -238,7 +241,7 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
                                 nameIcon.setVisibility(View.GONE);
                                 bankIcon.setVisibility(View.GONE);
                                 needNameLayout.setEnabled(false);
-                                needBankLayout.setEnabled(false);
+//                                needBankLayout.setEnabled(false);
                             }else if(code == -8){//已真正实名认证 支持连连但未绑定连连
                                 nameLayout.setText(Html.fromHtml(
                                         Utils.getUserNameForStart(json.optString("starName")) + "<br/>"
