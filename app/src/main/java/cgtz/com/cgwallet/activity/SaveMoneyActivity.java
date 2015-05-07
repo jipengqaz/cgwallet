@@ -331,10 +331,16 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
             public void onClick(View v) {
                 closeDialog();
                 if (checkbox.isChecked()) {
-                    //余额和银行卡支付
-                    useAccount = avaliableBalance.getText().toString().trim();
-                    useBank = bankCardMoney.getText().toString().trim();
-                    setBeforePay();
+                    if (Double.parseDouble(saveMoney) > Double.parseDouble(assets)) {
+                        //余额和银行卡支付
+                        useAccount = avaliableBalance.getText().toString().trim();
+                        useBank = bankCardMoney.getText().toString().trim();
+                        setBeforePay();
+                    }else{
+                        useAccount = saveMoney;
+                        useBank  = "0.00";
+                        setBeforePay();
+                    }
                 } else {
                     //银行卡支付
                     useBank = bankCardMoney.getText().toString().trim();
