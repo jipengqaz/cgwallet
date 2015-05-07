@@ -131,7 +131,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
         }else{
             assetsLayout.setVisibility(View.VISIBLE);
             transferHintLayout.setVisibility(View.VISIBLE);
-            assetsFigure.setText(assets + " 元");
+            assetsFigure.setText(assets);
             transferHint.setText(assetUseIntruduce);
         }
         if(!TextUtils.isEmpty(startCalculateTime)){

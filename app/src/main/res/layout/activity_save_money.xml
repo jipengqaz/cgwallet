@@ -34,11 +34,22 @@
                 android:id="@+id/save_money_assets"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/save_moeny_marign_left"
+                android:layout_marginRight="@dimen/height_edit_2"
                 android:textSize="@dimen/save_moeny_main_text"
                 android:textColor="@color/money_asset_text"
+                android:text="1255"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/rmb"
+                android:layout_marginRight="@dimen/save_moeny_marign_left"
+                android:textSize="@dimen/save_moeny_main_text"
+                android:textColor="@color/money_text_hint"
+                />
             <View
                 android:background="@color/bg_line"
                 android:layout_alignParentBottom="true"

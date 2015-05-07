@@ -101,7 +101,7 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
         text_tip1.setText(tip);
         bank_tail.setText("尾号 "+card.getCardLast());
         bank_name.setText(card.getBankName());
-        available_balance.setText(capitalBalance + " 元");
+        available_balance.setText(capitalBalance );
         bank_icon.setImageResource(BankCard.getBankIcon(Integer.parseInt(card.getBankId())));
         if(success == -2){
             apply_withdraw.setEnabled(false);

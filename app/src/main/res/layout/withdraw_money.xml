@@ -85,10 +85,17 @@
             android:id="@+id/available_balance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="2338 元"
+            tools:text="2338 "
             android:textSize="@dimen/save_moeny_main_text"
             android:textColor="@color/money_asset_text"
             android:layout_marginLeft="10dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rmb"
+            android:textColor="@color/money_tv_hint_text"
+            android:textSize="@dimen/text_size_12sp"
             />
     </LinearLayout>
         <View
