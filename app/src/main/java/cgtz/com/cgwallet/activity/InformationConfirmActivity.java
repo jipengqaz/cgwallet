@@ -657,6 +657,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                     case Constants.WHAT_EWALLET_AFFIRMDO://账户余额支付
                         LogUtils.i(TAG, "账户余额支付: " + jsonBean.getJsonString());
                         if(flag){
+                            hideProcessBar();
                             if(code == Constants.OPERATION_FAIL){//数据交互失败
                                 Utils.makeToast(InformationConfirmActivity.this, errorMsg);
                             }else if(code == Constants.OPERATION_SUCCESS){//数据交互成功

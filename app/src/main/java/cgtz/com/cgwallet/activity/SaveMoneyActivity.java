@@ -84,6 +84,8 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
     private boolean needEdit;//是否需要填写信息 true yes, false no
     private DecimalFormat df = new DecimalFormat("#0.00");
 
+    private TextView binding_tip;//绑定银行卡显示的文案
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,6 +116,8 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
         deleteEdit = (ImageView) findViewById(R.id.delete_edit);//删除输入内容
         incomeTimeHint = (TextView) findViewById(R.id.income_time_hint);//收益开始时间
         confirmSave = (Button) findViewById(R.id.cofirm_save);//确认存钱按钮
+
+        binding_tip = (TextView) findViewById(R.id.binding_tip);
     }
 
     /**
@@ -123,6 +127,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
         if(fromsave){//判断是否是来绑卡的   是的话设置默认投资  1元
             editFigure.setText("1");
             editFigure.setSelection(editFigure.getText().toString().trim().length());
+            binding_tip.setText("请使用您本人银行卡投资1元以验证信息正确");
             assets = "0.00";
         }
         if(TextUtils.isEmpty(assets) || assets.equals("0.00")){

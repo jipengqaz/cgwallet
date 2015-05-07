@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +36,7 @@ import cgtz.com.cgwallet.widget.ProgressDialog;
  * 我的钱包
  * Created by Administrator on 2015/4/11.
  */
-public class MyWalletFragment extends BaseFragment implements ISplashView,View.OnClickListener{
+public class MyWalletFragment extends BaseFragment implements ISplashView,View.OnClickListener,SwipeRefreshLayout.OnRefreshListener{
     private static final String TAG = "MyWalletFragment";
     private LinearLayout layoutAuther;//实名认证layout
     private LinearLayout layoutBank;//绑定银行卡layout
@@ -62,6 +63,7 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
     private int screenWidth;
     private boolean goLogin = false;//判断是否去登录的标志
     private LinearLayout today_earnings;//今日收益
+    private SwipeRefreshLayout mSwipeLayout;//下拉刷新控件
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         screenWidth = getResources().getDisplayMetrics().widthPixels;
@@ -94,6 +96,11 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
         walletNoIdentity = (TextView) view.findViewById(R.id.wallet_no_identity);//未实名认证
         walletNoBank = (TextView) view.findViewById(R.id.wallet_no_bank);//未绑卡
         today_earnings = (LinearLayout) view.findViewById(R.id.today_earnings);//今日收益
+
+//        mSwipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.id_swipe_ly);//下拉刷新控件
+//        mSwipeLayout.setOnRefreshListener(this);
+//        mSwipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
+//                android.R.color.holo_orange_light, android.R.color.holo_red_light);
     }
 
     /**
@@ -304,4 +311,9 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
             }
         }
     };
+
+    @Override
+    public void onRefresh() {
+        startNextActivity();
+    }
 }

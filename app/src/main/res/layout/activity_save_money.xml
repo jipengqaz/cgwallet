@@ -76,8 +76,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
+        <TextView
+            android:id="@+id/binding_tip"
+            android:layout_marginLeft="@dimen/save_moeny_marign_left"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/save_moeny_hint_text"
+            android:textColor="@color/money_tv_hint_text"
+            />
             <View
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/bg_line"
                 android:layout_alignParentTop="true"
                 android:layout_width="match_parent"

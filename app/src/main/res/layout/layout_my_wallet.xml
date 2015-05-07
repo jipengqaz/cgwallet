@@ -5,6 +5,10 @@
     android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <!--<android.support.v4.widget.SwipeRefreshLayout-->
+        <!--android:id="@+id/id_swipe_ly"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" >-->
     <ScrollView
         android:id="@+id/wallet_scrollview"
         android:scrollbars="none"
@@ -307,7 +311,7 @@
                         android:layout_height="wrap_content" />
                 </LinearLayout>
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
+    <!--</android.support.v4.widget.SwipeRefreshLayout>-->
 </LinearLayout>
