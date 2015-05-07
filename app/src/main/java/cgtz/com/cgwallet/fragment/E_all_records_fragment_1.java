@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.activity.E_wallet_record_activity;
 import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.client.E_wallet_list;
 import cgtz.com.cgwallet.data.E_records;
@@ -44,8 +45,10 @@ public class E_all_records_fragment_1 extends BaseFragment implements ISplashVie
     private int type; // 1 为全部记录  2 为转入记录   3 为转出记录
     private int page =0;
     private SplashPresenter presenter;
-    public void setType(int type){
+    private E_wallet_record_activity activity;
+    public void setType(int type,E_wallet_record_activity aa){
         this.type = type;
+        activity =aa;
     }
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -67,6 +70,32 @@ public class E_all_records_fragment_1 extends BaseFragment implements ISplashVie
         listview.setOnItemClickListener(projectAdapter);//记录单击事件
         listview.setOnRefreshListener(projectAdapter);//刷新
         listview.loadMore();
+//        listview.setOnScrollListener(new AbsListView.OnScrollListener() {
+//            /**
+//             * ListView的状态改变时触发
+//             * @param view
+//             * @param scrollState
+//             */
+//            @Override
+//            public void onScrollStateChanged(AbsListView view, int scrollState) {
+//                switch(scrollState){
+//                    case AbsListView.OnScrollListener.SCROLL_STATE_IDLE://空闲状态
+//
+//                        break;
+//                    case AbsListView.OnScrollListener.SCROLL_STATE_FLING://滚动状态
+//
+//                        break;
+//                    case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL://触摸后滚动
+//
+//                        break;
+//                }
+//            }
+//
+//            @Override
+//            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+//                activity.setanimation();
+//            }
+//        });
     }
 
     @Override
@@ -145,6 +174,8 @@ public class E_all_records_fragment_1 extends BaseFragment implements ISplashVie
                 }
             }
         };
+
+
         @Override
         public int getCount() {
             return projects.size();

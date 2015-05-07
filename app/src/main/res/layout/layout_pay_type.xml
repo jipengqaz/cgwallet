@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:text="元"
                 android:textSize="16sp"
-                android:textColor="@color/btn_invest"/>
+                android:textColor="@color/black"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/dialog_payment_layout_bankcard"

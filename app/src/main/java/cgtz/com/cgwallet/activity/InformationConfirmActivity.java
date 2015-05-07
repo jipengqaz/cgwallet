@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.adapter.BankAdapter;
 import cgtz.com.cgwallet.bean.Bank;
+import cgtz.com.cgwallet.bean.BankCard;
 import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
@@ -101,6 +103,8 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
     private PayOrder order = null;
     private boolean fromsave;//是否过来  绑卡的
     private String lianlianTest = "0.01";//测试时，连连支付金额
+    private ImageView bank_icon;//银行卡图标
+    private ImageView invest_bank_icon;//银行卡图标
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,7 +171,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
 
     /**初始化视图*/
     private void initViews(){
-//        UtilityUtils.setPossession_TextView(this);//设置文案  资金安全
+        Utils.safeCopyWrite(this);//设置安全信息
         layoutAccountBank = (LinearLayout) findViewById(R.id.investment_payment);
         invester_bank_pay = (TextView) findViewById(R.id.invester_bank_pay);//银行卡支付金额
         invester_balance = (TextView) findViewById(R.id.invester_balance);//余额支付金额
@@ -187,7 +191,15 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
         text_bankname = (TextView) findViewById(R.id.tv_investment_pay_bankname);//选择银行卡
         edit_bankcard = (EditText) findViewById(R.id.et_investment_pay_bankcard);//输入银行卡号
         layout_neednot_edit = (LinearLayout) findViewById(R.id.layout_invest_pay_neednot_edit);//不需要填写信息的布局
+        bank_icon = (ImageView) findViewById(R.id.bank_icon);//银行卡图标
+        invest_bank_icon = (ImageView) findViewById(R.id.invest_bank_icon);//银行卡图标
+
+        if(useAccount != null && useAccount.equals("0.00")){
+            layoutAccountBank.setVisibility(View.GONE);//隐藏余额支付金额
+        }
+        if(needEdit){
         getBankList();//获取支持的银行列表
+         }
     }
 
     private void fillWidget(){
@@ -236,6 +248,8 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                 if(!TextUtils.isEmpty(bankName)){
                     //选择银行卡
                     text_bankname.setText(bankName);
+                    bank_icon.setImageResource(BankCard.getBankIcon(Integer.parseInt(bankId)));
+                    bank_icon.setVisibility(View.VISIBLE);
                 }
                 if(!TextUtils.isEmpty(bankCard)){
                     //输入银行卡号
@@ -251,27 +265,30 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                     layout_neednot_edit.setVisibility(View.GONE);
                 }else{
                     //余额不充足
-                    LogUtils.i(TAG,"余额不充足支付");
+                    LogUtils.i(TAG, "余额不充足支付");
                     layout_need_edit.setVisibility(View.GONE);
                     layout_neednot_edit.setVisibility(View.VISIBLE);
-                    invest_name.setText(TextUtils.isEmpty(name)?"":Utils.getUserNameForStart(name) );
+                    invest_name.setText(TextUtils.isEmpty(name) ? "" : Utils.getUserNameForStart(name));
                     invest_identity.setText(TextUtils.isEmpty(identity)?"":Utils.getUserIdentity(identity) );
                     invest_bankcard.setText(TextUtils.isEmpty(lastBankCordNum)?"":"尾号"+lastBankCordNum );
+                    invest_bank_icon.setImageResource(BankCard.getBankIcon(Integer.parseInt(bankId)));
+                    invest_bank_icon.setVisibility(View.VISIBLE);
                     invest_bank_id.setText(TextUtils.isEmpty(bankName)?"":bankName);
                     backhint.setText(TextUtils.isEmpty(bankTip)?"":bankTip);
                 }
             }
+            if(!TextUtils.isEmpty(payLimitIntruduce)
+                    && (!TextUtils.isEmpty(bankName)
+                    || !TextUtils.isEmpty(bankCard))){
+                tv_pay_limit_desc.setText(payLimitIntruduce);
+                tv_pay_limit_desc.setVisibility(View.VISIBLE);
+            }else{
+                tv_pay_limit_desc.setVisibility(View.GONE);
+            }
         }
 
         stilledMoney.setText(saveMoney+"");
-        if(!TextUtils.isEmpty(payLimitIntruduce)
-                && (!TextUtils.isEmpty(bankName)
-                || !TextUtils.isEmpty(bankCard))){
-            tv_pay_limit_desc.setText(payLimitIntruduce);
-            tv_pay_limit_desc.setVisibility(View.VISIBLE);
-        }else{
-            tv_pay_limit_desc.setVisibility(View.GONE);
-        }
+
         if(!TextUtils.isEmpty(useBank)){
             //使用含有银行卡支付
             bank_layout.setVisibility(View.VISIBLE);
@@ -510,8 +527,10 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                 bankId = bank.getId()+"";//银行卡id
                 double pay_limit_test = bank.getPay_limit();
                 payLimit = bank.getPay_limit()*10000+"";
-                tv_pay_limit_desc.setText("该银行卡单笔最高可支付"+pay_limit_test+"万元");
+                tv_pay_limit_desc.setText("该银行卡单笔最高可支付" + pay_limit_test + "万元");
                 tv_pay_limit_desc.setVisibility(View.VISIBLE);
+                bank_icon.setImageResource(BankCard.getBankIcon(bank.getId()));
+                bank_icon.setVisibility(View.VISIBLE);
                 text_bankname.setText(bankName);
                 choose_bank_card_dialog.dismiss();
             }

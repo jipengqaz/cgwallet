@@ -7,8 +7,10 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
@@ -58,6 +60,8 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
 
     //当前选中项
     private int currenttab = 0;
+
+    private LinearLayout animation;//存钱  取钱布局按钮
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +80,7 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
         buttonTwo = (Button) findViewById(R.id.btn_two);
         button3 = (Button) findViewById(R.id.btn_3);
         green_sliders = findViewById(R.id.green_sliders);
+        animation = (LinearLayout) findViewById(R.id.animation);
         RelativeLayout.LayoutParams imageParams=new RelativeLayout.LayoutParams(screenWidth/3, ViewGroup.LayoutParams.WRAP_CONTENT);
         green_sliders.setLayoutParams(imageParams);
         if(progressDialog == null){
@@ -92,11 +97,11 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
         viewpager.setOffscreenPageLimit(2);//增加viewpager 缓存页面
         fragmentList = new ArrayList<Fragment>();
         e_all_records_fragment = new E_all_records_fragment_1();
-        e_all_records_fragment.setType(1);
+        e_all_records_fragment.setType(1,this);
         e_all_records_fragment1 = new E_all_records_fragment_1();
-        e_all_records_fragment1.setType(2);
+        e_all_records_fragment1.setType(2,this);
         e_all_records_fragment2 = new E_all_records_fragment_1();
-        e_all_records_fragment2.setType(3);
+        e_all_records_fragment2.setType(3,this);
 
         fragmentList.add(e_all_records_fragment);
         fragmentList.add(e_all_records_fragment1);
@@ -208,6 +213,33 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
                 changeView(2);
                 break;
         }
+    }
+    int i=0;
+    public  void setanimation(){//取钱和存钱位移动画
+        if(i==0){
+        i++;
+        TranslateAnimation animationOpen =    new TranslateAnimation(0,0,58,58);
+        animationOpen.setDuration(10000);
+            animationOpen.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    i--;
+                    E_wallet_record_activity.this.animation.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+        animation.setAnimation(animationOpen);
+        }
+
     }
     @Override
     protected void onResume() {

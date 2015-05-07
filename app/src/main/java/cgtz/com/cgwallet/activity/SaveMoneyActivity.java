@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 
 import cgtz.com.cgwallet.MApplication;
@@ -81,7 +82,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
     private CustomEffectsDialog dialog;
     private boolean fromsave;//是否过来  绑卡的
     private boolean needEdit;//是否需要填写信息 true yes, false no
-
+    private DecimalFormat df = new DecimalFormat("#0.00");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,12 +193,19 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                 /**
                  * 根据输入框中是否存在输入内容，来改变按钮的颜色和是否可点击
                  */
-                if (TextUtils.isEmpty(s.toString().trim())) {
+                String str = s.toString().trim();
+                if (TextUtils.isEmpty(str)) {
                     //按钮变为不可点击
                     confirmSave.setEnabled(false);
                     confirmSave.setBackgroundResource(R.drawable.bg_button_no_enabled);
                     deleteEdit.setVisibility(View.GONE);
                 } else {
+                    if(str.length()>1){
+                        if(str.subSequence(0, 1).equals("0")){//判断是否大于0
+                            editFigure.setText(str.substring(1));
+                            editFigure.setSelection(str.substring(1).length());
+                        }
+                    }
                     //按钮变为可点击
                     confirmSave.setEnabled(true);
                     confirmSave.setBackgroundResource(R.drawable.bg_button_preed);
@@ -219,13 +227,16 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                 } else {
                     //判断是否设置交易密码
                     if (isSetTrade == 1) {
-                        //选择支付方式
-                        if (!TextUtils.isEmpty(assets) && !assets.equals("0.00")
-                                && Double.parseDouble(saveMoney) <= Double.parseDouble(assets)) {
-                            useAccount = saveMoney;
-                            payMethod();
-                        } else {
+                        //判断是否有余额  没有直接跳到 支付页面 选择支付方式
+                        if (!TextUtils.isEmpty(assets) && !assets.equals("0.00")) {//&& Double.parseDouble(saveMoney) <= Double.parseDouble(assets)
                             showSelectedPayType();
+                        } else {
+                            useBank = saveMoney;
+                            needEdit = true;
+                            onlyUseAccount = false;
+                            useAccount="0.00";
+//                            payMethod();
+                            setBeforePay();
                         }
                     } else {
                         //未设置交易密码
@@ -288,10 +299,12 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
             closeDialog();
         }
 
+        checkbox.setChecked(true);
+
         payMoney.setText(saveMoney);//支付金额
         if(Double.parseDouble(saveMoney) > Double.parseDouble(assets)){
             onlyUseAccount = false;
-            String bankNeedPay = (Double.parseDouble(saveMoney) - Double.parseDouble(assets))*1.0+"";
+            String bankNeedPay = df.format(Double.parseDouble(saveMoney) - Double.parseDouble(assets));
             avaliableBalance.setText(assets);//使用账户金额
             bankCardMoney.setText(bankNeedPay);//银行卡支付金额
         }else{
@@ -319,6 +332,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                 } else {
                     //银行卡支付
                     useBank = bankCardMoney.getText().toString().trim();
+                    useAccount = "0";
                     setBeforePay();
                 }
             }
@@ -330,7 +344,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                 if (checkbox.isChecked()) {//选中使用账户余额
                     if (Double.parseDouble(saveMoney) > Double.parseDouble(assets)) {
                         onlyUseAccount = false;
-                        String bankNeedPay = (Double.parseDouble(saveMoney) - Double.parseDouble(assets)) * 1.0 + "";
+                        String bankNeedPay = df.format(Double.parseDouble(saveMoney) - Double.parseDouble(assets));
                         avaliableBalance.setText(assets);//使用账户金额
                         bankCardMoney.setText(bankNeedPay);//银行卡支付金额
                     } else {
@@ -339,6 +353,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                         bankCardMoney.setText("0.00");//银行卡支付金额
                     }
                 } else {//未选中使用账户余额
+                    onlyUseAccount = false;
                     avaliableBalance.setText("0.00");//使用账户金额
                     bankCardMoney.setText(saveMoney);
                 }
