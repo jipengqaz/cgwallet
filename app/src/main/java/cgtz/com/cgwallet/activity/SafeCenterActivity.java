@@ -40,6 +40,8 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
     private ProgressDialog progressDialog;
     private TextView is_pay_passwrod;
 
+    private boolean isbinding = false;
+
     private RelativeLayout rl_personal_sodoko_unlock_change,Reset_Passwrod,rl_personal_loginpwd_change;//管理手势,修改交易密码,修改密码
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +86,7 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
                 }
                 break;
             case R.id.rl_personal_bankcardbinding://绑定银行卡
-                if(bankIcon.getVisibility() == View.VISIBLE){
+                if(!isbinding){
                     startActivity(new Intent(this, SaveMoneyActivity.class)
                             .putExtra("fromsave",true));
                 }else{//跳到绑定银行卡列表页面
@@ -202,7 +204,8 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
                                         json.optString("bankName") + "<br/>"
                                                 + Utils.getBankStart(json.optString("starCardNumber"))));
                                 nameIcon.setVisibility(View.VISIBLE);
-                                bankIcon.setVisibility(View.GONE);
+                                bankIcon.setVisibility(View.VISIBLE);
+                                isbinding =true;
 //                                needBankLayout.setEnabled(false);
                             }else if(code == -4){//已真正实名认证，未绑卡
                                 nameLayout.setText(Html.fromHtml(
@@ -239,7 +242,8 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
                                         json.optString("bankName") + "<br/>"
                                                 + Utils.getBankStart(json.optString("starCardNumber"))));
                                 nameIcon.setVisibility(View.GONE);
-                                bankIcon.setVisibility(View.GONE);
+                                bankIcon.setVisibility(View.VISIBLE);
+                                isbinding = true;
                                 needNameLayout.setEnabled(false);
 //                                needBankLayout.setEnabled(false);
                             }else if(code == -8){//已真正实名认证 支持连连但未绑定连连
