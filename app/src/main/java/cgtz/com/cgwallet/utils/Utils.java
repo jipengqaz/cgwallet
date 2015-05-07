@@ -248,6 +248,20 @@ public class Utils {
         }
     }
 
+
+    /**
+     * 判断内容是否完整
+     * @param str
+     * @return
+     */
+    public static String isEmpty(String str){
+        if(TextUtils.isEmpty(str)){
+            return "";
+        }else{
+            return str;
+        }
+    }
+
     /**
      * 服务器维护弹窗
      * @param context

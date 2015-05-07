@@ -83,6 +83,8 @@ public class Constants {
     public static final int WHAT_WITHDRAW = 2015042817;//取钱页面进入判断识别码
     public static final int WHAT_UPDATE_BANK = 2015042823;//完善银行卡信息
     public static final int WHAT_BRANCH = 2015042843;//获取城市分行
+    public static final int WHAT_BANK_LIST_CASE = 10011;//修改登录密码Handler的what判断值
+    public static final int WHAT_BANKCARD_UNBIND = 2014121515;//注销银行卡数据返回handler判断值
     public static final int WHAT_VERSION_UPDATE = 20150000;//版本更新
     /**88888888888888888888888888888888888888**/
     public static final String URL_WALLET_SLOGAN = "https://d5ds88.cgtz.com/version/notice/wallet";//草根钱包介绍
@@ -120,6 +122,8 @@ public class Constants {
     public static final String URL_DO_WITHDRAW = "ewallet/RedeemDo";//取钱接口
     public static final String URL_UPDATE_BANK = "Bankcard/update";//银行卡信息完善接口
     public static final String URL_BRANCH = "api/getBranch";//获取分行信息
+    public static final String URL_BANK_LIST = "Bankcard/index";//获取绑定银行卡列表
+    public static final String URL_BANKCARD_UNBIND = "bankcard/Unbind";//注销银行卡接口
 
 
     /**

@@ -177,7 +177,7 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
             } else if(status.equals("1")) {
 //                Utils.makeToast(Withdraw_money.this, json.optString("msg"));
                 /**提现请求成功， 跳转提现成功页面*/
-                startActivity(new Intent(Withdraw_money.this, InProgressActivity.class).putExtra("isSaveAt",false));
+                startActivity(new Intent(Withdraw_money.this, InProgressActivity.class).putExtra("isSaveAt",false).putExtra("redeemTip",json.optString("redeemTip")));
                 finish();
             }
         }

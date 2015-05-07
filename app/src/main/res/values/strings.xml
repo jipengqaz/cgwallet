@@ -128,5 +128,7 @@
     <string name="text_first_setlock_msg">设置手势密码更安全</string>
     <string name="text_first_setlock_btnleft">以后再说</string>
     <string name="text_first_setlock_btnright">立即设置</string>
+    <string name="bank_not_logout_msg">为了您的资金安全，请联系客服修改银行卡\n客服电话：</string>
+    <string name="bank_not_logout_msg_ok">确认注销银行卡吗?</string>
 
 </resources>

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/Service/Provinces_download_Service.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/BankCardListActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/ChangeLoginPwdActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/Change_password_Activity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/cgtz/com/cgwallet/activity/E_wallet_record_activity.java" charset="UTF-8" />
@@ -79,6 +80,7 @@
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/button_bg_green_normal.9.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/loading_bg2.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/more_item_bg.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_bankcard_list.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_bind_bank_card.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_choose_bank_card.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_e_record.xml" charset="GBK" />
@@ -89,6 +91,7 @@
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_firstlogin_setlock.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_screen_slide_page.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/item_binding_bankcard.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/itme_e_wallet_1.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/layout_server_maintain.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/layout_tradepwd.xml" charset="GBK" />
