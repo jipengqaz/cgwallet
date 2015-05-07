@@ -51,7 +51,8 @@ public class InProgressActivity extends BaseActivity {
         }else{
             progressText.setText("取钱处理中...");
             lookSaveRecord.setText("查看取钱记录");
-            progresBanner.setText("资金将在1—2个工作日内到达您银行卡");
+            String redeemTip = getIntent().getStringExtra("redeemTip");
+            progresBanner.setText(redeemTip!=null?redeemTip:"资金将在1—2个工作日内到达您银行卡");
         }
     }
 
