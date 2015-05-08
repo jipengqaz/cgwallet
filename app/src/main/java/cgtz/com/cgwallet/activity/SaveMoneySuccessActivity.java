@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -71,8 +70,10 @@ public class SaveMoneySuccessActivity extends BaseActivity {
         goToWallet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SaveMoneySuccessActivity.this,MainActivity.class)
-                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                MainActivity on = (MainActivity)MApplication.getActivityByName(MainActivity.class.getName());
+                on.ValueforActivity(Constants.WHAT_IS_MY);
+                startActivity(new Intent(SaveMoneySuccessActivity.this, MainActivity.class)
+                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 );
                 finish();
             }
