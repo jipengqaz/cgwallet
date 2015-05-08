@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.Utils;
 
 /**
@@ -75,6 +76,8 @@ public class InProgressActivity extends BaseActivity {
         goToWallet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MainActivity on = (MainActivity)MApplication.getActivityByName(MainActivity.class.getName());
+                on.ValueforActivity(Constants.WHAT_IS_MY);
                 startActivity(new Intent(InProgressActivity.this,MainActivity.class)
                                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 );

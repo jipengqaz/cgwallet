@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -39,6 +38,7 @@ public class GestureVerifyActivity extends Activity implements android.view.View
     public static final String PARAM_PHONE_NUMBER = "PARAM_PHONE_NUMBER";
     /** 意图 */
     public static final String PARAM_INTENT_CODE = "PARAM_INTENT_CODE";
+    private int isnum = 0;
     private RelativeLayout mTopLayout;
     private TextView mTextTitle;
     private TextView mTextCancel;
@@ -111,6 +111,13 @@ public class GestureVerifyActivity extends Activity implements android.view.View
                         // 左右移动动画
                         Animation shakeAnimation = AnimationUtils.loadAnimation(GestureVerifyActivity.this, R.anim.shake);
                         mTextTip.startAnimation(shakeAnimation);
+                        isnum++;
+                        if(isnum == 4){
+                            startActivity(new Intent(GestureVerifyActivity.this,LoginActivity.class));
+                            Constants.GESTURES_PASSWORD = false;//用于判断是否需要跳的这页面
+                            Utils.loginExit(GestureVerifyActivity.this);
+                            finish();
+                        }
                     }
                 });
         // 设置手势解锁显示到哪个布局里面
@@ -128,8 +135,7 @@ public class GestureVerifyActivity extends Activity implements android.view.View
     long waitTime = 2000;
     long touchTime = 0;
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
+    public void onBackPressed() {
             long currentTime = System.currentTimeMillis();
             if ((currentTime - touchTime) >= waitTime) {
                 Toast.makeText(this, "再按一次退出应用", Toast.LENGTH_SHORT).show();
@@ -138,8 +144,6 @@ public class GestureVerifyActivity extends Activity implements android.view.View
                 MApplication.finishAllActivitys();
                 finish();
             }
-        }
-        return true;
     }
 
     @Override
