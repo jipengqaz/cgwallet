@@ -73,8 +73,9 @@
         android:id="@+id/gesture_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_below="@id/gesture_tip_layout" >
     </FrameLayout>
 

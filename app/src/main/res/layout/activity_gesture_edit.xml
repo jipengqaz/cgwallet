@@ -65,8 +65,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/gesture_tip_layout"
         android:layout_gravity="center_horizontal"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="20dip" >
     </FrameLayout>
 
