@@ -5,6 +5,9 @@ import android.app.Application;
 
 import java.util.ArrayList;
 
+import cgtz.com.cgwallet.utility.Constants;
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by Administrator on 2015/4/22.
  */
@@ -21,6 +24,8 @@ public class MApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        JPushInterface.setDebugMode(Constants.IS_TEST);//true 设置开启日志，发布时请关闭日志(false)
+        JPushInterface.init(this);// 初始化 JPush
     }
 
     public static String getImiId() {

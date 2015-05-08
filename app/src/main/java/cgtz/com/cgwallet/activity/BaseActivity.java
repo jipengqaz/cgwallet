@@ -11,11 +11,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.umeng.analytics.MobclickAgent;
 
-import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.Utils;
@@ -141,12 +139,12 @@ public class BaseActivity extends ActionBarActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        if(Utils.getLockPassword(this, Utils.getUserPhone(this))!=""&& Constants.GESTURES_PASSWORD && Utils.getUserId() != ""){
+        if(Utils.getUserId() != "" && Utils.getLockPassword(this, Utils.getUserPhone(this))!=""&& Constants.GESTURES_PASSWORD  ){
             Intent intent  = new Intent();
             intent.setClass(this,GestureVerifyActivity.class);
             startActivity(intent);
         }else{
-            Toast.makeText(this, "未设置手势密码", Toast.LENGTH_SHORT);
+//            Toast.makeText(this, "未设置手势密码", Toast.LENGTH_SHORT);
         }
     }
 }

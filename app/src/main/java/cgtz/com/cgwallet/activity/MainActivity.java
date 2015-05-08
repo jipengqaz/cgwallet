@@ -12,6 +12,7 @@ import android.os.Message;
 import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -574,17 +575,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             }
         });
     }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        JPushInterface.onPause(this);
-        MobclickAgent.onPause(this);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 
     @Override
     public void startProcessBar() {
@@ -718,5 +708,40 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e(TAG,Utils.getUserId()+"    "+Constants.GESTURES_PASSWORD +"    "+Utils.getLockPassword(this, Utils.getUserPhone(this)));
+        if(Utils.getUserId() != "" && Utils.getLockPassword(this, Utils.getUserPhone(this))!=""&& Constants.GESTURES_PASSWORD  ){//用于判断是否进入手势输入页面
+            Intent intent  = new Intent();
+            intent.setClass(this,GestureVerifyActivity.class);
+            startActivity(intent);
+        }else{
+//            Toast.makeText(this, "未设置手势密码", Toast.LENGTH_SHORT);
+        }
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Constants.GESTURES_PASSWORD =true;
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+        MobclickAgent.onPause(this);
+        Constants.GESTURES_PASSWORD =false;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Constants.GESTURES_PASSWORD =false;
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
 }
