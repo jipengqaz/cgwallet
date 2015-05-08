@@ -174,16 +174,12 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
                 int code = jsonBean.getCode();
                 String errorMsg = jsonBean.getError_msg();
                 JSONObject json = jsonBean.getJsonObject();
-                if(code == Constants.DATA_EVENT){
-                    hideProcessBar();
-                    Utils.makeToast(SafeCenterActivity.this,Constants.ERROR_MSG_CODE+code);
+                if(!Utils.filtrateCode(SafeCenterActivity.this,jsonBean)){
                     return;
                 }
                 switch (what){
                     case Constants.WHAT_ACCOUNT_INFO://获取个人信息及安全中心内容
                         LogUtils.i(TAG,"获取个人信息及安全中心内容: "+jsonBean.getJsonString());
-                        boolean flag = Utils.filtrateCode(SafeCenterActivity.this, jsonBean);
-                        if(flag){
                             if(code == -1) {//未实名认证，未绑卡
                                 nameLayout.setText(getResources().getString(R.string.no_anthen));
                                 bankLayout.setText(getResources().getString(R.string.no_binding));
@@ -265,10 +261,6 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
                                 is_pay_passwrod.setText("已设置");
                             }
                             hideProcessBar();
-                        }else{
-                            Utils.makeToast(SafeCenterActivity.this,errorMsg);
-                            hideProcessBar();
-                        }
                         break;
                 }
             }catch (Exception e){
