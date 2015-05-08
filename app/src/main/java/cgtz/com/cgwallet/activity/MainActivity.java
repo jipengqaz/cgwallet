@@ -12,8 +12,8 @@ import android.os.Message;
 import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -92,6 +92,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private TextView cgWalletText;
     private TextView myWalletText;
     private SlidingMenu mMenu;
+    private int Value = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -541,6 +542,30 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         Utils.saveisLockPassWord(this,Utils.getUserPhone(this),2);
         setPassWord();
     }
+        if(Value != 0){
+            switch (Value){
+                case Constants.WHAT_IS_MY://显示我的钱包
+                    if(!Utils.isLogined()){
+                        startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                    }else{
+                        currIndex = 2;
+                        getSupportFragmentManager().beginTransaction()
+                                .hide(fragments[0])
+                                .hide(fragments[1])
+                                .show(fragments[1]).commit();
+                        lineToRight();
+                        myWalletFragment.setData(true);
+                    }
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+            }
+            Value = 0;
+        }
     JPushInterface.onResume(this);
     MobclickAgent.onResume(this);
 }
@@ -664,6 +689,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         super.onSaveInstanceState(outState, outPersistentState);
     }
 
+
+
     class LineAnimTask extends AsyncTask<Integer, Integer, Integer> {
 
         @Override
@@ -711,7 +738,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     protected void onStart() {
         super.onStart();
-        Log.e(TAG,Utils.getUserId()+"    "+Constants.GESTURES_PASSWORD +"    "+Utils.getLockPassword(this, Utils.getUserPhone(this)));
+//        LogUtils.e(TAG,Utils.getUserId()+"     "+ Utils.getLockPassword(this, Utils.getUserPhone(this))+"      "+Constants.GESTURES_PASSWORD );
         if(Utils.getUserId() != "" && Utils.getLockPassword(this, Utils.getUserPhone(this))!=""&& Constants.GESTURES_PASSWORD  ){//用于判断是否进入手势输入页面
             Intent intent  = new Intent();
             intent.setClass(this,GestureVerifyActivity.class);
@@ -737,11 +764,33 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Constants.GESTURES_PASSWORD =false;
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return super.onTouchEvent(event);
+    }
+
+    public void ValueforActivity(int event) {
+        Value = event;
+    }
+
+    long waitTime = 2000;
+    long touchTime = 0;
+    @Override
+    public void onBackPressed() {
+        long currentTime = System.currentTimeMillis();
+        if ((currentTime - touchTime) >= waitTime) {
+            Toast.makeText(this, "再按一次退出应用", Toast.LENGTH_SHORT).show();
+            touchTime = currentTime;
+        } else {
+            MApplication.finishAllActivitys();
+            finish();
+        }
     }
 }

@@ -86,6 +86,7 @@ public class Constants {
     public static final int WHAT_BANK_LIST_CASE = 10011;//修改登录密码Handler的what判断值
     public static final int WHAT_BANKCARD_UNBIND = 2014121515;//注销银行卡数据返回handler判断值
     public static final int WHAT_VERSION_UPDATE = 20150000;//版本更新
+    public static final int WHAT_IS_MY = 1;//用于用户存钱 或取钱  返回主页面  好跳到我的钱包
     /**88888888888888888888888888888888888888**/
     public static final String URL_WALLET_SLOGAN = "https://d5ds88.cgtz.com/version/notice/wallet";//草根钱包介绍
     public static final String URL_SERVER_MAINTAIN = "android/Maintain";//服务器是否维护的判断接口
