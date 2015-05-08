@@ -433,6 +433,37 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         bottomLineSelected.setLayoutParams(params);
     }
 
+    public void clearFocus(){
+        LogUtils.i(TAG,"mainactivity clearFocus");
+        if(layoutCgWallet != null){
+            layoutCgWallet.setEnabled(false);
+        }
+        if(layoutMyWallet != null){
+            layoutMyWallet.setEnabled(false);
+        }
+        if(cgWalletFragment != null){
+            cgWalletFragment.clearFocus();
+        }
+        if(myWalletFragment != null){
+            myWalletFragment.clearFocus();
+        }
+    }
+
+    public void requetFocus(){
+        if(layoutCgWallet != null){
+            layoutCgWallet.setEnabled(true);
+        }
+        if(layoutMyWallet != null){
+            layoutMyWallet.setEnabled(true);
+        }
+        if(cgWalletFragment != null){
+            cgWalletFragment.requetFocus();
+        }
+        if(myWalletFragment != null){
+            myWalletFragment.requetFocus();
+        }
+    }
+
     private void setViewLinstener(){
         tvLogin.setOnClickListener(this);
         menuSafeCenter.setOnClickListener(this);

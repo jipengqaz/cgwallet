@@ -64,15 +64,59 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
     private boolean goLogin = false;//判断是否去登录的标志
     private LinearLayout today_earnings;//今日收益
     private SwipeRefreshLayout mSwipeLayout;//下拉刷新控件
+    private View layoutView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         screenWidth = getResources().getDisplayMetrics().widthPixels;
         presenter = new SplashPresenter(this);
-        View layoutView = inflater.inflate(R.layout.layout_my_wallet,container,false);
+        layoutView = inflater.inflate(R.layout.layout_my_wallet,container,false);
         initViews(layoutView);
         setWidgetAttrs();
         setListener();
         return layoutView;
+    }
+
+
+    public void clearFocus(){
+        if(layoutAuther != null){
+            layoutAuther.setEnabled(false);
+        }
+        if(layoutBank != null){
+            layoutBank.setEnabled(false);
+        }
+        if(layoutDraw != null){
+            layoutDraw.setEnabled(false);
+        }
+        if(layoutSave != null){
+            layoutSave.setEnabled(false);
+        }
+        if(layoutDrawRecord != null){
+            layoutDrawRecord.setEnabled(false);
+        }
+        if(layoutSaveRecord != null){
+            layoutSaveRecord.setEnabled(false);
+        }
+    }
+
+    public void requetFocus(){
+        if(layoutAuther != null){
+            layoutAuther.setEnabled(true);
+        }
+        if(layoutBank != null){
+            layoutBank.setEnabled(true);
+        }
+        if(layoutDraw != null){
+            layoutDraw.setEnabled(true);
+        }
+        if(layoutSave != null){
+            layoutSave.setEnabled(true);
+        }
+        if(layoutDrawRecord != null){
+            layoutDrawRecord.setEnabled(true);
+        }
+        if(layoutSaveRecord != null){
+            layoutSaveRecord.setEnabled(true);
+        }
     }
 
     /**

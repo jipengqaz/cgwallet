@@ -53,15 +53,47 @@ public class CgWalletFragment extends BaseFragment implements ISplashView,View.O
     private TextView linkName3;//第三个特色文案
     private String link_name;//获取的特色文案
     private String link_url;//获取的特色路径
+    private View layoutView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LogUtils.e(TAG, "onCreateView");
         presenter = new SplashPresenter(this);
-        View layoutView = inflater.inflate(R.layout.layout_cg_wallet, container, false);
+        layoutView = inflater.inflate(R.layout.layout_cg_wallet, container, false);
         initViews(layoutView);
         setListener();
         return layoutView;
+    }
+
+    public void clearFocus(){
+        LogUtils.i(TAG,"clearFocus");
+        if(drawLayout != null){
+            drawLayout.setEnabled(false);
+        }
+        if(saveLayout != null){
+            saveLayout.setEnabled(false);
+        }
+        if(linkLayout1 != null){
+            linkLayout1.setEnabled(false);
+        }
+        if(linkLayout3 != null){
+            linkLayout3.setEnabled(false);
+        }
+    }
+
+    public void requetFocus(){
+        if(drawLayout != null){
+            drawLayout.setEnabled(true);
+        }
+        if(saveLayout != null){
+            saveLayout.setEnabled(true);
+        }
+        if(linkLayout1 != null){
+            linkLayout1.setEnabled(true);
+        }
+        if(linkLayout3 != null){
+            linkLayout3.setEnabled(true);
+        }
     }
 
     /**

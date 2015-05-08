@@ -15,6 +15,7 @@ import com.nineoldandroids.view.ViewHelper;
 
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.activity.LoginActivity;
+import cgtz.com.cgwallet.activity.MainActivity;
 import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.ScreenUtils;
 import cgtz.com.cgwallet.utils.Utils;
@@ -52,7 +53,7 @@ public class SlidingMenu extends HorizontalScrollView{
 	private static final int NEED_TO_LOGIN = 3;//去登录
 	private boolean isShowLeftMenu = false;
 	private boolean isShowRightMenu = false;
-	private Activity bindActivity;//绑定的Activity
+	private MainActivity bindActivity;//绑定的Activity
 	private int rightSlidingMenu;//右边菜单显示时，向左滑动的距离
 
 	public SlidingMenu(Context context, AttributeSet attrs)
@@ -140,24 +141,28 @@ public class SlidingMenu extends HorizontalScrollView{
 						isShowLeftMenu = true;
 						isShowRightMenu = false;
 						this.smoothScrollTo(0,0);
+						focusToggle(false);
 						break;
 					case SHOW_RIGHT_MENU:
 						//显示右边菜单
 						isShowLeftMenu = false;
 						isShowRightMenu = true;
-						this.smoothScrollTo(rightSlidingMenu,0);
+						this.smoothScrollTo(rightSlidingMenu, 0);
+						focusToggle(false);
 						break;
 					case HIDE_LEFT_MENU:
 						//隐藏左边菜单
 						isShowLeftMenu = false;
 						isShowRightMenu = false;
-						this.smoothScrollTo(mMenuWidth,0);
+						this.smoothScrollTo(mMenuWidth, 0);
+						focusToggle(true);
 						break;
 					case HIDE_RIGHT_MENU:
 						//隐藏右边菜单
 						isShowRightMenu = false;
 						isShowLeftMenu = false;
-						this.smoothScrollTo(mMenuWidth,0);
+						this.smoothScrollTo(mMenuWidth, 0);
+						focusToggle(true);
 						break;
 					case NEED_TO_LOGIN:
 						//去登录
@@ -172,7 +177,7 @@ public class SlidingMenu extends HorizontalScrollView{
 		return super.onTouchEvent(ev);
 	}
 
-	public void setBindActivity(Activity activity){
+	public void setBindActivity(MainActivity activity){
 		bindActivity = activity;
 	}
 
@@ -203,29 +208,41 @@ public class SlidingMenu extends HorizontalScrollView{
 	}
 
 	/**
+	 * 改变view焦点
+	 * @param flag
+	 */
+	private void focusToggle(boolean flag){
+		if(flag){
+			// 有焦点
+			bindActivity.requetFocus();
+		}else{
+			// 无焦点
+			bindActivity.clearFocus();
+		}
+	}
+
+	/**
 	 * 打开左边菜单
 	 */
 	public void showLeftMenu(){
+		LogUtils.i(TAG, "showLeftMenu");
 		if(isShowLeftMenu){
 			return;
 		}
-		this.smoothScrollTo(0,0);
+		this.smoothScrollTo(0, 0);
 		isShowLeftMenu = true;
-		mContent.setEnabled(false);
-		mContent.setFocusable(false);
-		mContent.setFocusableInTouchMode(false);
+		focusToggle(false);
 	}
 
 	/**
 	 * 隐藏左边菜单
 	 */
 	public void hideLeftmenu(){
+		LogUtils.i(TAG,"hideLeftmenu");
 		if(isShowLeftMenu){
 			this.smoothScrollTo(mMenuWidth,0);
 			isShowLeftMenu = false;
-			mContent.setEnabled(true);
-			mContent.setFocusable(true);
-			mContent.setFocusableInTouchMode(true);
+			focusToggle(true);
 		}
 	}
 
@@ -261,6 +278,7 @@ public class SlidingMenu extends HorizontalScrollView{
 		}
 		this.smoothScrollTo(rightSlidingMenu,0);
 		isShowRightMenu = true;
+		focusToggle(false);
 	}
 
 	/**
@@ -270,9 +288,9 @@ public class SlidingMenu extends HorizontalScrollView{
 		if(isShowRightMenu){
 			this.smoothScrollTo(mMenuWidth,0);
 			isShowRightMenu = false;
+			focusToggle(true);
 		}
 	}
-
 
 	@Override
 	protected void onScrollChanged(int x, int y, int oldx, int oldy){
