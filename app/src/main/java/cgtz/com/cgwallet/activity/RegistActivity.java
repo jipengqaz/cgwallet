@@ -129,7 +129,10 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
                     empty_phone.setVisibility(View.GONE);
                 }
 
-                if (editable.toString().trim().length() == 11 && CODE_TIME == 60) {
+                if (editable.toString().trim().length() == 11 ) {
+                    mHandler.removeMessages(GET_CODE_TIME);
+                    getSecurityCode.setText(getResources().getString(R.string.hint_regist_get_security_code));
+                    CODE_TIME = 60;
                     getSecurityCode.setEnabled(true);
                     getSecurityCode.setBackgroundResource(R.color.main_bg);
                 } else {
