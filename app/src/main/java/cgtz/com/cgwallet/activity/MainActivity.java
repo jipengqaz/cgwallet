@@ -246,12 +246,13 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                             // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
                             mController.postShare(MainActivity.this, SHARE_MEDIA.QQ, mShareListener);
                         }else{
-                            Utils.makeToast(MainActivity.this,"您为安装QQ,请安装后分享！");
+                            Utils.makeToast(MainActivity.this,"您未安装该应用,请安装后分享！");
                         }
                         break;
                     case R.id.qzone:
                         //判断是否有安装
                         aa = mController.getConfig().getSsoHandler(HandlerRequestCode.QZONE_REQUEST_CODE).isClientInstalled();
+
                         if(aa){
                         QZoneShareContent qzone = new QZoneShareContent();
                         //设置分享文字
@@ -266,7 +267,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
                         mController.postShare(MainActivity.this, SHARE_MEDIA.QZONE, mShareListener);
                         }else{
-                            Utils.makeToast(MainActivity.this,"您未安装,请安装后分享！");
+                            Utils.makeToast(MainActivity.this,"您未安装该应用,请安装后分享！");
                         }
                         break;
                     case R.id.sms:
@@ -295,7 +296,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
                         mController.postShare(MainActivity.this, SHARE_MEDIA.WEIXIN, mShareListener);
                         }else{
-                            Utils.makeToast(MainActivity.this,"您未安装,请安装后分享！");
+                            Utils.makeToast(MainActivity.this,"您未安装该应用,请安装后分享！");
                         }
                         break;
                     case R.id.wxcircle://朋友圈
@@ -313,18 +314,19 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
                         mController.postShare(MainActivity.this, SHARE_MEDIA.WEIXIN_CIRCLE, mShareListener);
                         }else{
-                            Utils.makeToast(MainActivity.this,"您未安装,请安装后分享！");
+                            Utils.makeToast(MainActivity.this,"您未安装该应用,请安装后分享！");
                         }
                         break;
                     case R.id.sina://新浪
-                        //设置新浪SSO handler
-                        mController.getConfig().setSsoHandler(new SinaSsoHandler());
-                        // 设置分享内容
-                        mController.setShareContent(content);
-                        //设置分享图片，参数2为本地图片的资源引用
-                        mController.setShareMedia(image);
-                        // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
-                        mController.postShare(MainActivity.this, SHARE_MEDIA.SINA, mShareListener);
+                        //判断是否有安装
+                            //设置新浪SSO handler
+                            mController.getConfig().setSsoHandler(new SinaSsoHandler());
+                            // 设置分享内容
+                            mController.setShareContent(content);
+                            //设置分享图片，参数2为本地图片的资源引用
+                            mController.setShareMedia(image);
+                            // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
+                            mController.postShare(MainActivity.this, SHARE_MEDIA.SINA, mShareListener);
                         break;
                     case R.id.rules://分享规则
                         startActivity(new Intent(MainActivity.this, WebViewActivity.class)
