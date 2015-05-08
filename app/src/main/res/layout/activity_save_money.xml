@@ -1,0 +1,182 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/box"
+    android:background="@color/bg_center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    >
+    <LinearLayout
+        android:background="@color/bg_center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/save_money_my_assets"
+            android:layout_marginTop="30dp"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_edit">
+            <View
+                android:background="@color/bg_line"
+                android:layout_alignParentTop="true"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+            <TextView
+                android:layout_centerVertical="true"
+                android:text="草根账户余额"
+                android:layout_marginLeft="@dimen/save_moeny_marign_left"
+                android:textSize="@dimen/save_moeny_main_text"
+                android:textColor="@color/money_text_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/save_money_assets"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/height_edit_2"
+                android:textSize="@dimen/save_moeny_main_text"
+                android:textColor="@color/money_asset_text"
+                android:text="1255"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/rmb"
+                android:layout_marginRight="@dimen/save_moeny_marign_left"
+                android:textSize="@dimen/save_moeny_main_text"
+                android:textColor="@color/money_text_hint"
+                />
+            <View
+                android:background="@color/bg_line"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/save_money_transfer_hint"
+            android:layout_marginLeft="@dimen/save_moeny_marign_left"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/icon_money_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/save_money_assets_use"
+                android:layout_marginLeft="5dp"
+                android:textSize="@dimen/save_moeny_hint_text"
+                android:textColor="@color/money_tv_hint_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/binding_tip"
+            android:layout_marginLeft="@dimen/save_moeny_marign_left"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/save_moeny_hint_text"
+            android:textColor="@color/money_tv_hint_text"
+            />
+            <View
+                android:layout_marginTop="10dp"
+                android:background="@color/bg_line"
+                android:layout_alignParentTop="true"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+            <LinearLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_edit"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                >
+            <TextView
+                android:id="@+id/save_money_transfer_figure_hint"
+                android:layout_centerVertical="true"
+                android:text="存钱余额"
+                android:layout_marginLeft="@dimen/save_moeny_marign_left"
+                android:textSize="@dimen/save_moeny_main_text"
+                android:textColor="@color/money_text_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/et_save_figure"
+                android:numeric="integer"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/save_moeny_main_text"
+                android:textColor="@color/money_asset_text"
+                android:hint="建议转入整数金额"
+                android:textColorHint="@color/money_text_edit"
+                android:maxLength="10"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:id="@+id/delete_edit"
+                android:src="@mipmap/icon_delete_edit"
+                android:layout_marginRight="@dimen/save_moeny_marign_left"
+                android:layout_alignParentRight="true"
+                android:visibility="gone"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            </LinearLayout>
+            <View
+                android:background="@color/bg_line"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+        <LinearLayout
+            android:layout_marginLeft="@dimen/save_moeny_marign_left"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="开始计算收益时间:"
+                android:textSize="@dimen/save_moeny_hint_text"
+                android:textColor="@color/money_tv_hint_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/income_time_hint"
+                android:textSize="@dimen/save_moeny_hint_text"
+                android:textColor="@color/money_tv_hint_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/cofirm_save"
+            android:enabled="false"
+            android:text="@string/save_money_button_text"
+            android:textSize="@dimen/button_text_size"
+            android:textColor="@color/button_text_not_enabled"
+            android:layout_margin="@dimen/save_moeny_marign_left"
+            android:background="@drawable/bg_button_no_enabled"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height" />
+
+
+    </LinearLayout>
+    <include layout="@layout/layout_banner_black"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

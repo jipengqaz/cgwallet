@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:background="@drawable/bg_dialog_tradepwd"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_marginLeft="@dimen/investment_backcard_marginleft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/invester_password"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+        <EditText
+            android:id="@+id/trade_password"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:padding="5dp"
+            android:textColorHint="@color/invest_start_text1"
+            android:textColor="@color/invest_start_text1"
+            android:hint="@string/invester_password_hint"
+            android:numeric="integer"
+            android:password="true"
+            android:maxLength="6"
+            android:textSize="16sp"/>
+    </LinearLayout>
+</LinearLayout>

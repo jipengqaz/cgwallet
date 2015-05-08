@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    >
+    <ImageView
+        android:id="@+id/no_transfer_project"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:padding="100dp"
+        android:src="@mipmap/no_data_image"
+        android:layout_gravity="center_vertical"
+        />
+    <!--android:src="@drawable/no_transfer_project"-->
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:paddingBottom="4dp">
+
+        <TextView
+            android:id="@+id/end_line"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:visibility="gone" />
+
+        <!-- 提示 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:id="@+id/foot_tips"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            >
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="1dp"
+                android:background="@color/tip_line"
+                android:id="@+id/line_left"
+                android:visibility="gone"
+                android:layout_marginRight="1dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/click_to_see_more"
+                android:textSize="13sp"
+                android:textColor="@color/tip_line"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:id="@+id/foot_tipsTextView" />
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="1dp"
+                android:background="@color/tip_line"
+                android:id="@+id/line_right"
+                android:visibility="gone"
+                android:layout_marginLeft="1dp" />
+        </LinearLayout>
+        <!-- 进度条 -->
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/progressBarStyleSmall"
+            android:id="@+id/foot_progressBar"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@id/foot_tips"
+            android:layout_marginRight="5dp"
+            android:visibility="gone"
+            android:layout_marginTop="4dp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_go_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dp"
+        android:textSize="14sp"
+        android:textColor="@color/main_blue"
+        android:text="去提交"
+        android:visibility="gone" />
+</LinearLayout>

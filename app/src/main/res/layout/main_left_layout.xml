@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#454787"
-    android:orientation="vertical"
+    android:background="#00000000"
     android:layout_width="250dp"
     android:layout_height="match_parent">
     <LinearLayout
@@ -9,104 +8,179 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
-            android:layout_margin="10dp"
-            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
+                android:id="@+id/image_Login"
+                android:src="@mipmap/icon_no_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:layout_marginTop="12dp"
                 android:id="@+id/tv_goToLogin"
-                android:text="登录"
-                android:padding="5dp"
-                android:gravity="center_vertical"
+                android:text="@string/text_please_login"
+                android:background="@mipmap/icon_login_btn"
+                android:gravity="center"
                 android:textSize="@dimen/left_layout_text_size"
                 android:textColor="@color/left_layout_text_color"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:visibility="gone"
+                android:layout_marginTop="12dp"
+                android:id="@+id/tv_show_login_mobile"
+                android:gravity="center"
+                android:textSize="@dimen/left_layout_text_size"
+                android:textColor="@color/left_layout_text_color"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <LinearLayout
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center_vertical"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
-                android:layout_margin="10dp"
+                android:id="@+id/left_menu_safe_center"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="@dimen/left_layout_item_height">
                 <ImageView
+                    android:src="@mipmap/icon_safe_center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-                <TextView
-                    android:text="安全中心"
-                    android:textSize="@dimen/left_layout_text_size"
-                    android:textColor="@color/left_layout_text_color"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                <RelativeLayout
+                    android:layout_marginLeft="@dimen/left_layout_icon_text_distance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="安全中心"
+                        android:textSize="@dimen/left_layout_text_size"
+                        android:textColor="@color/left_layout_text_color"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:layout_alignParentRight="true"
+                        android:src="@mipmap/icon_toleft_arraw"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
             </LinearLayout>
             <LinearLayout
-                android:layout_margin="10dp"
+                android:id="@+id/left_menu_help_center"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="@dimen/left_layout_item_height">
                 <ImageView
+                    android:src="@mipmap/icon_help"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-                <TextView
-                    android:text="帮助中心"
-                    android:textSize="@dimen/left_layout_text_size"
-                    android:textColor="@color/left_layout_text_color"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                <RelativeLayout
+                    android:layout_marginLeft="@dimen/left_layout_icon_text_distance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="帮助中心"
+                        android:textSize="@dimen/left_layout_text_size"
+                        android:textColor="@color/left_layout_text_color"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:layout_alignParentRight="true"
+                        android:src="@mipmap/icon_toleft_arraw"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
             </LinearLayout>
             <LinearLayout
-                android:layout_margin="10dp"
+                android:id="@+id/left_menu_more"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="@dimen/left_layout_item_height">
                 <ImageView
+                    android:src="@mipmap/icon_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-                <TextView
-                    android:text="更多"
-                    android:textSize="@dimen/left_layout_text_size"
-                    android:textColor="@color/left_layout_text_color"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                <RelativeLayout
+                    android:layout_marginLeft="@dimen/left_layout_icon_text_distance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="更多"
+                        android:textSize="@dimen/left_layout_text_size"
+                        android:textColor="@color/left_layout_text_color"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:layout_alignParentRight="true"
+                        android:src="@mipmap/icon_toleft_arraw"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
             </LinearLayout>
             <LinearLayout
-                android:layout_margin="10dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="@dimen/left_layout_item_height">
                 <ImageView
+                    android:src="@mipmap/icon_version"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-                <TextView
-                    android:text="版本"
-                    android:textSize="@dimen/left_layout_text_size"
-                    android:textColor="@color/left_layout_text_color"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:layout_marginLeft="30dp"
-                    android:text="v1.0"
-                    android:textSize="@dimen/left_layout_text_size"
-                    android:textColor="@color/left_layout_text_color"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                <RelativeLayout
+                    android:layout_marginLeft="@dimen/left_layout_icon_text_distance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/aaaaaaa"
+                        android:text="版本"
+                        android:textSize="@dimen/left_layout_text_size"
+                        android:textColor="@color/left_layout_text_color"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/version"
+                        android:gravity="right|bottom"
+                        android:text="v1.0"
+                        android:textSize="@dimen/text_size_10sp"
+                        android:textColor="@color/left_layout_text_color"
+                        android:layout_alignBottom="@id/aaaaaaa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/left_menu_login_out"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="@dimen/left_layout_icon_text_distance"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/left_layout_item_height">
+        <ImageView
+            android:src="@mipmap/icon_loginout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:text="退出登录"
+            android:textSize="@dimen/left_menu_loginout_text"
+            android:textColor="@color/left_menu_loginout_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </RelativeLayout>

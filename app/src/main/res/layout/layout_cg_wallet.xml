@@ -1,74 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_cg_wallet"
+    android:background="@mipmap/bg_main"
     android:orientation="vertical"
-    android:background="@color/main_bg"
     android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
-        android:background="@color/bg_left_layout_rate_color"
-        android:gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_marginTop="22dp"
+            android:background="@mipmap/bg_year_rate"
+            android:layout_width="208dp"
+            android:layout_height="208dp">
+            <LinearLayout
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:src="@mipmap/icon_year_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginLeft="7dp"
+                        android:text="年化收益"
+                        android:gravity="center"
+                        android:textColor="@color/center_layout_normal_text"
+                        android:textSize="@dimen/center_year_rate_text_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/cg_wallet_rate_integer"
+                        android:textSize="@dimen/main_center_rate_text_size1"
+                        android:textColor="@color/center_layout_normal_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/cg_wallet_rate_decimal"
+                        android:textSize="@dimen/main_center_rate_text_size2"
+                        android:textColor="@color/center_layout_normal_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="%"
+                        android:textSize="@dimen/main_center_rate_text_size3"
+                        android:textColor="@color/center_layout_normal_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+        <include layout="@layout/layout_banner"
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
+        android:weightSum="1"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
-            android:layout_marginTop="20dp"
             android:gravity="center"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:text="年化收益率"
-                android:textSize="@dimen/text_size_16sp"
-                android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            android:layout_height="@dimen/transfer_weight_height">
+            <LinearLayout
+                android:id="@+id/layout_draw"
+                android:background="@mipmap/bg_save_money"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:src="@mipmap/icon_draw_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_marginLeft="@dimen/save_money_icon_text_distance"
+                    android:text="@string/transfer_output"
+                    android:gravity="center"
+                    android:textColor="@color/center_layout_normal_text"
+                    android:textSize="@dimen/save_or_draw_money_text_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout_save"
+                android:layout_marginLeft="17dp"
+                android:background="@mipmap/bg_draw_money"
+                android:layout_weight="1"
+                android:layout_gravity="right"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <TextView
+                    android:text="@string/transfer_input"
+                    android:gravity="center"
+                    android:textColor="@color/center_layout_normal_text"
+                    android:textSize="@dimen/save_or_draw_money_text_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:layout_marginLeft="@dimen/save_money_icon_text_distance"
+                    android:src="@mipmap/icon_save_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
         </LinearLayout>
-        <TextView
-            android:id="@+id/main_center_rate"
-            android:layout_marginTop="20dp"
-            android:text="7.00%"
-            android:textSize="@dimen/main_center_rate_text_size"
-            android:textColor="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:layout_marginBottom="30dp"
-            android:id="@+id/main_center_earnings"
-            android:layout_marginTop="20dp"
-            android:text="@string/cg_wallet_earnings"
-            android:textSize="@dimen/text_size_16sp"
-            android:textColor="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <LinearLayout
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/layout_monitoring_platform_height">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="@string/monitoring_platform"
-            android:textSize="@dimen/monitoring_platform"
-            android:textColor="@color/monitoring_platform"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <LinearLayout
-        android:background="@color/bg_center_layout_introduce"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
         <LinearLayout
+            android:gravity="center"
+            android:layout_marginTop="30dp"
+            android:weightSum="1"
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/cg_wallet_link1"
+                android:layout_weight="0.2"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@mipmap/icon_one_yuan_start_invest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/cg_wallet_link_name1"
+                    android:text="@string/wallet_basic_info1"
+                    android:layout_marginTop="@dimen/wallet_basic_info_drawpadding"
+                    android:gravity="center"
+                    android:textColor="@color/center_layout_normal_text"
+                    android:textSize="@dimen/wallet_advantage_hint_text_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/cg_wallet_link2"
+                android:layout_weight="0.2"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@mipmap/icon_five_guarantee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/cg_wallet_link_name2"
+                    android:text="@string/wallet_basic_info2"
+                    android:layout_marginTop="@dimen/wallet_basic_info_drawpadding"
+                    android:gravity="center"
+                    android:textColor="@color/center_layout_normal_text"
+                    android:textSize="@dimen/wallet_advantage_hint_text_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/cg_wallet_link3"
+                android:layout_weight="0.2"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@mipmap/icon_flexible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/cg_wallet_link_name3"
+                    android:text="@string/wallet_basic_info3"
+                    android:layout_marginTop="@dimen/wallet_basic_info_drawpadding"
+                    android:gravity="center"
+                    android:textColor="@color/center_layout_normal_text"
+                    android:textSize="@dimen/wallet_advantage_hint_text_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

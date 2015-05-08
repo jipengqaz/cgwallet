@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_banner"
+    android:drawableLeft="@mipmap/icon_bank"
+    android:drawablePadding="10dp"
+    android:gravity="center_vertical"
+    android:text="@string/banner_text"
+    android:textSize="@dimen/text_bank_hint"
+    android:textColor="@color/white"
+    android:layout_width="0dp"
+    android:layout_height="0dp"/>

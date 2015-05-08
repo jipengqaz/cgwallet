@@ -6,18 +6,22 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import cgtz.com.cgwallet.utility.Constants;
+import cgtz.com.cgwallet.utils.LogUtils;
 
 /**
- * 解析数据对象���ݱ������
+ * 解析数据对象
  * Created by Administrator on 2015/4/11.
  */
 public class JsonBean {
+    private static final String TAG = "JsonBean";
     private int code;//数据类型判断值ֵ
     private String error_msg;//错误信息
     private String jsonString;//数据json内容
+    private JSONObject jsonObject;
 
     public JsonBean(){}
     public JsonBean(String str){
+        LogUtils.i(TAG, "数据：" + str);
         if(TextUtils.isEmpty(str)){
             code = Constants.NO_DATA;//网络不稳定或者服务器没有返回数据
             error_msg = Constants.NO_DATA_MSG;
@@ -29,6 +33,7 @@ public class JsonBean {
                 //正常获取到服务器返回的内容
                 try {
                     JSONObject obj = new JSONObject(str);
+                    jsonObject = obj;
                     String action = obj.optString("action");
                     int state = obj.optInt("success");
                     if (action.equals("login")) {
@@ -46,9 +51,14 @@ public class JsonBean {
                             code = Constants.OPERATION_FAIL;
                             error_msg = obj.optString("msg");
                             jsonString = str;
-                        } else {
+                        } else if(state == 1){
                             //访问服务器操作成功
                             code = Constants.OPERATION_SUCCESS;
+                            error_msg = obj.optString("msg");
+                            jsonString = str;
+                        }else{
+                            //访问服务器操作其它判断
+                            code = state;
                             error_msg = obj.optString("msg");
                             jsonString = str;
                         }
@@ -59,6 +69,10 @@ public class JsonBean {
                 }
             }
         }
+    }
+
+    public JSONObject getJsonObject() {
+        return jsonObject;
     }
 
     public int getCode() {

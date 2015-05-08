@@ -1,0 +1,83 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/box"
+    android:background="@color/bg_regist"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/bg_regist_first_box"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_margin="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_regist_edit"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+                <EditText
+                    android:id="@+id/et_regist_pwd"
+                    android:layout_weight="1"
+                    android:digits="@string/pwd_digits"
+                    android:password="true"
+                    android:maxLength="20"
+                    android:hint="@string/hint_regist_edit_pwd"
+                    android:textSize="@dimen/hint_regist_mobile"
+                    android:textColor="@color/hint_regist_edit"
+                    android:textColorHint="@color/hint_regist_edit"
+                    android:drawableLeft="@mipmap/icon_regist_pwd"
+                    android:drawablePadding="10dp"
+                    android:padding="10dp"
+                    android:maxLines="1"
+                    android:background="@drawable/bg_regist_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:id="@+id/iv_show_pwd"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@mipmap/icon_regist_no_show_pwd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <EditText
+                android:layout_marginTop="10dp"
+                android:text="@string/hint_regist_pwd_introduce"
+                android:textSize="@dimen/hint_regist_mobile"
+                android:textColor="@color/hint_regist_pwd_introduce"
+                android:enabled="false"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btn_regist"
+                android:enabled="false"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_16sp"
+                android:background="@drawable/bg_button_no_enabled"
+                android:text="@string/text_regist_finish"
+                android:layout_width="match_parent"
+                android:layout_height="42dp" />
+            <TextView
+                android:id="@+id/tv_regist_protocol"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/hint_regist_protocol"
+                android:textSize="@dimen/hint_regist_mobile"
+                android:textColor="@color/bg_regist_protocol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

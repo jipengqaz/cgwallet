@@ -1,8 +1,17 @@
-<cgtz.com.cgwallet.view.BidirSlidingLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/custom_sliding_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <include layout="@layout/main_left_layout"/>
-    <include layout="@layout/main_right_layout"/>
-    <include layout="@layout/main_center_layout"/>
-</cgtz.com.cgwallet.view.BidirSlidingLayout>
+<cgtz.com.cgwallet.widget.SlidingMenu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:zhy="http://schemas.android.com/apk/ryan.com"
+    android:id="@+id/id_menu"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:background="@mipmap/bg_menu"
+    android:scrollbars="none"
+    zhy:rightPadding="300dp" >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal" >
+        <include layout="@layout/main_left_layout" />
+        <include layout="@layout/main_center_layout"/>
+        <include layout="@layout/main_right_layout"/>
+    </LinearLayout>
+</cgtz.com.cgwallet.widget.SlidingMenu>

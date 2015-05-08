@@ -1,18 +1,23 @@
 package cgtz.com.cgwallet.activity;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
+
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.utility.Constants;
+import cgtz.com.cgwallet.utils.Utils;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * �自定义主activity
@@ -23,6 +28,7 @@ public class BaseActivity extends ActionBarActivity {
     private ActionBar actionBar;
     private LinearLayout backLayout;
     private TextView titleView;
+    private TextView rightText;
     private ImageView iconBack;
 
     @Override
@@ -42,6 +48,7 @@ public class BaseActivity extends ActionBarActivity {
         View actionBarWeek = RelativeLayout.inflate(this, R.layout.layout_action_bar, null);
         backLayout = (LinearLayout) actionBarWeek.findViewById(R.id.action_bar_back_layout);
         titleView = (TextView) actionBarWeek.findViewById(R.id.action_bar_title);
+        rightText = (TextView) actionBarWeek.findViewById(R.id.action_bar_right_text);
         iconBack = (ImageView) actionBarWeek.findViewById(R.id.action_bar_left_icon);
         backLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +57,10 @@ public class BaseActivity extends ActionBarActivity {
             }
         });
         actionBar.setCustomView(actionBarWeek);
+    }
+
+    public void setBackListener(View.OnClickListener listener){
+        backLayout.setOnClickListener(listener);
     }
 
     public void setTitle(String msg){
@@ -66,6 +77,20 @@ public class BaseActivity extends ActionBarActivity {
         }
     }
 
+    public void setRightText(String text){
+        if(!TextUtils.isEmpty(text)){
+            rightText.setText(text);
+            rightText.setVisibility(View.VISIBLE);
+        }else{
+            rightText.setVisibility(View.GONE);
+        }
+    }
+
+    public void setRightListener(View.OnClickListener listener){
+        if(rightText != null)
+            rightText.setOnClickListener(listener);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
@@ -76,5 +101,50 @@ public class BaseActivity extends ActionBarActivity {
                 break;
         }
         return false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+        MobclickAgent.onPause(this);
+        Constants.GESTURES_PASSWORD =false;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Constants.GESTURES_PASSWORD =true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Constants.GESTURES_PASSWORD =false;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if(Utils.getUserId() != "" && Utils.getLockPassword(this, Utils.getUserPhone(this))!=""&& Constants.GESTURES_PASSWORD  ){
+            Intent intent  = new Intent();
+            intent.setClass(this,GestureVerifyActivity.class);
+            startActivity(intent);
+        }else{
+//            Toast.makeText(this, "未设置手势密码", Toast.LENGTH_SHORT);
+        }
     }
 }

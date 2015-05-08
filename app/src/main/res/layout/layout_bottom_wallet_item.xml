@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/layout_bottom"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_bottom_transfer_height">
+        <LinearLayout
+            android:id="@+id/layout_cg_wallet"
+            android:layout_weight="1"
+            android:background="@mipmap/bg_wallet_selected"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/cg_wallet_icon"
+                android:src="@mipmap/icon_wallet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/cg_wallet_text"
+                android:layout_marginLeft="2dp"
+                android:gravity="center"
+                android:text="@string/main_top_cg_wallet"
+                android:textColor="@color/layout_bottom_transfer_left_text"
+                android:textSize="@dimen/layout_bottom_transfer_text_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="@color/bg_bine"
+            />
+        <LinearLayout
+            android:id="@+id/layout_my_wallet"
+            android:layout_weight="1"
+            android:background="@mipmap/bg_wallet_normal"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/my_wallet_icon"
+                android:src="@mipmap/icon_my_wallet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/my_wallet_text"
+                android:layout_marginLeft="2dp"
+                android:gravity="center"
+                android:text="@string/main_top_my_wallet"
+                android:textColor="@color/layout_bottom_transfer_right_text"
+                android:textSize="@dimen/layout_bottom_transfer_text_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
