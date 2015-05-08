@@ -132,7 +132,7 @@ public class Earnings_record extends BaseActivity implements ISplashView {
                             Map map = new HashMap();
                             map.put("receivableInterest",json.optDouble("receivableInterest"));//待转出利息
                             map.put("receivedInterest",json.optDouble("receivedInterest"));//可提利息
-                            map.put("totalCount",json.optDouble("totalCount"));//累计收益
+                            map.put("totalCount",json.optDouble("interestTotal"));//累计收益
                             inves.add(map);
                         }
                         if (list != null) {
