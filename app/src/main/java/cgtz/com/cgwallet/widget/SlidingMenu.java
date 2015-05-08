@@ -313,22 +313,22 @@ public class SlidingMenu extends HorizontalScrollView{
 	@Override
 	protected void onScrollChanged(int x, int y, int oldx, int oldy){
 		super.onScrollChanged(x, y, oldx, oldy);
-		if(isShowLeftMenu && !isShowRightMenu){
-			LogUtils.e(TAG,"左边菜单操作,x: "+x);
-			float scale = x * 1.0f / mMenuWidth;
-			float leftScale = 1 - 0.3f * scale;
-			float rightScale = 0.8f + scale * 0.2f;
-			LogUtils.i("Sliding","左: leftScale: "+leftScale+" rightScale: "+rightScale+" open: "+isOpen);
-			ViewHelper.setScaleX(mMenu, leftScale);
-			ViewHelper.setScaleY(mMenu, leftScale);
-			ViewHelper.setAlpha(mMenu, 0.6f + 0.4f * (1 - scale));
-			ViewHelper.setTranslationX(mMenu, mMenuWidth * scale * 0.6f);
-
-			ViewHelper.setPivotX(mContent, 0);
-			ViewHelper.setPivotY(mContent, mContent.getHeight() / 2);
-			ViewHelper.setScaleX(mContent, rightScale);
-			ViewHelper.setScaleY(mContent, rightScale);
-		}
+//		if(isShowLeftMenu && !isShowRightMenu){
+//			LogUtils.e(TAG,"左边菜单操作,x: "+x);
+//			float scale = x * 1.0f / mMenuWidth;
+//			float leftScale = 1 - 0.3f * scale;
+//			float rightScale = 0.8f + scale * 0.2f;
+//			LogUtils.i("Sliding","左: leftScale: "+leftScale+" rightScale: "+rightScale+" open: "+isOpen);
+//			ViewHelper.setScaleX(mMenu, leftScale);
+//			ViewHelper.setScaleY(mMenu, leftScale);
+//			ViewHelper.setAlpha(mMenu, 0.6f + 0.4f * (1 - scale));
+//			ViewHelper.setTranslationX(mMenu, mMenuWidth * scale * 0.6f);
+//
+//			ViewHelper.setPivotX(mContent, 0);
+//			ViewHelper.setPivotY(mContent, mContent.getHeight() / 2);
+//			ViewHelper.setScaleX(mContent, rightScale);
+//			ViewHelper.setScaleY(mContent, rightScale);
+//		}
 //		else if(isShowRightMenu && !isShowLeftMenu){
 //			LogUtils.e(TAG,"右边菜单操作");
 //			float scale = x * 1.0f / (mMenuWidth*2);
