@@ -224,6 +224,7 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
                                                 + Utils.getBankStart(json.optString("starCardNumber"))));
                                 nameIcon.setVisibility(View.GONE);
                                 bankIcon.setVisibility(View.VISIBLE);
+                                isbinding = true;
                                 needNameLayout.setEnabled(false);
                             }else if(code == -6){//未真正实名 已绑卡 支持但未绑定连连
                                 nameLayout.setText(Html.fromHtml(
@@ -234,6 +235,7 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
                                                 + Utils.getBankStart(json.optString("starCardNumber"))));
                                 nameIcon.setVisibility(View.VISIBLE);
                                 bankIcon.setVisibility(View.VISIBLE);
+                                isbinding = true;
                             }else if(code == -7){//已真正实名认证 已绑定连连 不可修改
                                 nameLayout.setText(Html.fromHtml(
                                         Utils.getUserNameForStart(json.optString("starName")) + "<br/>"
@@ -255,6 +257,7 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
                                                 + Utils.getBankStart(json.optString("starCardNumber"))));
                                 nameIcon.setVisibility(View.GONE);
                                 bankIcon.setVisibility(View.VISIBLE);
+                                isbinding = true;
                                 needNameLayout.setEnabled(false);
                             }
                             is_pay_passwrod.setVisibility(View.VISIBLE);
