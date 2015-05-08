@@ -105,6 +105,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         initViews();
         setFragment();
         setViewLinstener();
+        mMenu.setBindActivity(this);
         showLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

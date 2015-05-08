@@ -1,6 +1,8 @@
 package cgtz.com.cgwallet.widget;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -12,8 +14,10 @@ import android.widget.LinearLayout;
 import com.nineoldandroids.view.ViewHelper;
 
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.activity.LoginActivity;
 import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.ScreenUtils;
+import cgtz.com.cgwallet.utils.Utils;
 
 
 public class SlidingMenu extends HorizontalScrollView{
@@ -49,8 +53,10 @@ public class SlidingMenu extends HorizontalScrollView{
 	private static final int HIDE_LEFT_MENU = -2;//隐藏左边菜单
 	private static final int HIDE_RIGHT_MENU = 2;//隐藏右边菜单
 	private static final int NO_MENU_SHOW = 0;//不做任何操作
+	private static final int NEED_TO_LOGIN = 3;//去登录
 	private boolean isShowLeftMenu = false;
 	private boolean isShowRightMenu = false;
+	private Activity bindActivity;//绑定的Activity
 
 	public SlidingMenu(Context context, AttributeSet attrs)
 	{
@@ -163,6 +169,13 @@ public class SlidingMenu extends HorizontalScrollView{
 						isShowLeftMenu = false;
 						this.smoothScrollTo(mMenuWidth,0);
 						return true;
+					case NEED_TO_LOGIN:
+						//去登录
+						isShowRightMenu = false;
+						isShowLeftMenu = false;
+						this.smoothScrollTo(mMenuWidth,0);
+						bindActivity.startActivity(new Intent(bindActivity, LoginActivity.class));
+						break;
 				}
 //				if (scrollX > mHalfMenuWidth){
 //					isLeft = true;
@@ -178,9 +191,8 @@ public class SlidingMenu extends HorizontalScrollView{
 		return super.onTouchEvent(ev);
 	}
 
-	@Override
-	public void computeScroll() {
-		super.computeScroll();
+	public void setBindActivity(Activity activity){
+		bindActivity = activity;
 	}
 
 	/***
@@ -191,10 +203,14 @@ public class SlidingMenu extends HorizontalScrollView{
 		if(scrollX >= 0 && scrollX < mMenuWidth && !isShowLeftMenu && !isShowRightMenu){
 			//向右滑动，滑动距离大于菜单宽度，左右两边菜单都没有显示，允许显示左边菜单，
 			menuType = SHOW_LEFT_MENU;
-		}else if(mMenuWidth < scrollX && scrollX <= (mMenuWidth*2)
+		}else if(Utils.isLogined() && mMenuWidth < scrollX && scrollX <= (mMenuWidth*2)
 				&& !isShowLeftMenu && !isShowRightMenu){
 			//手指向左滑动，滑动距离大于菜单宽度，左右菜单都未显示，允许显示右边菜单
 			menuType = SHOW_RIGHT_MENU;
+		}else if(!Utils.isLogined() && mMenuWidth < scrollX && scrollX <= (mMenuWidth*2)
+				&& !isShowLeftMenu && !isShowRightMenu){
+			//手指向左滑动，滑动距离大于菜单宽度，左右菜单都未显示，允许显示右边菜单
+			menuType = NEED_TO_LOGIN;
 		}else if(scrollX >= 0 && isShowLeftMenu && !isShowRightMenu){
 			//手指向左滑动，滑动距离大于菜单宽度，左边菜单显示，右边菜单未显示，隐藏左边菜单
 			menuType = HIDE_LEFT_MENU;
