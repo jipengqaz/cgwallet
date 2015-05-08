@@ -17,6 +17,7 @@ import cgtz.com.cgwallet.utils.ScreenUtils;
 
 
 public class SlidingMenu extends HorizontalScrollView{
+	private static final String TAG = "SlidingMenu";
 	/**
 	 * 屏幕宽度
 	 */
@@ -41,6 +42,15 @@ public class SlidingMenu extends HorizontalScrollView{
 	private ViewGroup mMenu;
 	private ViewGroup mContent;
 	private ViewGroup mRightMenu;
+
+	private int menuType;//用来存储显示的是哪一个菜单页面  0，左边 1，右边
+	private static final int SHOW_LEFT_MENU = -1;//显示左边菜单
+	private static final int SHOW_RIGHT_MENU = 1;//显示右边菜单
+	private static final int HIDE_LEFT_MENU = -2;//隐藏左边菜单
+	private static final int HIDE_RIGHT_MENU = 2;//隐藏右边菜单
+	private static final int NO_MENU_SHOW = 0;//不做任何操作
+	private boolean isShowLeftMenu = false;
+	private boolean isShowRightMenu = false;
 
 	public SlidingMenu(Context context, AttributeSet attrs)
 	{
@@ -115,9 +125,9 @@ public class SlidingMenu extends HorizontalScrollView{
 			this.scrollTo(mMenuWidth, 0);
 			once = true;
 			showRightMenu = false;
+			menuType = NO_MENU_SHOW;
 		}
 	}
-
 	@Override
 	public boolean onTouchEvent(MotionEvent ev)
 	{
@@ -126,19 +136,92 @@ public class SlidingMenu extends HorizontalScrollView{
 			// Up时，进行判断，如果显示区域大于菜单宽度一半则完全显示，否则隐藏
 			case MotionEvent.ACTION_UP:
 				int scrollX = getScrollX();
-				if (scrollX > mHalfMenuWidth){
-					isLeft = true;
-					this.smoothScrollTo(mMenuWidth, 0);
-					isOpen = false;
-				} else{
-					isLeft = true;
-					this.smoothScrollTo(0, 0);
-					isOpen = true;
+				LogUtils.e(TAG,"scrollX: "+scrollX);
+				changeWhichMenu(scrollX);
+				switch (menuType){
+					case SHOW_LEFT_MENU:
+						//显示左边菜单
+						isShowLeftMenu = true;
+						isShowRightMenu = false;
+						this.smoothScrollTo(0,0);
+						return true;
+					case SHOW_RIGHT_MENU:
+						//显示右边菜单
+						isShowLeftMenu = false;
+						isShowRightMenu = true;
+						this.smoothScrollTo(mMenuWidth*2,0);
+						return true;
+					case HIDE_LEFT_MENU:
+						//隐藏左边菜单
+						isShowLeftMenu = false;
+						isShowRightMenu = false;
+						this.smoothScrollTo(mMenuWidth,0);
+						return true;
+					case HIDE_RIGHT_MENU:
+						//隐藏右边菜单
+						isShowRightMenu = false;
+						isShowLeftMenu = false;
+						this.smoothScrollTo(mMenuWidth,0);
+						return true;
 				}
+//				if (scrollX > mHalfMenuWidth){
+//					isLeft = true;
+//					this.smoothScrollTo(mMenuWidth, 0);
+//					isOpen = false;
+//				} else{
+//					isLeft = true;
+//					this.smoothScrollTo(0, 0);
+//					isOpen = true;
+//				}
 				return true;
 		}
 		return super.onTouchEvent(ev);
 	}
+
+	@Override
+	public void computeScroll() {
+		super.computeScroll();
+	}
+
+	/***
+	 * 根据滑动的方向和滑动的距离，判断是否显示左右菜单
+	 * @param scrollX
+	 */
+	private void changeWhichMenu(int scrollX){
+		if(scrollX >= 0 && scrollX < mMenuWidth && !isShowLeftMenu && !isShowRightMenu){
+			//向右滑动，滑动距离大于菜单宽度，左右两边菜单都没有显示，允许显示左边菜单，
+			menuType = SHOW_LEFT_MENU;
+		}else if(mMenuWidth < scrollX && scrollX <= (mMenuWidth*2)
+				&& !isShowLeftMenu && !isShowRightMenu){
+			//手指向左滑动，滑动距离大于菜单宽度，左右菜单都未显示，允许显示右边菜单
+			menuType = SHOW_RIGHT_MENU;
+		}else if(scrollX >= 0 && isShowLeftMenu && !isShowRightMenu){
+			//手指向左滑动，滑动距离大于菜单宽度，左边菜单显示，右边菜单未显示，隐藏左边菜单
+			menuType = HIDE_LEFT_MENU;
+		}else if(scrollX > 0 && !isShowLeftMenu && isShowRightMenu){
+			//手指向右滑动，滑动距离大于菜单宽度，左边菜单未显示，右边菜单显示，隐藏右边菜单
+			menuType = HIDE_RIGHT_MENU;
+		}
+	}
+
+	/**
+	 * 打开左边菜单
+	 */
+	public void showLeftMenu(){
+		if(isShowLeftMenu){
+			return;
+		}
+		this.smoothScrollTo(0,0);
+		isShowLeftMenu = true;
+	}
+
+	public void hideLeftmenu(){
+		if(isShowLeftMenu){
+			this.smoothScrollTo(mMenuWidth,0);
+			isShowLeftMenu = false;
+		}
+	}
+
 
 	/**
 	 * 打开菜单
@@ -166,23 +249,43 @@ public class SlidingMenu extends HorizontalScrollView{
 	/**
 	 * 切换菜单状态
 	 */
-	public void toggle()
-	{
-		if (isOpen)
-		{
-			closeMenu();
-		} else
-		{
-			openMenu();
+	public void leftToggle(){
+		if (isShowLeftMenu){
+			hideLeftmenu();
+		} else{
+			showLeftMenu();
 		}
 	}
 
-	public void showRightMenu(){
-		isLeft = false;
-		if(showRightMenu){
-			closeRightMenu();//关闭右侧菜单
+	/**
+	 * 右边菜单开关
+	 */
+	public void rightToggle(){
+		if(isShowRightMenu){
+			hideRightMenu();
 		}else{
-			openRightMenu();//打开右侧菜单
+			showRightMenu();
+		}
+	}
+
+	/**
+	 * 显示右边菜单
+	 */
+	public void showRightMenu(){
+		if(isShowRightMenu){
+			return;
+		}
+		this.smoothScrollTo(mMenuWidth*2,0);
+		isShowRightMenu = true;
+	}
+
+	/**
+	 * 隐藏右边菜单
+	 */
+	public void hideRightMenu(){
+		if(isShowRightMenu){
+			this.smoothScrollTo(mMenuWidth,0);
+			isShowRightMenu = false;
 		}
 	}
 
@@ -190,7 +293,7 @@ public class SlidingMenu extends HorizontalScrollView{
 	 * 关闭右侧菜单
 	 */
 	private void closeRightMenu(){
-		if (showRightMenu){
+		if (isShowRightMenu){
 			this.smoothScrollTo(mMenuWidth, 0);
 			showRightMenu = false;
 		}
@@ -210,7 +313,8 @@ public class SlidingMenu extends HorizontalScrollView{
 	@Override
 	protected void onScrollChanged(int x, int y, int oldx, int oldy){
 		super.onScrollChanged(x, y, oldx, oldy);
-		if(isLeft){
+		if(isShowLeftMenu && !isShowRightMenu){
+			LogUtils.e(TAG,"左边菜单操作,x: "+x);
 			float scale = x * 1.0f / mMenuWidth;
 			float leftScale = 1 - 0.3f * scale;
 			float rightScale = 0.8f + scale * 0.2f;
@@ -225,20 +329,51 @@ public class SlidingMenu extends HorizontalScrollView{
 			ViewHelper.setScaleX(mContent, rightScale);
 			ViewHelper.setScaleY(mContent, rightScale);
 		}
-		else{
-//			float scale = x * 1.0f / (mScreenWidth+mMenuWidth);
-//			float leftScale = 1 - 0.3f * scale;
-//			float rightScale = 0.8f + scale * 0.2f;
+//		else if(isShowRightMenu && !isShowLeftMenu){
+//			LogUtils.e(TAG,"右边菜单操作");
+//			float scale = x * 1.0f / (mMenuWidth*2);
+//			float rightScale = 1 - 0.3f * scale;
+//			float leftScale = 0.8f + scale * 0.2f;
 //			LogUtils.i("Sliding","右：leftScale: "+leftScale+" rightScale: "+rightScale);
-//			ViewHelper.setScaleX(mContent, leftScale);
-//			ViewHelper.setScaleY(mContent, leftScale);
-//			ViewHelper.setAlpha(mContent, 0.6f + 0.4f * (1 - scale));
-//			ViewHelper.setTranslationX(mContent, mScreenWidth+mMenuWidth * scale * 0.6f);
-//
-//			ViewHelper.setPivotX(mRightMenu, 0);
-//			ViewHelper.setPivotY(mRightMenu, mRightMenu.getHeight() / 2);
 //			ViewHelper.setScaleX(mRightMenu, rightScale);
 //			ViewHelper.setScaleY(mRightMenu, rightScale);
-		}
+//			ViewHelper.setAlpha(mRightMenu, 0.6f + 0.4f * (1 - scale));
+//			ViewHelper.setTranslationX(mRightMenu, mMenuWidth * scale * 0.6f);
+//
+//			ViewHelper.setPivotX(mContent, 0);
+//			ViewHelper.setPivotY(mContent, mContent.getHeight() / 2);
+//			ViewHelper.setScaleX(mContent, leftScale);
+//			ViewHelper.setScaleY(mContent, leftScale);
+//		}
+//		if(isLeft){
+//			float scale = x * 1.0f / mMenuWidth;
+//			float leftScale = 1 - 0.3f * scale;
+//			float rightScale = 0.8f + scale * 0.2f;
+//			LogUtils.i("Sliding","左: leftScale: "+leftScale+" rightScale: "+rightScale+" open: "+isOpen);
+//			ViewHelper.setScaleX(mMenu, leftScale);
+//			ViewHelper.setScaleY(mMenu, leftScale);
+//			ViewHelper.setAlpha(mMenu, 0.6f + 0.4f * (1 - scale));
+//			ViewHelper.setTranslationX(mMenu, mMenuWidth * scale * 0.6f);
+//
+//			ViewHelper.setPivotX(mContent, 0);
+//			ViewHelper.setPivotY(mContent, mContent.getHeight() / 2);
+//			ViewHelper.setScaleX(mContent, rightScale);
+//			ViewHelper.setScaleY(mContent, rightScale);
+//		}
+//		else{
+//			float scale = x * 1.0f / (mMenuWidth+mScreenWidth);
+//			float rightScale = 1 - 0.3f * scale;
+//			float leftScale = 0.8f + scale * 0.2f;
+//			LogUtils.i("Sliding","右：leftScale: "+leftScale+" rightScale: "+rightScale);
+//			ViewHelper.setScaleX(mRightMenu, rightScale);
+//			ViewHelper.setScaleY(mRightMenu, rightScale);
+//			ViewHelper.setAlpha(mRightMenu, 0.6f + 0.4f * (1 - scale));
+//			ViewHelper.setTranslationX(mRightMenu, mMenuWidth * scale * 0.6f);
+//
+//			ViewHelper.setPivotX(mContent, 0);
+//			ViewHelper.setPivotY(mContent, mContent.getHeight() / 2);
+//			ViewHelper.setScaleX(mContent, leftScale);
+//			ViewHelper.setScaleY(mContent, leftScale);
+//		}
 	}
 }

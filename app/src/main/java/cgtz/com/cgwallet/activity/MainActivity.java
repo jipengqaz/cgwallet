@@ -107,14 +107,14 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         showLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mMenu.toggle();
+                mMenu.leftToggle();
             }
         });
         showRightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(Utils.isLogined()) {
-                    mMenu.showRightMenu();
+                    mMenu.rightToggle();
                     Get_share_content.getContent(handler);
                 }else{
                     startActivity(new Intent(MainActivity.this,LoginActivity.class));
