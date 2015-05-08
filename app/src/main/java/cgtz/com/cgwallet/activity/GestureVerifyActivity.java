@@ -96,7 +96,7 @@ public class GestureVerifyActivity extends Activity implements android.view.View
                     @Override
                     public void checkedSuccess() {
                         mGestureContentView.clearDrawlineState(0L);
-                        Toast.makeText(GestureVerifyActivity.this, "密码正确", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(GestureVerifyActivity.this, "密码正确", Toast.LENGTH_SHORT).show();
 
                         Constants.GESTURES_PASSWORD = false;//用于判断是否需要跳的这页面
                         GestureVerifyActivity.this.finish();
