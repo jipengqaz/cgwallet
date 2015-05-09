@@ -18,10 +18,9 @@ public class Get_data {
      * @param handler
      */
     public static void getStartUp(Handler handler){
-        Map<String, String> params = new HashMap<String, String>();
         CustomTask task = new CustomTask(handler, Constants.WHAT_STARTUP,
                 Constants.URL_STARTUP,
-                true,params,true);
+                false,null,true);
         task.execute();
     }
 
@@ -30,10 +29,9 @@ public class Get_data {
      * @param handler
      */
     public static void getKefuTip(Handler handler){
-        Map<String, String> params = new HashMap<String, String>();
         CustomTask task = new CustomTask(handler, Constants.WHAT_KE_FU,
                 Constants.URL_KEFUTIP,
-                true,params,true);
+                false,null,true);
         task.execute();
     }
 
@@ -42,10 +40,9 @@ public class Get_data {
      * @param handler
      */
     public static void getProvince(Handler handler){
-        Map<String, String> params = new HashMap<String, String>();
         CustomTask task = new CustomTask(handler, Constants.WHAT_PROVINCES,
                 Constants.URL_PROVINCES_CITIES_UPDATE,
-                true,params,true);
+                false,null,true);
         task.execute();
     }
 

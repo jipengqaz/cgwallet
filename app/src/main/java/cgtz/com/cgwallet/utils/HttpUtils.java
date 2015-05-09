@@ -253,11 +253,12 @@ public class HttpUtils {
      * encode 编码格式
      */
     public static StringBuffer getRequestData(Map<String, String> params,String encode) {
-        StringBuffer stringBuffer = new StringBuffer(); // 存储封装好的请求体信息
-        stringBuffer.append(Constants.service_date);//向服务器传递全局数据
-        stringBuffer.append("device_id="+MApplication.getJpushRegistid()+"&");//向服务器发送设备号
-        stringBuffer.append("channel="+ MApplication.getChannel()+"&");//向服务器发送渠道号
-        stringBuffer.append("device_serial_id="+MApplication.getImiId()+"&");//向服务器发送手机本身的设备号
+        StringBuffer stringBuffer = getConstansData(); // 存储封装好的请求体信息
+        stringBuffer.append("&");
+//        stringBuffer.append(Constants.service_date);//向服务器传递全局数据
+//        stringBuffer.append("device_id="+MApplication.getJpushRegistid()+"&");//向服务器发送设备号
+//        stringBuffer.append("channel=" + MApplication.getChannel() + "&");//向服务器发送渠道号
+//        stringBuffer.append("device_serial_id="+MApplication.getImiId()+"&");//向服务器发送手机本身的设备号
 //        stringBuffer.append(Constants.latitude+"="+CGApp.getApp().getLatitude()+"&");//向服务器发送经度
 //        stringBuffer.append(Constants.longitude+"="+CGApp.getApp().getLongitude()+"&");//向服务器发送纬度
         try {
@@ -275,6 +276,17 @@ public class HttpUtils {
         LogUtils.i("",stringBuffer.toString());
         return stringBuffer;
     }
+
+    public static StringBuffer getConstansData(){
+        StringBuffer stringBuffer = new StringBuffer(); // 存储封装好的请求体信息
+        stringBuffer.append(Constants.service_date);//向服务器传递全局数据
+        stringBuffer.append("device_id="+MApplication.getJpushRegistid()+"&");//向服务器发送设备号
+        stringBuffer.append("channel="+ MApplication.getChannel()+"&");//向服务器发送渠道号
+        stringBuffer.append("device_serial_id="+MApplication.getImiId()+"&");//向服务器发送手机本身的设备号
+        stringBuffer.deleteCharAt(stringBuffer.length()-1);
+        return stringBuffer;
+    }
+
 
     static class MyTrustManager implements X509TrustManager{
 
