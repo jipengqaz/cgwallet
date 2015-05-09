@@ -261,6 +261,7 @@
 
         <service android:name=".Service.Provinces_download_Service" />
         <service android:name=".Service.Image_download_Service" />
+        <service android:name=".Service.Code_download_Service"/>
 
         <activity
             android:name=".activity.SaveMoneyActivity"

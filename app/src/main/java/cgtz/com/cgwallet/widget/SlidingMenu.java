@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
-import com.nineoldandroids.view.ViewHelper;
-
+import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.activity.MainActivity;
 import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.ScreenUtils;
 
@@ -265,6 +265,7 @@ public class SlidingMenu extends HorizontalScrollView{
 			hideRightMenu();
 		}else{
 			showRightMenu();
+			((MainActivity)MApplication.getActivityByName(MainActivity.class.getName())).initShareData();//设置分享  显示数据
 		}
 	}
 

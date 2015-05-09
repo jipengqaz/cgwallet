@@ -78,6 +78,7 @@ public class Provinces_download_Service extends Service {
                     }
                     Intent intent = new Intent();
                     intent.setAction("provinces");
+                    intent.putExtra("judge_Service", 2);
                     intent.putExtra("provinceCityUpdate",provinceCityUpdate);
                     sendBroadcast(intent);
                 } catch (JSONException e) {
