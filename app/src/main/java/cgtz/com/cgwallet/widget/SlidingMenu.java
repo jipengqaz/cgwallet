@@ -51,6 +51,7 @@ public class SlidingMenu extends HorizontalScrollView{
 	private static final int HIDE_LEFT_MENU = -2;//隐藏左边菜单
 	private static final int HIDE_RIGHT_MENU = 2;//隐藏右边菜单
 	private static final int NEED_TO_LOGIN = 3;//去登录
+	private static final int NO_MENU_TOGGLE = 0;//没有菜单
 	private boolean isShowLeftMenu = false;
 	private boolean isShowRightMenu = false;
 	private MainActivity bindActivity;//绑定的Activity
@@ -106,7 +107,7 @@ public class SlidingMenu extends HorizontalScrollView{
 //			mMenuWidth = mScreenWidth - mMenuRightPadding;
 			mMenuWidth = mScreenWidth -(mScreenWidth/2-100) ;
 			rightSlidingMenu = mMenuWidth*2;
-			mHalfMenuWidth = 5;
+			mHalfMenuWidth = 10;
 			mMenu.getLayoutParams().width = mMenuWidth;
 			mContent.getLayoutParams().width = mScreenWidth;
 			mRightMenu.getLayoutParams().width = mMenuWidth;
@@ -122,7 +123,7 @@ public class SlidingMenu extends HorizontalScrollView{
 			// 将菜单隐藏
 			this.scrollTo(mMenuWidth, 0);
 			once = true;
-			menuType = HIDE_LEFT_MENU;
+			menuType = NO_MENU_TOGGLE;
 		}
 	}
 
@@ -130,11 +131,14 @@ public class SlidingMenu extends HorizontalScrollView{
 	public boolean onTouchEvent(MotionEvent ev){
 		int action = ev.getAction();
 		switch (action){
+			case MotionEvent.ACTION_MOVE:
+				LogUtils.e(TAG,"scrollX: "+getScrollX());
+				changeWhichMenu(getScrollX());
+				break;
 			case MotionEvent.ACTION_UP:
 				// Up时，进行判断，如果显示区域大于菜单宽度一半则完全显示，否则隐藏
 				int scrollX = getScrollX();
-				LogUtils.e(TAG,"scrollX: "+scrollX);
-				changeWhichMenu(scrollX);
+//				changeWhichMenu(scrollX);
 				switch (menuType){
 					case SHOW_LEFT_MENU:
 						//显示左边菜单
@@ -155,6 +159,7 @@ public class SlidingMenu extends HorizontalScrollView{
 						//隐藏左边菜单
 						isShowLeftMenu = false;
 						isShowRightMenu = false;
+						menuType = NO_MENU_TOGGLE;
 						this.smoothScrollTo(mMenuWidth, 0);
 						focusToggle(true);
 						break;
@@ -162,6 +167,7 @@ public class SlidingMenu extends HorizontalScrollView{
 						//隐藏右边菜单
 						isShowRightMenu = false;
 						isShowLeftMenu = false;
+						menuType = NO_MENU_TOGGLE;
 						this.smoothScrollTo(mMenuWidth, 0);
 						focusToggle(true);
 						break;
@@ -169,6 +175,7 @@ public class SlidingMenu extends HorizontalScrollView{
 						//去登录
 						isShowRightMenu = false;
 						isShowLeftMenu = false;
+						menuType = NO_MENU_TOGGLE;
 						this.smoothScrollTo(mMenuWidth,0);
 						bindActivity.startActivity(new Intent(bindActivity, LoginActivity.class));
 						break;
@@ -188,14 +195,14 @@ public class SlidingMenu extends HorizontalScrollView{
 	 */
 	private void changeWhichMenu(int scrollX){
 		LogUtils.e(TAG,"传递的scrollX: "+scrollX);
-		if(scrollX >= mHalfMenuWidth && scrollX <= mMenuWidth && !isShowLeftMenu && !isShowRightMenu){
+		if(scrollX >= 0 && scrollX <= mMenuWidth - mHalfMenuWidth && !isShowLeftMenu && !isShowRightMenu){
 			//向右滑动，滑动距离大于菜单宽度，左右两边菜单都没有显示，允许显示左边菜单，
 			menuType = SHOW_LEFT_MENU;
-		}else if(Utils.isLogined() && mHalfMenuWidth <= scrollX && scrollX <= rightSlidingMenu
+		}else if(Utils.isLogined() && mHalfMenuWidth+mMenuWidth <= scrollX && scrollX <= rightSlidingMenu
 				&& !isShowLeftMenu && !isShowRightMenu){
 			//手指向左滑动，滑动距离大于菜单宽度，左右菜单都未显示，允许显示右边菜单
 			menuType = SHOW_RIGHT_MENU;
-		}else if(!Utils.isLogined() && mMenuWidth < scrollX && scrollX <= rightSlidingMenu
+		}else if(!Utils.isLogined() && mHalfMenuWidth+mMenuWidth < scrollX && scrollX <= rightSlidingMenu
 				&& !isShowLeftMenu && !isShowRightMenu){
 			//向左滑动时，判断是否登录过，没有登录时，去登录
 			menuType = NEED_TO_LOGIN;
