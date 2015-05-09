@@ -22,6 +22,7 @@ import java.util.HashMap;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.Service.Code_download_Service;
 import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
@@ -339,6 +340,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
                             if(Utils.getisLockPassWord(LoginActivity.this,mobile)==0){//判断该账号是否是第一次登录该手机
                                 Utils.saveisLockPassWord(LoginActivity.this,mobile,1);
                             }
+                            startService(new Intent(LoginActivity.this, Code_download_Service.class));//开启获取分享数据的服务
                             hideProcessBar();
                             finish();
                         }

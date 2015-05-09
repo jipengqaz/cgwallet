@@ -15,6 +15,11 @@ public class Start_update_value {
     public final static String KEY_KEFU_UPDATE = "kefuUpdate";//客服
     public final static String KEY_CITY_UPDATE = "ProvinceCityUpdate";//支行信息
 
+    public final static String KEY_SHARE = "share";//分享信息
+    public final static String KEY_QR_CODE ="Qr_code";//二维码  信息
+
+
+
     /**
      * 返回所有的更新时间数据
      * @param context
@@ -27,6 +32,28 @@ public class Start_update_value {
         map.put(KEY_KEFU_UPDATE, preferences.getString(KEY_KEFU_UPDATE, ""));
         map.put(KEY_CITY_UPDATE, preferences.getString(KEY_CITY_UPDATE, ""));
         return map;
+    }
+
+    public static HashMap<String ,String > getShare(Context context){
+        SharedPreferences  preferences = context.getSharedPreferences(PREFS_FILE_NAME,Context.MODE_PRIVATE);
+        HashMap <String ,String > map = new HashMap<String ,String >();
+        map.put(KEY_SHARE, preferences.getString(Utils.getUserPhone(context)+KEY_SHARE, ""));
+        map.put(KEY_QR_CODE, preferences.getString(Utils.getUserPhone(context)+KEY_QR_CODE, ""));
+        return map;
+    }
+
+    /**
+     * 存储分享数据
+     * @param context
+     * @param share   分享文案
+     * @param Qr_code 二维码
+     */
+    public static void saveShare(Context context,String share,String  Qr_code){
+        SharedPreferences preferences = context.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(Utils.getUserPhone(context)+KEY_SHARE, share);
+        editor.putString(Utils.getUserPhone(context)+KEY_QR_CODE, Qr_code);
+        editor.commit();
     }
     /**
      * 存储启动图最后更新时间
