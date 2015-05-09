@@ -1,6 +1,5 @@
 package cgtz.com.cgwallet.widget;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -13,6 +12,7 @@ import android.widget.LinearLayout;
 
 import com.nineoldandroids.view.ViewHelper;
 
+import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.activity.LoginActivity;
 import cgtz.com.cgwallet.activity.MainActivity;
@@ -148,6 +148,7 @@ public class SlidingMenu extends HorizontalScrollView{
 						isShowLeftMenu = false;
 						isShowRightMenu = true;
 						this.smoothScrollTo(rightSlidingMenu, 0);
+						((MainActivity)MApplication.getActivityByName(MainActivity.class.getName())).initShareData();//设置分享数据
 						focusToggle(false);
 						break;
 					case HIDE_LEFT_MENU:
@@ -265,6 +266,7 @@ public class SlidingMenu extends HorizontalScrollView{
 		if(isShowRightMenu){
 			hideRightMenu();
 		}else{
+			((MainActivity)MApplication.getActivityByName(MainActivity.class.getName())).initShareData();//设置分享数据
 			showRightMenu();
 		}
 	}

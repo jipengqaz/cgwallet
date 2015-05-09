@@ -43,7 +43,6 @@ public class Code_download_Service extends Service{
                     }
                     break;
                 case 1:
-                    Start_update_value.saveShare(Code_download_Service.this, json + "", res);
                     Intent intent = new Intent();
                     intent.setAction("provinces");
                     intent.putExtra("judge_Service", 3);
@@ -65,6 +64,7 @@ public class Code_download_Service extends Service{
                 byte[] data = HttpUtils.getImage(qrcode);
                 LogUtils.e(TAG,data.length+"");
                 res = new String(data,"ISO8859-1");
+                Start_update_value.saveShare(Code_download_Service.this, json + "", res);
 //                if (data != null) {
 //                    bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);// bitmap
 //                } else {
