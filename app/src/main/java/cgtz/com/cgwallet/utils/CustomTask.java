@@ -40,8 +40,6 @@ public class CustomTask extends AsyncTask<String,Void,String> {
         this.encode = encode;
         if(flag){
             content = HttpUtils.getRequestData(maps,encode).toString();
-        }else{
-            this.url_ = this.url_ +"?"+HttpUtils.getConstansData();
         }
         LogUtils.e("CustomTask", "url: " + this.url_+" content: "+content);
     }/**
@@ -65,8 +63,6 @@ public class CustomTask extends AsyncTask<String,Void,String> {
         }
         if(flag){
             content = HttpUtils.getRequestData(maps,encode).toString();
-        }else{
-            this.url_ = this.url_ +"?"+HttpUtils.getConstansData();
         }
         LogUtils.e("CustomTask", "url: " + this.url_+" content: "+content);
     }
@@ -85,6 +81,7 @@ public class CustomTask extends AsyncTask<String,Void,String> {
         this.handler = handler;
         this.handler_what = handler_what;
         this.flag = isPost;
+        this.flag = true;
         if(is_ping) {
             this.url_ = (Constants.IS_TEST?Constants.OFFLINE_HTTP:Constants.ONLINE_HTTP) + url_;
         }else{
@@ -93,8 +90,6 @@ public class CustomTask extends AsyncTask<String,Void,String> {
         this.encode = encode;
         if(flag){
             content = HttpUtils.getRequestData(maps,encode).toString();
-        }else{
-            this.url_ = this.url_ +"?"+HttpUtils.getConstansData();
         }
         LogUtils.e("CustomTask", "url: " + this.url_+" content: "+content);
     }

@@ -20,7 +20,7 @@ public class Get_data {
     public static void getStartUp(Handler handler){
         CustomTask task = new CustomTask(handler, Constants.WHAT_STARTUP,
                 Constants.URL_STARTUP,
-                false,null,true);
+                true,null,true);
         task.execute();
     }
 
@@ -31,7 +31,7 @@ public class Get_data {
     public static void getKefuTip(Handler handler){
         CustomTask task = new CustomTask(handler, Constants.WHAT_KE_FU,
                 Constants.URL_KEFUTIP,
-                false,null,true);
+                true,null,true);
         task.execute();
     }
 
@@ -42,15 +42,14 @@ public class Get_data {
     public static void getProvince(Handler handler){
         CustomTask task = new CustomTask(handler, Constants.WHAT_PROVINCES,
                 Constants.URL_PROVINCES_CITIES_UPDATE,
-                false,null,true);
+                true,null,true);
         task.execute();
     }
 
     public static void getImage(Handler handler){
-        Map<String, String> params = new HashMap<String, String>();
         CustomTask task = new CustomTask(handler, 0,
                 Constants.URL_API_STARTIMAGE,
-                true,params,true);
+                true,null,true);
         task.execute();
     }
 }
