@@ -1,6 +1,8 @@
 package cgtz.com.cgwallet.utils;
 
 
+import android.text.TextUtils;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -27,12 +29,14 @@ import javax.net.ssl.X509TrustManager;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.utility.Constants;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * Http工具类
  * Created by Administrator on 2014/9/19.
  */
 public class HttpUtils {
+    private static final String TAG = "HttpUtils";
     private static int timeout = 30*1000;//连接超时时间
     private static int getTimeOut = 3 * 1000;//get请求超时时间
     /**
@@ -43,7 +47,7 @@ public class HttpUtils {
      * @return String
      */
     public static String HttpPost(String url,String content,String encoding){
-        LogUtils.e("HttpUtils", "content: "+content);
+        LogUtils.e(TAG, "content: "+content);
         HttpURLConnection conn = null;
         String str="";
         try{
@@ -278,12 +282,19 @@ public class HttpUtils {
     }
 
     public static StringBuffer getConstansData(){
+        LogUtils.e(TAG, "regist_id: " + JPushInterface.getRegistrationID(MApplication.getInstance()));
+        LogUtils.i(TAG, "device_id: " + MApplication.getJpushRegistid());
         StringBuffer stringBuffer = new StringBuffer(); // 存储封装好的请求体信息
         stringBuffer.append(Constants.service_date);//向服务器传递全局数据
+        if(TextUtils.isEmpty(MApplication.getJpushRegistid())){
+            MApplication.setJpushRegistid(JPushInterface.getRegistrationID(MApplication.getInstance()));
+        }
         stringBuffer.append("device_id="+MApplication.getJpushRegistid()+"&");//向服务器发送设备号
         stringBuffer.append("channel="+ MApplication.getChannel()+"&");//向服务器发送渠道号
-        stringBuffer.append("device_serial_id="+MApplication.getImiId()+"&");//向服务器发送手机本身的设备号
-        stringBuffer.deleteCharAt(stringBuffer.length()-1);
+        if(!TextUtils.isEmpty(MApplication.getImiId())){
+            stringBuffer.append("device_serial_id="+MApplication.getImiId()+"&");//向服务器发送手机本身的设备号
+        }
+        stringBuffer.deleteCharAt(stringBuffer.length() - 1);
         return stringBuffer;
     }
 

@@ -20,6 +20,7 @@ public class MApplication extends Application {
     public static String channeel;//渠道类别
     public static String jpushRegistid;//极光推送注册id
     public static String imiId;//手机设备号
+    public static MApplication instance;
 
     @Override
     public void onCreate() {
@@ -27,6 +28,14 @@ public class MApplication extends Application {
         JPushInterface.setDebugMode(Constants.IS_TEST);//true 设置开启日志，发布时请关闭日志(false)
         JPushInterface.init(this);// 初始化 JPush
     }
+
+    public static synchronized MApplication getInstance(){
+        if(instance == null){
+            instance = new MApplication();
+        }
+        return instance;
+    }
+
 
     public static String getImiId() {
         return imiId;
