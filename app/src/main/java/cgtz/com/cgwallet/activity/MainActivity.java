@@ -7,8 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -41,20 +39,20 @@ import com.umeng.socialize.weixin.controller.UMWXHandler;
 import com.umeng.socialize.weixin.media.CircleShareContent;
 import com.umeng.socialize.weixin.media.WeiXinShareContent;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
-import cgtz.com.cgwallet.bean.JsonBean;
-import cgtz.com.cgwallet.client.Get_share_content;
 import cgtz.com.cgwallet.fragment.CgWalletFragment;
 import cgtz.com.cgwallet.fragment.MyWalletFragment;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
-import cgtz.com.cgwallet.utils.HttpUtils;
 import cgtz.com.cgwallet.utils.LogUtils;
+import cgtz.com.cgwallet.utils.Start_update_value;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.ISplashView;
 import cgtz.com.cgwallet.widget.ProgressDialog;
@@ -118,9 +116,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             public void onClick(View v) {
                 if(Utils.isLogined()) {
                     mMenu.rightToggle();
-                    Get_share_content.getContent(handler);
                 }else{
-                    startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 }
             }
         });
@@ -130,53 +127,45 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private final UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share");
     private String content="",url="";//分享内容  和  分享链接
     private ImageView Qr_code;//二维码
-    private Handler handler = new Handler(){//获取分享内容的
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what){
-                case 0:
-                    JsonBean jsonBean = (JsonBean) msg.obj;
-                    int code = jsonBean.getCode();
-                    String errorMsg = jsonBean.getError_msg();
-                    JSONObject json = null;
-                    if(!Utils.filtrateCode(MainActivity.this,jsonBean)){
-                        return;
-                    }
-                    json = jsonBean.getJsonObject();
-                    if(json.optInt("success") == 1) {
-                        LogUtils.e(TAG, json + "");
-                        content = json.optString("content");
-                        url = json.optString("url");
-                        qrcode = json.optString("qrcode");
-                        new Thread(connectNet).start();
-                    }
-                    break;
-                case 1:
-                    if (bitmap != null) {
-                        Qr_code.setImageBitmap(bitmap);// 显示获取的二维码
-                    }
-                    break;
-            }
-        }
-    };
-    private boolean isShare = false;
+
     private Bitmap bitmap = null;
-    private String qrcode;
+    private String res;
+    /**
+     * 设置分享  显示数据
+     */
+    public void initShareData(){
+        HashMap<String,String> map = Start_update_value.getShare(this);
+        String date = map.get(Start_update_value.KEY_SHARE);
+        try {
+            JSONObject json = new JSONObject(date);
+            LogUtils.e(TAG,json+"");
+            content = json.optString("content");
+            url=json.optString("url");
+
+            res = map.get(Start_update_value.KEY_QR_CODE);
+            new Thread(connectNet).start();;
+//            byte[] qr_code = res.getBytes("UTF-8");
+//            bitmap = BitmapFactory.decodeByteArray(qr_code, 0, qr_code.length);
+//            Qr_code.setImageBitmap(bitmap);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
     //获取二维码的线程
     private Runnable connectNet = new Runnable(){
         @Override
         public void run() {
             //取得的是byte数组, 从byte数组生成bitmap
-            byte[] data = new byte[0];
             try {
-                data = HttpUtils.getImage(qrcode);
-                if (data != null) {
-                    bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);// bitmap
+                byte[] qr_code = res.getBytes("ISO8859-1");
+
+                if (qr_code != null) {
+                    bitmap = BitmapFactory.decodeByteArray(qr_code, 0, qr_code.length);
+                    Qr_code.setImageBitmap(bitmap);
                 } else {
 
                 }
-                handler.sendEmptyMessage(1);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -394,6 +383,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
      * 添加分享平台
      */
     private void configuration() {
+        mController.getConfig().closeToast();//禁止toast
         // 添加短信平台
         addSMS();
         // 添加微信平台

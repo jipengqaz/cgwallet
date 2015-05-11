@@ -851,7 +851,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                 params.put("password", MD5Util.md5(tradePwd));//支付密码
                 params.put("cap",useAccount);//余额支付数值
                 params.put("amount",saveMoney);//转入金额
-                params.put("order_from","1");//订单来源 1:android 2:ios
+                params.put("order_from","4");//订单来源 4:android 5:ios
                 params.put("card_no", "");//银行卡号
                 CustomTask task = new CustomTask(mHandler, Constants.WHAT_EWALLET_AFFIRMDO
                         ,Constants.URL_EWALLET_AFFIRMDO,
@@ -869,7 +869,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                 params.put("amount",saveMoney);//转入金额
                 params.put("payneeded",useBank);//第三方支付金额
                 params.put("pay_method",payType+"");//第三方通道类型 3:连连支付
-                params.put("order_from","1");//订单来源 1:android 2:ios
+                params.put("order_from","4");//订单来源 4:android 5:ios
                 params.put("bank_id",bankId);//银行id
                 params.put("card_no",bankCard);//银行卡号
                 CustomTask task = new CustomTask(mHandler, Constants.WHAT_EWALLET_AFFIRMREDIRECT

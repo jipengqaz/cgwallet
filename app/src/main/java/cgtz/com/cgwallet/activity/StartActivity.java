@@ -38,6 +38,7 @@ import java.util.TimerTask;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.Service.Code_download_Service;
 import cgtz.com.cgwallet.Service.Image_download_Service;
 import cgtz.com.cgwallet.Service.Provinces_download_Service;
 import cgtz.com.cgwallet.bean.JsonBean;
@@ -197,6 +198,7 @@ public class StartActivity extends Activity {
                                 String token = object.optString("token");
                                 Utils.saveUserId(userId);
                                 Utils.saveToken(token);
+                                startService(new Intent(StartActivity.this, Code_download_Service.class));//开启获取分享数据的服务
                             }
                             break;
                     }

@@ -239,10 +239,14 @@ public class E_all_records_fragment_1 extends BaseFragment implements ISplashVie
                         holder.money.setText(inves.getAmount() + "");
                         holder.money.setTextColor(getResources().getColor(R.color.save_or_draw_money_layout_text));
                     }
-                    if (inves.getProgress().equals("1")) {
-                        holder.state.setVisibility(View.VISIBLE);
-                    } else {
-                        holder.state.setVisibility(View.GONE);
+                    switch (inves.getProgress()){
+                        case "-1"://转出失败
+                            holder.state.setText("转出失败");
+                        case "1"://转出中
+                            holder.state.setVisibility(View.VISIBLE);
+                            break;
+                        default:
+                            holder.state.setVisibility(View.GONE);
                     }
                     break;
                 case 1:

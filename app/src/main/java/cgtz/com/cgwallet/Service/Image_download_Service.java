@@ -59,7 +59,7 @@ public class Image_download_Service extends Service {
                     }
                     Intent intent = new Intent();
                     intent.setAction("provinces");
-                    intent.putExtra("judge_Service", true);
+                    intent.putExtra("judge_Service", 1);
                     intent.putExtra("imageUpdate", imageUpdate);
                     sendBroadcast(intent);
                     break;
