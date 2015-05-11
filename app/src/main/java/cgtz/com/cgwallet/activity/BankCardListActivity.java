@@ -304,8 +304,8 @@ public class BankCardListActivity extends BaseActivity {
                             });
                             effectsDialog.setCanceledOnTouchOutside(false);
                             effectsDialog.setCancelable(false);
-                            effectsDialog.show();
                         }
+                        effectsDialog.show();
                     }
                 });
             }
