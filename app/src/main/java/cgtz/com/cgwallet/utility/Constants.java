@@ -20,7 +20,7 @@ public class Constants {
     public static final String OFFLINE_HTTP_28 = "http://115.29.245.28:42111/wallet/";//测试服务器路径
     public static final String OFFLINE_HTTP = IS_28?OFFLINE_HTTP_28:
                                     (IS_DEVELOP?OFFLINE_HTTP_DEVELOP:OFFLINE_HTTP_TEST);//测试服务器路径
-    public static final String ONLINE_HTTP = "";//线上服务器路径
+    public static final String ONLINE_HTTP = "https://wallet.cgtz.com";//线上服务器路径
     public static final String VERSION = version+(IS_TEST?
             (IS_28?"-28":"-dev")
             :"");//版本号
