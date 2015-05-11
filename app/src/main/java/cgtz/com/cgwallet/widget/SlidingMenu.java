@@ -331,7 +331,7 @@ public class SlidingMenu extends HorizontalScrollView{
 			ViewHelper.setScaleX(mContent, rightScale);
 			ViewHelper.setScaleY(mContent, rightScale);
 
-		}else if(menuType == SHOW_RIGHT_MENU || menuType == HIDE_RIGHT_MENU){
+		}else if(menuType == SHOW_RIGHT_MENU || menuType == HIDE_RIGHT_MENU || menuType == NEED_TO_LOGIN){
 			LogUtils.i(TAG,"右边菜单操作");
 			//向左滑动，显示右边菜单
 
