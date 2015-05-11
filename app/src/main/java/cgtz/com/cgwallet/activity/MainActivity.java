@@ -186,8 +186,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         public void onComplete(SHARE_MEDIA platform, int stCode,
                                SocializeEntity entity) {
             if (stCode == 200) {
-                Toast.makeText(MainActivity.this, "分享成功", Toast.LENGTH_SHORT)
-                        .show();
+//                Toast.makeText(MainActivity.this, "分享成功", Toast.LENGTH_SHORT)
+//                        .show();
             } else {
 //                Toast.makeText(MainActivity.this,
 //                        "分享失败 : error code : " + stCode, Toast.LENGTH_SHORT)

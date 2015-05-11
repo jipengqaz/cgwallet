@@ -13,7 +13,6 @@ import cgtz.com.cgwallet.client.Get_share_content;
 import cgtz.com.cgwallet.utils.HttpUtils;
 import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.Start_update_value;
-import cgtz.com.cgwallet.utils.Utils;
 
 /**
  * Created by Administrator on 2015/5/9 0009.
@@ -32,9 +31,6 @@ public class Code_download_Service extends Service{
                     JsonBean jsonBean = (JsonBean) msg.obj;
                     int code = jsonBean.getCode();
                     String errorMsg = jsonBean.getError_msg();
-                    if(!Utils.filtrateCode(Code_download_Service.this, jsonBean)){
-                        return;
-                    }
                     json = jsonBean.getJsonObject();
                     if(json.optInt("success") == 1) {
                         LogUtils.e(TAG,json+"");

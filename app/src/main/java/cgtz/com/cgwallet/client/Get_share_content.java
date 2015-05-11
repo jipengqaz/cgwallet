@@ -15,12 +15,14 @@ import cgtz.com.cgwallet.utils.Utils;
 public class Get_share_content {
 
     public static void getContent(Handler handler){
-        HashMap param=new HashMap();
-        param.put("user_id", Utils.getUserId());
-        param.put("token",Utils.getToken());
-        CustomTask task = new CustomTask(handler, 0,
-                Constants.URL_SHARE_TIP,
-                true,param,true);
-        task.execute();
+        if(Utils.getUserId() != ""){
+            HashMap param=new HashMap();
+            param.put("user_id", Utils.getUserId());
+            param.put("token",Utils.getToken());
+            CustomTask task = new CustomTask(handler, 0,
+                    Constants.URL_SHARE_TIP,
+                    true,param,true);
+            task.execute();
+        }
     }
 }
