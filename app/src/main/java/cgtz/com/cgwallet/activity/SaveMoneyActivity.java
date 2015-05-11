@@ -316,6 +316,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
             String bankNeedPay = df.format(Double.parseDouble(saveMoney) - Double.parseDouble(assets));
             avaliableBalance.setText(assets);//使用账户金额
             bankCardMoney.setText(bankNeedPay);//银行卡支付金额
+            bankCardLayout.setVisibility(View.VISIBLE);
         }else{
             onlyUseAccount = true;
             avaliableBalance.setText(assets);//使用账户金额
