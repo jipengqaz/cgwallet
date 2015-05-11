@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -91,6 +93,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private TextView myWalletText;
     private SlidingMenu mMenu;
     private int Value = 0;
+    private FragmentManager fm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +102,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         setContentView(R.layout.activity_main);
         MApplication.registActivities(this);//存储该activity
         splashPresenter = new SplashPresenter(this);
+        fm = getSupportFragmentManager();
 
         screenWith = getResources().getDisplayMetrics().widthPixels;
         initViews();
@@ -471,40 +475,67 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
      * 初始化fragment
      */
     private void setFragment(){
-        fragments = new Fragment[2];
-        fragments[0] = getSupportFragmentManager().findFragmentById(R.id.menu_center_fragment1);
-        fragments[1] = getSupportFragmentManager().findFragmentById(R.id.menu_center_fragment2);
-        cgWalletFragment = (CgWalletFragment) fragments[0];
-        myWalletFragment = (MyWalletFragment) fragments[1];
-        getSupportFragmentManager().beginTransaction().hide(fragments[1]).hide(fragments[0]).show(fragments[0]).commit();
+        layoutClick(R.id.layout_cg_wallet);
+//        fragments = new Fragment[2];
+//        fragments[0] = getSupportFragmentManager().findFragmentById(R.id.menu_center_fragment1);
+//        fragments[1] = getSupportFragmentManager().findFragmentById(R.id.menu_center_fragment2);
+//        cgWalletFragment = (CgWalletFragment) fragments[0];
+//        myWalletFragment = (MyWalletFragment) fragments[1];
+//        getSupportFragmentManager().beginTransaction().hide(fragments[1]).hide(fragments[0]).show(fragments[0]).commit();
     }
 
     public void layoutClick(int type){
+        FragmentTransaction ft = fm.beginTransaction();
+        hideFragment(ft);
         switch (type){
             case R.id.layout_cg_wallet://显示草根钱包页面
                 currIndex = 1;
-                getSupportFragmentManager().beginTransaction()
-                        .hide(fragments[0])
-                        .hide(fragments[1])
-                        .show(fragments[0]).commit();
+                if(cgWalletFragment != null){
+                    ft.show(cgWalletFragment);
+                    cgWalletFragment.setData();
+                }else{
+                    cgWalletFragment = new CgWalletFragment();
+                    ft.add(R.id.menu_center_fragment1,cgWalletFragment);
+                }
+//                getSupportFragmentManager().beginTransaction()
+//                        .hide(fragments[0])
+//                        .hide(fragments[1])
+//                        .show(fragments[0]).commit();
                 lineToLeft();
-                cgWalletFragment.setData();
+//                cgWalletFragment.setData();
                 break;
             case R.id.layout_my_wallet://显示我的钱包页面
                 if(!Utils.isLogined()){
-                    startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 }else{
                     currIndex = 2;
-                    getSupportFragmentManager().beginTransaction()
-                            .hide(fragments[0])
-                            .hide(fragments[1])
-                            .show(fragments[1]).commit();
+                    if(myWalletFragment != null) {
+                        ft.show(myWalletFragment);
+                        myWalletFragment.setData(true);
+                    }else{
+                        myWalletFragment = new MyWalletFragment();
+                        ft.add(R.id.menu_center_fragment1,myWalletFragment);
+                    }
                     lineToRight();
-                    myWalletFragment.setData(true);
+//                    getSupportFragmentManager().beginTransaction()
+//                            .hide(fragments[0])
+//                            .hide(fragments[1])
+//                            .show(fragments[1]).commitAllowingStateLoss();
+//                    myWalletFragment.setData(true);
                 }
                 break;
         }
+        ft.commit();
 
+    }
+
+    private void hideFragment(android.support.v4.app.FragmentTransaction ft){
+        if(cgWalletFragment != null){
+            ft.hide(cgWalletFragment);
+        }
+        if(myWalletFragment != null){
+            ft.hide(myWalletFragment);
+        }
     }
 
     /**
@@ -550,8 +581,9 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             setLeftMenuInfo(0);//未登录
         }else{
             LogUtils.i(TAG, "Utils.isLogined 为 false");
-            if(currIndex == 2){
-                myWalletFragment.setData(true);
+            if (currIndex == 2){
+                layoutClick(R.id.layout_my_wallet);
+//                myWalletFragment.setData(true);
             }
         }
         String userMobile = Utils.getUserPhone(this);
@@ -573,12 +605,13 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         startActivity(new Intent(MainActivity.this,LoginActivity.class));
                     }else{
                         currIndex = 2;
-                        getSupportFragmentManager().beginTransaction()
-                                .hide(fragments[0])
-                                .hide(fragments[1])
-                                .show(fragments[1]).commit();
-                        lineToRight();
-                        myWalletFragment.setData(true);
+                        layoutClick(R.id.layout_my_wallet);
+//                        getSupportFragmentManager().beginTransaction()
+//                                .hide(fragments[0])
+//                                .hide(fragments[1])
+//                                .show(fragments[1]).commit();
+//                        lineToRight();
+//                        myWalletFragment.setData(true);
                     }
                     break;
                 case 2:

@@ -71,6 +71,7 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
         presenter = new SplashPresenter(this);
         layoutView = inflater.inflate(R.layout.layout_my_wallet,container,false);
         initViews(layoutView);
+        setData(true);
         setWidgetAttrs();
         setListener();
         return layoutView;

@@ -4,14 +4,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <fragment
-        android:name="cgtz.com.cgwallet.fragment.CgWalletFragment"
+    <FrameLayout
         android:id="@+id/menu_center_fragment1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-    <fragment
-        android:name="cgtz.com.cgwallet.fragment.MyWalletFragment"
-        android:id="@+id/menu_center_fragment2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    <!--<fragment-->
+        <!--android:name="cgtz.com.cgwallet.fragment.MyWalletFragment"-->
+        <!--android:id="@+id/menu_center_fragment2"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
 </LinearLayout>
