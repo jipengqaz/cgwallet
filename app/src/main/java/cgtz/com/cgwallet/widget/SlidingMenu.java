@@ -159,7 +159,6 @@ public class SlidingMenu extends HorizontalScrollView{
 						//隐藏左边菜单
 						isShowLeftMenu = false;
 						isShowRightMenu = false;
-						menuType = NO_MENU_TOGGLE;
 						this.smoothScrollTo(mMenuWidth, 0);
 						focusToggle(true);
 						break;
@@ -167,7 +166,6 @@ public class SlidingMenu extends HorizontalScrollView{
 						//隐藏右边菜单
 						isShowRightMenu = false;
 						isShowLeftMenu = false;
-						menuType = NO_MENU_TOGGLE;
 						this.smoothScrollTo(mMenuWidth, 0);
 						focusToggle(true);
 						break;
@@ -175,7 +173,6 @@ public class SlidingMenu extends HorizontalScrollView{
 						//去登录
 						isShowRightMenu = false;
 						isShowLeftMenu = false;
-						menuType = NO_MENU_TOGGLE;
 						this.smoothScrollTo(mMenuWidth,0);
 						bindActivity.startActivity(new Intent(bindActivity, LoginActivity.class));
 						break;
@@ -307,11 +304,13 @@ public class SlidingMenu extends HorizontalScrollView{
 	 * @param oldx
 	 */
 	private void scrollChangeToggle(int x,int oldx){
-		if(x < mMenuWidth && x < oldx){
+		LogUtils.i(TAG,"menutype: "+ menuType);
+		if(menuType == SHOW_LEFT_MENU || menuType == HIDE_LEFT_MENU){
+			LogUtils.i(TAG,"左边菜单操作");
 			//向右滑动，显示左边菜单
 			LogUtils.e(TAG,"左边菜单操作,x: "+x);
 			float scale = x * 1.0f / mMenuWidth;
-			float leftScale = 1 - 0.3f * scale;
+			float leftScale = 1 - 0.2f * scale;
 			float rightScale = 0.8f + scale * 0.2f;
 			LogUtils.i("Sliding","左: leftScale: "+leftScale+" rightScale: "+rightScale+" scale: "+scale);
 			ViewHelper.setScaleX(mMenu, leftScale);
@@ -324,19 +323,18 @@ public class SlidingMenu extends HorizontalScrollView{
 			ViewHelper.setScaleX(mContent, rightScale);
 			ViewHelper.setScaleY(mContent, rightScale);
 
-		}else if(x > mMenuWidth && x > oldx){
+		}else if(menuType == SHOW_RIGHT_MENU || menuType == HIDE_RIGHT_MENU){
+			LogUtils.i(TAG,"右边菜单操作");
 			//向左滑动，显示右边菜单
-			if(x >= mMenuWidth*2){
-				x = mMenuWidth*2;
-			}
+
 			LogUtils.e(TAG,"右边菜单操作,x: "+x + " mMenuWidth: "+mMenuWidth);
 			float scale = 1 - x * 1.0f / rightSlidingMenu;
-			float leftScale = 0.8f + scale * 0.2f;
-			float rightScale = 1 - 0.2f * scale;
+			float leftScale = 0.8f + scale * 0.4f;
+			float rightScale = 1 - 0.4f * scale;
 			LogUtils.i("Sliding","右：leftScale: "+leftScale+" rightScale: "+rightScale+" scale: "+scale);
 			ViewHelper.setScaleX(mRightMenu, rightScale);
 			ViewHelper.setScaleY(mRightMenu, rightScale);
-			ViewHelper.setAlpha(mRightMenu, 0.6f + 0.4f * (1 - scale));
+			ViewHelper.setAlpha(mRightMenu, 0.6f + 0.4f * scale);
 			ViewHelper.setTranslationX(mRightMenu, mMenuWidth * scale * 0.6f);
 
 			ViewHelper.setPivotX(mContent, mScreenWidth);
@@ -350,8 +348,8 @@ public class SlidingMenu extends HorizontalScrollView{
 	@Override
 	protected void onScrollChanged(int x, int y, int oldx, int oldy){
 		super.onScrollChanged(x, y, oldx, oldy);
-		LogUtils.e(TAG, "onScrollChanged x: " + x+" oldx: "+oldx);
-//		scrollChangeToggle(x,oldx);
+		LogUtils.e(TAG, "onScrollChanged x: " + x + " oldx: " + oldx);
+		scrollChangeToggle(x, oldx);
 //		if(isShowLeftMenu && !isShowRightMenu){
 //			LogUtils.e(TAG,"左边菜单操作,x: "+x);
 //			float scale = x * 1.0f / mMenuWidth;
