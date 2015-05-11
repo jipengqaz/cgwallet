@@ -107,7 +107,7 @@ public class SlidingMenu extends HorizontalScrollView{
 //			mMenuWidth = mScreenWidth - mMenuRightPadding;
 			mMenuWidth = mScreenWidth -(mScreenWidth/2-100) ;
 			rightSlidingMenu = mMenuWidth*2;
-			mHalfMenuWidth = 10;
+			mHalfMenuWidth = mMenuWidth/2-10;
 			mMenu.getLayoutParams().width = mMenuWidth;
 			mContent.getLayoutParams().width = mScreenWidth;
 			mRightMenu.getLayoutParams().width = mMenuWidth;
@@ -234,8 +234,10 @@ public class SlidingMenu extends HorizontalScrollView{
 		if(isShowLeftMenu){
 			return;
 		}
+		menuType = SHOW_LEFT_MENU;
 		this.smoothScrollTo(0, 0);
 		isShowLeftMenu = true;
+		isShowRightMenu = false;
 		focusToggle(false);
 	}
 
@@ -245,8 +247,10 @@ public class SlidingMenu extends HorizontalScrollView{
 	public void hideLeftmenu(){
 		LogUtils.i(TAG, "hideLeftmenu");
 		if(isShowLeftMenu){
+			menuType = HIDE_LEFT_MENU;
 			this.smoothScrollTo(mMenuWidth,0);
 			isShowLeftMenu = false;
+			isShowRightMenu = false;
 			focusToggle(true);
 		}
 	}
@@ -282,8 +286,10 @@ public class SlidingMenu extends HorizontalScrollView{
 		if(isShowRightMenu){
 			return;
 		}
+		menuType = SHOW_RIGHT_MENU;
 		this.smoothScrollTo(rightSlidingMenu,0);
 		isShowRightMenu = true;
+		isShowLeftMenu = false;
 		focusToggle(false);
 	}
 
@@ -292,8 +298,10 @@ public class SlidingMenu extends HorizontalScrollView{
 	 */
 	public void hideRightMenu(){
 		if(isShowRightMenu){
+			menuType = HIDE_RIGHT_MENU;
 			this.smoothScrollTo(mMenuWidth,0);
 			isShowRightMenu = false;
+			isShowLeftMenu = false;
 			focusToggle(true);
 		}
 	}
