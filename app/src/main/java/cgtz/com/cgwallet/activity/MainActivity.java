@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -44,14 +43,12 @@ import com.umeng.socialize.weixin.media.WeiXinShareContent;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.fragment.CgWalletFragment;
 import cgtz.com.cgwallet.fragment.MyWalletFragment;
-import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.Start_update_value;
@@ -297,7 +294,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         CircleShareContent circleMedia = new CircleShareContent();
                         circleMedia.setShareContent(content);
                         //设置朋友圈title
-                        circleMedia.setTitle("草根投资");
+                        circleMedia.setTitle(content);
                         circleMedia.setShareImage(image);
                         circleMedia.setTargetUrl(url);
                         mController.setShareMedia(circleMedia);
