@@ -194,7 +194,7 @@ public class SlidingMenu extends HorizontalScrollView{
 						setMenuFocus();
 						isShowRightMenu = false;
 						isShowLeftMenu = false;
-						this.smoothScrollTo(mMenuWidth,0);
+						this.smoothScrollTo(mMenuWidth, 0);
 						focusToggle(true);
 						break;
 				}
@@ -220,7 +220,7 @@ public class SlidingMenu extends HorizontalScrollView{
 				&& !isShowLeftMenu && !isShowRightMenu){
 			//手指向左滑动，滑动距离大于菜单宽度，左右菜单都未显示，允许显示右边菜单
 			menuType = SHOW_RIGHT_MENU;
-		}else if(!Utils.isLogined() && mHalfMenuWidth+mMenuWidth < scrollX && scrollX <= rightSlidingMenu
+		}else if(!Utils.isLogined() && mHalfMenuWidth+mMenuWidth <= scrollX && scrollX <= rightSlidingMenu
 				&& !isShowLeftMenu && !isShowRightMenu){
 			//向左滑动时，判断是否登录过，没有登录时，去登录
 			menuType = NEED_TO_LOGIN;
@@ -230,8 +230,12 @@ public class SlidingMenu extends HorizontalScrollView{
 		}else if(scrollX >= mHalfMenuWidth && !isShowLeftMenu && isShowRightMenu){
 			//手指向右滑动，滑动距离大于菜单宽度，左边菜单未显示，右边菜单显示，隐藏右边菜单
 			menuType = HIDE_RIGHT_MENU;
-		}else{
-			menuType = NO_MENU_TOGGLE;
+		}else if(scrollX > mMenuWidth - mHalfMenuWidth && scrollX <= mMenuWidth
+				&& !isShowLeftMenu && !isShowRightMenu){
+			menuType = HIDE_LEFT_MENU;
+		}else if(Utils.isLogined() && mMenuWidth < scrollX && scrollX < mHalfMenuWidth+mMenuWidth
+				&& !isShowLeftMenu && !isShowRightMenu){
+			menuType = HIDE_RIGHT_MENU;
 		}
 	}
 
