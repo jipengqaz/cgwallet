@@ -42,7 +42,8 @@ public class CustomTask extends AsyncTask<String,Void,String> {
             content = HttpUtils.getRequestData(maps,encode).toString();
         }
         LogUtils.e("CustomTask", "url: " + this.url_+" content: "+content);
-    }/**
+    }
+    /**
      *
      * @param handler
      * @param handler_what  handler 判断值
@@ -59,7 +60,7 @@ public class CustomTask extends AsyncTask<String,Void,String> {
         if(is_ping) {
             this.url_ = (Constants.IS_TEST?Constants.OFFLINE_HTTP:Constants.ONLINE_HTTP) + url_;
         }else{
-            this.url_ = url_;
+            this.url_ = Constants.IS_TEST?Constants.OFFLINE_HTTP:Constants.ONLINE_HTTP;
         }
         if(flag){
             content = HttpUtils.getRequestData(maps,encode).toString();
@@ -85,7 +86,7 @@ public class CustomTask extends AsyncTask<String,Void,String> {
         if(is_ping) {
             this.url_ = (Constants.IS_TEST?Constants.OFFLINE_HTTP:Constants.ONLINE_HTTP) + url_;
         }else{
-            this.url_ = url_;
+            this.url_ = Constants.IS_TEST?Constants.OFFLINE_HTTP:Constants.ONLINE_HTTP;
         }
         this.encode = encode;
         if(flag){

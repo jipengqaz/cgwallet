@@ -190,8 +190,9 @@ public class HttpUtils {
             //里面会抛连接和返回超时java.net.SocketTimeoutException，还有IO异常
             return "event";
         }finally{
-            conn.disconnect();
-            conn = null;
+            if(conn != null){
+                conn.disconnect();
+            }
         }
         return str;
     }
