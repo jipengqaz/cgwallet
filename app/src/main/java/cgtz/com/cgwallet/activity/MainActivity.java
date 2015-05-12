@@ -424,7 +424,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     }
 
     public void clearFocus(){
-        LogUtils.i(TAG,"mainactivity clearFocus");
+        LogUtils.i(TAG, "mainactivity clearFocus");
         if(layoutCgWallet != null){
             layoutCgWallet.setEnabled(false);
         }
@@ -665,15 +665,19 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
      */
     private void setLeftMenuInfo(int type){
         if(type == 1){//已登录
+            LogUtils.i(TAG,"已登录");
             layotExit.setVisibility(View.VISIBLE);
             tvShowLoginMobile.setVisibility(View.VISIBLE);
             image_Login.setImageResource(R.mipmap.icon_yes_login);
             tvLogin.setVisibility(View.GONE);
         }else if(type == 0){//未登录
+            LogUtils.i(TAG,"未登录");
             tvLogin.setVisibility(View.VISIBLE);
             layotExit.setVisibility(View.GONE);
             tvShowLoginMobile.setVisibility(View.GONE);
             image_Login.setImageResource(R.mipmap.icon_no_login);
+        }else{
+            LogUtils.i(TAG,"未进入登录状况的判断");
         }
     }
 
