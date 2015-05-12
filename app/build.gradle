@@ -39,7 +39,7 @@ android {
         exclude 'AndroidManifest.xml'
         exclude 'resources.arsc'
         exclude 'classes.dex'
-        exclude 'res/drawable/cgtz_logo'
+        exclude 'res/mipmap/icon_logo'
     }
     lintOptions {
         checkReleaseBuilds false
