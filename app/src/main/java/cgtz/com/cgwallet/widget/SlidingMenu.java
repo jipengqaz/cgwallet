@@ -162,7 +162,7 @@ public class SlidingMenu extends HorizontalScrollView{
 						isShowLeftMenu = false;
 						isShowRightMenu = true;
 						this.smoothScrollTo(rightSlidingMenu, 0);
-						((MainActivity)MApplication.getActivityByName(MainActivity.class.getName())).initShareData();//设置分享数据
+						bindActivity.initShareData();//设置分享数据
 						focusToggle(false);
 						break;
 					case HIDE_LEFT_MENU:
@@ -289,7 +289,7 @@ public class SlidingMenu extends HorizontalScrollView{
 		if(isShowRightMenu){
 			hideRightMenu();
 		}else{
-			((MainActivity)MApplication.getActivityByName(MainActivity.class.getName())).initShareData();//设置分享数据
+			bindActivity.initShareData();//设置分享数据
 			showRightMenu();
 		}
 	}
@@ -383,9 +383,8 @@ public class SlidingMenu extends HorizontalScrollView{
 	/**
 	 * 计算滑动方向
 	 * @param x
-	 * @param oldx
 	 */
-	private void scrollChangeToggle(int x,int oldx){
+	private void scrollChangeToggle(int x){
 		LogUtils.i(TAG,"menutype: "+ menuType);
 		if(menuType == SHOW_LEFT_MENU || menuType == HIDE_LEFT_MENU){
 			LogUtils.i(TAG,"左边菜单操作");
@@ -431,73 +430,12 @@ public class SlidingMenu extends HorizontalScrollView{
 	protected void onScrollChanged(int x, int y, int oldx, int oldy){
 		super.onScrollChanged(x, y, oldx, oldy);
 		LogUtils.e(TAG, "onScrollChanged x: " + x + " oldx: " + oldx);
-		scrollChangeToggle(x, oldx);
-//		if(isShowLeftMenu && !isShowRightMenu){
-//			LogUtils.e(TAG,"左边菜单操作,x: "+x);
-//			float scale = x * 1.0f / mMenuWidth;
-//			float leftScale = 1 - 0.3f * scale;
-//			float rightScale = 0.8f + scale * 0.2f;
-//			LogUtils.i("Sliding","左: leftScale: "+leftScale+" rightScale: "+rightScale+" scale: "+scale);
-//			ViewHelper.setScaleX(mMenu, leftScale);
-//			ViewHelper.setScaleY(mMenu, leftScale);
-//			ViewHelper.setAlpha(mMenu, 0.6f + 0.4f * (1 - scale));
-//			ViewHelper.setTranslationX(mMenu, mMenuWidth * scale * 0.6f);
-//
-//			ViewHelper.setPivotX(mContent, 0);
-//			ViewHelper.setPivotY(mContent, mContent.getHeight() / 2);
-//			ViewHelper.setScaleX(mContent, rightScale);
-//			ViewHelper.setScaleY(mContent, rightScale);
-//		}else if(isShowRightMenu && !isShowLeftMenu){
-//			if(x >= mMenuWidth*2){
-//				x = mMenuWidth*2;
-//			}
-//			LogUtils.e(TAG,"右边菜单操作,x: "+x + " mMenuWidth: "+mMenuWidth);
-//			float scale = 1 - x * 1.0f / rightSlidingMenu;
-//			float leftScale = 0.8f + scale * 0.2f;
-//			float rightScale = 1 - 0.2f * scale;
-//			LogUtils.i("Sliding","右：leftScale: "+leftScale+" rightScale: "+rightScale+" scale: "+scale);
-//			ViewHelper.setScaleX(mRightMenu, rightScale);
-//			ViewHelper.setScaleY(mRightMenu, rightScale);
-//			ViewHelper.setAlpha(mRightMenu, 0.6f + 0.4f * (1 - scale));
-//			ViewHelper.setTranslationX(mRightMenu, mMenuWidth * scale * 0.6f);
-//
-//			ViewHelper.setPivotX(mContent, mScreenWidth);
-//			ViewHelper.setPivotY(mContent, mContent.getHeight() / 2);
-//			ViewHelper.setScaleX(mContent, leftScale);
-//			ViewHelper.setScaleY(mContent, leftScale);
-//		}else if(menuType == HIDE_LEFT_MENU){
-//			LogUtils.e(TAG,"左边菜单,x: "+x);
-//			float scale = x * 1.0f / mMenuWidth;
-//			float leftScale = 1 - 0.3f * scale;
-//			float rightScale = 0.8f + scale * 0.2f;
-//			LogUtils.i("Sliding","左: leftScale: "+leftScale+" rightScale: "+rightScale+" scale: "+scale);
-//			ViewHelper.setScaleX(mMenu, leftScale);
-//			ViewHelper.setScaleY(mMenu, leftScale);
-//			ViewHelper.setAlpha(mMenu, 0.6f + 0.4f * (1 - scale));
-//			ViewHelper.setTranslationX(mMenu, mMenuWidth * scale * 0.6f);
-//
-//			ViewHelper.setPivotX(mContent, 0);
-//			ViewHelper.setPivotY(mContent, mContent.getHeight() / 2);
-//			ViewHelper.setScaleX(mContent, rightScale);
-//			ViewHelper.setScaleY(mContent, rightScale);
-//		}else if(menuType == HIDE_RIGHT_MENU){
-//			if(x <= mMenuWidth){
-//				x = 0;
-//			}
-//			LogUtils.e(TAG,"右边菜单,x: "+x + " mMenuWidth: "+mMenuWidth);
-//			float scale = 1 - x * 1.0f / rightSlidingMenu;
-//			float leftScale = 0.8f + scale * 0.2f;
-//			float rightScale = 1 - 0.2f * scale;
-//			LogUtils.i("Sliding","右：leftScale: "+leftScale+" rightScale: "+rightScale+" scale: "+scale);
-//			ViewHelper.setScaleX(mRightMenu, rightScale);
-//			ViewHelper.setScaleY(mRightMenu, rightScale);
-//			ViewHelper.setAlpha(mRightMenu, 0.6f + 0.4f * (1- scale));
-//			ViewHelper.setTranslationX(mRightMenu, mMenuWidth * scale * 0.6f);
-//
-//			ViewHelper.setPivotX(mContent, mScreenWidth);
-//			ViewHelper.setPivotY(mContent, mContent.getHeight() / 2);
-//			ViewHelper.setScaleX(mContent, leftScale);
-//			ViewHelper.setScaleY(mContent, leftScale);
-//		}
+		scrollChangeToggle(x);
+	}
+
+	@Override
+	public void computeScroll() {
+		LogUtils.i(TAG,"执行 computeScroll");
+		super.computeScroll();
 	}
 }

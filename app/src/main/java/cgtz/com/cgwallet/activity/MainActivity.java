@@ -507,7 +507,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                 }
                 break;
         }
-        ft.commit();
+        ft.commitAllowingStateLoss();
     }
 
     private void hideFragment(android.support.v4.app.FragmentTransaction ft){
