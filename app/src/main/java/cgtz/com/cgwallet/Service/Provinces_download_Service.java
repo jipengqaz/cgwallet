@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.client.Get_data;
 import cgtz.com.cgwallet.utility.Constants;
+import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.Utils;
 
 
@@ -63,14 +64,11 @@ public class Provinces_download_Service extends Service {
                         JSONArray array = json.optJSONArray("cities");
                         int arr = array.length();
                         for (int i = 0; i < arr; i++) {
-                            try {
                                 JSONObject test2 = (JSONObject) array.get(i);
                                 String name = test2.optString("province");
                                 JSONArray test1 = test2.optJSONArray("values");
                                 editor.putString(name, test1 + "");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+
                         }
                         editor.commit();
                     } else {
@@ -82,7 +80,8 @@ public class Provinces_download_Service extends Service {
                     intent.putExtra("provinceCityUpdate",provinceCityUpdate);
                     sendBroadcast(intent);
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    LogUtils.e(TAG, "下载省市  错误");
+                    Provinces_download_Service.this.stopSelf();
                 }
             }
         });
