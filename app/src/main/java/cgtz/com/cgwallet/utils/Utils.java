@@ -123,6 +123,7 @@ public class Utils {
         MApplication.setToken("");
         MApplication.setUser_id("");
         MApplication.setIsSetTrade(false);
+        Start_update_value.saveShare(context,"","");
     }
 
 
