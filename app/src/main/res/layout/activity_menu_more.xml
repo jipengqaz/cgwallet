@@ -138,6 +138,7 @@
             android:id="@+id/ke_fu_tip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/hint_regist_pwd_introduce"
             android:layout_marginTop="30dp"
             android:gravity="center"
             />

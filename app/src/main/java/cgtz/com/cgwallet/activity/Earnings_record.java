@@ -225,7 +225,7 @@ public class Earnings_record extends BaseActivity implements ISplashView {
                     layout.width = (int) ((interest - minInterest) / (maxInterest - minInterest) * (width / 2) + (width/2));
                     holder.money.setLayoutParams(layout);
                     if(position == 1){
-                        holder.money.setBackgroundColor(getResources().getColor(R.color.save_or_draw_money_layout_text));
+                        holder.money.setBackgroundColor(getResources().getColor(R.color.button_text_can_click));
                     }else{
                         holder.money.setBackgroundColor(getResources().getColor(R.color.item_earnings_record_2_2));
                     }
