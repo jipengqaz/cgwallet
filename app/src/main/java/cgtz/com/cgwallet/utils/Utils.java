@@ -429,7 +429,7 @@ public class Utils {
             @Override
             public void onClick(View view) {
                 if (imm != null && imm.isActive()) {
-                    imm.hideSoftInputFromWindow(context.getCurrentFocus().getWindowToken(),
+                    imm.hideSoftInputFromWindow(context.findViewById(R.id.box).getWindowToken(),
                             InputMethodManager.HIDE_NOT_ALWAYS);
                 }
             }
