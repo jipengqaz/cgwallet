@@ -117,6 +117,7 @@ public class Utils {
      * @return
      */
     public static void loginExit(Context context){
+        Start_update_value.saveShare(context,"","");
         SharedUtils sharedUtils = new SharedUtils(context,Constants.CONFIG);
         sharedUtils.remove(Constants.LOGIN_PASSWORD);
 //        sharedUtils.remove(Constants.LOGIN_TOKEN);
