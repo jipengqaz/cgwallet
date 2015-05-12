@@ -128,7 +128,7 @@
             android:layout_centerVertical="true"
             android:textSize="@dimen/text_size_16sp"
             android:textColor="@color/money_asset_text"
-            android:hint="建议取出整数金额"
+            android:hint="请输入整数金额"
             android:textColorHint="@color/money_text_edit"
             android:layout_weight="1"
             android:layout_marginLeft="10dp"

@@ -48,13 +48,6 @@
                 android:background="@drawable/bg_button_no_enabled"
                 />
 
-            <TextView
-                android:id="@+id/ke_fu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="30.0dp"
-                android:gravity="center"
-                />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
