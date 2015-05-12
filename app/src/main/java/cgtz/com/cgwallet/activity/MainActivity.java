@@ -483,7 +483,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                     cgWalletFragment.setData();
                 }else{
                     cgWalletFragment = new CgWalletFragment();
-                    ft.add(R.id.menu_center_fragment1,cgWalletFragment);
+                    ft.add(R.id.menu_center_framelayout,cgWalletFragment);
                 }
                 break;
             case R.id.layout_my_wallet://显示我的钱包页面
@@ -499,12 +499,12 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                     }else{
                         LogUtils.e(TAG,"new a myWalletFragment");
                         myWalletFragment = new MyWalletFragment();
-                        ft.add(R.id.menu_center_fragment1,myWalletFragment);
+                        ft.add(R.id.menu_center_framelayout,myWalletFragment);
                     }
                 }
                 break;
         }
-        ft.commit();
+        ft.commitAllowingStateLoss();
     }
 
     private void hideFragment(android.support.v4.app.FragmentTransaction ft){
