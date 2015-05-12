@@ -44,6 +44,10 @@ public class SlidingMenu extends HorizontalScrollView{
 	private ViewGroup mMenu;
 	private ViewGroup mContent;
 	private ViewGroup mRightMenu;
+	private ViewGroup leftLayout1;
+	private ViewGroup leftLayout2;
+	private ViewGroup leftLayout3;
+
 
 	private int menuType;//用来存储显示的是哪一个菜单页面  0，左边 1，右边
 	private static final int SHOW_LEFT_MENU = -1;//显示左边菜单
@@ -103,6 +107,10 @@ public class SlidingMenu extends HorizontalScrollView{
 			mMenu = (ViewGroup) wrapper.getChildAt(0);
 			mContent = (ViewGroup) wrapper.getChildAt(1);
 			mRightMenu = (ViewGroup) wrapper.getChildAt(2);
+			ViewGroup leftLayout = (ViewGroup) mMenu.getChildAt(0);
+			leftLayout1 = (ViewGroup) ((ViewGroup) leftLayout.getChildAt(1)).getChildAt(0);
+			leftLayout2 = (ViewGroup) ((ViewGroup) leftLayout.getChildAt(1)).getChildAt(1);
+			leftLayout3 = (ViewGroup) ((ViewGroup) leftLayout.getChildAt(1)).getChildAt(2);
 
 //			mMenuWidth = mScreenWidth - mMenuRightPadding;
 			mMenuWidth = mScreenWidth -(mScreenWidth/2-100) ;
@@ -142,6 +150,7 @@ public class SlidingMenu extends HorizontalScrollView{
 				switch (menuType){
 					case SHOW_LEFT_MENU:
 						//显示左边菜单
+						setMenuFocus();
 						isShowLeftMenu = true;
 						isShowRightMenu = false;
 						this.smoothScrollTo(0,0);
@@ -149,6 +158,7 @@ public class SlidingMenu extends HorizontalScrollView{
 						break;
 					case SHOW_RIGHT_MENU:
 						//显示右边菜单
+						setMenuFocus();
 						isShowLeftMenu = false;
 						isShowRightMenu = true;
 						this.smoothScrollTo(rightSlidingMenu, 0);
@@ -157,6 +167,7 @@ public class SlidingMenu extends HorizontalScrollView{
 						break;
 					case HIDE_LEFT_MENU:
 						//隐藏左边菜单
+						setMenuFocus();
 						isShowLeftMenu = false;
 						isShowRightMenu = false;
 						this.smoothScrollTo(mMenuWidth, 0);
@@ -164,6 +175,7 @@ public class SlidingMenu extends HorizontalScrollView{
 						break;
 					case HIDE_RIGHT_MENU:
 						//隐藏右边菜单
+						setMenuFocus();
 						isShowRightMenu = false;
 						isShowLeftMenu = false;
 						this.smoothScrollTo(mMenuWidth, 0);
@@ -171,6 +183,7 @@ public class SlidingMenu extends HorizontalScrollView{
 						break;
 					case NEED_TO_LOGIN:
 						//去登录
+						setMenuFocus();
 						isShowRightMenu = false;
 						isShowLeftMenu = false;
 						this.smoothScrollTo(mMenuWidth,0);
@@ -235,6 +248,7 @@ public class SlidingMenu extends HorizontalScrollView{
 			return;
 		}
 		menuType = SHOW_LEFT_MENU;
+		setMenuFocus();
 		this.smoothScrollTo(0, 0);
 		isShowLeftMenu = true;
 		isShowRightMenu = false;
@@ -248,6 +262,7 @@ public class SlidingMenu extends HorizontalScrollView{
 		LogUtils.i(TAG, "hideLeftmenu");
 		if(isShowLeftMenu){
 			menuType = HIDE_LEFT_MENU;
+			setMenuFocus();
 			this.smoothScrollTo(mMenuWidth,0);
 			isShowLeftMenu = false;
 			isShowRightMenu = false;
@@ -287,6 +302,7 @@ public class SlidingMenu extends HorizontalScrollView{
 			return;
 		}
 		menuType = SHOW_RIGHT_MENU;
+		setMenuFocus();
 		this.smoothScrollTo(rightSlidingMenu,0);
 		isShowRightMenu = true;
 		isShowLeftMenu = false;
@@ -299,11 +315,69 @@ public class SlidingMenu extends HorizontalScrollView{
 	public void hideRightMenu(){
 		if(isShowRightMenu){
 			menuType = HIDE_RIGHT_MENU;
+			setMenuFocus();
 			this.smoothScrollTo(mMenuWidth,0);
 			isShowRightMenu = false;
 			isShowLeftMenu = false;
 			focusToggle(true);
 		}
+	}
+
+	private void setMenuFocus(){
+		switch (menuType){
+			case SHOW_LEFT_MENU:
+				//显示左边菜单
+				leftLayout1.setEnabled(true);
+				leftLayout2.setEnabled(true);
+				leftLayout3.setEnabled(true);
+
+				mMenu.setFocusable(true);
+				mRightMenu.setFocusable(false);
+				mMenu.setFocusableInTouchMode(true);
+				mRightMenu.setFocusableInTouchMode(false);
+				break;
+			case SHOW_RIGHT_MENU:
+				//显示右边菜单
+				leftLayout1.setEnabled(false);
+				leftLayout2.setEnabled(false);
+				leftLayout3.setEnabled(false);
+				mMenu.setFocusable(false);
+				mRightMenu.setFocusable(true);
+				mMenu.setFocusableInTouchMode(false);
+				mRightMenu.setFocusableInTouchMode(true);
+				break;
+			case HIDE_LEFT_MENU:
+				//隐藏左边菜单
+				leftLayout1.setEnabled(false);
+				leftLayout2.setEnabled(false);
+				leftLayout3.setEnabled(false);
+				mMenu.setFocusable(false);
+				mRightMenu.setFocusable(false);
+				mMenu.setFocusableInTouchMode(false);
+				mRightMenu.setFocusableInTouchMode(false);
+				break;
+			case HIDE_RIGHT_MENU:
+				//隐藏右边菜单
+				leftLayout1.setEnabled(false);
+				leftLayout2.setEnabled(false);
+				leftLayout3.setEnabled(false);
+				mMenu.setFocusable(false);
+				mRightMenu.setFocusable(false);
+				mMenu.setFocusableInTouchMode(false);
+				mRightMenu.setFocusableInTouchMode(false);
+				break;
+			case NEED_TO_LOGIN:
+				//去登录
+				leftLayout1.setEnabled(false);
+				leftLayout2.setEnabled(false);
+				leftLayout3.setEnabled(false);
+				mMenu.setFocusable(false);
+				mRightMenu.setFocusable(false);
+				mMenu.setFocusableInTouchMode(false);
+				mRightMenu.setFocusableInTouchMode(false);
+				break;
+		}
+
 	}
 
 	/**
