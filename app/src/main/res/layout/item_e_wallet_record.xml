@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:textSize="@dimen/text_size_14sp"
-                android:text="取出中"
+                android:text="取钱中"
                 android:textColor="@color/investment_details_red"
                 />
         </LinearLayout>
