@@ -68,7 +68,8 @@ public class Code_download_Service extends Service{
 //                }
                 handler.sendEmptyMessage(1);
             } catch (Exception e) {
-                e.printStackTrace();
+                LogUtils.e(TAG, "下载二维码  错误");
+                Code_download_Service.this.stopSelf();
             }
         }
     };

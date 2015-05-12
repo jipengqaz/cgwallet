@@ -42,9 +42,8 @@ public class Image_download_Service extends Service {
                         String url = json.optString("url");
                         downloadingAndSave(url);
                     } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                        LogUtils.e(TAG, "下载启动图  错误");
+                        Image_download_Service.this.stopSelf();
                     }
                     break;
                 case Constants.HANDLER_RL_START:
