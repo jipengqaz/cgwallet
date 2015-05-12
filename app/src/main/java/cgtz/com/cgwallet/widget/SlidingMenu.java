@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
@@ -60,18 +61,21 @@ public class SlidingMenu extends HorizontalScrollView{
 	private boolean isShowRightMenu = false;
 	private MainActivity bindActivity;//绑定的Activity
 	private int rightSlidingMenu;//右边菜单显示时，向左滑动的距离
+	private GestureDetector mGestureDetector;
 
-	public SlidingMenu(Context context, AttributeSet attrs)
-	{
+	public SlidingMenu(Context context, AttributeSet attrs){
 		this(context, attrs, 0);
-
 	}
 
-	public SlidingMenu(Context context, AttributeSet attrs, int defStyle)
-	{
+	public SlidingMenu(Context context, AttributeSet attrs, int defStyle){
 		super(context, attrs, defStyle);
 		mScreenWidth = ScreenUtils.getScreenWidth(context);
-
+		/**
+		 * new GestureDetector(SimpleGestureListener) 被弃用了，
+		 * 用下面的这种
+		 */
+		mGestureDetector = new GestureDetector(context,new HScrollDetector());
+		setFadingEdgeLength(0);
 		TypedArray a = context.obtainStyledAttributes(attrs,
 				R.styleable.SlidingMenu);
 		mMenuRightPadding = (int) a.getDimension(R.styleable.SlidingMenu_rightPadding,300);// 默认为10DP
@@ -133,6 +137,11 @@ public class SlidingMenu extends HorizontalScrollView{
 			once = true;
 			menuType = NO_MENU_TOGGLE;
 		}
+	}
+
+	@Override
+	public boolean onInterceptTouchEvent(MotionEvent ev) {
+		return super.onInterceptTouchEvent(ev) && mGestureDetector.onTouchEvent(ev);
 	}
 
 	@Override
@@ -399,7 +408,7 @@ public class SlidingMenu extends HorizontalScrollView{
 	 * @param x
 	 */
 	private void scrollChangeToggle(int x){
-		LogUtils.i(TAG,"menutype: "+ menuType);
+		LogUtils.i(TAG, "menutype: " + menuType);
 		if(menuType == SHOW_LEFT_MENU || menuType == HIDE_LEFT_MENU){
 			LogUtils.i(TAG,"左边菜单操作");
 			//向右滑动，显示左边菜单
@@ -447,9 +456,13 @@ public class SlidingMenu extends HorizontalScrollView{
 		scrollChangeToggle(x);
 	}
 
-	@Override
-	public void computeScroll() {
-		LogUtils.i(TAG,"执行 computeScroll");
-		super.computeScroll();
+	class HScrollDetector extends GestureDetector.SimpleOnGestureListener{
+		@Override
+		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+			if(Math.abs(distanceX) > Math.abs(distanceY)){
+				return true;
+			}
+			return false;
+		}
 	}
 }

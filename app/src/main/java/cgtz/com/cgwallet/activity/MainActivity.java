@@ -674,8 +674,10 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             image_Login.setImageResource(R.mipmap.icon_yes_login);
             tvLogin.setVisibility(View.GONE);
         }else if(type == 0){//未登录
-            LogUtils.i(TAG,"未登录");
-            tvLogin.setVisibility(View.VISIBLE);
+            if(tvLogin.getVisibility() == View.GONE){
+                LogUtils.i(TAG, "未登录");
+                tvLogin.setVisibility(View.VISIBLE);
+            }
             layotExit.setVisibility(View.GONE);
             tvShowLoginMobile.setVisibility(View.GONE);
             image_Login.setImageResource(R.mipmap.icon_no_login);
