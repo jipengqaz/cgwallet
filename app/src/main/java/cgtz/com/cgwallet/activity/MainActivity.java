@@ -584,6 +584,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             if (currIndex == 2){
                 layoutClick(R.id.layout_my_wallet);
 //                myWalletFragment.setData(true);
+            }else{
+                layoutClick(R.id.layout_cg_wallet);
             }
         }
         String userMobile = Utils.getUserPhone(this);
