@@ -242,7 +242,10 @@ public class E_all_records_fragment_1 extends BaseFragment implements ISplashVie
                     switch (inves.getProgress()){
                         case "-1"://转出失败
                             holder.state.setText("取钱失败");
+                            holder.state.setVisibility(View.VISIBLE);
+                            break;
                         case "1"://转出中
+                            holder.state.setText("取钱中");
                             holder.state.setVisibility(View.VISIBLE);
                             break;
                         default:
