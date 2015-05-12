@@ -77,14 +77,11 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private TextView tvShowLoginMobile;//显示登录的手机号
     private ImageView image_Login;//登录上面的图片
     private LinearLayout layotExit;//退出登录
-    private SplashPresenter splashPresenter;
-    private ArrayList<Fragment> listFms;
     private int currIndex;//当前页卡编号
     private ProgressDialog progressDialog;
     private CgWalletFragment cgWalletFragment;
     private MyWalletFragment myWalletFragment;
     private ImageView bottomLineSelected;//底部的白线
-    private Fragment[] fragments;
     private int screenWith;
     private LinearLayout.LayoutParams params;
     private ImageView cgWalletIcon;
@@ -101,7 +98,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         MApplication.registActivities(this);//存储该activity
-        splashPresenter = new SplashPresenter(this);
         fm = getSupportFragmentManager();
 
         screenWith = getResources().getDisplayMetrics().widthPixels;
@@ -476,12 +472,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
      */
     private void setFragment(){
         layoutClick(R.id.layout_cg_wallet);
-//        fragments = new Fragment[2];
-//        fragments[0] = getSupportFragmentManager().findFragmentById(R.id.menu_center_fragment1);
-//        fragments[1] = getSupportFragmentManager().findFragmentById(R.id.menu_center_fragment2);
-//        cgWalletFragment = (CgWalletFragment) fragments[0];
-//        myWalletFragment = (MyWalletFragment) fragments[1];
-//        getSupportFragmentManager().beginTransaction().hide(fragments[1]).hide(fragments[0]).show(fragments[0]).commit();
     }
 
     public void layoutClick(int type){
@@ -489,6 +479,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         hideFragment(ft);
         switch (type){
             case R.id.layout_cg_wallet://显示草根钱包页面
+                lineToLeft();
                 currIndex = 1;
                 if(cgWalletFragment != null){
                     ft.show(cgWalletFragment);
@@ -497,36 +488,26 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                     cgWalletFragment = new CgWalletFragment();
                     ft.add(R.id.menu_center_fragment1,cgWalletFragment);
                 }
-//                getSupportFragmentManager().beginTransaction()
-//                        .hide(fragments[0])
-//                        .hide(fragments[1])
-//                        .show(fragments[0]).commit();
-                lineToLeft();
-//                cgWalletFragment.setData();
                 break;
             case R.id.layout_my_wallet://显示我的钱包页面
                 if(!Utils.isLogined()){
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 }else{
+                    lineToRight();
                     currIndex = 2;
                     if(myWalletFragment != null) {
+                        LogUtils.e(TAG,"show myWalletFragment");
                         ft.show(myWalletFragment);
                         myWalletFragment.setData(true);
                     }else{
+                        LogUtils.e(TAG,"new a myWalletFragment");
                         myWalletFragment = new MyWalletFragment();
                         ft.add(R.id.menu_center_fragment1,myWalletFragment);
                     }
-                    lineToRight();
-//                    getSupportFragmentManager().beginTransaction()
-//                            .hide(fragments[0])
-//                            .hide(fragments[1])
-//                            .show(fragments[1]).commitAllowingStateLoss();
-//                    myWalletFragment.setData(true);
                 }
                 break;
         }
         ft.commit();
-
     }
 
     private void hideFragment(android.support.v4.app.FragmentTransaction ft){
@@ -583,7 +564,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             LogUtils.i(TAG, "Utils.isLogined 为 false");
             if (currIndex == 2){
                 layoutClick(R.id.layout_my_wallet);
-//                myWalletFragment.setData(true);
             }else{
                 layoutClick(R.id.layout_cg_wallet);
             }
@@ -608,12 +588,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                     }else{
                         currIndex = 2;
                         layoutClick(R.id.layout_my_wallet);
-//                        getSupportFragmentManager().beginTransaction()
-//                                .hide(fragments[0])
-//                                .hide(fragments[1])
-//                                .show(fragments[1]).commit();
-//                        lineToRight();
-//                        myWalletFragment.setData(true);
                     }
                     break;
                 case 2:
@@ -710,11 +684,12 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.layout_cg_wallet://显示草根钱包页面
-                currIndex = 0;
+                currIndex = 1;
                 layoutClick(v.getId());
                 break;
             case R.id.layout_my_wallet://显示我的钱包页面
-                currIndex = 1;
+                currIndex = 2;
+
                 layoutClick(v.getId());
                 break;
             case R.id.left_menu_safe_center://安全中心
