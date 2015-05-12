@@ -187,7 +187,15 @@ public class SlidingMenu extends HorizontalScrollView{
 						isShowRightMenu = false;
 						isShowLeftMenu = false;
 						this.smoothScrollTo(mMenuWidth,0);
+						focusToggle(true);
 						bindActivity.startActivity(new Intent(bindActivity, LoginActivity.class));
+						break;
+					case NO_MENU_TOGGLE:
+						setMenuFocus();
+						isShowRightMenu = false;
+						isShowLeftMenu = false;
+						this.smoothScrollTo(mMenuWidth,0);
+						focusToggle(true);
 						break;
 				}
 				return true;
@@ -222,6 +230,8 @@ public class SlidingMenu extends HorizontalScrollView{
 		}else if(scrollX >= mHalfMenuWidth && !isShowLeftMenu && isShowRightMenu){
 			//手指向右滑动，滑动距离大于菜单宽度，左边菜单未显示，右边菜单显示，隐藏右边菜单
 			menuType = HIDE_RIGHT_MENU;
+		}else{
+			menuType = NO_MENU_TOGGLE;
 		}
 	}
 
