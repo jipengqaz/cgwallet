@@ -141,7 +141,7 @@ public class SlidingMenu extends HorizontalScrollView{
 
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
-		return super.onInterceptTouchEvent(ev) && mGestureDetector.onTouchEvent(ev);
+		return super.onInterceptTouchEvent(ev) ;
 	}
 
 	@Override
@@ -154,8 +154,6 @@ public class SlidingMenu extends HorizontalScrollView{
 				break;
 			case MotionEvent.ACTION_UP:
 				// Up时，进行判断，如果显示区域大于菜单宽度一半则完全显示，否则隐藏
-				int scrollX = getScrollX();
-//				changeWhichMenu(scrollX);
 				switch (menuType){
 					case SHOW_LEFT_MENU:
 						//显示左边菜单
@@ -354,50 +352,30 @@ public class SlidingMenu extends HorizontalScrollView{
 				leftLayout2.setEnabled(true);
 				leftLayout3.setEnabled(true);
 
-				mMenu.setFocusable(true);
-				mRightMenu.setFocusable(false);
-				mMenu.setFocusableInTouchMode(true);
-				mRightMenu.setFocusableInTouchMode(false);
 				break;
 			case SHOW_RIGHT_MENU:
 				//显示右边菜单
 				leftLayout1.setEnabled(false);
 				leftLayout2.setEnabled(false);
 				leftLayout3.setEnabled(false);
-				mMenu.setFocusable(false);
-				mRightMenu.setFocusable(true);
-				mMenu.setFocusableInTouchMode(false);
-				mRightMenu.setFocusableInTouchMode(true);
 				break;
 			case HIDE_LEFT_MENU:
 				//隐藏左边菜单
 				leftLayout1.setEnabled(false);
 				leftLayout2.setEnabled(false);
 				leftLayout3.setEnabled(false);
-				mMenu.setFocusable(false);
-				mRightMenu.setFocusable(false);
-				mMenu.setFocusableInTouchMode(false);
-				mRightMenu.setFocusableInTouchMode(false);
 				break;
 			case HIDE_RIGHT_MENU:
 				//隐藏右边菜单
 				leftLayout1.setEnabled(false);
 				leftLayout2.setEnabled(false);
 				leftLayout3.setEnabled(false);
-				mMenu.setFocusable(false);
-				mRightMenu.setFocusable(false);
-				mMenu.setFocusableInTouchMode(false);
-				mRightMenu.setFocusableInTouchMode(false);
 				break;
 			case NEED_TO_LOGIN:
 				//去登录
 				leftLayout1.setEnabled(false);
 				leftLayout2.setEnabled(false);
 				leftLayout3.setEnabled(false);
-				mMenu.setFocusable(false);
-				mRightMenu.setFocusable(false);
-				mMenu.setFocusableInTouchMode(false);
-				mRightMenu.setFocusableInTouchMode(false);
 				break;
 		}
 

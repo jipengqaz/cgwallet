@@ -97,6 +97,17 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
         if(layoutSaveRecord != null){
             layoutSaveRecord.setEnabled(false);
         }
+        if(assetsLayout != null){
+            assetsLayout.setEnabled(false);
+        }
+        //累计收益layout
+        if(accumulativeLayout != null){
+            accumulativeLayout.setEnabled(true);
+        }
+        //今日收益layout
+        if(today_earnings != null){
+            today_earnings.setEnabled(true);
+        }
     }
 
     public void requetFocus(){
@@ -117,6 +128,18 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
         }
         if(layoutSaveRecord != null){
             layoutSaveRecord.setEnabled(true);
+        }
+        //我的资产layout
+        if(assetsLayout != null){
+            assetsLayout.setEnabled(true);
+        }
+        //累计收益layout
+        if(accumulativeLayout != null){
+            accumulativeLayout.setEnabled(true);
+        }
+        //今日收益layout
+        if(today_earnings != null){
+            today_earnings.setEnabled(true);
         }
     }
 
