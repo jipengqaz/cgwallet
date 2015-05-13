@@ -63,7 +63,7 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
     private int screenWidth;
     private boolean goLogin = false;//判断是否去登录的标志
     private LinearLayout today_earnings;//今日收益
-//    private SwipeRefreshLayout mSwipeLayout;//下拉刷新控件
+    private SwipeRefreshLayout mSwipeLayout;//下拉刷新控件
     private View layoutView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -142,28 +142,28 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
         walletNoBank = (TextView) view.findViewById(R.id.wallet_no_bank);//未绑卡
         today_earnings = (LinearLayout) view.findViewById(R.id.today_earnings);//今日收益
 
-//        mSwipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.id_swipe_ly);//下拉刷新控件
-//        mSwipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
-//                android.R.color.holo_orange_light, android.R.color.holo_red_light);
-//        mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                mSwipeLayout.setRefreshing(true);
-//                LogUtils.e("Swipe", "刷新");
-//                if(TextUtils.isEmpty(Utils.getUserId()) || TextUtils.isEmpty(Utils.getToken())){//判断是否登录
-//                    goLogin = true;
-//                    Utils.makeToast(getActivity(),Constants.NEED_LOGIN);
-//                    startActivity(new Intent(getActivity(), LoginActivity.class));
-//                }else{
-//                    HashMap<String,String> params = new HashMap<>();
-//                    params.put("user_id", Utils.getUserId());
-//                    params.put("token", Utils.getToken());
-//                    CustomTask task = new CustomTask(mHandler, Constants.WHAT_WALLET_DETAIL
-//                            ,Constants.URL_WALLET_DETAIL,true,params,true);
-//                    task.execute();
-//                }
-//            }
-//        });
+        mSwipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.id_swipe_ly);//下拉刷新控件
+        mSwipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
+                android.R.color.holo_orange_light, android.R.color.holo_red_light);
+        mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mSwipeLayout.setRefreshing(true);
+                LogUtils.e("Swipe", "刷新");
+                if(TextUtils.isEmpty(Utils.getUserId()) || TextUtils.isEmpty(Utils.getToken())){//判断是否登录
+                    goLogin = true;
+                    Utils.makeToast(getActivity(),Constants.NEED_LOGIN);
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }else{
+                    HashMap<String,String> params = new HashMap<>();
+                    params.put("user_id", Utils.getUserId());
+                    params.put("token", Utils.getToken());
+                    CustomTask task = new CustomTask(mHandler, Constants.WHAT_WALLET_DETAIL
+                            ,Constants.URL_WALLET_DETAIL,true,params,true);
+                    task.execute();
+                }
+            }
+        });
     }
 
     /**
@@ -342,7 +342,7 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
         public void handleMessage(Message msg) {
             try{
 
-//                mSwipeLayout.setRefreshing(false);
+                mSwipeLayout.setRefreshing(false);
 
                 JsonBean jsonBean = (JsonBean) msg.obj;
                 int code = jsonBean.getCode();

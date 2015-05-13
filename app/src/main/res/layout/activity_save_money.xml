@@ -101,7 +101,7 @@
             <TextView
                 android:id="@+id/save_money_transfer_figure_hint"
                 android:layout_centerVertical="true"
-                android:text="存钱余额"
+                android:text="存入金额"
                 android:layout_marginLeft="@dimen/save_moeny_marign_left"
                 android:textSize="@dimen/save_moeny_main_text"
                 android:textColor="@color/money_text_hint"
@@ -164,7 +164,10 @@
             android:text="@string/save_money_button_text"
             android:textSize="@dimen/button_text_size"
             android:textColor="@color/button_text_not_enabled"
-            android:layout_margin="@dimen/save_moeny_marign_left"
+            android:layout_marginRight="@dimen/save_moeny_marign_left"
+            android:layout_marginLeft="@dimen/save_moeny_marign_left"
+            android:layout_marginBottom="@dimen/save_moeny_marign_left"
+            android:layout_marginTop="40dp"
             android:background="@drawable/bg_button_no_enabled"
             android:layout_width="match_parent"
             android:layout_height="@dimen/button_height" />

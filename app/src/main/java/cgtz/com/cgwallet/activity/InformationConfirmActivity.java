@@ -18,9 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
-import com.yintong.secure.d.al;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -166,7 +163,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
         useAccount = getIntent().getStringExtra("useAccount");//使用的余额数值
         useBank = getIntent().getStringExtra("useBank");//使用的银行卡支付金额
         startCalculateTime = getIntent().getStringExtra("startCalculateTime");//开始计算收益时间
-        if(Constants.IS_28){
+        if(Constants.IS_28 || !Constants.IS_TEST){
             lianlianTest = useBank;
         }
     }
