@@ -79,7 +79,9 @@ public class Code_download_Service extends Service{
     }
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Get_share_content.getContent(handler);
+        String userId = intent .getStringExtra("userId");
+        String token = intent.getStringExtra("token");
+        Get_share_content.getContent(handler,userId,token);
         return super.onStartCommand(intent, flags, startId);
     }
 }

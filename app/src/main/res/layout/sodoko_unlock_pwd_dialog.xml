@@ -74,5 +74,5 @@
         android:layout_height="50dp"
         android:text="确定"
         android:textSize="@dimen/text_size_16sp"
-        android:textColor="@color/btn_invest"/>
+        android:textColor="@color/main_bg"/>
 </LinearLayout>
