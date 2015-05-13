@@ -102,11 +102,11 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
         }
         //累计收益layout
         if(accumulativeLayout != null){
-            accumulativeLayout.setEnabled(true);
+            accumulativeLayout.setEnabled(false);
         }
         //今日收益layout
         if(today_earnings != null){
-            today_earnings.setEnabled(true);
+            today_earnings.setEnabled(false);
         }
     }
 
