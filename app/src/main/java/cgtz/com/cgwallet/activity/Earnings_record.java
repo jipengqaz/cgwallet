@@ -222,7 +222,14 @@ public class Earnings_record extends BaseActivity implements ISplashView {
                     Log.e(TAG, width + "     " + (int) ((interest - minInterest) / (maxInterest - minInterest) * (width / 2) + (width / 2)));
 
                     ViewGroup.LayoutParams layout = holder.money.getLayoutParams();
-                    layout.width = (int) ((interest - minInterest) / (maxInterest - minInterest) * (width / 2) + (width/2));
+                    if(interest .equals( minInterest)){
+                        layout.width = width/2;
+                    }else if(interest.equals(maxInterest)){
+                        layout.width = width;
+                    }else{
+                        layout.width = (int) ((interest - minInterest) / (maxInterest - minInterest) * (width / 2) + (width/2));
+                    }
+//                    LogUtils.e(TAG,layout.width+"      "+interest  +"    "+maxInterest+"     "+minInterest);
                     holder.money.setLayoutParams(layout);
                     if(position == 1){
                         holder.money.setBackgroundColor(getResources().getColor(R.color.main_bg));
