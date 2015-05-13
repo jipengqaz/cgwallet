@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.PersistableBundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -91,6 +92,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 
     private static String MY_WALLET = "my";
     private static String CG_WALLET = "cg";
+    private Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,7 +145,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             url=json.optString("url");
 
             res = map.get(Start_update_value.KEY_QR_CODE);
-            new Thread(connectNet).start();;
+            mHandler.post(connectNet);
 //            byte[] qr_code = res.getBytes("UTF-8");
 //            bitmap = BitmapFactory.decodeByteArray(qr_code, 0, qr_code.length);
 //            Qr_code.setImageBitmap(bitmap);
@@ -832,6 +834,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mHandler.removeCallbacks(connectNet);
     }
 
     @Override

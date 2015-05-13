@@ -377,6 +377,11 @@ public class SlidingMenu extends HorizontalScrollView{
 				leftLayout2.setEnabled(false);
 				leftLayout3.setEnabled(false);
 				break;
+			case NO_MENU_TOGGLE:
+				leftLayout1.setEnabled(false);
+				leftLayout2.setEnabled(false);
+				leftLayout3.setEnabled(false);
+				break;
 		}
 
 	}
