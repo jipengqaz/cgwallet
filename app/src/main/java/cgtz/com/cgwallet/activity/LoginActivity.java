@@ -177,10 +177,10 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String str = s.toString();
-                if(str.length()>0){
+                if (str.length() > 0) {
                     //按钮变为可点击
                     empty.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     empty.setVisibility(View.GONE);
                 }
             }
@@ -190,29 +190,71 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
 
             }
         });
-
-        etLoginPhone.addTextChangedListener(new TextWatcher() {
+        etLoginPhone.setOnFocusChangeListener(new View.OnFocusChangeListener() {//监听焦点事件
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus && showEditsMobile.getText().length()>0) {
+                    showEditsMobile.setVisibility(View.VISIBLE);
+                    // 此处为得到焦点时的处理内容
+                } else {
+                    showEditsMobile.setVisibility(View.GONE);
+                    // 此处为失去焦点时的处理内容
+                }
+            }
+        });
+        etLoginPhone.addTextChangedListener(new TextWatcher() {//监听输入事件
+            private int lastlen = 0;
+            private StringBuilder sb = null;
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (TextUtils.isEmpty(charSequence.toString().trim())) {
-                    showEditsMobile.setVisibility(View.GONE);
-                    showEditsMobile.setText("");
-                    empty_phone.setVisibility(View.GONE);
-                } else {
-                    showEditsMobile.setVisibility(View.VISIBLE);
-                    showEditsMobile.setText(charSequence.toString().trim());
-                    empty_phone.setVisibility(View.VISIBLE);
-                }
+            public void onTextChanged(CharSequence charSequence, int i4, int i1, int i2) {
+
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
+                if (TextUtils.isEmpty(etLoginPhone.getText().toString().trim())) {
+                    showEditsMobile.setVisibility(View.GONE);
+                    showEditsMobile.setText("");
+                    empty_phone.setVisibility(View.GONE);
+                } else {
+                    sb = new StringBuilder();
+                    String str = etLoginPhone.getText().toString();
+                    sb.append(str);
+                    int len = str.length();
+                    if (len >= lastlen) {
+                        lastlen = len;
+                        int j = 0;
+                        for (int i = 0; i < len - 1; i++) {
+                            if (i == 2 || i == 6) {
+                                j++;
+                                sb.insert(i + j, " ");
+                            }
+                        }
+                    } else {
+                        lastlen = len;
+                        int j = 0;
+                        if (len == 3) {
 
+                        } else {
+                            for (int i = 0; i < len - 1; i++) {
+                                if (i == 2 || i == 6 ) {
+                                    j++;
+                                    sb.insert(i + j, " ");
+                                }
+                            }
+                        }
+
+                    }
+                    showEditsMobile.setText(sb.toString());
+                    showEditsMobile.setVisibility(View.VISIBLE);
+//                    showEditsMobile.setText(charSequence.toString().trim());
+                    empty_phone.setVisibility(View.VISIBLE);
+                }
             }
         });
     }
@@ -340,7 +382,8 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
                             if(Utils.getisLockPassWord(LoginActivity.this,mobile)==0){//判断该账号是否是第一次登录该手机
                                 Utils.saveisLockPassWord(LoginActivity.this,mobile,1);
                             }
-                            startService(new Intent(LoginActivity.this, Code_download_Service.class));//开启获取分享数据的服务
+                            startService(new Intent(LoginActivity.this, Code_download_Service.class)
+                                    .putExtra("userId",userId).putExtra("token",token));//开启获取分享数据的服务
                             hideProcessBar();
                             finish();
                         }

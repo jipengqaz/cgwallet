@@ -7,7 +7,7 @@
     <string name="main_top_cg_wallet">草根钱包</string>
     <string name="main_top_my_wallet">我的钱包</string>
     <string name="cg_wallet_earnings">万份年化收益</string>
-    <string name="monitoring_platform">平台资金账户由国有银行实时监管</string>
+    <string name="monitoring_platform"></string>
 
     <string name="main_right_text">当面扫一扫，好友一起赚</string>
     <string name="main_right_text_bottom">推荐规则 ></string>
@@ -27,7 +27,7 @@
     <string name="set_gesture_pattern_reason">设置手势密码，防止他人未经授权查看</string>
     <string name="reset_gesture_code">重新设置手势密码</string>
     <!-- End -->
-    <string name="banner_text">平台资金账户由国有银行实时监管</string>
+    <string name="banner_text"></string>
     <string name="wallet_basic_info1">1元起投</string>
     <string name="wallet_basic_info2">五重保障</string>
     <string name="wallet_basic_info3">随存随取</string>

@@ -75,6 +75,7 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
     }
 
     private void initViews(){
+        Utils.safeCopyWrite(this);//设置安全文案
         registMobile = (EditText) findViewById(R.id.et_regist_mobile);
         securityCode = (EditText) findViewById(R.id.et_regist_security_code);
         getSecurityCode = (TextView) findViewById(R.id.tv_regist_get_security_code);
@@ -348,7 +349,8 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
                                 if(Utils.getisLockPassWord(RegistActivity.this,mobile)==0){//判断该账号是否是第一次登录该手机
                                     Utils.saveisLockPassWord(RegistActivity.this,mobile,1);
                                 }
-                                startService(new Intent(RegistActivity.this, Code_download_Service.class));//开启获取分享数据的服务
+                                startService(new Intent(RegistActivity.this, Code_download_Service.class)
+                                        .putExtra("userId",userId).putExtra("token",token));//开启获取分享数据的服务
                                 startActivity(new Intent(RegistActivity.this, MainActivity.class)
                                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                             }

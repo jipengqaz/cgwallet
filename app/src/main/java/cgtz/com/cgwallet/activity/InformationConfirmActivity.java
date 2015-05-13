@@ -18,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -164,7 +163,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
         useAccount = getIntent().getStringExtra("useAccount");//使用的余额数值
         useBank = getIntent().getStringExtra("useBank");//使用的银行卡支付金额
         startCalculateTime = getIntent().getStringExtra("startCalculateTime");//开始计算收益时间
-        if(Constants.IS_28){
+        if(Constants.IS_28 || !Constants.IS_TEST){
             lianlianTest = useBank;
         }
     }
@@ -440,6 +439,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                             }
                         });
                         cDiaog.withButton2Text("确定");
+                        cDiaog.withButton2TextColor(getResources().getColor(R.color.main_bg));
                         cDiaog.withButton2Click(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -476,6 +476,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                         }
                     });
                     cDiaog.withButton2Text("确定");
+                    cDiaog.withButton2TextColor(getResources().getColor(R.color.main_bg));
                     cDiaog.withButton2Click(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -563,19 +564,22 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                     String retCode = objContent.optString("ret_code");
                     String retMsg = objContent.optString("ret_msg");
                     // 先判断状态码，状态码为 成功或处理中 的需要 验签
-                    if (cgtz.com.cgwallet.utils.llutils.Constants.RET_CODE_SUCCESS.equals(retCode)
-                            || cgtz.com.cgwallet.utils.llutils.Constants.RET_CODE_PROCESS.equals(retCode)) {
-                        String resulPay = objContent
-                                .optString("result_pay");
+                    if(cgtz.com.cgwallet.utils.llutils.Constants.RET_CODE_SUCCESS.equals(retCode)){
+                        // TODO 卡前置模式返回的银行卡绑定协议号，用来下次支付时使用，此处仅作为示例使用。正式接入时去掉
+//                        TextView tv_agree_no = (TextView) findViewById(R.id.tv_agree_no);
+//                        tv_agree_no.setVisibility(View.VISIBLE);
+//                        tv_agree_no.setText(objContent.optString(
+//                                "agreementno", ""));
+                        String resulPay = objContent.optString("result_pay");
                         if (cgtz.com.cgwallet.utils.llutils.Constants.RESULT_PAY_SUCCESS
-                                .equalsIgnoreCase(resulPay)
-                                || cgtz.com.cgwallet.utils.llutils.Constants.RESULT_PAY_PROCESSING
                                 .equalsIgnoreCase(resulPay)) {
-                            // TODO 支付成功后续处理
-//                                    if(runningDialog != null){
-//                                        runningDialog.setMessage("充值成功，正在确认投资记录");
-//                                        runningDialog.show();
-//                                    }
+//                            BaseHelper.showDialog(AuthActivity.this, "提示",
+//                                    "支付成功，交易状态码：" + retCode,
+//                                    android.R.drawable.ic_dialog_alert);
+//                            // TOBaseHelper.showDialog(AuthActivity.this, "提示",
+//                                    "支付成功，交易状态码：" + retCode,
+//                                    android.R.drawable.ic_dialog_alert);
+//                            // TODO 支付成功后续处理
                             HashMap<String,String> params = new HashMap<>();
                             params.put("user_id",Utils.getUserId()+"");
                             params.put("token",Utils.getToken());
@@ -600,8 +604,26 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                                     customDialog.dismiss();
                                 }
                             });
+//                            BaseHelper.showDialog(AuthActivity.this, "提示",
+//                                    retMsg + "，交易状态码:" + retCode,
+//                                    android.R.drawable.ic_dialog_alert);
                         }
-                    } else {
+                    }else if(cgtz.com.cgwallet.utils.llutils.Constants.RET_CODE_PROCESS.equals(retCode)){
+                        String resulPay = objContent.optString("result_pay");
+                        if (cgtz.com.cgwallet.utils.llutils.Constants.RESULT_PAY_PROCESSING
+                                .equalsIgnoreCase(resulPay)) {
+                            customDialog.setMessage(retMsg);
+                            customDialog.setConfirmBtnText("确认");
+                            customDialog.show();
+                            customDialog.setConfirmListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    closeDialog();
+                                    customDialog.dismiss();
+                                    }
+                            });
+                        }
+                    }else{
                         customDialog.setMessage(retMsg);
                         customDialog.setConfirmBtnText("确认");
                         customDialog.show();
@@ -613,6 +635,52 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                             }
                         });
                     }
+//                    if (cgtz.com.cgwallet.utils.llutils.Constants.RET_CODE_SUCCESS.equals(retCode)
+//                            || cgtz.com.cgwallet.utils.llutils.Constants.RET_CODE_PROCESS.equals(retCode)) {
+//                        String resulPay = objContent
+//                                .optString("result_pay");
+//                        if (cgtz.com.cgwallet.utils.llutils.Constants.RESULT_PAY_SUCCESS
+//                                .equalsIgnoreCase(resulPay)
+//                                || cgtz.com.cgwallet.utils.llutils.Constants.RESULT_PAY_PROCESSING
+//                                .equalsIgnoreCase(resulPay)) {
+//                            // TODO 支付成功后续处理
+//                            HashMap<String,String> params = new HashMap<>();
+//                            params.put("user_id",Utils.getUserId()+"");
+//                            params.put("token",Utils.getToken());
+//                            params.put("trade_no", no_order);
+//                            if(isRealleyName){
+//                                LogUtils.i(TAG,"isAuth is false");
+//                                params.put("name",name);
+//                                params.put("identity",identity);
+//                            }
+//                            CustomTask task = new CustomTask(mHandler, Constants.WHAT_BANKCARD_LLBIND
+//                                    ,Constants.URL_BANKCARD_LLBIND,
+//                                    true,params,true);
+//                            task.execute();
+//                        } else {
+//                            customDialog.setMessage(retMsg);
+//                            customDialog.setConfirmBtnText("确认");
+//                            customDialog.show();
+//                            customDialog.setConfirmListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View view) {
+//                                    closeDialog();
+//                                    customDialog.dismiss();
+//                                }
+//                            });
+//                        }
+//                    } else {
+//                        customDialog.setMessage(retMsg);
+//                        customDialog.setConfirmBtnText("确认");
+//                        customDialog.show();
+//                        customDialog.setConfirmListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View view) {
+//                                closeDialog();
+//                                customDialog.dismiss();
+//                            }
+//                        });
+//                    }
                     return;
                 }
                 JsonBean jsonBean = (JsonBean) msg.obj;

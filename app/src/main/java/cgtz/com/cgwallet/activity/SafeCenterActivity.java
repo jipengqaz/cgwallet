@@ -53,7 +53,7 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
         presenter = new SplashPresenter(this);
 
         init();
-        presenter.didFinishLoading(this);
+
     }
 
     private void init() {
@@ -124,6 +124,7 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
     @Override
     protected void onResume() {
         super.onResume();
+        presenter.didFinishLoading(this);
     }
 
     @Override

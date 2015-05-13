@@ -20,8 +20,8 @@ public class JsonBean {
     private JSONObject jsonObject;
 
     public JsonBean(){}
-    public JsonBean(String str){
-        LogUtils.i(TAG, "数据：" + str);
+    public JsonBean(String str,String url_interface){
+        LogUtils.i(TAG, url_interface+"数据：" + str);
         if(TextUtils.isEmpty(str)){
             code = Constants.NO_DATA;//网络不稳定或者服务器没有返回数据
             error_msg = Constants.NO_DATA_MSG;

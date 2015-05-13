@@ -141,7 +141,7 @@ public class Earnings_record extends BaseActivity implements ISplashView {
                             for (int i = 0; i < size; i++) {
                                 invesJson = list.optJSONObject(i);
                                 Map map = new HashMap();
-                                map.put("interest",invesJson.optDouble("interest"));
+                                map.put("interest",invesJson.optString("interest"));
                                 map.put("date",invesJson.optString("date"));//时间
                                 inves.add(map);
                             }
@@ -218,14 +218,21 @@ public class Earnings_record extends BaseActivity implements ISplashView {
                     }
                     Double interest = Double.parseDouble(map.get("interest").toString());
                     holder.time.setText(map.get("date") + "");
-                    holder.money.setText(interest + "");
+                    holder.money.setText(map.get("interest").toString());
                     Log.e(TAG, width + "     " + (int) ((interest - minInterest) / (maxInterest - minInterest) * (width / 2) + (width / 2)));
 
                     ViewGroup.LayoutParams layout = holder.money.getLayoutParams();
-                    layout.width = (int) ((interest - minInterest) / (maxInterest - minInterest) * (width / 2) + (width/2));
+                    if(interest .equals( minInterest)){
+                        layout.width = width/2;
+                    }else if(interest.equals(maxInterest)){
+                        layout.width = width;
+                    }else{
+                        layout.width = (int) ((interest - minInterest) / (maxInterest - minInterest) * (width / 2) + (width/2));
+                    }
+//                    LogUtils.e(TAG,layout.width+"      "+interest  +"    "+maxInterest+"     "+minInterest);
                     holder.money.setLayoutParams(layout);
                     if(position == 1){
-                        holder.money.setBackgroundColor(getResources().getColor(R.color.save_or_draw_money_layout_text));
+                        holder.money.setBackgroundColor(getResources().getColor(R.color.main_bg));
                     }else{
                         holder.money.setBackgroundColor(getResources().getColor(R.color.item_earnings_record_2_2));
                     }

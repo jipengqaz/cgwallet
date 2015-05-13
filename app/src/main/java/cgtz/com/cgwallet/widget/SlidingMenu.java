@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
@@ -44,6 +45,10 @@ public class SlidingMenu extends HorizontalScrollView{
 	private ViewGroup mMenu;
 	private ViewGroup mContent;
 	private ViewGroup mRightMenu;
+	private ViewGroup leftLayout1;
+	private ViewGroup leftLayout2;
+	private ViewGroup leftLayout3;
+
 
 	private int menuType;//用来存储显示的是哪一个菜单页面  0，左边 1，右边
 	private static final int SHOW_LEFT_MENU = -1;//显示左边菜单
@@ -56,18 +61,21 @@ public class SlidingMenu extends HorizontalScrollView{
 	private boolean isShowRightMenu = false;
 	private MainActivity bindActivity;//绑定的Activity
 	private int rightSlidingMenu;//右边菜单显示时，向左滑动的距离
+	private GestureDetector mGestureDetector;
 
-	public SlidingMenu(Context context, AttributeSet attrs)
-	{
+	public SlidingMenu(Context context, AttributeSet attrs){
 		this(context, attrs, 0);
-
 	}
 
-	public SlidingMenu(Context context, AttributeSet attrs, int defStyle)
-	{
+	public SlidingMenu(Context context, AttributeSet attrs, int defStyle){
 		super(context, attrs, defStyle);
 		mScreenWidth = ScreenUtils.getScreenWidth(context);
-
+		/**
+		 * new GestureDetector(SimpleGestureListener) 被弃用了，
+		 * 用下面的这种
+		 */
+		mGestureDetector = new GestureDetector(context,new HScrollDetector());
+		setFadingEdgeLength(0);
 		TypedArray a = context.obtainStyledAttributes(attrs,
 				R.styleable.SlidingMenu);
 		mMenuRightPadding = (int) a.getDimension(R.styleable.SlidingMenu_rightPadding,300);// 默认为10DP
@@ -103,11 +111,15 @@ public class SlidingMenu extends HorizontalScrollView{
 			mMenu = (ViewGroup) wrapper.getChildAt(0);
 			mContent = (ViewGroup) wrapper.getChildAt(1);
 			mRightMenu = (ViewGroup) wrapper.getChildAt(2);
+			ViewGroup leftLayout = (ViewGroup) mMenu.getChildAt(0);
+			leftLayout1 = (ViewGroup) ((ViewGroup) leftLayout.getChildAt(1)).getChildAt(0);
+			leftLayout2 = (ViewGroup) ((ViewGroup) leftLayout.getChildAt(1)).getChildAt(1);
+			leftLayout3 = (ViewGroup) ((ViewGroup) leftLayout.getChildAt(1)).getChildAt(2);
 
 //			mMenuWidth = mScreenWidth - mMenuRightPadding;
 			mMenuWidth = mScreenWidth -(mScreenWidth/2-100) ;
 			rightSlidingMenu = mMenuWidth*2;
-			mHalfMenuWidth = 10;
+			mHalfMenuWidth = mMenuWidth/2-10;
 			mMenu.getLayoutParams().width = mMenuWidth;
 			mContent.getLayoutParams().width = mScreenWidth;
 			mRightMenu.getLayoutParams().width = mMenuWidth;
@@ -128,6 +140,11 @@ public class SlidingMenu extends HorizontalScrollView{
 	}
 
 	@Override
+	public boolean onInterceptTouchEvent(MotionEvent ev) {
+		return super.onInterceptTouchEvent(ev) ;
+	}
+
+	@Override
 	public boolean onTouchEvent(MotionEvent ev){
 		int action = ev.getAction();
 		switch (action){
@@ -137,11 +154,10 @@ public class SlidingMenu extends HorizontalScrollView{
 				break;
 			case MotionEvent.ACTION_UP:
 				// Up时，进行判断，如果显示区域大于菜单宽度一半则完全显示，否则隐藏
-				int scrollX = getScrollX();
-//				changeWhichMenu(scrollX);
 				switch (menuType){
 					case SHOW_LEFT_MENU:
 						//显示左边菜单
+						setMenuFocus();
 						isShowLeftMenu = true;
 						isShowRightMenu = false;
 						this.smoothScrollTo(0,0);
@@ -149,14 +165,16 @@ public class SlidingMenu extends HorizontalScrollView{
 						break;
 					case SHOW_RIGHT_MENU:
 						//显示右边菜单
+						setMenuFocus();
 						isShowLeftMenu = false;
 						isShowRightMenu = true;
 						this.smoothScrollTo(rightSlidingMenu, 0);
-						((MainActivity)MApplication.getActivityByName(MainActivity.class.getName())).initShareData();//设置分享数据
+						bindActivity.initShareData();//设置分享数据
 						focusToggle(false);
 						break;
 					case HIDE_LEFT_MENU:
 						//隐藏左边菜单
+						setMenuFocus();
 						isShowLeftMenu = false;
 						isShowRightMenu = false;
 						this.smoothScrollTo(mMenuWidth, 0);
@@ -164,6 +182,7 @@ public class SlidingMenu extends HorizontalScrollView{
 						break;
 					case HIDE_RIGHT_MENU:
 						//隐藏右边菜单
+						setMenuFocus();
 						isShowRightMenu = false;
 						isShowLeftMenu = false;
 						this.smoothScrollTo(mMenuWidth, 0);
@@ -171,10 +190,19 @@ public class SlidingMenu extends HorizontalScrollView{
 						break;
 					case NEED_TO_LOGIN:
 						//去登录
+						setMenuFocus();
 						isShowRightMenu = false;
 						isShowLeftMenu = false;
 						this.smoothScrollTo(mMenuWidth,0);
+						focusToggle(true);
 						bindActivity.startActivity(new Intent(bindActivity, LoginActivity.class));
+						break;
+					case NO_MENU_TOGGLE:
+						setMenuFocus();
+						isShowRightMenu = false;
+						isShowLeftMenu = false;
+						this.smoothScrollTo(mMenuWidth, 0);
+						focusToggle(true);
 						break;
 				}
 				return true;
@@ -199,7 +227,7 @@ public class SlidingMenu extends HorizontalScrollView{
 				&& !isShowLeftMenu && !isShowRightMenu){
 			//手指向左滑动，滑动距离大于菜单宽度，左右菜单都未显示，允许显示右边菜单
 			menuType = SHOW_RIGHT_MENU;
-		}else if(!Utils.isLogined() && mHalfMenuWidth+mMenuWidth < scrollX && scrollX <= rightSlidingMenu
+		}else if(!Utils.isLogined() && mHalfMenuWidth+mMenuWidth <= scrollX && scrollX <= rightSlidingMenu
 				&& !isShowLeftMenu && !isShowRightMenu){
 			//向左滑动时，判断是否登录过，没有登录时，去登录
 			menuType = NEED_TO_LOGIN;
@@ -208,6 +236,12 @@ public class SlidingMenu extends HorizontalScrollView{
 			menuType = HIDE_LEFT_MENU;
 		}else if(scrollX >= mHalfMenuWidth && !isShowLeftMenu && isShowRightMenu){
 			//手指向右滑动，滑动距离大于菜单宽度，左边菜单未显示，右边菜单显示，隐藏右边菜单
+			menuType = HIDE_RIGHT_MENU;
+		}else if(scrollX > mMenuWidth - mHalfMenuWidth && scrollX <= mMenuWidth
+				&& !isShowLeftMenu && !isShowRightMenu){
+			menuType = HIDE_LEFT_MENU;
+		}else if(Utils.isLogined() && mMenuWidth < scrollX && scrollX < mHalfMenuWidth+mMenuWidth
+				&& !isShowLeftMenu && !isShowRightMenu){
 			menuType = HIDE_RIGHT_MENU;
 		}
 	}
@@ -234,8 +268,11 @@ public class SlidingMenu extends HorizontalScrollView{
 		if(isShowLeftMenu){
 			return;
 		}
+		menuType = SHOW_LEFT_MENU;
+		setMenuFocus();
 		this.smoothScrollTo(0, 0);
 		isShowLeftMenu = true;
+		isShowRightMenu = false;
 		focusToggle(false);
 	}
 
@@ -245,8 +282,11 @@ public class SlidingMenu extends HorizontalScrollView{
 	public void hideLeftmenu(){
 		LogUtils.i(TAG, "hideLeftmenu");
 		if(isShowLeftMenu){
+			menuType = HIDE_LEFT_MENU;
+			setMenuFocus();
 			this.smoothScrollTo(mMenuWidth,0);
 			isShowLeftMenu = false;
+			isShowRightMenu = false;
 			focusToggle(true);
 		}
 	}
@@ -270,7 +310,7 @@ public class SlidingMenu extends HorizontalScrollView{
 		if(isShowRightMenu){
 			hideRightMenu();
 		}else{
-			((MainActivity)MApplication.getActivityByName(MainActivity.class.getName())).initShareData();//设置分享数据
+			bindActivity.initShareData();//设置分享数据
 			showRightMenu();
 		}
 	}
@@ -282,8 +322,11 @@ public class SlidingMenu extends HorizontalScrollView{
 		if(isShowRightMenu){
 			return;
 		}
+		menuType = SHOW_RIGHT_MENU;
+		setMenuFocus();
 		this.smoothScrollTo(rightSlidingMenu,0);
 		isShowRightMenu = true;
+		isShowLeftMenu = false;
 		focusToggle(false);
 	}
 
@@ -292,19 +335,63 @@ public class SlidingMenu extends HorizontalScrollView{
 	 */
 	public void hideRightMenu(){
 		if(isShowRightMenu){
+			menuType = HIDE_RIGHT_MENU;
+			setMenuFocus();
 			this.smoothScrollTo(mMenuWidth,0);
 			isShowRightMenu = false;
+			isShowLeftMenu = false;
 			focusToggle(true);
 		}
+	}
+
+	private void setMenuFocus(){
+		switch (menuType){
+			case SHOW_LEFT_MENU:
+				//显示左边菜单
+				leftLayout1.setEnabled(true);
+				leftLayout2.setEnabled(true);
+				leftLayout3.setEnabled(true);
+
+				break;
+			case SHOW_RIGHT_MENU:
+				//显示右边菜单
+				leftLayout1.setEnabled(false);
+				leftLayout2.setEnabled(false);
+				leftLayout3.setEnabled(false);
+				break;
+			case HIDE_LEFT_MENU:
+				//隐藏左边菜单
+				leftLayout1.setEnabled(false);
+				leftLayout2.setEnabled(false);
+				leftLayout3.setEnabled(false);
+				break;
+			case HIDE_RIGHT_MENU:
+				//隐藏右边菜单
+				leftLayout1.setEnabled(false);
+				leftLayout2.setEnabled(false);
+				leftLayout3.setEnabled(false);
+				break;
+			case NEED_TO_LOGIN:
+				//去登录
+				leftLayout1.setEnabled(false);
+				leftLayout2.setEnabled(false);
+				leftLayout3.setEnabled(false);
+				break;
+			case NO_MENU_TOGGLE:
+				leftLayout1.setEnabled(false);
+				leftLayout2.setEnabled(false);
+				leftLayout3.setEnabled(false);
+				break;
+		}
+
 	}
 
 	/**
 	 * 计算滑动方向
 	 * @param x
-	 * @param oldx
 	 */
-	private void scrollChangeToggle(int x,int oldx){
-		LogUtils.i(TAG,"menutype: "+ menuType);
+	private void scrollChangeToggle(int x){
+		LogUtils.i(TAG, "menutype: " + menuType);
 		if(menuType == SHOW_LEFT_MENU || menuType == HIDE_LEFT_MENU){
 			LogUtils.i(TAG,"左边菜单操作");
 			//向右滑动，显示左边菜单
@@ -323,7 +410,7 @@ public class SlidingMenu extends HorizontalScrollView{
 			ViewHelper.setScaleX(mContent, rightScale);
 			ViewHelper.setScaleY(mContent, rightScale);
 
-		}else if(menuType == SHOW_RIGHT_MENU || menuType == HIDE_RIGHT_MENU){
+		}else if(menuType == SHOW_RIGHT_MENU || menuType == HIDE_RIGHT_MENU || menuType == NEED_TO_LOGIN){
 			LogUtils.i(TAG,"右边菜单操作");
 			//向左滑动，显示右边菜单
 
@@ -349,73 +436,16 @@ public class SlidingMenu extends HorizontalScrollView{
 	protected void onScrollChanged(int x, int y, int oldx, int oldy){
 		super.onScrollChanged(x, y, oldx, oldy);
 		LogUtils.e(TAG, "onScrollChanged x: " + x + " oldx: " + oldx);
-		scrollChangeToggle(x, oldx);
-//		if(isShowLeftMenu && !isShowRightMenu){
-//			LogUtils.e(TAG,"左边菜单操作,x: "+x);
-//			float scale = x * 1.0f / mMenuWidth;
-//			float leftScale = 1 - 0.3f * scale;
-//			float rightScale = 0.8f + scale * 0.2f;
-//			LogUtils.i("Sliding","左: leftScale: "+leftScale+" rightScale: "+rightScale+" scale: "+scale);
-//			ViewHelper.setScaleX(mMenu, leftScale);
-//			ViewHelper.setScaleY(mMenu, leftScale);
-//			ViewHelper.setAlpha(mMenu, 0.6f + 0.4f * (1 - scale));
-//			ViewHelper.setTranslationX(mMenu, mMenuWidth * scale * 0.6f);
-//
-//			ViewHelper.setPivotX(mContent, 0);
-//			ViewHelper.setPivotY(mContent, mContent.getHeight() / 2);
-//			ViewHelper.setScaleX(mContent, rightScale);
-//			ViewHelper.setScaleY(mContent, rightScale);
-//		}else if(isShowRightMenu && !isShowLeftMenu){
-//			if(x >= mMenuWidth*2){
-//				x = mMenuWidth*2;
-//			}
-//			LogUtils.e(TAG,"右边菜单操作,x: "+x + " mMenuWidth: "+mMenuWidth);
-//			float scale = 1 - x * 1.0f / rightSlidingMenu;
-//			float leftScale = 0.8f + scale * 0.2f;
-//			float rightScale = 1 - 0.2f * scale;
-//			LogUtils.i("Sliding","右：leftScale: "+leftScale+" rightScale: "+rightScale+" scale: "+scale);
-//			ViewHelper.setScaleX(mRightMenu, rightScale);
-//			ViewHelper.setScaleY(mRightMenu, rightScale);
-//			ViewHelper.setAlpha(mRightMenu, 0.6f + 0.4f * (1 - scale));
-//			ViewHelper.setTranslationX(mRightMenu, mMenuWidth * scale * 0.6f);
-//
-//			ViewHelper.setPivotX(mContent, mScreenWidth);
-//			ViewHelper.setPivotY(mContent, mContent.getHeight() / 2);
-//			ViewHelper.setScaleX(mContent, leftScale);
-//			ViewHelper.setScaleY(mContent, leftScale);
-//		}else if(menuType == HIDE_LEFT_MENU){
-//			LogUtils.e(TAG,"左边菜单,x: "+x);
-//			float scale = x * 1.0f / mMenuWidth;
-//			float leftScale = 1 - 0.3f * scale;
-//			float rightScale = 0.8f + scale * 0.2f;
-//			LogUtils.i("Sliding","左: leftScale: "+leftScale+" rightScale: "+rightScale+" scale: "+scale);
-//			ViewHelper.setScaleX(mMenu, leftScale);
-//			ViewHelper.setScaleY(mMenu, leftScale);
-//			ViewHelper.setAlpha(mMenu, 0.6f + 0.4f * (1 - scale));
-//			ViewHelper.setTranslationX(mMenu, mMenuWidth * scale * 0.6f);
-//
-//			ViewHelper.setPivotX(mContent, 0);
-//			ViewHelper.setPivotY(mContent, mContent.getHeight() / 2);
-//			ViewHelper.setScaleX(mContent, rightScale);
-//			ViewHelper.setScaleY(mContent, rightScale);
-//		}else if(menuType == HIDE_RIGHT_MENU){
-//			if(x <= mMenuWidth){
-//				x = 0;
-//			}
-//			LogUtils.e(TAG,"右边菜单,x: "+x + " mMenuWidth: "+mMenuWidth);
-//			float scale = 1 - x * 1.0f / rightSlidingMenu;
-//			float leftScale = 0.8f + scale * 0.2f;
-//			float rightScale = 1 - 0.2f * scale;
-//			LogUtils.i("Sliding","右：leftScale: "+leftScale+" rightScale: "+rightScale+" scale: "+scale);
-//			ViewHelper.setScaleX(mRightMenu, rightScale);
-//			ViewHelper.setScaleY(mRightMenu, rightScale);
-//			ViewHelper.setAlpha(mRightMenu, 0.6f + 0.4f * (1- scale));
-//			ViewHelper.setTranslationX(mRightMenu, mMenuWidth * scale * 0.6f);
-//
-//			ViewHelper.setPivotX(mContent, mScreenWidth);
-//			ViewHelper.setPivotY(mContent, mContent.getHeight() / 2);
-//			ViewHelper.setScaleX(mContent, leftScale);
-//			ViewHelper.setScaleY(mContent, leftScale);
-//		}
+		scrollChangeToggle(x);
+	}
+
+	class HScrollDetector extends GestureDetector.SimpleOnGestureListener{
+		@Override
+		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+			if(Math.abs(distanceX) > Math.abs(distanceY)){
+				return true;
+			}
+			return false;
+		}
 	}
 }

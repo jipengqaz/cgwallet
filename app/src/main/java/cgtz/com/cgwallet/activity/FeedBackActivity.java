@@ -9,7 +9,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import java.util.HashMap;
 
@@ -19,7 +18,6 @@ import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.CustomTask;
-import cgtz.com.cgwallet.utils.Ke_Fu_data;
 import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.ISplashView;
@@ -83,8 +81,6 @@ public class FeedBackActivity extends BaseActivity implements ISplashView{
         showBack(true);
         presenter = new SplashPresenter(this);
         MApplication.registActivities(this);//存储该activity
-        TextView ke_fu= (TextView) findViewById(R.id.ke_fu);
-        ke_fu.setText(Ke_Fu_data.getContent(this));
         feed_advise= (EditText) findViewById(R.id.feed_advise);
         feed_send= (Button) findViewById(R.id.feed_send);
         setListener();

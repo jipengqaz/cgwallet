@@ -40,6 +40,8 @@ public class MenuMoreActivity extends BaseActivity implements View.OnClickListen
         feedBack = (RelativeLayout) findViewById(R.id.feed_back);
         contactMine = (RelativeLayout) findViewById(R.id.contact_mine);
         version = (TextView) findViewById(R.id.version);
+        TextView ke_fu_tip = (TextView) findViewById(R.id.ke_fu_tip);
+        ke_fu_tip.setText(Ke_Fu_data.getWorkTime(this));
         Utils.safeCopyWrite(this);//设置安全文案
     }
 

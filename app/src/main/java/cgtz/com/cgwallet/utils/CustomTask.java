@@ -42,7 +42,8 @@ public class CustomTask extends AsyncTask<String,Void,String> {
             content = HttpUtils.getRequestData(maps,encode).toString();
         }
         LogUtils.e("CustomTask", "url: " + this.url_+" content: "+content);
-    }/**
+    }
+    /**
      *
      * @param handler
      * @param handler_what  handler 判断值
@@ -56,10 +57,11 @@ public class CustomTask extends AsyncTask<String,Void,String> {
         this.handler = handler;
         this.handler_what = handler_what;
         this.flag = isPost;
+        this.flag = true;
         if(is_ping) {
             this.url_ = (Constants.IS_TEST?Constants.OFFLINE_HTTP:Constants.ONLINE_HTTP) + url_;
         }else{
-            this.url_ = url_;
+            this.url_ = Constants.IS_TEST?Constants.OFFLINE_HTTP:Constants.ONLINE_HTTP;
         }
         if(flag){
             content = HttpUtils.getRequestData(maps,encode).toString();
@@ -85,7 +87,7 @@ public class CustomTask extends AsyncTask<String,Void,String> {
         if(is_ping) {
             this.url_ = (Constants.IS_TEST?Constants.OFFLINE_HTTP:Constants.ONLINE_HTTP) + url_;
         }else{
-            this.url_ = url_;
+            this.url_ = Constants.IS_TEST?Constants.OFFLINE_HTTP:Constants.ONLINE_HTTP;
         }
         this.encode = encode;
         if(flag){
@@ -114,7 +116,7 @@ public class CustomTask extends AsyncTask<String,Void,String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        JsonBean jsonBean = new JsonBean(s);
+        JsonBean jsonBean = new JsonBean(s,url_);
         handler.sendMessage(handler.obtainMessage(handler_what,jsonBean));
     }
 }

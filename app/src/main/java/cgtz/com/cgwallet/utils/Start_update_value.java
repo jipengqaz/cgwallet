@@ -34,6 +34,11 @@ public class Start_update_value {
         return map;
     }
 
+    /**
+     * 获取分享数据
+     * @param context
+     * @return
+     */
     public static HashMap<String ,String > getShare(Context context){
         SharedPreferences  preferences = context.getSharedPreferences(PREFS_FILE_NAME,Context.MODE_PRIVATE);
         HashMap <String ,String > map = new HashMap<String ,String >();

@@ -71,6 +71,7 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
         presenter = new SplashPresenter(this);
         layoutView = inflater.inflate(R.layout.layout_my_wallet,container,false);
         initViews(layoutView);
+        setData(true);
         setWidgetAttrs();
         setListener();
         return layoutView;
@@ -96,6 +97,17 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
         if(layoutSaveRecord != null){
             layoutSaveRecord.setEnabled(false);
         }
+        if(assetsLayout != null){
+            assetsLayout.setEnabled(false);
+        }
+        //累计收益layout
+        if(accumulativeLayout != null){
+            accumulativeLayout.setEnabled(false);
+        }
+        //今日收益layout
+        if(today_earnings != null){
+            today_earnings.setEnabled(false);
+        }
     }
 
     public void requetFocus(){
@@ -116,6 +128,18 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
         }
         if(layoutSaveRecord != null){
             layoutSaveRecord.setEnabled(true);
+        }
+        //我的资产layout
+        if(assetsLayout != null){
+            assetsLayout.setEnabled(true);
+        }
+        //累计收益layout
+        if(accumulativeLayout != null){
+            accumulativeLayout.setEnabled(true);
+        }
+        //今日收益layout
+        if(today_earnings != null){
+            today_earnings.setEnabled(true);
         }
     }
 
@@ -142,8 +166,7 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
         today_earnings = (LinearLayout) view.findViewById(R.id.today_earnings);//今日收益
 
         mSwipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.id_swipe_ly);//下拉刷新控件
-        mSwipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
-                android.R.color.holo_orange_light, android.R.color.holo_red_light);
+        mSwipeLayout.setColorSchemeResources(R.color.main_bg);
         mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

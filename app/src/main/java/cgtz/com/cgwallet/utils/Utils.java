@@ -117,6 +117,7 @@ public class Utils {
      * @return
      */
     public static void loginExit(Context context){
+        Start_update_value.saveShare(context,"","");
         SharedUtils sharedUtils = new SharedUtils(context,Constants.CONFIG);
         sharedUtils.remove(Constants.LOGIN_PASSWORD);
 //        sharedUtils.remove(Constants.LOGIN_TOKEN);
@@ -235,6 +236,7 @@ public class Utils {
             Utils.makeToast(context,errorMsg);
             return false;
         }else if(code == Constants.NEED_LOGIN_AGAIN){//需要重新登录
+            loginExit(context);
             context.startActivity(new Intent(context, LoginActivity.class));
             if(!MainActivity.class.getName().equals(((Activity)context).getClass().getName())){
                 ((Activity)context).finish();
@@ -428,7 +430,7 @@ public class Utils {
             @Override
             public void onClick(View view) {
                 if (imm != null && imm.isActive()) {
-                    imm.hideSoftInputFromWindow(context.getCurrentFocus().getWindowToken(),
+                    imm.hideSoftInputFromWindow(context.findViewById(R.id.box).getWindowToken(),
                             InputMethodManager.HIDE_NOT_ALWAYS);
                 }
             }
@@ -443,6 +445,16 @@ public class Utils {
         TextView text = (TextView) context.findViewById(R.id.tv_banner);
         if(text!=null){
         text.setText(Ke_Fu_data.getSafe(context));
+        }
+    }
+    /**
+     * 设置安全信息
+     * @param context
+     */
+    public static void safeCopyWrite(Activity context,View view){
+        TextView text = (TextView) view.findViewById(R.id.tv_banner);
+        if(text!=null){
+            text.setText(Ke_Fu_data.getSafe(context));
         }
     }
 

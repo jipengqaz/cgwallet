@@ -7,9 +7,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.PersistableBundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -42,14 +44,12 @@ import com.umeng.socialize.weixin.media.WeiXinShareContent;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.fragment.CgWalletFragment;
 import cgtz.com.cgwallet.fragment.MyWalletFragment;
-import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.Start_update_value;
@@ -75,14 +75,11 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private TextView tvShowLoginMobile;//显示登录的手机号
     private ImageView image_Login;//登录上面的图片
     private LinearLayout layotExit;//退出登录
-    private SplashPresenter splashPresenter;
-    private ArrayList<Fragment> listFms;
     private int currIndex;//当前页卡编号
     private ProgressDialog progressDialog;
     private CgWalletFragment cgWalletFragment;
     private MyWalletFragment myWalletFragment;
     private ImageView bottomLineSelected;//底部的白线
-    private Fragment[] fragments;
     private int screenWith;
     private LinearLayout.LayoutParams params;
     private ImageView cgWalletIcon;
@@ -91,6 +88,11 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private TextView myWalletText;
     private SlidingMenu mMenu;
     private int Value = 0;
+    private FragmentManager fm;
+
+    private static String MY_WALLET = "my";
+    private static String CG_WALLET = "cg";
+    private Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +100,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         MApplication.registActivities(this);//存储该activity
-        splashPresenter = new SplashPresenter(this);
+        fm = getSupportFragmentManager();
 
         screenWith = getResources().getDisplayMetrics().widthPixels;
         initViews();
@@ -143,7 +145,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             url=json.optString("url");
 
             res = map.get(Start_update_value.KEY_QR_CODE);
-            new Thread(connectNet).start();;
+            mHandler.post(connectNet);
 //            byte[] qr_code = res.getBytes("UTF-8");
 //            bitmap = BitmapFactory.decodeByteArray(qr_code, 0, qr_code.length);
 //            Qr_code.setImageBitmap(bitmap);
@@ -186,8 +188,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         public void onComplete(SHARE_MEDIA platform, int stCode,
                                SocializeEntity entity) {
             if (stCode == 200) {
-                Toast.makeText(MainActivity.this, "分享成功", Toast.LENGTH_SHORT)
-                        .show();
+//                Toast.makeText(MainActivity.this, "分享成功", Toast.LENGTH_SHORT)
+//                        .show();
             } else {
 //                Toast.makeText(MainActivity.this,
 //                        "分享失败 : error code : " + stCode, Toast.LENGTH_SHORT)
@@ -297,7 +299,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         CircleShareContent circleMedia = new CircleShareContent();
                         circleMedia.setShareContent(content);
                         //设置朋友圈title
-                        circleMedia.setTitle("草根投资");
+                        circleMedia.setTitle(content);
                         circleMedia.setShareImage(image);
                         circleMedia.setTargetUrl(url);
                         mController.setShareMedia(circleMedia);
@@ -427,7 +429,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     }
 
     public void clearFocus(){
-        LogUtils.i(TAG,"mainactivity clearFocus");
+        LogUtils.i(TAG, "mainactivity clearFocus");
         if(layoutCgWallet != null){
             layoutCgWallet.setEnabled(false);
         }
@@ -471,40 +473,80 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
      * 初始化fragment
      */
     private void setFragment(){
-        fragments = new Fragment[2];
-        fragments[0] = getSupportFragmentManager().findFragmentById(R.id.menu_center_fragment1);
-        fragments[1] = getSupportFragmentManager().findFragmentById(R.id.menu_center_fragment2);
-        cgWalletFragment = (CgWalletFragment) fragments[0];
-        myWalletFragment = (MyWalletFragment) fragments[1];
-        getSupportFragmentManager().beginTransaction().hide(fragments[1]).hide(fragments[0]).show(fragments[0]).commit();
+        layoutClick(R.id.layout_cg_wallet);
     }
 
     public void layoutClick(int type){
+        FragmentTransaction ft = fm.beginTransaction();
+        hideFragment(ft);
         switch (type){
             case R.id.layout_cg_wallet://显示草根钱包页面
-                currIndex = 1;
-                getSupportFragmentManager().beginTransaction()
-                        .hide(fragments[0])
-                        .hide(fragments[1])
-                        .show(fragments[0]).commit();
                 lineToLeft();
-                cgWalletFragment.setData();
+                currIndex = 1;
+                if(cgWalletFragment != null){
+                    if(fm.findFragmentByTag(CG_WALLET) != null
+                            && fm.findFragmentByTag(CG_WALLET).isAdded()){
+                        ft.show(fm.findFragmentByTag(CG_WALLET));
+                    }else{
+                        ft.add(R.id.menu_center_framelayout,cgWalletFragment,CG_WALLET);
+                    }
+                    ft.show(fm.findFragmentByTag(CG_WALLET));
+//                    ft.show(cgWalletFragment);
+                    cgWalletFragment.setData();
+                }else{
+                    cgWalletFragment = new CgWalletFragment();
+                    if(fm.findFragmentByTag(CG_WALLET) != null
+                            && fm.findFragmentByTag(CG_WALLET).isAdded()){
+                        ft.show(fm.findFragmentByTag(CG_WALLET));
+                    }else{
+                        ft.add(R.id.menu_center_framelayout,cgWalletFragment,CG_WALLET);
+                    }
+//                    ft.add(R.id.menu_center_framelayout,cgWalletFragment,CG_WALLET);
+                }
+                ft.commitAllowingStateLoss();
                 break;
             case R.id.layout_my_wallet://显示我的钱包页面
                 if(!Utils.isLogined()){
-                    startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 }else{
-                    currIndex = 2;
-                    getSupportFragmentManager().beginTransaction()
-                            .hide(fragments[0])
-                            .hide(fragments[1])
-                            .show(fragments[1]).commit();
                     lineToRight();
-                    myWalletFragment.setData(true);
+                    currIndex = 2;
+
+                    if(myWalletFragment != null) {
+                        LogUtils.e(TAG, "show myWalletFragment");
+                        if(fm.findFragmentByTag(MY_WALLET) != null && fm.findFragmentByTag(MY_WALLET).isAdded()){
+                            ft.show(fm.findFragmentByTag(MY_WALLET));
+                        }else{
+                            ft.add(R.id.menu_center_framelayout,myWalletFragment,MY_WALLET);
+                        }
+//                        ft.show(fm.findFragmentByTag(MY_WALLET));
+//                        ft.show(myWalletFragment);
+                        myWalletFragment.setData(true);
+                    }else{
+                        LogUtils.e(TAG,"new a myWalletFragment");
+                        myWalletFragment = new MyWalletFragment();
+                        if(fm.findFragmentByTag(MY_WALLET) != null &&fm.findFragmentByTag(MY_WALLET).isAdded()){
+                            ft.show(fm.findFragmentByTag(MY_WALLET));
+                        }else{
+                            ft.add(R.id.menu_center_framelayout,myWalletFragment,MY_WALLET);
+                        }
+//                        ft.add(R.id.menu_center_framelayout,myWalletFragment,MY_WALLET);
+                    }
+                    ft.commitAllowingStateLoss();
                 }
                 break;
         }
+    }
 
+    private void hideFragment(android.support.v4.app.FragmentTransaction ft){
+        if(cgWalletFragment != null){
+            ft.hide(fm.findFragmentByTag(CG_WALLET));
+//            ft.hide(cgWalletFragment);
+        }
+        if(myWalletFragment != null){
+            ft.hide(fm.findFragmentByTag(MY_WALLET));
+//            ft.hide(myWalletFragment);
+        }
     }
 
     /**
@@ -550,8 +592,10 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             setLeftMenuInfo(0);//未登录
         }else{
             LogUtils.i(TAG, "Utils.isLogined 为 false");
-            if(currIndex == 2){
-                myWalletFragment.setData(true);
+            if (currIndex == 2){
+                layoutClick(R.id.layout_my_wallet);
+            }else{
+                layoutClick(R.id.layout_cg_wallet);
             }
         }
         String userMobile = Utils.getUserPhone(this);
@@ -573,12 +617,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         startActivity(new Intent(MainActivity.this,LoginActivity.class));
                     }else{
                         currIndex = 2;
-                        getSupportFragmentManager().beginTransaction()
-                                .hide(fragments[0])
-                                .hide(fragments[1])
-                                .show(fragments[1]).commit();
-                        lineToRight();
-                        myWalletFragment.setData(true);
+                        layoutClick(R.id.layout_my_wallet);
                     }
                     break;
                 case 2:
@@ -659,15 +698,21 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
      */
     private void setLeftMenuInfo(int type){
         if(type == 1){//已登录
+            LogUtils.i(TAG,"已登录");
             layotExit.setVisibility(View.VISIBLE);
             tvShowLoginMobile.setVisibility(View.VISIBLE);
             image_Login.setImageResource(R.mipmap.icon_yes_login);
             tvLogin.setVisibility(View.GONE);
         }else if(type == 0){//未登录
+            if(tvLogin.getVisibility() == View.GONE){
+                LogUtils.i(TAG, "未登录");
+                tvLogin.setVisibility(View.VISIBLE);
+            }
             layotExit.setVisibility(View.GONE);
             tvShowLoginMobile.setVisibility(View.GONE);
             image_Login.setImageResource(R.mipmap.icon_no_login);
-            tvLogin.setVisibility(View.VISIBLE);
+        }else{
+            LogUtils.i(TAG,"未进入登录状况的判断");
         }
     }
 
@@ -675,11 +720,12 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.layout_cg_wallet://显示草根钱包页面
-                currIndex = 0;
+                currIndex = 1;
                 layoutClick(v.getId());
                 break;
             case R.id.layout_my_wallet://显示我的钱包页面
-                currIndex = 1;
+                currIndex = 2;
+
                 layoutClick(v.getId());
                 break;
             case R.id.left_menu_safe_center://安全中心
@@ -788,6 +834,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mHandler.removeCallbacks(connectNet);
     }
 
     @Override

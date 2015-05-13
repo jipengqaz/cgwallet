@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -77,7 +76,6 @@ public class OpenSudokoUnlockActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 flag = Utils.getLockPassword(OpenSudokoUnlockActivity.this, Utils.getUserPhone(OpenSudokoUnlockActivity.this)) != "";
-                Log.e("aaaa", flag + "");
                 if (!flag) {
                     Intent intent = new Intent(OpenSudokoUnlockActivity.this, GestureEditActivity.class);
                     startActivity(intent);

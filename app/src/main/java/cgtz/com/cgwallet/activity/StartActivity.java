@@ -198,7 +198,8 @@ public class StartActivity extends Activity {
                                 String token = object.optString("token");
                                 Utils.saveUserId(userId);
                                 Utils.saveToken(token);
-                                startService(new Intent(StartActivity.this, Code_download_Service.class));//开启获取分享数据的服务
+                                startService(new Intent(StartActivity.this, Code_download_Service.class)
+                                        .putExtra("userId",userId).putExtra("token",token));//开启获取分享数据的服务
                             }
                             break;
                     }
