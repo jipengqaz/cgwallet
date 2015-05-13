@@ -42,7 +42,7 @@
                 android:layout_gravity="left"
                 android:textSize="@dimen/text_size_14sp"
                 android:text="取钱中"
-                android:textColor="@color/investment_details_red"
+                android:textColor="@color/money_asset_text"
                 />
         </LinearLayout>
         </LinearLayout>

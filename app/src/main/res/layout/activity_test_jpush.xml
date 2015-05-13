@@ -45,7 +45,7 @@
         <Button
             android:id="@+id/jpush_msg_open_app"
             android:text="@string/jpush_message_button"
-            android:background="@drawable/bg_remond_selector"
+            android:background="@drawable/bg_login_button"
             android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="48dp" />

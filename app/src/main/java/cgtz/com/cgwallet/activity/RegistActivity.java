@@ -75,6 +75,7 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
     }
 
     private void initViews(){
+        Utils.safeCopyWrite(this);//设置安全文案
         registMobile = (EditText) findViewById(R.id.et_regist_mobile);
         securityCode = (EditText) findViewById(R.id.et_regist_security_code);
         getSecurityCode = (TextView) findViewById(R.id.tv_regist_get_security_code);
