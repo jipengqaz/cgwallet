@@ -115,7 +115,7 @@ public class CustomTask extends AsyncTask<String,Void,String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        JsonBean jsonBean = new JsonBean(s);
+        JsonBean jsonBean = new JsonBean(s,url_);
         handler.sendMessage(handler.obtainMessage(handler_what,jsonBean));
     }
 }
