@@ -482,13 +482,26 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                 lineToLeft();
                 currIndex = 1;
                 if(cgWalletFragment != null){
+                    if(fm.findFragmentByTag(CG_WALLET) != null
+                            && fm.findFragmentByTag(CG_WALLET).isAdded()){
+                        ft.show(fm.findFragmentByTag(CG_WALLET));
+                    }else{
+                        ft.add(R.id.menu_center_framelayout,cgWalletFragment,CG_WALLET);
+                    }
                     ft.show(fm.findFragmentByTag(CG_WALLET));
 //                    ft.show(cgWalletFragment);
                     cgWalletFragment.setData();
                 }else{
                     cgWalletFragment = new CgWalletFragment();
-                    ft.add(R.id.menu_center_framelayout,cgWalletFragment,CG_WALLET);
+                    if(fm.findFragmentByTag(CG_WALLET) != null
+                            && fm.findFragmentByTag(CG_WALLET).isAdded()){
+                        ft.show(fm.findFragmentByTag(CG_WALLET));
+                    }else{
+                        ft.add(R.id.menu_center_framelayout,cgWalletFragment,CG_WALLET);
+                    }
+//                    ft.add(R.id.menu_center_framelayout,cgWalletFragment,CG_WALLET);
                 }
+                ft.commitAllowingStateLoss();
                 break;
             case R.id.layout_my_wallet://显示我的钱包页面
                 if(!Utils.isLogined()){
@@ -496,20 +509,31 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                 }else{
                     lineToRight();
                     currIndex = 2;
+
                     if(myWalletFragment != null) {
                         LogUtils.e(TAG, "show myWalletFragment");
-                        ft.show(fm.findFragmentByTag(MY_WALLET));
+                        if(fm.findFragmentByTag(MY_WALLET) != null && fm.findFragmentByTag(MY_WALLET).isAdded()){
+                            ft.show(fm.findFragmentByTag(MY_WALLET));
+                        }else{
+                            ft.add(R.id.menu_center_framelayout,myWalletFragment,MY_WALLET);
+                        }
+//                        ft.show(fm.findFragmentByTag(MY_WALLET));
 //                        ft.show(myWalletFragment);
                         myWalletFragment.setData(true);
                     }else{
                         LogUtils.e(TAG,"new a myWalletFragment");
                         myWalletFragment = new MyWalletFragment();
-                        ft.add(R.id.menu_center_framelayout,myWalletFragment,MY_WALLET);
+                        if(fm.findFragmentByTag(MY_WALLET) != null &&fm.findFragmentByTag(MY_WALLET).isAdded()){
+                            ft.show(fm.findFragmentByTag(MY_WALLET));
+                        }else{
+                            ft.add(R.id.menu_center_framelayout,myWalletFragment,MY_WALLET);
+                        }
+//                        ft.add(R.id.menu_center_framelayout,myWalletFragment,MY_WALLET);
                     }
+                    ft.commitAllowingStateLoss();
                 }
                 break;
         }
-        ft.commitAllowingStateLoss();
     }
 
     private void hideFragment(android.support.v4.app.FragmentTransaction ft){
