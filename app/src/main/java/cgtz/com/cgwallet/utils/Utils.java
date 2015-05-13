@@ -236,6 +236,7 @@ public class Utils {
             Utils.makeToast(context,errorMsg);
             return false;
         }else if(code == Constants.NEED_LOGIN_AGAIN){//需要重新登录
+            loginExit(context);
             context.startActivity(new Intent(context, LoginActivity.class));
             if(!MainActivity.class.getName().equals(((Activity)context).getClass().getName())){
                 ((Activity)context).finish();
