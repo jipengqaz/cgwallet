@@ -89,6 +89,9 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private int Value = 0;
     private FragmentManager fm;
 
+    private static String MY_WALLET = "my";
+    private static String CG_WALLET = "cg";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -479,11 +482,12 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                 lineToLeft();
                 currIndex = 1;
                 if(cgWalletFragment != null){
-                    ft.show(cgWalletFragment);
+                    ft.show(fm.findFragmentByTag(CG_WALLET));
+//                    ft.show(cgWalletFragment);
                     cgWalletFragment.setData();
                 }else{
                     cgWalletFragment = new CgWalletFragment();
-                    ft.add(R.id.menu_center_framelayout,cgWalletFragment);
+                    ft.add(R.id.menu_center_framelayout,cgWalletFragment,CG_WALLET);
                 }
                 break;
             case R.id.layout_my_wallet://显示我的钱包页面
@@ -493,13 +497,14 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                     lineToRight();
                     currIndex = 2;
                     if(myWalletFragment != null) {
-                        LogUtils.e(TAG,"show myWalletFragment");
-                        ft.show(myWalletFragment);
+                        LogUtils.e(TAG, "show myWalletFragment");
+                        ft.show(fm.findFragmentByTag(MY_WALLET));
+//                        ft.show(myWalletFragment);
                         myWalletFragment.setData(true);
                     }else{
                         LogUtils.e(TAG,"new a myWalletFragment");
                         myWalletFragment = new MyWalletFragment();
-                        ft.add(R.id.menu_center_framelayout,myWalletFragment);
+                        ft.add(R.id.menu_center_framelayout,myWalletFragment,MY_WALLET);
                     }
                 }
                 break;
@@ -509,10 +514,12 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 
     private void hideFragment(android.support.v4.app.FragmentTransaction ft){
         if(cgWalletFragment != null){
-            ft.hide(cgWalletFragment);
+            ft.hide(fm.findFragmentByTag(CG_WALLET));
+//            ft.hide(cgWalletFragment);
         }
         if(myWalletFragment != null){
-            ft.hide(myWalletFragment);
+            ft.hide(fm.findFragmentByTag(MY_WALLET));
+//            ft.hide(myWalletFragment);
         }
     }
 
