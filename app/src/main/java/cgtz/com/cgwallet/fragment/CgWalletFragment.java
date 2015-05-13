@@ -111,6 +111,7 @@ public class CgWalletFragment extends BaseFragment implements ISplashView,View.O
         linkName2 = (TextView) view.findViewById(R.id.cg_wallet_link_name2);//第二个特色文案
         linkLayout3 = (LinearLayout) view.findViewById(R.id.cg_wallet_link3);//第三个特色布局
         linkName3 = (TextView) view.findViewById(R.id.cg_wallet_link_name3);//第三个特色文案
+        Utils.safeCopyWrite(getActivity(),view);//设置安全文案
         setData();
     }
 

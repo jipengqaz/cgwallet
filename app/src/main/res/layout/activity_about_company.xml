@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="访问官网www.cgtz.com"
-        android:textColor="@color/bg_about_mine_btn"
+        android:textColor="@color/main_bg"
         android:background="@drawable/bg_about_mine_btn"
         android:layout_margin="6dp"
         />

@@ -446,6 +446,16 @@ public class Utils {
         text.setText(Ke_Fu_data.getSafe(context));
         }
     }
+    /**
+     * 设置安全信息
+     * @param context
+     */
+    public static void safeCopyWrite(Activity context,View view){
+        TextView text = (TextView) view.findViewById(R.id.tv_banner);
+        if(text!=null){
+            text.setText(Ke_Fu_data.getSafe(context));
+        }
+    }
 
     /**
      * 获取渠道名

@@ -74,7 +74,7 @@
     <dimen name="dimen_paybank_top_text_width">100dp</dimen>
     <dimen name="investment_backcard_nib_width">80dp</dimen>
     <dimen name="investment_backcard_nib_marginleft">10dp</dimen>
-    <dimen name="hint_show_edits_mobile">18sp</dimen>
+    <dimen name="hint_show_edits_mobile">28sp</dimen>
     <dimen name="height_edit">46dp</dimen>
     <dimen name="height_edit_2">50dp</dimen>
 </resources>

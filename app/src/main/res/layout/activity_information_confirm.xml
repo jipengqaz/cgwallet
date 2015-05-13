@@ -34,7 +34,7 @@
                         android:layout_width="@dimen/dimen_paybank_top_text_width"
                         android:layout_height="wrap_content"
                         android:text="@string/stilled_money"
-                        android:textSize="@dimen/text_size_14sp"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textColor="#000000"/>
                     <TextView
                         android:id="@+id/stilled_money"

@@ -439,6 +439,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                             }
                         });
                         cDiaog.withButton2Text("确定");
+                        cDiaog.withButton2TextColor(getResources().getColor(R.color.main_bg));
                         cDiaog.withButton2Click(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -475,6 +476,7 @@ public class InformationConfirmActivity extends BaseActivity implements ISplashV
                         }
                     });
                     cDiaog.withButton2Text("确定");
+                    cDiaog.withButton2TextColor(getResources().getColor(R.color.main_bg));
                     cDiaog.withButton2Click(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {

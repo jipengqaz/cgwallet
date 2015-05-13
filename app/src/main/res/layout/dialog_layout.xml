@@ -109,7 +109,7 @@
                     android:textSize="@dimen/text_size_16sp"
                     android:visibility="gone"
                     android:id="@+id/button2"
-                    android:textColor="@color/remond_btn_bg"
+                    android:textColor="@color/main_bg"
                     android:gravity="center"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

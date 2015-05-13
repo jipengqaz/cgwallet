@@ -166,8 +166,7 @@ public class MyWalletFragment extends BaseFragment implements ISplashView,View.O
         today_earnings = (LinearLayout) view.findViewById(R.id.today_earnings);//今日收益
 
         mSwipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.id_swipe_ly);//下拉刷新控件
-        mSwipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
-                android.R.color.holo_orange_light, android.R.color.holo_red_light);
+        mSwipeLayout.setColorSchemeResources(R.color.main_bg);
         mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
