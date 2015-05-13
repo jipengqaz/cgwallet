@@ -5,11 +5,13 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
+import cgtz.com.cgwallet.utility.Constants;
+
 
 public class ChangeLogHelper {
 
     final static String PREFS_FILE_NAME = "app-version";
-    final static String PREFS_KEY = "app_version";
+    final static String PREFS_KEY = "app_version"+ Constants.version;
     final static String FINANCIAL_KEY = "financial";
     final static String ASSETS_KEY ="assets";
 

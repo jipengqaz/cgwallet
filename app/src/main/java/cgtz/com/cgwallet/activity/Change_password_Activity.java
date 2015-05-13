@@ -55,7 +55,7 @@ public class Change_password_Activity extends BaseActivity{
             } else {
                 send_message.setText("重发验证码");
                 mHandler.removeCallbacks(this);
-                send_message.setBackgroundResource(R.drawable.bg_remond_selector);
+                send_message.setBackgroundResource(R.drawable.bg_button_preed);
                 send_message.setEnabled(true);
             }
         }
