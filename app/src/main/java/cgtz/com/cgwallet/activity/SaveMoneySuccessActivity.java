@@ -43,7 +43,7 @@ public class SaveMoneySuccessActivity extends BaseActivity {
         goToWallet = (TextView) findViewById(R.id.go_to_wallet);//查看我的钱包
         walletSlogan = (ImageView) findViewById(R.id.iv_slogan);//钱包口号
         if(!TextUtils.isEmpty(saveMoney)){
-            saveFigure.setText(saveMoney);
+            saveFigure.setText(saveMoney+"元");
         }
 
         if(!TextUtils.isEmpty(startCalculateTime)){
