@@ -42,6 +42,10 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
 
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+
+
     <application
         android:name=".MApplication"
         android:screenOrientation="portrait"
