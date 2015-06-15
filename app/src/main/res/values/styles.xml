@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="@style/Theme.AppCompat">
         <item name="actionBarStyle">@style/ActionBarStyle</item>
         <!-- ActionBar高度 -->
         <item name="actionBarSize">@dimen/activity_title_height</item>

@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:src="@mipmap/icon_menu_left"
+        android:src="@mipmap/icon_menu"
         />
     <ImageView
         android:layout_centerInParent="true"
@@ -28,6 +28,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:src="@mipmap/icon_menu_right"
+        android:src="@mipmap/icon_share"
         />
 </RelativeLayout>
