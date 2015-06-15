@@ -8,6 +8,7 @@
         <!-- 去除ActionBar底部阴影效果 -->
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@null</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <!--<style name="ActionBarStyle" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">-->
