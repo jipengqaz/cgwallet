@@ -35,8 +35,8 @@
     <string name="really_bankcard">银行卡</string>
     <string name="no_anthen">未认证</string>
     <string name="no_binding">未绑定</string>
-    <string name="login_pwd_change">修改登录密码</string>
-    <string name="sodoko_unlock">管理手势密码</string>
+    <string name="login_pwd_change">登录密码</string>
+    <string name="sodoko_unlock">解锁密码</string>
     <string name="sudoko_open_sudoko_unlock">开启手势密码</string>
     <string name="sudoko_set_again">重新设置手势</string>
     <!--activity  name-->

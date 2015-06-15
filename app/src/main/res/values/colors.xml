@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="action_bar_bg">#12e191</color>
+    <color name="action_bar_bg">#40bb6b</color>
     <color name="action_bar_title_text_color">#ffffff</color>
     <color name="action_bar_right_text_color">#ffffff</color>
     <color name="main_blue">#45c01a</color>
@@ -111,4 +111,6 @@
     <color name="bg_show_edits_mobile">#7eeac3</color>
     <color name="text_color">#000000</color>
     <color name="text_hint_color">#999999</color>
+    <color name="safe_center_text_color">#00000f</color>
+
 </resources>

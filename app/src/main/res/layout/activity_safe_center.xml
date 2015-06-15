@@ -27,6 +27,7 @@
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/safe_center_text_color"
                     android:textSize="@dimen/safe_center_text"
                     android:text="@string/really_name"/>
                 <LinearLayout
@@ -68,6 +69,7 @@
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/safe_center_text_color"
                     android:textSize="@dimen/safe_center_text"
                     android:text="@string/really_bankcard"/>
                 <LinearLayout
@@ -113,43 +115,6 @@
                 android:layout_height="0.5dp"/>
             <RelativeLayout
                 android:background="@drawable/bg_safe_center_click"
-                android:id="@+id/Reset_Passwrod"
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-                <TextView
-                    android:layout_marginLeft="10dp"
-                    android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_size_16sp"
-                    android:text="@string/Reset_Passwrod"/>
-                <TextView
-                    android:id="@+id/is_pay_passwrod"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:text="@string/Reset_passwrod_wei"
-                    android:textSize="@dimen/text_size_12sp"
-
-                    android:gravity="right"
-                    android:layout_marginRight="40dp"
-                    />
-                <ImageView
-                    android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:src="@mipmap/open"
-                    android:layout_marginRight="20dp"
-                    />
-            </RelativeLayout>
-            <View
-                android:background="@color/bg_line"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"/>
-            <RelativeLayout
-                android:background="@drawable/bg_safe_center_click"
                 android:id="@+id/rl_personal_loginpwd_change"
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
@@ -158,6 +123,7 @@
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/safe_center_text_color"
                     android:textSize="@dimen/text_size_16sp"
                     android:text="@string/login_pwd_change"/>
                 <ImageView
@@ -184,8 +150,47 @@
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/safe_center_text_color"
                     android:textSize="@dimen/text_size_16sp"
                     android:text="@string/sodoko_unlock"/>
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@mipmap/open"
+                    android:layout_marginRight="20dp"
+                    />
+            </RelativeLayout>
+            <View
+                android:background="@color/bg_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+            <RelativeLayout
+                android:background="@drawable/bg_safe_center_click"
+                android:id="@+id/Reset_Passwrod"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/safe_center_text_color"
+                    android:textSize="@dimen/text_size_16sp"
+                    android:text="@string/Reset_Passwrod"/>
+                <TextView
+                    android:id="@+id/is_pay_passwrod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/main_tips2"
+                    android:text="@string/Reset_passwrod_wei"
+                    android:textSize="@dimen/text_size_12sp"
+                    android:gravity="right"
+                    android:layout_marginRight="40dp"
+                    />
                 <ImageView
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
