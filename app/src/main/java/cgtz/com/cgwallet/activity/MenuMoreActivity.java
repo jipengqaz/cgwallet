@@ -22,8 +22,10 @@ public class MenuMoreActivity extends BaseActivity implements View.OnClickListen
     private RelativeLayout aboutMine;//关于我们
     private RelativeLayout feedBack;//意见反馈
     private RelativeLayout contactMine;//联系我们
+    private RelativeLayout versionUpdate;//版本升级
     private CustomEffectsDialog ceffectDialog;
     private TextView version;//版本号
+    private TextView serviceMobile;//客服电话号码
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,16 +41,20 @@ public class MenuMoreActivity extends BaseActivity implements View.OnClickListen
         aboutMine = (RelativeLayout) findViewById(R.id.about_mine);
         feedBack = (RelativeLayout) findViewById(R.id.feed_back);
         contactMine = (RelativeLayout) findViewById(R.id.contact_mine);
+        versionUpdate = (RelativeLayout) findViewById(R.id.version_update);
         version = (TextView) findViewById(R.id.version);
+        serviceMobile = (TextView) findViewById(R.id.service_mobile);
         TextView ke_fu_tip = (TextView) findViewById(R.id.ke_fu_tip);
         ke_fu_tip.setText(Ke_Fu_data.getWorkTime(this));
         Utils.safeCopyWrite(this);//设置安全文案
+        serviceMobile.setText(Ke_Fu_data.getPhone(MenuMoreActivity.this));
     }
 
     private void setListener(){
         aboutMine.setOnClickListener(this);
         feedBack.setOnClickListener(this);
         contactMine.setOnClickListener(this);
+        versionUpdate.setOnClickListener(this);
         version.setText("当前版本: v " + Utils.getVersion(this));
         version.setOnClickListener(this);
     }
@@ -115,6 +121,9 @@ public class MenuMoreActivity extends BaseActivity implements View.OnClickListen
                     touchTime = 0;
                     Toast.makeText(this, "渠道号："+Utils.getChannelName(this)+"   版本code："+Utils.getVersion1(this), Toast.LENGTH_SHORT).show();
                 }
+                break;
+            case R.id.version_update://版本升级
+
                 break;
         }
     }

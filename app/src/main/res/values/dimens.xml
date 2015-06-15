@@ -77,4 +77,5 @@
     <dimen name="hint_show_edits_mobile">28sp</dimen>
     <dimen name="height_edit">46dp</dimen>
     <dimen name="height_edit_2">50dp</dimen>
+    <dimen name="menu_more_text_margin_left">30dp</dimen>
 </resources>
