@@ -25,6 +25,7 @@ public class MApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         JPushInterface.setDebugMode(Constants.IS_TEST);//true 设置开启日志，发布时请关闭日志(false)
         JPushInterface.init(this);// 初始化 JPush
     }
