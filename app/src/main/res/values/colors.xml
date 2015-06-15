@@ -109,4 +109,6 @@
     <color name="more_item_pressed">#ededed</color>
     <color name="hint_show_edits_mobile">#04955d</color>
     <color name="bg_show_edits_mobile">#7eeac3</color>
+    <color name="text_color">#000000</color>
+    <color name="text_hint_color">#999999</color>
 </resources>
