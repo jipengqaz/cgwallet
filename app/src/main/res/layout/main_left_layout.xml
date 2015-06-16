@@ -103,6 +103,33 @@
                 </RelativeLayout>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/left_menu_cgtz"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/left_layout_item_height">
+                <ImageView
+                    android:src="@mipmap/icon_cgtz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RelativeLayout
+                    android:layout_marginLeft="@dimen/left_layout_icon_text_distance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="草根投资"
+                        android:textSize="@dimen/left_layout_text_size"
+                        android:textColor="@color/left_layout_text_color"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:layout_alignParentRight="true"
+                        android:src="@mipmap/icon_toleft_arraw"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
                 android:id="@+id/left_menu_more"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -126,37 +153,6 @@
                         android:layout_alignParentRight="true"
                         android:src="@mipmap/icon_toleft_arraw"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </RelativeLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/left_layout_item_height">
-                <ImageView
-                    android:src="@mipmap/icon_version"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <RelativeLayout
-                    android:layout_marginLeft="@dimen/left_layout_icon_text_distance"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/aaaaaaa"
-                        android:text="版本"
-                        android:textSize="@dimen/left_layout_text_size"
-                        android:textColor="@color/left_layout_text_color"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:id="@+id/version"
-                        android:gravity="right|bottom"
-                        android:text="v1.0"
-                        android:textSize="@dimen/text_size_10sp"
-                        android:textColor="@color/left_layout_text_color"
-                        android:layout_alignBottom="@id/aaaaaaa"
-                        android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </RelativeLayout>
             </LinearLayout>

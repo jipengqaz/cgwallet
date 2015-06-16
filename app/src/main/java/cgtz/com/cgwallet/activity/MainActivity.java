@@ -71,6 +71,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private LinearLayout menuSafeCenter;//安全中心
     private LinearLayout menuHelpCenter;//帮助中心
     private LinearLayout menuMore;//更多
+    private LinearLayout menuCgtz;//跳转草根投资
     private TextView tvLogin;//未登录显示文案或者显示登录的手机号
     private TextView tvShowLoginMobile;//显示登录的手机号
     private ImageView image_Login;//登录上面的图片
@@ -404,8 +405,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     }
 
     private void initViews(){
-        TextView version = (TextView) findViewById(R.id.version);
-        version.setText("v"+Constants.VERSION);
         mMenu = (SlidingMenu) findViewById(R.id.id_menu);
         cgWalletIcon = (ImageView) findViewById(R.id.cg_wallet_icon);
         myWalletIcon = (ImageView) findViewById(R.id.my_wallet_icon);
@@ -419,6 +418,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         menuSafeCenter = (LinearLayout) findViewById(R.id.left_menu_safe_center);
         menuHelpCenter = (LinearLayout) findViewById(R.id.left_menu_help_center);
         menuMore = (LinearLayout) findViewById(R.id.left_menu_more);
+        menuCgtz = (LinearLayout) findViewById(R.id.left_menu_cgtz);
         tvShowLoginMobile = (TextView) findViewById(R.id.tv_show_login_mobile);
         image_Login = (ImageView) findViewById(R.id.image_Login);
         layotExit = (LinearLayout) findViewById(R.id.left_menu_login_out);
@@ -464,6 +464,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         menuSafeCenter.setOnClickListener(this);
         menuHelpCenter.setOnClickListener(this);
         menuMore.setOnClickListener(this);
+        menuCgtz.setOnClickListener(this);
         layotExit.setOnClickListener(this);
         layoutCgWallet.setOnClickListener(this);//底部的草根钱包
         layoutMyWallet.setOnClickListener(this);//底部的我的钱包
@@ -739,6 +740,9 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                 startActivity(new Intent(this,WebViewActivity.class)
                 .putExtra("url","https://d5ds88.cgtz.com/version/e/detail")
                 .putExtra("title","帮助中心"));
+                break;
+            case R.id.left_menu_cgtz://草根投资
+
                 break;
             case R.id.left_menu_more://更多
                 startActivity(new Intent(this,MenuMoreActivity.class));
