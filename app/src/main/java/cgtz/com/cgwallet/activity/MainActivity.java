@@ -50,6 +50,7 @@ import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.fragment.CgWalletFragment;
 import cgtz.com.cgwallet.fragment.MyWalletFragment;
+import cgtz.com.cgwallet.fragment.My_wallet_new_Fragment;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.Start_update_value;
@@ -78,7 +79,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private int currIndex;//当前页卡编号
     private ProgressDialog progressDialog;
     private CgWalletFragment cgWalletFragment;
-    private MyWalletFragment myWalletFragment;
+//    private MyWalletFragment myWalletFragment;
+    private My_wallet_new_Fragment myWalletFragment;
     private ImageView bottomLineSelected;//底部的白线
     private int screenWith;
     private LinearLayout.LayoutParams params;
@@ -524,7 +526,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         myWalletFragment.setData(true);
                     }else{
                         LogUtils.e(TAG,"new a myWalletFragment");
-                        myWalletFragment = new MyWalletFragment();
+                        myWalletFragment = new My_wallet_new_Fragment();
                         if(fm.findFragmentByTag(MY_WALLET) != null &&fm.findFragmentByTag(MY_WALLET).isAdded()){
                             ft.show(fm.findFragmentByTag(MY_WALLET));
                         }else{

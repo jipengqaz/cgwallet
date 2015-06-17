@@ -7,7 +7,7 @@
     <color name="bg_about_mine_btn">#45c01a</color>
     <color name="top_title">#12e191</color>
     <color name="main_red">#fb5e4f</color>
-    <color name="main_bg">#12e191</color>
+    <color name="main_bg">@color/action_bar_bg</color>
     <color name="main_bg_white">#f8f8f8</color>
     <color name="bg_center">#f5f5f5</color>
     <color name="main_comment">#606060</color>
@@ -61,9 +61,7 @@
     <color name="bg_login_edit_stroke">#0085d4</color>
     <color name="bg_login_button_normal">#09d88a</color>
     <color name="bg_login_button_click">#0bc47e</color>
-    <color name="my_wallet_today_earning_hint">#ffffff</color>
-    <color name="my_wallet_earning_text">#898989</color>
-    <color name="my_wallet_earning_num_text">#536962</color>
+   
     <color name="bg_bine">#53c599</color>
     <color name="bg_my_wallet">#eeeeee</color>
     <color name="item_earnings_record_2_2">#d1d1d1</color>
@@ -109,4 +107,9 @@
     <color name="more_item_pressed">#ededed</color>
     <color name="hint_show_edits_mobile">#04955d</color>
     <color name="bg_show_edits_mobile">#7eeac3</color>
+    <color name="back_my_wallet">#40bb8b</color>
+    <color name="my_wallet_today_earning_hint">#ffffff</color>
+    <color name="my_wallet_earning_text">#b2b2b2</color>
+    <color name="my_wallet_earning_num_text">#666666</color>
+    <color name="my_wallet_line">#e5e5e5</color>
 </resources>

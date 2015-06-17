@@ -14,7 +14,7 @@ public class Constants {
     public static final String colors  ="#e44d42";//手势密码提示文案颜色
     public static final boolean IS_TEST = true;//判断是否为测试环境
     public static final boolean IS_DEVELOP = false;//用于在开发还是测试之间选择测试服务器路径的判断
-    public static final boolean IS_28 = true;//判断是否更改为28服务器路径
+    public static final boolean IS_28 = false;//判断是否更改为28服务器路径
     public static final String OFFLINE_HTTP_TEST = "http://192.168.10.188:45680/wallet/";//用于开发的-测试服务器路径
     public static final String OFFLINE_HTTP_DEVELOP = "http://192.168.10.188:45680/wallet2/";//用于开发的-测试服务器路径
     public static final String OFFLINE_HTTP_28 = "http://115.29.245.28:42111/wallet/";//测试服务器路径
