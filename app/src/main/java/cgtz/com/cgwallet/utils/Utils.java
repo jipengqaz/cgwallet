@@ -112,6 +112,15 @@ public class Utils {
     }
 
     /**
+     * 获取带星号手机号
+     * @param context
+     * @return
+     */
+    public static String getMobileOfStar(Context context){
+        return getHasStarsMobile(getUserPhone(context));
+    }
+
+    /**
      * 退出账号,删除登录密码  清空  该账户的数据
      * @param context
      * @return

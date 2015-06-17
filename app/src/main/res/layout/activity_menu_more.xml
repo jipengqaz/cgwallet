@@ -38,14 +38,26 @@
                 android:background="@drawable/bg_safe_center_click"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/more_item_height">
-                <TextView
+                <LinearLayout
                     android:layout_marginLeft="@dimen/menu_more_text_margin_left"
                     android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/safe_center_text"
-                    android:textColor="@color/code_333333"
-                    android:text="关于我们"/>
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_marginRight="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ico_about"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/safe_center_text"
+                        android:textColor="@color/code_333333"
+                        android:text="关于我们"/>
+                </LinearLayout>
                 <ImageView
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
@@ -64,14 +76,26 @@
                 android:background="@drawable/bg_safe_center_click"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/more_item_height">
-                <TextView
+                <LinearLayout
                     android:layout_marginLeft="@dimen/menu_more_text_margin_left"
                     android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/safe_center_text"
-                    android:textColor="@color/code_333333"
-                    android:text="版本升级"/>
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_marginRight="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ico_up"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/safe_center_text"
+                        android:textColor="@color/code_333333"
+                        android:text="版本升级"/>
+                </LinearLayout>
                 <ImageView
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
@@ -100,14 +124,26 @@
                 android:background="@drawable/bg_safe_center_click"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/more_item_height">
-                <TextView
+                <LinearLayout
                     android:layout_marginLeft="@dimen/menu_more_text_margin_left"
                     android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/safe_center_text"
-                    android:textColor="@color/code_333333"
-                    android:text="意见反馈"/>
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_marginRight="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ico_option"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/safe_center_text"
+                        android:textColor="@color/code_333333"
+                        android:text="意见反馈"/>
+                </LinearLayout>
                 <ImageView
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
@@ -126,14 +162,26 @@
                 android:id="@+id/contact_mine"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/more_item_height">
-                <TextView
+                <LinearLayout
                     android:layout_marginLeft="@dimen/menu_more_text_margin_left"
                     android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_size_14sp"
-                    android:textColor="@color/code_333333"
-                    android:text="联系我们"/>
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_marginRight="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ico_contact"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/code_333333"
+                        android:text="联系我们"/>
+                </LinearLayout>
                 <TextView
                     android:id="@+id/service_mobile"
                     android:textColor="@color/gray"
