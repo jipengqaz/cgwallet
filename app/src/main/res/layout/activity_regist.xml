@@ -37,14 +37,11 @@
                 android:numeric="integer"
                 android:maxLength="11"
                 android:hint="@string/hint_regist_mobile"
-                android:textSize="@dimen/hint_regist_mobile"
-                android:textColor="@color/hint_regist_edit"
-                android:textColorHint="@color/hint_regist_edit"
+                style="@style/regist_text_hint"
                 android:drawableLeft="@mipmap/icon_regist_user"
                 android:drawablePadding="10dp"
                 android:lines="1"
                 android:padding="10dp"
-                android:background="@drawable/bg_regist_edit"
                 android:layout_width="match_parent"
                 android:layout_height="40dp" />
                 <ImageView
@@ -67,19 +64,16 @@
                     android:background="@drawable/bg_regist_edit"
                     android:layout_width="120dp"
                     android:layout_height="match_parent">
-                <EditText
-                    android:layout_weight="1"
-                    android:id="@+id/et_regist_security_code"
-                    android:hint="@string/hint_regist_security_code"
-                    android:textColorHint="@color/hint_regist_edit"
-                    android:textSize="@dimen/hint_regist_mobile"
-                    android:textColor="@color/hint_regist_edit"
-                    android:padding="10dp"
-                    android:background="@drawable/bg_regist_edit"
-                    android:maxLength="6"
-                    android:inputType="number"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    <EditText
+                        style="@style/regist_text_hint"
+                        android:layout_weight="1"
+                        android:id="@+id/et_regist_security_code"
+                        android:hint="@string/hint_regist_security_code"
+                        android:padding="10dp"
+                        android:maxLength="6"
+                        android:inputType="number"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
                     <ImageView
                         android:id="@+id/empty_code"
                         android:visibility="gone"
@@ -114,6 +108,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp">
                     <EditText
+                        style="@style/regist_text_hint"
                         android:id="@+id/et_regist_pwd"
                         android:layout_weight="1"
                         android:digits="@string/pwd_digits"
@@ -121,13 +116,10 @@
                         android:maxLength="20"
                         android:hint="@string/hint_regist_edit_pwd"
                         android:textSize="@dimen/hint_regist_mobile"
-                        android:textColor="@color/hint_regist_edit"
-                        android:textColorHint="@color/hint_regist_edit"
                         android:drawableLeft="@mipmap/icon_regist_pwd"
                         android:drawablePadding="10dp"
                         android:padding="10dp"
                         android:maxLines="1"
-                        android:background="@drawable/bg_regist_edit"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                     <ImageView
@@ -145,9 +137,8 @@
                         android:src="@mipmap/icon_regist_no_show_password"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
-
                 </LinearLayout>
-                <EditText
+                <TextView
                     android:layout_marginTop="10dp"
                     android:text="@string/hint_regist_pwd_introduce"
                     android:textSize="@dimen/text_size_12sp"
@@ -167,15 +158,32 @@
                     android:text="@string/text_regist_finish"
                     android:layout_width="match_parent"
                     android:layout_height="42dp" />
-                <TextView
-                    android:id="@+id/tv_regist_protocol"
+                <LinearLayout
                     android:padding="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/hint_regist_protocol"
-                    android:textSize="@dimen/hint_regist_mobile"
-                    android:textColor="@color/bg_regist_protocol"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <CheckBox
+                        android:id="@+id/checkbox"
+                        android:checked="true"
+                        style="@style/regist_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:text="我已阅读并同意"
+                        android:textColor="@color/gray"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/tv_regist_protocol"
+                        android:text="@string/hint_regist_protocol"
+                        android:textSize="@dimen/hint_regist_mobile"
+                        android:textColor="@color/bg_regist_protocol"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

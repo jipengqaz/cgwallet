@@ -103,4 +103,14 @@
         <item name="android:drawablePadding">11dp</item>
         <item name="android:background">@null</item>
     </style>
+    <style name="regist_text_hint">
+        <item name="android:textColorHint">@color/hint_regist_edit</item>
+        <item name="android:textColor">@color/hint_regist_edit</item>
+        <item name="android:textSize">@dimen/hint_regist_mobile</item>
+        <item name="android:background">@drawable/bg_regist_edit</item>
+    </style>
+    <style name="regist_checkbox" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/regist_checkbox</item>
+        <item name="android:padding">5dp</item>
+    </style>
 </resources>

@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -55,6 +56,7 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
     private int  is;//用户判断访问那个接口
     private boolean isChecked = false;//设置是否显示密码
     private ImageView empty_code,empty_phone,empty;//清空验证码输入框，清空手机输入框，清空密码输入框
+    private CheckBox checkbox;//草根协议是否同意
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +88,7 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
         empty_code = (ImageView) findViewById(R.id.empty_code);//清空验证码输入框
         empty_phone = (ImageView) findViewById(R.id.empty_phone);//清空手机输入框
         empty = (ImageView) findViewById(R.id.empty);//清空密码输入框
+        checkbox = (CheckBox) findViewById(R.id.checkbox);//同意草根协议
 
         if(beforeMobile){//如果是修改密码
             lookProtocol.setVisibility(View.GONE);
@@ -237,20 +240,6 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
                     presenter.didFinishLoading(this);
                 }
                 break;
-//            case R.id.btn_regist_next://下一步
-//                mobile  = registMobile.getText().toString().trim();
-//                mobile_code = securityCode.getText().toString().trim();
-//                if(TextUtils.isEmpty(mobile)){
-//                    Utils.makeToast(this,"请输入注册手机号");
-//                }else if(TextUtils.isEmpty(mobile_code)){
-//                    Utils.makeToast(this,"请填写验证码");
-//                }else{
-//                    startActivity(new Intent(this,RegistNextActivity.class)
-//                    .putExtra("mobile",mobile)
-//                    .putExtra("mobile_code", mobile_code)
-//                    .putExtra("beforeMobile", beforeMobile));
-//                }
-//                break;
             case R.id.btn_regist://注册按钮
                 mobile  = registMobile.getText().toString().trim();
                 mobile_code = securityCode.getText().toString().trim();
@@ -262,7 +251,9 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
                 }else if(TextUtils.isEmpty(mobile_pwd)){
                     Utils.makeToast(this,"请设置登录密码");
                 }else if(mobile_pwd.length() >20 || mobile_pwd.length() < 6){
-                    Utils.makeToast(this,"密码位数不正确");
+                    Utils.makeToast(this, "密码位数不正确");
+                }else if(!checkbox.isChecked()){
+                    Utils.makeToast(this,"请勾选草根协议");
                 }else{
                     is = 2;
                     presenter.didFinishLoading(this);
@@ -395,10 +386,6 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
         switch (is){
             case 1:
             //获取验证码
-//            getSecurityCode.setText(CODE_TIME + TIME_MSG);
-////        getSecurityCode.setTextColor(getResources().getColor(R.color.white));
-//            getSecurityCode.setEnabled(false);
-//            mHandler.sendEmptyMessageDelayed(GET_CODE_TIME, 1000);
             params = new HashMap();
             params.put("mobile", mobile);
             task = new CustomTask(mHandler, Constants.WHAT_GET_SECURITY_CODE
