@@ -57,8 +57,8 @@
     <dimen name="my_wallet_today_earning_hint">14sp</dimen>
     <dimen name="my_wallet_top_height">165dp</dimen>
     <dimen name="my_wallet_figure_size">68sp</dimen>
-    <dimen name="my_wallet_earning_size">14sp</dimen>
-    <dimen name="my_wallet_earning_num_size">22sp</dimen>
+    <dimen name="my_wallet_earning_size">12sp</dimen>
+    <dimen name="my_wallet_earning_num_size">26sp</dimen>
     <dimen name="my_wallet_another_size">14sp</dimen>
     <dimen name="height_login_bottom">48dp</dimen>
     <dimen name="draw_padding">15dp</dimen>
