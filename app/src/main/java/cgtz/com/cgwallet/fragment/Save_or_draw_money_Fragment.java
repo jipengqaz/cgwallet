@@ -14,7 +14,7 @@ import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.widget.ProgressDialog;
 
 /**
- * 安全信息文案
+ *
  * Created by Administrator on 2015/6/17.
  */
 public class Save_or_draw_money_Fragment extends BaseFragment{
