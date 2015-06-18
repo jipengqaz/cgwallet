@@ -21,7 +21,7 @@ public class Save_or_draw_money_Fragment extends BaseFragment{
     private ProgressDialog progressDialog;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view  = inflater.inflate(R.layout.layout_save_or_draw_money,null);
+        View view  = inflater.inflate(R.layout.layout_save_or_draw_money,container,false);
         TextView layout_draw_money = (TextView) view.findViewById(R.id.layout_draw_money);
         TextView saveLayout = (TextView) view.findViewById(R.id.layout_save_money);
         saveLayout.setOnClickListener(new View.OnClickListener() {

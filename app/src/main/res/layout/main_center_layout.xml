@@ -14,28 +14,28 @@
     <FrameLayout
         android:id="@+id/menu_center_framelayout"
         android:layout_below="@+id/top_title_layout"
-        android:layout_above="@+id/transfer_layout"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-    <include layout="@layout/layout_bottom_wallet_item"
-        android:id="@+id/transfer_layout"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/layout_bottom_transfer_height"/>
-    <LinearLayout
-        android:id="@+id/wallet_bottom_line_layout"
-        android:gravity="bottom"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/layout_bottom_transfer_line_height"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/wallet_bottom_line_selected"
-            android:scaleType="fitXY"
-            android:src="@mipmap/icon_line_selected"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+    <!--android:layout_above="@+id/transfer_layout"-->
+    <!--<include layout="@layout/layout_bottom_wallet_item"-->
+        <!--android:id="@+id/transfer_layout"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/layout_bottom_transfer_height"/>-->
+    <!--<LinearLayout-->
+        <!--android:id="@+id/wallet_bottom_line_layout"-->
+        <!--android:gravity="bottom"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginBottom="@dimen/layout_bottom_transfer_line_height"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<ImageView-->
+            <!--android:id="@+id/wallet_bottom_line_selected"-->
+            <!--android:scaleType="fitXY"-->
+            <!--android:src="@mipmap/icon_line_selected"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+    <!--</LinearLayout>-->
 </RelativeLayout>
