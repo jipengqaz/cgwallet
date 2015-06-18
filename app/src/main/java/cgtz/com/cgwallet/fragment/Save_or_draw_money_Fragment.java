@@ -24,7 +24,7 @@ public class Save_or_draw_money_Fragment extends BaseFragment{
         View view  = inflater.inflate(R.layout.layout_save_or_draw_money,container,false);
         TextView layout_draw_money = (TextView) view.findViewById(R.id.layout_draw_money);
         TextView saveLayout = (TextView) view.findViewById(R.id.layout_save_money);
-        saveLayout.setOnClickListener(new View.OnClickListener() {
+        saveLayout.setOnClickListener(new View.OnClickListener() {//¥Ê«Æ
             @Override
             public void onClick(View view) {
                 getActivity().startActivity(new Intent(getActivity(), SaveMoneyActivity.class));
@@ -33,7 +33,7 @@ public class Save_or_draw_money_Fragment extends BaseFragment{
         if(progressDialog == null){
             progressDialog = new ProgressDialog(getActivity(),R.style.loading_dialog);
         }
-        layout_draw_money.setOnClickListener(new View.OnClickListener() {
+        layout_draw_money.setOnClickListener(new View.OnClickListener() {//»°«Æ
             @Override
             public void onClick(View view) {
                 Withdraw_money_Client.getWithdraw_money(getActivity(), Constants.WHAT_WITHDRAW, progressDialog);

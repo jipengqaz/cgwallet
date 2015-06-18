@@ -56,7 +56,7 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
         showBack(true);
         MApplication.registActivities(this);
         setContentView(R.layout.withdraw_money);
-        setTitle("取钱");
+        setTitle(getResources().getString(R.string.transfer_output));
         if(savedInstanceState !=null ){//从savedInstanceState获取数据
             capitalBalance =savedInstanceState.getString("capitalBalance");
             card = (BankCard) savedInstanceState.getSerializable("card");
