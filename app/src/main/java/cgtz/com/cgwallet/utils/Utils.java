@@ -408,26 +408,6 @@ public class Utils {
         }
     }
 
-    /**
-     * 跳转存钱和取钱页面
-     */
-    public static void SaveOrDrawMoney(final Activity context, final ProgressDialog progressDialog){
-
-        TextView saveLayout = (TextView) context.findViewById(R.id.layout_save_money);
-        TextView drawLayout= (TextView) context.findViewById(R.id.layout_draw_money);
-        saveLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                context.startActivity(new Intent(context, SaveMoneyActivity.class));
-            }
-        });
-        drawLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Withdraw_money_Client.getWithdraw_money(context, Constants.WHAT_WITHDRAW, progressDialog);
-            }
-        });
-    }
 
     /**
      * 点击屏幕，关闭输入键盘

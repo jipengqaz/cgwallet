@@ -6,7 +6,7 @@
     >
     <cgtz.com.cgwallet.view.RefreshAndLoadMoreListView
         android:id="@+id/record_listview"
-        android:layout_above="@+id/aaaa"
+        android:layout_above="@+id/save"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginRight="20dp"
@@ -15,10 +15,10 @@
         android:divider="@null"
         android:listSelector="@android:color/transparent"
         />
-    <include layout="@layout/layout_save_or_draw_money"
-        android:id="@+id/aaaa"
+    <fragment
+        android:id="@+id/save"
+        android:name="cgtz.com.cgwallet.fragment.Save_or_draw_money_Fragment"
         android:layout_alignParentBottom="true"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/save_or_draw_money_layout_height"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/save_or_draw_money_layout_height" />
 </RelativeLayout>

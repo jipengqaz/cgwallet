@@ -76,7 +76,6 @@ public class Earnings_record extends BaseActivity implements ISplashView {
         if(progressDialog == null){
             progressDialog = new ProgressDialog(this,R.style.loading_dialog);
         }
-        Utils.SaveOrDrawMoney(this, progressDialog);
     }
     @Override
     protected void onDestroy() {

@@ -72,11 +72,11 @@
         android:id="@+id/animation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <include layout="@layout/layout_save_or_draw_money"
-        android:layout_width="wrap_content"
-        android:layout_weight="1"
-        android:layout_height="58dp"
-        />
+        <fragment
+            android:id="@+id/save"
+            android:name="cgtz.com.cgwallet.fragment.Save_or_draw_money_Fragment"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/save_or_draw_money_layout_height" />
     </LinearLayout>
     </LinearLayout>
     <RelativeLayout
