@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     >
-    <ProgressBar
-        android:id="@+id/progress_bar_2"
-        android:layout_width="match_parent"
-        android:layout_height="6dp"
-        android:max="100"
-        android:background="@color/white"
-        style="?android:attr/progressBarStyleHorizontal"/>
 
 
     <WebView
@@ -20,5 +13,10 @@
         android:layout_height="match_parent"
         android:scrollbars="none"
         android:id="@+id/webview" />
+    <TextView
+        android:id="@+id/progress_bar_2"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@color/investment_details_red"/>
 
-</LinearLayout>
+</RelativeLayout>
