@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -59,6 +60,7 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
     private View layoutView;
     private NotSlideGridView function;//所有的选项
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         screenWidth = getResources().getDisplayMetrics().widthPixels;
@@ -82,6 +84,14 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
         if(today_earnings != null){
             today_earnings.setEnabled(false);
         }
+        //选项
+        if(function != null){
+            function.setEnabled(false);
+        }
+        //下拉刷新
+        if(mSwipeLayout != null){
+            mSwipeLayout.setEnabled(false);
+        }
     }
 
     public void requetFocus(){
@@ -96,6 +106,14 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
         //今日收益layout
         if(today_earnings != null){
             today_earnings.setEnabled(true);
+        }
+        //选项
+        if(function != null){
+            function.setEnabled(true);
+        }
+        //下拉刷新
+        if(mSwipeLayout != null){
+            mSwipeLayout.setEnabled(true);
         }
     }
     public void setData(boolean flag){
@@ -314,8 +332,12 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
         if(TextUtils.isEmpty(Utils.getUserId()) || TextUtils.isEmpty(Utils.getToken())){//判断是否登录
             goLogin = true;
             hideProcessBar();
-            Utils.makeToast(getActivity(),Constants.NEED_LOGIN);
-            startActivity(new Intent(getActivity(), LoginActivity.class));
+            if(!Utils.getIsMask(getActivity())){
+
+            }else{
+                Utils.makeToast(getActivity(), Constants.NEED_LOGIN);
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+            }
         }else{
             HashMap<String,String> params = new HashMap<>();
             params.put("user_id", Utils.getUserId());

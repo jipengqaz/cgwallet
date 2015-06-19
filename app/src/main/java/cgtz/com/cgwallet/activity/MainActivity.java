@@ -428,7 +428,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                 switch (v.getId()){
                     case R.id.start_money://开始生钱
                         dialog_main.dismiss();
-                        Utils.saveIsMask(MainActivity.this,true);
+                        Utils.saveIsMask(MainActivity.this,true);//存储是否显示遮罩层的判断值
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
                         break;
                     case R.id.understand://了解草根钱包
@@ -808,13 +808,16 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.cg_wallet_button://显示草根钱包页面
-                currIndex = 2;
-                layoutClick(v.getId());
+                if(SlidingMenu.isshow){
+                    currIndex = 2;
+                    layoutClick(v.getId());
+                }
                 break;
             case R.id.my_wallet_button://显示我的钱包页面
-                currIndex = 1;
-
-                layoutClick(v.getId());
+                if(SlidingMenu.isshow){
+                    currIndex = 1;
+                    layoutClick(v.getId());
+                }
                 break;
             case R.id.left_menu_safe_center://安全中心
                 if(Utils.isLogined()){//判断是否登录

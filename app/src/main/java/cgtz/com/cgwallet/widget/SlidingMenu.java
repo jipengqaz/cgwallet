@@ -24,6 +24,7 @@ import cgtz.com.cgwallet.utils.Utils;
 
 public class SlidingMenu extends HorizontalScrollView{
 	private static final String TAG = "SlidingMenu";
+	public static boolean isshow = true;//判断是否显示的是侧面菜单页面
 	/**
 	 * 屏幕宽度
 	 */
@@ -162,6 +163,7 @@ public class SlidingMenu extends HorizontalScrollView{
 						isShowRightMenu = false;
 						this.smoothScrollTo(0,0);
 						focusToggle(false);
+						isshow = false;
 						break;
 					case SHOW_RIGHT_MENU:
 						//显示右边菜单
@@ -171,6 +173,7 @@ public class SlidingMenu extends HorizontalScrollView{
 						this.smoothScrollTo(rightSlidingMenu, 0);
 						bindActivity.initShareData();//设置分享数据
 						focusToggle(false);
+						isshow = false;
 						break;
 					case HIDE_LEFT_MENU:
 						//隐藏左边菜单
@@ -179,6 +182,7 @@ public class SlidingMenu extends HorizontalScrollView{
 						isShowRightMenu = false;
 						this.smoothScrollTo(mMenuWidth, 0);
 						focusToggle(true);
+						isshow = true;
 						break;
 					case HIDE_RIGHT_MENU:
 						//隐藏右边菜单
@@ -187,6 +191,7 @@ public class SlidingMenu extends HorizontalScrollView{
 						isShowLeftMenu = false;
 						this.smoothScrollTo(mMenuWidth, 0);
 						focusToggle(true);
+						isshow = true;
 						break;
 					case NEED_TO_LOGIN:
 						//去登录
@@ -298,8 +303,10 @@ public class SlidingMenu extends HorizontalScrollView{
 	public void leftToggle(){
 		if (isShowLeftMenu){
 			hideLeftmenu();
+			isshow = true;
 		} else{
 			showLeftMenu();
+			isshow = false;
 		}
 	}
 
@@ -308,9 +315,13 @@ public class SlidingMenu extends HorizontalScrollView{
 	 */
 	public void rightToggle(){
 		if(isShowRightMenu){
+			isshow = true;
+			LogUtils.e(TAG,isshow+"    isshow true");
 			hideRightMenu();
 		}else{
 			bindActivity.initShareData();//设置分享数据
+			isshow = false;
+			LogUtils.e(TAG,isshow+"");
 			showRightMenu();
 		}
 	}
