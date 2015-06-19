@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -52,6 +53,7 @@ import cgtz.com.cgwallet.fragment.CgWalletFragment;
 import cgtz.com.cgwallet.fragment.MyWalletFragment;
 import cgtz.com.cgwallet.fragment.My_wallet_new_Fragment;
 import cgtz.com.cgwallet.utility.Constants;
+import cgtz.com.cgwallet.utils.Ke_Fu_data;
 import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.Start_update_value;
 import cgtz.com.cgwallet.utils.Utils;
@@ -121,9 +123,9 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         showRightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Utils.isLogined()) {
+                if (Utils.isLogined()) {
                     mMenu.rightToggle();
-                }else{
+                } else {
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 }
             }
@@ -408,6 +410,42 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         }
     }
 
+    /**
+     * 显示遮罩层的  dialog
+     */
+    private Dialog dialog_main;
+    private void showDialog(){
+        LinearLayout dialog_layout =
+                (LinearLayout) LayoutInflater.from(this).inflate(R.layout.dialot_main_mask_layer, null);
+        dialog_main = new Dialog(this, R.style.dialog_main);
+        dialog_main.setCancelable(false);//禁止返回键关闭
+        TextView text = (TextView) dialog_layout.findViewById(R.id.tv_banner);//设置安全文案
+        text.setText(Ke_Fu_data.getSafe(this));
+
+        View.OnClickListener click = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()){
+                    case R.id.start_money://开始生钱
+                        dialog_main.dismiss();
+                        Utils.saveIsMask(MainActivity.this,true);
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        break;
+                    case R.id.understand://了解草根钱包
+
+                        break;
+                }
+            }
+        };
+        Button start_money = (Button) dialog_layout.findViewById(R.id.start_money);
+        TextView understand = (TextView) dialog_layout.findViewById(R.id.understand);
+
+        understand.setOnClickListener(click);
+        start_money.setOnClickListener(click);
+        dialog_main.setContentView(dialog_layout);
+        dialog_main.show();
+    }
+
     private void initViews(){
         mMenu = (SlidingMenu) findViewById(R.id.id_menu);
 //        cgWalletIcon = (ImageView) findViewById(R.id.cg_wallet_icon);
@@ -491,11 +529,35 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         hideFragment(ft);
         switch (type){
             case R.id.my_wallet_button://显示我的钱包页面
+                currIndex = 1;
                 lineToLeft();
                 if(!Utils.isLogined()){
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    if(!Utils.getIsMask(this)){//判断是否显示过遮罩层
+                        if(myWalletFragment != null) {
+                            LogUtils.e(TAG, "show myWalletFragment");
+                            if(fm.findFragmentByTag(MY_WALLET) != null && fm.findFragmentByTag(MY_WALLET).isAdded()){
+                                ft.show(fm.findFragmentByTag(MY_WALLET));
+                            }else{
+                                ft.add(R.id.menu_center_framelayout,myWalletFragment,MY_WALLET);
+                            }
+//                        ft.show(fm.findFragmentByTag(MY_WALLET));
+//                        ft.show(myWalletFragment);
+                            myWalletFragment.setData(true);
+                        }else{
+                            LogUtils.e(TAG,"new a myWalletFragment");
+                            myWalletFragment = new My_wallet_new_Fragment();
+                            if(fm.findFragmentByTag(MY_WALLET) != null &&fm.findFragmentByTag(MY_WALLET).isAdded()){
+                                ft.show(fm.findFragmentByTag(MY_WALLET));
+                            }else{
+                                ft.add(R.id.menu_center_framelayout,myWalletFragment,MY_WALLET);
+                            }
+//                        ft.add(R.id.menu_center_framelayout,myWalletFragment,MY_WALLET);
+                        }
+                        ft.commitAllowingStateLoss();
+                    }else{
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    }
                 }else{
-                    currIndex = 1;
                     if(myWalletFragment != null) {
                         LogUtils.e(TAG, "show myWalletFragment");
                         if(fm.findFragmentByTag(MY_WALLET) != null && fm.findFragmentByTag(MY_WALLET).isAdded()){
@@ -609,8 +671,12 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         super.onResume();
         if(!Utils.isLogined()){
             LogUtils.i(TAG, "Utils.isLogined 为 true");
-            startActivity(new Intent(this,LoginActivity.class));
-            setLeftMenuInfo(0);//未登录
+            if(!Utils.getIsMask(this)){//判断是否显示过遮罩层
+                showDialog();
+            }else{
+                startActivity(new Intent(this,LoginActivity.class));
+                setLeftMenuInfo(0);//未登录
+             }
         }else{
             LogUtils.i(TAG, "Utils.isLogined 为 false");
             if (currIndex == 1){
@@ -619,37 +685,38 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                 layoutClick(R.id.cg_wallet_button);
             }
         }
-        String userMobile = Utils.getUserPhone(this);
-        LogUtils.i(TAG, "islogin: " + Utils.isLogined() + " mobile: " + Utils.getUserPhone(this));
-        if(Utils.isLogined()){
-            tvShowLoginMobile.setText(Utils.getHasStarsMobile(userMobile));
-            setLeftMenuInfo(1);//已登录
-        }else{
-            setLeftMenuInfo(0);//未登录
-        }
-        if(Utils.getisLockPassWord(this,Utils.getUserPhone(this)) == 1){//判断该账号是否是第一次登录该手机
-        Utils.saveisLockPassWord(this,Utils.getUserPhone(this),2);
-        setPassWord();
-    }
-        if(Value != 0){
-            switch (Value){
-                case Constants.WHAT_IS_MY://显示我的钱包
-//                    if(!Utils.isLogined()){
-//                        startActivity(new Intent(MainActivity.this,LoginActivity.class));
-//                    }else{
-//                        currIndex = 2;
-//                        layoutClick(R.id.layout_my_wallet);
-//                    }
-//                    break;
-                case 2:
-
-                    break;
-                case 3:
-
-                    break;
+            String userMobile = Utils.getUserPhone(this);
+            LogUtils.i(TAG, "islogin: " + Utils.isLogined() + " mobile: " + Utils.getUserPhone(this));
+            if(Utils.isLogined()){
+                tvShowLoginMobile.setText(Utils.getHasStarsMobile(userMobile));
+                setLeftMenuInfo(1);//已登录
+            }else{
+                setLeftMenuInfo(0);//未登录
             }
-            Value = 0;
-        }
+            if(Utils.getisLockPassWord(this,Utils.getUserPhone(this)) == 1){//判断该账号是否是第一次登录该手机
+            Utils.saveisLockPassWord(this,Utils.getUserPhone(this),2);
+            setPassWord();
+            }
+            if(Value != 0){
+                switch (Value){
+                    case Constants.WHAT_IS_MY://显示我的钱包
+    //                    if(!Utils.isLogined()){
+    //                        startActivity(new Intent(MainActivity.this,LoginActivity.class));
+    //                    }else{
+    //                        currIndex = 2;
+    //                        layoutClick(R.id.layout_my_wallet);
+    //                    }
+    //                    break;
+                    case 2:
+
+                        break;
+                    case 3:
+
+                        break;
+                }
+                Value = 0;
+            }
+
     JPushInterface.onResume(this);
     MobclickAgent.onResume(this);
 }
@@ -773,6 +840,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             case R.id.left_menu_login_out://退出登录
                 Utils.loginExit(this);
                 setLeftMenuInfo(0);
+                startActivity(new Intent(this, LoginActivity.class));
                 break;
         }
     }

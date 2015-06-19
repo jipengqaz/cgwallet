@@ -117,4 +117,5 @@
     <color name="my_wallet_earning_num_text">#666666</color>
     <color name="my_wallet_line">#e5e5e5</color>
     <color name="my_wallet_back">#F2F2F2</color>
+    <color name = "dialog_back">#00000000</color>
 </resources>

@@ -185,6 +185,25 @@ public class Utils {
     }
 
     /**
+     * 存储是否显示过遮罩层
+     * @param context
+     * @param ismask
+     */
+    public static void saveIsMask(Context context,boolean ismask){
+        SharedUtils sharedUtils = new SharedUtils(context,Constants.CONFIG_GESTURE);
+        sharedUtils.saveBoolean("ismask", ismask);
+    }
+
+    /**
+     * 获取是否显示过遮罩层
+     * @param context
+     * @return
+     */
+    public static boolean getIsMask(Context context){
+        SharedUtils sharedUtils = new SharedUtils(context,Constants.CONFIG_GESTURE);
+        return sharedUtils.getBoolean("ismask", false);
+    }
+    /**
      *
      * 存储登录后是否是否提示用户过设置手势密码
      * @param context

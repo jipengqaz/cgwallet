@@ -131,5 +131,6 @@
     <string name="bank_not_logout_msg">为了您的资金安全，请联系客服修改银行卡\n客服电话：</string>
     <string name="bank_not_logout_msg_ok">确认注销银行卡吗?</string>
     <string name="rmb"> 元</string>
+    <string name="dialog_main_btn_text">开始生钱</string>
 
 </resources>
