@@ -50,6 +50,7 @@ import java.util.HashMap;
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.fragment.CgWalletFragment;
+import cgtz.com.cgwallet.fragment.CgWallet_web_fragment;
 import cgtz.com.cgwallet.fragment.MyWalletFragment;
 import cgtz.com.cgwallet.fragment.My_wallet_new_Fragment;
 import cgtz.com.cgwallet.utility.Constants;
@@ -81,8 +82,9 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private LinearLayout layotExit;//退出登录
     private int currIndex;//当前页卡编号
     private ProgressDialog progressDialog;
-    private CgWalletFragment cgWalletFragment;
+//    private CgWalletFragment cgWalletFragment;
 //    private MyWalletFragment myWalletFragment;
+    private CgWallet_web_fragment cgWalletFragment;
     private My_wallet_new_Fragment myWalletFragment;
 //    private ImageView bottomLineSelected;//底部的白线
     private int screenWith;
@@ -130,6 +132,12 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                 }
             }
         });
+        if(!Utils.isLogined()){
+            if(!Utils.getIsMask(this)){//判断是否显示过遮罩层
+                LogUtils.e(TAG, "aaa   " + Utils.getIsMask(this));
+                showDialog();
+            }
+        }
         initShare();
     }
     //获取友盟分享变量
@@ -427,8 +435,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             public void onClick(View v) {
                 switch (v.getId()){
                     case R.id.start_money://开始生钱
+                        Utils.saveIsMask(MainActivity.this, true);//存储是否显示遮罩层的判断值
                         dialog_main.dismiss();
-                        Utils.saveIsMask(MainActivity.this,true);//存储是否显示遮罩层的判断值
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
                         break;
                     case R.id.understand://了解草根钱包
@@ -594,9 +602,9 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                     }
                     ft.show(fm.findFragmentByTag(CG_WALLET));
 //                    ft.show(cgWalletFragment);
-                    cgWalletFragment.setData();
+                    cgWalletFragment.reload();
                 }else{
-                    cgWalletFragment = new CgWalletFragment();
+                    cgWalletFragment = new CgWallet_web_fragment("https://www.cgtz.com/");
                     if(fm.findFragmentByTag(CG_WALLET) != null
                             && fm.findFragmentByTag(CG_WALLET).isAdded()){
                         ft.show(fm.findFragmentByTag(CG_WALLET));
@@ -672,7 +680,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         if(!Utils.isLogined()){
             LogUtils.i(TAG, "Utils.isLogined 为 true");
             if(!Utils.getIsMask(this)){//判断是否显示过遮罩层
-                showDialog();
+
             }else{
                 startActivity(new Intent(this,LoginActivity.class));
                 setLeftMenuInfo(0);//未登录
