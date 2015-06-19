@@ -809,12 +809,18 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         switch (v.getId()){
             case R.id.cg_wallet_button://显示草根钱包页面
                 if(SlidingMenu.isshow){
+                    if(currIndex == 2){
+                        break;
+                    }
                     currIndex = 2;
                     layoutClick(v.getId());
                 }
                 break;
             case R.id.my_wallet_button://显示我的钱包页面
                 if(SlidingMenu.isshow){
+                    if(currIndex == 1){
+                        break;
+                    }
                     currIndex = 1;
                     layoutClick(v.getId());
                 }
