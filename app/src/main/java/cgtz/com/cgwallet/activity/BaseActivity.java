@@ -45,6 +45,7 @@ public class BaseActivity extends ActionBarActivity {
         actionBar.setIcon(android.R.color.transparent);
         actionBar.setBackgroundDrawable(getResources().getDrawable(R.color.top_title));
         actionBar.setTitle("草根");
+        actionBar.setElevation(0);
         View actionBarWeek = RelativeLayout.inflate(this, R.layout.layout_action_bar, null);
         backLayout = (LinearLayout) actionBarWeek.findViewById(R.id.action_bar_back_layout);
         titleView = (TextView) actionBarWeek.findViewById(R.id.action_bar_title);

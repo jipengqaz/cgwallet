@@ -167,7 +167,7 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
             public void onRefresh() {
                 mSwipeLayout.setRefreshing(true);
                 LogUtils.e("Swipe", "刷新");
-                if (TextUtils.isEmpty(Utils.getUserId()) || TextUtils.isEmpty(Utils.getToken())) {//判断是否登录
+                if (!Utils.isLogined()) {//判断是否登录
                     goLogin = true;
                     Utils.makeToast(getActivity(), Constants.NEED_LOGIN);
                     startActivity(new Intent(getActivity(), LoginActivity.class));

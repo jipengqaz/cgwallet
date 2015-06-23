@@ -48,6 +48,7 @@ import cgtz.com.cgwallet.utils.ChangeLogHelper;
 import cgtz.com.cgwallet.utils.HttpUtils;
 import cgtz.com.cgwallet.utils.Ke_Fu_data;
 import cgtz.com.cgwallet.utils.LogUtils;
+import cgtz.com.cgwallet.utils.MD5Util;
 import cgtz.com.cgwallet.utils.Start_update_value;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.widget.ServerMainTainDialog;
@@ -196,8 +197,10 @@ public class StartActivity extends Activity {
                                 JSONObject object = jsonObject.optJSONObject("info");
                                 String userId = object.optString("userId");
                                 String token = object.optString("token");
+                                String mobile = object.optString("mobile");
                                 Utils.saveUserId(userId);
                                 Utils.saveToken(token);
+                                Utils.saveMobile(StartActivity.this, mobile);
                                 startService(new Intent(StartActivity.this, Code_download_Service.class)
                                         .putExtra("userId",userId).putExtra("token",token));//开启获取分享数据的服务
                             }
