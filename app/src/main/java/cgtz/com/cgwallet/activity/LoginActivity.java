@@ -49,7 +49,6 @@ public class LoginActivity extends Activity implements ISplashView,View.OnClickL
     private static final String TAG = "LoginActivity";
     private EditText etLoginPhone;//输入登录手机号码
     private EditText etLoginPwd;//输入登录密码
-    private TextView tvServicePhone;//显示客服电话
     private Button btnLogin;//登录按钮
     private TextView tvRegistAccount;//注册账户
     private TextView tvForgetPwd;//忘记密码
@@ -94,7 +93,6 @@ public class LoginActivity extends Activity implements ISplashView,View.OnClickL
     private void initViews(){
         etLoginPhone = (EditText) findViewById(R.id.login_edit_phone);//输入登录手机号码
         etLoginPwd = (EditText) findViewById(R.id.login_edit_pwd);//输入登录密码
-        tvServicePhone = (TextView) findViewById(R.id.tv_show_service_phone);//显示客服电话
         btnLogin = (Button) findViewById(R.id.login_button_finish);//登录按钮
         tvRegistAccount = (TextView) findViewById(R.id.tv_regist_account);//注册账户
         tvForgetPwd = (TextView) findViewById(R.id.tv_forget_pwd);//忘记密码
@@ -103,7 +101,6 @@ public class LoginActivity extends Activity implements ISplashView,View.OnClickL
 //        showEditsMobile = (TextView) findViewById(R.id.show_edits_mobile);//显示输入的手机号
         showPwd = (ImageView) findViewById(R.id.iv_show_pwd);//是否显示密码
         empty = (ImageView) findViewById(R.id.empty);//清空密码输入框数据
-        tvServicePhone.setText(Ke_Fu_data.getPhone(this));
         fillViews();
     }
 

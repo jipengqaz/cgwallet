@@ -115,62 +115,28 @@
             </LinearLayout>
             <Button
                 android:id="@+id/login_button_finish"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/bg_login_button"
                 android:text="@string/login_button_next"
                 android:textSize="@dimen/login_btn_text"
-                android:textColor="@color/login_btn_text"
+                android:textColor="@color/login_btn_can_click_text"
                 android:layout_width="match_parent"
                 android:layout_height="42dp" />
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="100dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_marginLeft="19dp"
-                    android:text="@string/hint_service_text"
-                    android:textSize="@dimen/text_size_12sp"
-                    android:textColor="@color/login_hint_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:id="@+id/tv_show_service_phone"
-                    android:textSize="@dimen/text_size_12sp"
-                    android:textColor="@color/login_hint_service_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_forget_pwd"
+                android:text="@string/hint_forget_pwd"
+                style="@style/login_activity_forget_text"/>
         </LinearLayout>
     <LinearLayout
         android:id="@+id/bottom_layout"
+        android:gravity="center"
         android:layout_alignParentBottom="true"
-        android:background="@color/bg_login_bottom"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_login_bottom">
         <TextView
             android:id="@+id/tv_regist_account"
-            android:gravity="center"
             android:text="@string/hint_regist_account"
-            android:textSize="@dimen/login_edit_text"
-            android:textColor="@color/hint_regist_account"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
-        <View
-            android:background="@color/bg_green_line"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"/>
-        <TextView
-            android:id="@+id/tv_forget_pwd"
-            android:gravity="center"
-            android:text="@string/hint_forget_pwd"
-            android:textSize="@dimen/login_edit_text"
-            android:textColor="@color/hint_regist_account"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
+            style="@style/login_activity_regist_text"/>
     </LinearLayout>
 </RelativeLayout>
