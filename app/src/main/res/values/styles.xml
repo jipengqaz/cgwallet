@@ -118,6 +118,15 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/text_size_14sp</item>
         <item name="android:background">@null</item>
+        <item name="android:maxLength">11</item>
+        <item name="android:numeric">integer</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawableLeft">@mipmap/icon_login_phone</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:paddingLeft">@dimen/draw_padding</item>
+        <item name="android:layout_height">@dimen/height_login_edit</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_weight">1</item>
     </style>
     <style name="login_popwindow_item_text">
         <item name="android:padding">5dp</item>
@@ -138,13 +147,13 @@
         <item name="android:layout_marginTop">5dp</item>
     </style>
     <style name="login_activity_regist_text">
-        <item name="android:padding">5dp</item>
+        <item name="android:padding">10dp</item>
         <item name="android:background">@drawable/bg_login_regist_text</item>
         <item name="android:textColor">@color/hint_regist_account</item>
         <item name="android:textSize">@dimen/text_size_14sp</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">80dp</item>
     </style>
 
     <!--第一次进入是的遮罩层-->

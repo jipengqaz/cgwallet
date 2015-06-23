@@ -56,8 +56,8 @@
     <color name="feed_back_edit_hint">#959696</color>
     <color name="login_phone_text">#ffffff</color>
     <color name="login_edit_text">#91939a</color>
-    <color name="login_btn_text">#ffffff</color>
-    <color name="login_btn_can_click_text">#5edb89</color>
+    <color name="login_btn_text">#5edb89</color>
+    <color name="login_btn_can_click_text">#ffffff</color>
     <color name="bg_login_edit_solid">#41e6a6</color>
     <color name="bg_login_edit_stroke">#0085d4</color>
     <color name="bg_login_button_normal">#09d88a</color>

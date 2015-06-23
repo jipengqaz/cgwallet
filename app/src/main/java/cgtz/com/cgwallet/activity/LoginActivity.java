@@ -138,6 +138,13 @@ public class LoginActivity extends Activity implements ISplashView,View.OnClickL
                 } else {
                     empty.setVisibility(View.GONE);
                 }
+                if(str.length()>=6){
+                    btnLogin.setTextColor(getResources().getColor(R.color.login_btn_can_click_text));
+                    btnLogin.setEnabled(true);
+                }else{
+                    btnLogin.setTextColor(getResources().getColor(R.color.login_btn_text));
+                    btnLogin.setEnabled(false);
+                }
             }
 
             @Override
