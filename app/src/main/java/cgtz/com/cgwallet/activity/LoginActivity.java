@@ -59,7 +59,7 @@ public class LoginActivity extends Activity implements ISplashView,View.OnClickL
     private String loginPhone;//登录手机号
     private String loginPwd;//登录密码
     private ImageView showPwd;//是否显示密码
-    private String beforeMobile;//之前登录过的手机号
+    public String beforeMobile;//之前登录过的手机号
     private boolean isChecked = false;//设置是否显示密码
     private ImageView empty;//清空数据
     public boolean isStarMobile = false;//用于判断是否为星号手机号
@@ -183,6 +183,7 @@ public class LoginActivity extends Activity implements ISplashView,View.OnClickL
 
             @Override
             public void afterTextChanged(Editable editable) {
+                LogUtils.d(TAG, "手机号改变");
                 isStarMobile = false;
                 if (TextUtils.isEmpty(etLoginPhone.getText().toString().trim())) {
 //                    showEditsMobile.setVisibility(View.GONE);
@@ -282,11 +283,15 @@ public class LoginActivity extends Activity implements ISplashView,View.OnClickL
                 startActivityForResult(new Intent(LoginActivity.this,RegistActivity.class),100);
                 break;
             case R.id.login_button_finish://登录
-                if(!isStarMobile){//判断是否输入手机号
-                    //输入手机号
-                    loginPhone = etLoginPhone.getText().toString();
-                }else{
-                    //隐藏了就使用之前登录过的手机号
+//                if(!isStarMobile){//判断是否输入手机号
+//                    //输入手机号
+//                    loginPhone = etLoginPhone.getText().toString();
+//                }else{
+//                    //隐藏了就使用之前登录过的手机号
+//                    loginPhone = beforeMobile;
+//                }
+                loginPhone = etLoginPhone.getText().toString();
+                if(loginPhone.lastIndexOf("*") != -1){
                     loginPhone = beforeMobile;
                 }
                 loginPwd = etLoginPwd.getText().toString();
@@ -314,11 +319,11 @@ public class LoginActivity extends Activity implements ISplashView,View.OnClickL
                     etLoginPhone.setText("");//删除手机号输入框中的内容
                 }else{
                     //显示登录过的手机号列表
-//                    if(listBeans != null && listBeans.size() > 0){
-//                        loginPop.showPop();
-//                    }
-                    loginPop = new LoginPopupwindow(this,mobileParent,etLoginPhone,listBeans);
-                    loginPop.showPop();
+                    if(listBeans != null && listBeans.size() > 0){
+                        loginPop = new LoginPopupwindow(this,mobileParent,etLoginPhone,listBeans);
+                        loginPop.showPop();
+                    }
+
                 }
                 break;
         }

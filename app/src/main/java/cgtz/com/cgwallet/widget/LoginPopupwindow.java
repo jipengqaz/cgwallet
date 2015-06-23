@@ -23,6 +23,7 @@ import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.activity.LoginActivity;
 import cgtz.com.cgwallet.bean.LoginMobileBean;
 import cgtz.com.cgwallet.utils.LogUtils;
+import cgtz.com.cgwallet.utils.Utils;
 
 /**
  * 自定义登录手机号列表
@@ -65,8 +66,8 @@ public class LoginPopupwindow extends PopupWindow {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 LoginMobileBean mobileBean = (LoginMobileBean) parent.getAdapter().getItem(position);
-                context.isStarMobile = false;
-                mobileView.setText(mobileBean.getMobile());
+                context.beforeMobile = mobileBean.getMobile();
+                mobileView.setText(Utils.getHasStarsMobile(mobileBean.getMobile()));
                 hidePop();
             }
         });
@@ -119,7 +120,7 @@ public class LoginPopupwindow extends PopupWindow {
             }
             if(lists != null){
                 LoginMobileBean bean = lists.get(position);
-                mobileText.setText(bean.getMobile());
+                mobileText.setText(Utils.getHasStarsMobile(bean.getMobile()));
             }
             return convertView;
         }

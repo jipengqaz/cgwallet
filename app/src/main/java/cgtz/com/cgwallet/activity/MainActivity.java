@@ -179,7 +179,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             //取得的是byte数组, 从byte数组生成bitmap
             try {
                 byte[] qr_code = res.getBytes("ISO8859-1");
-
                 if (qr_code != null) {
                     bitmap = BitmapFactory.decodeByteArray(qr_code, 0, qr_code.length);
                     Qr_code.setImageBitmap(bitmap);
@@ -255,6 +254,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                             mController.setShareMedia(qqShareContent);
                             // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
                             mController.postShare(MainActivity.this, SHARE_MEDIA.QQ, mShareListener);
+                            mMenu.rightToggle();
                         }else{
                             Utils.makeToast(MainActivity.this,"您未安装该应用,请安装后分享！");
                         }
@@ -262,20 +262,20 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                     case R.id.qzone:
                         //判断是否有安装
                         aa = mController.getConfig().getSsoHandler(HandlerRequestCode.QZONE_REQUEST_CODE).isClientInstalled();
-
                         if(aa){
-                        QZoneShareContent qzone = new QZoneShareContent();
-                        //设置分享文字
-                        qzone.setShareContent(content);
-                        //设置点击消息的跳转URL
-                        qzone.setTargetUrl(url);
-                        //设置分享内容的标题
-                        qzone.setTitle("草根投资");
-                        //设置分享图片
-                        qzone.setShareImage(image);
-                        mController.setShareMedia(qzone);
-                        // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
-                        mController.postShare(MainActivity.this, SHARE_MEDIA.QZONE, mShareListener);
+                            QZoneShareContent qzone = new QZoneShareContent();
+                            //设置分享文字
+                            qzone.setShareContent(content);
+                            //设置点击消息的跳转URL
+                            qzone.setTargetUrl(url);
+                            //设置分享内容的标题
+                            qzone.setTitle("草根投资");
+                            //设置分享图片
+                            qzone.setShareImage(image);
+                            mController.setShareMedia(qzone);
+                            // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
+                            mController.postShare(MainActivity.this, SHARE_MEDIA.QZONE, mShareListener);
+                            mMenu.rightToggle();
                         }else{
                             Utils.makeToast(MainActivity.this,"您未安装该应用,请安装后分享！");
                         }
@@ -287,24 +287,26 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         mController.setShareMedia(sms);
                         // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
                         mController.postShare(MainActivity.this, SHARE_MEDIA.SMS, mShareListener);
+                        mMenu.rightToggle();
                         break;
                     case R.id.wechat://微信
                         //判断是否有安装
                         aa = mController.getConfig().getSsoHandler(HandlerRequestCode.WX_REQUEST_CODE).isClientInstalled();
                         if(aa){
-                        //设置微信好友分享内容
-                        WeiXinShareContent weixinContent = new WeiXinShareContent();
-                        //设置分享文字
-                        weixinContent.setShareContent(content);
-                        //设置title
-                        weixinContent.setTitle("草根投资");
-                        //设置分享内容跳转URL
-                        weixinContent.setTargetUrl(url);
-                        //设置分享图片
-                        weixinContent.setShareImage(image);
-                        mController.setShareMedia(weixinContent);
-                        // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
-                        mController.postShare(MainActivity.this, SHARE_MEDIA.WEIXIN, mShareListener);
+                            //设置微信好友分享内容
+                            WeiXinShareContent weixinContent = new WeiXinShareContent();
+                            //设置分享文字
+                            weixinContent.setShareContent(content);
+                            //设置title
+                            weixinContent.setTitle("草根投资");
+                            //设置分享内容跳转URL
+                            weixinContent.setTargetUrl(url);
+                            //设置分享图片
+                            weixinContent.setShareImage(image);
+                            mController.setShareMedia(weixinContent);
+                            // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
+                            mController.postShare(MainActivity.this, SHARE_MEDIA.WEIXIN, mShareListener);
+                            mMenu.rightToggle();
                         }else{
                             Utils.makeToast(MainActivity.this,"您未安装该应用,请安装后分享！");
                         }
@@ -313,16 +315,17 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         //判断是否有安装
                         aa = mController.getConfig().getSsoHandler(HandlerRequestCode.WX_CIRCLE_REQUEST_CODE).isClientInstalled();
                         if(aa){
-                        //设置微信朋友圈分享内容
-                        CircleShareContent circleMedia = new CircleShareContent();
-                        circleMedia.setShareContent(content);
-                        //设置朋友圈title
-                        circleMedia.setTitle(content);
-                        circleMedia.setShareImage(image);
-                        circleMedia.setTargetUrl(url);
-                        mController.setShareMedia(circleMedia);
-                        // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
-                        mController.postShare(MainActivity.this, SHARE_MEDIA.WEIXIN_CIRCLE, mShareListener);
+                            //设置微信朋友圈分享内容
+                            CircleShareContent circleMedia = new CircleShareContent();
+                            circleMedia.setShareContent(content);
+                            //设置朋友圈title
+                            circleMedia.setTitle(content);
+                            circleMedia.setShareImage(image);
+                            circleMedia.setTargetUrl(url);
+                            mController.setShareMedia(circleMedia);
+                            // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
+                            mController.postShare(MainActivity.this, SHARE_MEDIA.WEIXIN_CIRCLE, mShareListener);
+                            mMenu.rightToggle();
                         }else{
                             Utils.makeToast(MainActivity.this,"您未安装该应用,请安装后分享！");
                         }
@@ -342,6 +345,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         startActivity(new Intent(MainActivity.this, WebViewActivity.class)
                                 .putExtra("url", "https://d5ds88.cgtz.com/version/notice/rule")
                                 .putExtra("title", "推荐规则"));
+                        mMenu.rightToggle();
                         break;
                 }
             }
@@ -439,6 +443,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             @Override
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
                 if(keyCode == KeyEvent.KEYCODE_BACK){
+                    long digTime = System.currentTimeMillis();
+                    LogUtils.i(TAG,"digTime:"+digTime);
                     MApplication.finishAllActivitys();
                     finish();
                 }
@@ -558,7 +564,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             case R.id.my_wallet_button://显示我的钱包页面
                 currIndex = 1;
                 lineToLeft();
-                if(!Utils.isLogined()){
+                if(Utils.isLogined()){
                     if(!Utils.getIsMask(this)){//判断是否显示过遮罩层
                         if(myWalletFragment != null) {
                             LogUtils.e(TAG, "show myWalletFragment");
@@ -583,7 +589,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         }
                         ft.commitAllowingStateLoss();
                     }else{
-                        showDialog();
                         if(myWalletFragment != null) {
                             if(fm.findFragmentByTag(MY_WALLET) != null && fm.findFragmentByTag(MY_WALLET).isAdded()){
                                 ft.show(fm.findFragmentByTag(MY_WALLET));
@@ -598,31 +603,48 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                                 ft.add(R.id.menu_center_framelayout,myWalletFragment,MY_WALLET);
                             }
                         }
+                        myWalletFragment.setData(true);
                         ft.commitAllowingStateLoss();
 //                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
                     }
                 }else{
+                    showDialog();
                     if(myWalletFragment != null) {
-                        LogUtils.e(TAG, "show myWalletFragment");
                         if(fm.findFragmentByTag(MY_WALLET) != null && fm.findFragmentByTag(MY_WALLET).isAdded()){
                             ft.show(fm.findFragmentByTag(MY_WALLET));
                         }else{
                             ft.add(R.id.menu_center_framelayout,myWalletFragment,MY_WALLET);
                         }
-//                        ft.show(fm.findFragmentByTag(MY_WALLET));
-//                        ft.show(myWalletFragment);
-                        myWalletFragment.setData(true);
                     }else{
-                        LogUtils.e(TAG,"new a myWalletFragment");
                         myWalletFragment = new My_wallet_new_Fragment();
                         if(fm.findFragmentByTag(MY_WALLET) != null &&fm.findFragmentByTag(MY_WALLET).isAdded()){
                             ft.show(fm.findFragmentByTag(MY_WALLET));
                         }else{
                             ft.add(R.id.menu_center_framelayout,myWalletFragment,MY_WALLET);
                         }
-//                        ft.add(R.id.menu_center_framelayout,myWalletFragment,MY_WALLET);
                     }
                     ft.commitAllowingStateLoss();
+//                    if(myWalletFragment != null) {
+//                        LogUtils.e(TAG, "show myWalletFragment");
+//                        if(fm.findFragmentByTag(MY_WALLET) != null && fm.findFragmentByTag(MY_WALLET).isAdded()){
+//                            ft.show(fm.findFragmentByTag(MY_WALLET));
+//                        }else{
+//                            ft.add(R.id.menu_center_framelayout,myWalletFragment,MY_WALLET);
+//                        }
+////                        ft.show(fm.findFragmentByTag(MY_WALLET));
+////                        ft.show(myWalletFragment);
+//                        myWalletFragment.setData(true);
+//                    }else{
+//                        LogUtils.e(TAG,"new a myWalletFragment");
+//                        myWalletFragment = new My_wallet_new_Fragment();
+//                        if(fm.findFragmentByTag(MY_WALLET) != null &&fm.findFragmentByTag(MY_WALLET).isAdded()){
+//                            ft.show(fm.findFragmentByTag(MY_WALLET));
+//                        }else{
+//                            ft.add(R.id.menu_center_framelayout,myWalletFragment,MY_WALLET);
+//                        }
+////                        ft.add(R.id.menu_center_framelayout,myWalletFragment,MY_WALLET);
+//                    }
+//                    ft.commitAllowingStateLoss();
                 }
 
                 break;
@@ -713,10 +735,15 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     protected void onResume() {
         super.onResume();
-        if(!Utils.isLogined()){
+        if(Utils.isLogined()){
             LogUtils.i(TAG, "Utils.isLogined 为 true");
-            showDialog();
-            layoutClick(R.id.my_wallet_button);
+            if (currIndex == 1){
+                layoutClick(R.id.my_wallet_button);
+            }else{
+                layoutClick(R.id.cg_wallet_button);
+            }
+//            showDialog();
+//            layoutClick(R.id.my_wallet_button);
 //            if(!Utils.getIsMask(this)){//判断是否显示过遮罩层
 //
 //            }else{
@@ -725,11 +752,13 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 //            }
         }else{
             LogUtils.i(TAG, "Utils.isLogined 为 false");
-            if (currIndex == 1){
-                layoutClick(R.id.my_wallet_button);
-            }else{
-                layoutClick(R.id.cg_wallet_button);
-            }
+            showDialog();
+            layoutClick(R.id.my_wallet_button);
+//            if (currIndex == 1){
+//                layoutClick(R.id.my_wallet_button);
+//            }else{
+//                layoutClick(R.id.cg_wallet_button);
+//            }
         }
             String userMobile = Utils.getUserPhone(this);
             LogUtils.i(TAG, "islogin: " + Utils.isLogined() + " mobile: " + Utils.getUserPhone(this));
@@ -740,8 +769,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                 setLeftMenuInfo(0);//未登录
             }
             if(Utils.getisLockPassWord(this,Utils.getUserPhone(this)) == 1){//判断该账号是否是第一次登录该手机
-            Utils.saveisLockPassWord(this,Utils.getUserPhone(this),2);
-            setPassWord();
+                Utils.saveisLockPassWord(this,Utils.getUserPhone(this),2);
+                setPassWord();
             }
             if(Value != 0){
                 switch (Value){
@@ -877,20 +906,25 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                 }else{
                     startActivity(new Intent(this,LoginActivity.class));
                 }
+                mMenu.leftToggle();
                 break;
             case R.id.left_menu_help_center://帮助中心
                 startActivity(new Intent(this,WebViewActivity.class)
                 .putExtra("url","https://d5ds88.cgtz.com/version/e/detail")
                 .putExtra("title","帮助中心"));
+                mMenu.leftToggle();
                 break;
             case R.id.left_menu_cgtz://草根投资
 
+                mMenu.leftToggle();
                 break;
             case R.id.left_menu_more://更多
                 startActivity(new Intent(this,MenuMoreActivity.class));
+                mMenu.leftToggle();
                 break;
             case R.id.tv_goToLogin://去登录或者个人信息
                 startActivity(new Intent(this,LoginActivity.class));
+                mMenu.leftToggle();
                 break;
             case R.id.left_menu_login_out://退出登录
                 Utils.loginExit(this);
@@ -982,6 +1016,13 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     protected void onDestroy() {
         super.onDestroy();
         mHandler.removeCallbacks(connectNet);
+        closeDialog();
+    }
+
+    private void closeDialog(){
+        if(dialog_main != null && dialog_main.isShowing()){
+            dialog_main.dismiss();
+        }
     }
 
     @Override

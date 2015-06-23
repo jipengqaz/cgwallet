@@ -15,6 +15,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.litepal.crud.DataSupport;
+
 import java.util.HashMap;
 
 import cgtz.com.cgwallet.MApplication;
@@ -81,6 +83,7 @@ public class Utils {
      * @param mobile
      */
     public static void saveMobile(Context context,String mobile){
+        DataSupport.deleteAll(LoginMobileBean.class,"mobile = ?",mobile);
         LoginMobileBean loginMobileBean = new LoginMobileBean();
         loginMobileBean.setMobile(mobile);
         loginMobileBean.save();
