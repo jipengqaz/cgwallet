@@ -48,7 +48,6 @@ import cgtz.com.cgwallet.utils.ChangeLogHelper;
 import cgtz.com.cgwallet.utils.HttpUtils;
 import cgtz.com.cgwallet.utils.Ke_Fu_data;
 import cgtz.com.cgwallet.utils.LogUtils;
-import cgtz.com.cgwallet.utils.MD5Util;
 import cgtz.com.cgwallet.utils.Start_update_value;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.widget.ServerMainTainDialog;

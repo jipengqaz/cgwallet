@@ -7,13 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.lang.annotation.Target;
 
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.activity.SaveMoneyActivity;
 import cgtz.com.cgwallet.client.Withdraw_money_Client;
 import cgtz.com.cgwallet.utility.Constants;
-import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.widget.ProgressDialog;
 import cgtz.com.cgwallet.widget.SlidingMenu;
 

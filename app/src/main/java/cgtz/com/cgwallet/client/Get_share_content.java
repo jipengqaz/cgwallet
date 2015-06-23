@@ -14,7 +14,7 @@ import cgtz.com.cgwallet.utils.CustomTask;
 public class Get_share_content {
 
     public static void getContent(Handler handler,String user_id,String token){
-            HashMap param=new HashMap();
+            HashMap<String,String> param=new HashMap<>();
             param.put("user_id", user_id);
             param.put("token",token);
             CustomTask task = new CustomTask(handler, 0,
