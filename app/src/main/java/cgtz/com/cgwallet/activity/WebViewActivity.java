@@ -8,15 +8,19 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.CookieManager;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.utils.LogUtils;
+import cgtz.com.cgwallet.utils.ScreenUtils;
 
 /**
  * Created by Administrator on 2015/4/21.
@@ -24,10 +28,10 @@ import cgtz.com.cgwallet.R;
 public class WebViewActivity extends BaseActivity {
 
         public WebView webView;
-        private ProgressBar pb;
-        private Handler handler;
-        private  Runnable run;
+        private TextView pb;
         private int Progress;
+        private int width;
+    private ViewGroup.LayoutParams lp;
 
         private String title;
         private String url;
@@ -62,34 +66,21 @@ public class WebViewActivity extends BaseActivity {
 
             webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);//滚动条风格，为0就是不给滚动条留空间，滚动条覆盖在网页上
             CookieManager.getInstance().setAcceptCookie(true);
-            pb= (ProgressBar) findViewById(R.id.progress_bar_2);
+            pb= (TextView) findViewById(R.id.progress_bar_2);
+            lp = pb.getLayoutParams();
+            width = ScreenUtils.getScreenWidth(this)/100;
             webView.setWebChromeClient(new WebChromeClient(){//用于修改进度条
                 @Override
                 public void onProgressChanged(WebView view, int newProgress) {
                     Progress=newProgress;
                     if(newProgress <100){
-                        run.run();
+                        lp.width = width*Progress;
+                        pb.setLayoutParams(lp);
                     }else{
                         pb.setVisibility(View.GONE);
                     }
                 }
             });
-
-            handler=new Handler(){//用于修改进度条
-                @Override
-                public void handleMessage(Message msg) {
-                    super.handleMessage(msg);
-                    pb.setProgress(Progress);
-                }
-            };
-            run=new Runnable() {//用于修改进度条
-                @Override
-                public void run() {
-                    Message mes=new Message();
-                    mes.what=1;
-                    handler.sendMessage(mes);
-                }
-            };
 
             webView.setWebViewClient(new WebViewClient() {
                 public boolean shouldOverrideUrlLoading(final WebView view, final String url) {

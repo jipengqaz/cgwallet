@@ -95,7 +95,7 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
         if( fromsave){
             setTitle(Constants.TITLE_BIND_BANK);
         }else{
-            setTitle("存钱");
+            setTitle(getResources().getString(R.string.transfer_input));
         }
         showBack(true);
         presenter = new SplashPresenter(this);

@@ -111,9 +111,11 @@
     <color name="text_hint_color">#999999</color>
     <color name="safe_center_text_color">#00000f</color>
 
-    <color name="back_my_wallet">#40bb8b</color>
+    <color name="back_my_wallet">#40bb6b</color>
     <color name="my_wallet_today_earning_hint">#ffffff</color>
     <color name="my_wallet_earning_text">#b2b2b2</color>
     <color name="my_wallet_earning_num_text">#666666</color>
     <color name="my_wallet_line">#e5e5e5</color>
+    <color name="my_wallet_back">#F2F2F2</color>
+    <color name = "dialog_back">#00000000</color>
 </resources>

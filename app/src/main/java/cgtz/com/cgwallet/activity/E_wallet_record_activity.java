@@ -86,8 +86,6 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
         if(progressDialog == null){
             progressDialog = new ProgressDialog(this,R.style.loading_dialog);
         }
-        Utils.SaveOrDrawMoney(this, progressDialog);
-
 
         buttonOne.setOnClickListener(this);
         buttonTwo.setOnClickListener(this);

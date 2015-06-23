@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:background="@color/my_wallet_line"
+    android:background="@color/my_wallet_back"
     android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -193,6 +193,7 @@
         </ScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
     <fragment
+        android:id="@+id/save"
         android:name="cgtz.com.cgwallet.fragment.Save_or_draw_money_Fragment"
         android:layout_width="match_parent"
         android:layout_height="@dimen/save_or_draw_money_layout_height" />
