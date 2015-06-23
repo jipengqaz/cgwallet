@@ -2,6 +2,7 @@ package cgtz.com.cgwallet.activity;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,6 +13,7 @@ import android.os.PersistableBundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -133,10 +135,11 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             }
         });
         if(!Utils.isLogined()){
-            if(!Utils.getIsMask(this)){//判断是否显示过遮罩层
-                LogUtils.e(TAG, "aaa   " + Utils.getIsMask(this));
-                showDialog();
-            }
+//            if(!Utils.getIsMask(this)){//判断是否显示过遮罩层
+//                LogUtils.e(TAG, "aaa   " + Utils.getIsMask(this));
+//                showDialog();
+//            }
+            showDialog();
         }
         initShare();
     }
@@ -425,8 +428,24 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private void showDialog(){
         LinearLayout dialog_layout =
                 (LinearLayout) LayoutInflater.from(this).inflate(R.layout.dialot_main_mask_layer, null);
-        dialog_main = new Dialog(this, R.style.dialog_main);
+        if(dialog_main == null){
+            dialog_main = new Dialog(this, R.style.dialog_main);
+        }
+        if(dialog_main.isShowing()){
+            dialog_main.dismiss();
+        }
         dialog_main.setCancelable(false);//禁止返回键关闭
+        dialog_main.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                if(keyCode == KeyEvent.KEYCODE_BACK){
+                    MApplication.finishAllActivitys();
+                    finish();
+                }
+                return true;
+            }
+        });
+
         TextView text = (TextView) dialog_layout.findViewById(R.id.tv_banner);//设置安全文案
         text.setText(Ke_Fu_data.getSafe(this));
 
@@ -559,11 +578,28 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                             }else{
                                 ft.add(R.id.menu_center_framelayout,myWalletFragment,MY_WALLET);
                             }
+                            myWalletFragment.setData(true);
 //                        ft.add(R.id.menu_center_framelayout,myWalletFragment,MY_WALLET);
                         }
                         ft.commitAllowingStateLoss();
                     }else{
-                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        showDialog();
+                        if(myWalletFragment != null) {
+                            if(fm.findFragmentByTag(MY_WALLET) != null && fm.findFragmentByTag(MY_WALLET).isAdded()){
+                                ft.show(fm.findFragmentByTag(MY_WALLET));
+                            }else{
+                                ft.add(R.id.menu_center_framelayout,myWalletFragment,MY_WALLET);
+                            }
+                        }else{
+                            myWalletFragment = new My_wallet_new_Fragment();
+                            if(fm.findFragmentByTag(MY_WALLET) != null &&fm.findFragmentByTag(MY_WALLET).isAdded()){
+                                ft.show(fm.findFragmentByTag(MY_WALLET));
+                            }else{
+                                ft.add(R.id.menu_center_framelayout,myWalletFragment,MY_WALLET);
+                            }
+                        }
+                        ft.commitAllowingStateLoss();
+//                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
                     }
                 }else{
                     if(myWalletFragment != null) {
@@ -679,12 +715,14 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         super.onResume();
         if(!Utils.isLogined()){
             LogUtils.i(TAG, "Utils.isLogined 为 true");
-            if(!Utils.getIsMask(this)){//判断是否显示过遮罩层
-
-            }else{
-                startActivity(new Intent(this,LoginActivity.class));
-                setLeftMenuInfo(0);//未登录
-             }
+            showDialog();
+            layoutClick(R.id.my_wallet_button);
+//            if(!Utils.getIsMask(this)){//判断是否显示过遮罩层
+//
+//            }else{
+//                startActivity(new Intent(this,LoginActivity.class));
+//                setLeftMenuInfo(0);//未登录
+//            }
         }else{
             LogUtils.i(TAG, "Utils.isLogined 为 false");
             if (currIndex == 1){

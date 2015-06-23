@@ -113,7 +113,7 @@ public class LoginActivity extends Activity implements ISplashView,View.OnClickL
             etLoginPhone.setText(Utils.getHasStarsMobile(beforeMobile));
             etLoginPhone.setSelection(etLoginPhone.getText().toString().trim().length());
         }
-        listBeans = DataSupport.findAll(LoginMobileBean.class);
+        listBeans = DataSupport.order("id desc").limit(3).find(LoginMobileBean.class);
     }
 
     private void setListener(){
@@ -164,13 +164,6 @@ public class LoginActivity extends Activity implements ISplashView,View.OnClickL
                     isEditMobileFocus = false;
                     changeMobile.setImageResource(R.mipmap.icon_change_mobile);
                 }
-//                if (hasFocus && showEditsMobile.getText().length()>0) {
-//                    showEditsMobile.setVisibility(View.VISIBLE);
-//                    // 此处为得到焦点时的处理内容
-//                } else {
-//                    showEditsMobile.setVisibility(View.GONE);
-//                    // 此处为失去焦点时的处理内容
-//                }
             }
         });
 
