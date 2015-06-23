@@ -24,6 +24,7 @@ import cgtz.com.cgwallet.activity.MainActivity;
 import cgtz.com.cgwallet.activity.SaveMoneyActivity;
 import cgtz.com.cgwallet.activity.WebViewActivity;
 import cgtz.com.cgwallet.bean.JsonBean;
+import cgtz.com.cgwallet.bean.LoginMobileBean;
 import cgtz.com.cgwallet.client.Withdraw_money_Client;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.widget.ProgressDialog;
@@ -80,6 +81,9 @@ public class Utils {
      * @param mobile
      */
     public static void saveMobile(Context context,String mobile){
+        LoginMobileBean loginMobileBean = new LoginMobileBean();
+        loginMobileBean.setMobile(mobile);
+        loginMobileBean.save();
         SharedUtils sharedUtils = new SharedUtils(context, Constants.CONFIG);
         sharedUtils.saveString(Constants.LOGIN_PHONE, mobile);
     }

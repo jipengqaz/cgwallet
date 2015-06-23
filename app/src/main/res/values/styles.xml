@@ -119,4 +119,12 @@
         <item name="android:textSize">@dimen/text_size_14sp</item>
         <item name="android:background">@null</item>
     </style>
+    <style name="login_popwindow_item_text">
+        <item name="android:padding">5dp</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">@dimen/text_size_12sp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
 </resources>

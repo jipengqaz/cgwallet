@@ -20,13 +20,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONObject;
+import org.litepal.crud.DataSupport;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.Service.Code_download_Service;
 import cgtz.com.cgwallet.bean.JsonBean;
+import cgtz.com.cgwallet.bean.LoginMobileBean;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.CustomTask;
@@ -35,6 +39,7 @@ import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.MD5Util;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.ISplashView;
+import cgtz.com.cgwallet.widget.LoginPopupwindow;
 import cgtz.com.cgwallet.widget.ProgressDialog;
 
 /**
@@ -48,7 +53,8 @@ public class LoginActivity extends Activity implements ISplashView,View.OnClickL
     private Button btnLogin;//登录按钮
     private TextView tvRegistAccount;//注册账户
     private TextView tvForgetPwd;//忘记密码
-    private TextView showEditsMobile;//显示输入的手机号码
+//    private TextView showEditsMobile;//显示输入的手机号码
+    private ImageView changeMobile;//手机号输入框后的图标
     private SplashPresenter presenter;
     private ProgressDialog progressDialog;
     private String loginPhone;//登录手机号
@@ -56,8 +62,12 @@ public class LoginActivity extends Activity implements ISplashView,View.OnClickL
     private ImageView showPwd;//是否显示密码
     private String beforeMobile;//之前登录过的手机号
     private boolean isChecked = false;//设置是否显示密码
-    private ImageView empty,empty_phone;//清空数据
-    private boolean isStarMobile = false;//用于判断是否为星号手机号
+    private ImageView empty;//清空数据
+    public boolean isStarMobile = false;//用于判断是否为星号手机号
+    public boolean isEditMobileFocus = false;//判断手机输入框是否获取到焦点,默认没有获取到
+    private List<LoginMobileBean> listBeans;//登录过的手机号集合
+    private LinearLayout mobileParent;//输入框外层布局
+    private LoginPopupwindow loginPop;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -88,10 +98,11 @@ public class LoginActivity extends Activity implements ISplashView,View.OnClickL
         btnLogin = (Button) findViewById(R.id.login_button_finish);//登录按钮
         tvRegistAccount = (TextView) findViewById(R.id.tv_regist_account);//注册账户
         tvForgetPwd = (TextView) findViewById(R.id.tv_forget_pwd);//忘记密码
-        showEditsMobile = (TextView) findViewById(R.id.show_edits_mobile);//显示输入的手机号
+        changeMobile = (ImageView) findViewById(R.id.empty_change_mobile);//手机号输入框后面的图标
+        mobileParent = (LinearLayout) findViewById(R.id.phone_layout);//输入框外层布局
+//        showEditsMobile = (TextView) findViewById(R.id.show_edits_mobile);//显示输入的手机号
         showPwd = (ImageView) findViewById(R.id.iv_show_pwd);//是否显示密码
         empty = (ImageView) findViewById(R.id.empty);//清空密码输入框数据
-        empty_phone = (ImageView) findViewById(R.id.empty_phone);//清空手机输入空数据
         tvServicePhone.setText(Ke_Fu_data.getPhone(this));
         fillViews();
     }
@@ -103,8 +114,9 @@ public class LoginActivity extends Activity implements ISplashView,View.OnClickL
         if(!TextUtils.isEmpty(beforeMobile)){
             isStarMobile = true;
             etLoginPhone.setText(Utils.getHasStarsMobile(beforeMobile));
+            etLoginPhone.setSelection(etLoginPhone.getText().toString().trim().length());
         }
-        etLoginPhone.setSelection(etLoginPhone.getText().toString().trim().length());
+        listBeans = DataSupport.findAll(LoginMobileBean.class);
     }
 
     private void setListener(){
@@ -114,11 +126,10 @@ public class LoginActivity extends Activity implements ISplashView,View.OnClickL
         tvForgetPwd.setOnClickListener(this);
         showPwd.setOnClickListener(this);
         empty.setOnClickListener(this);
-        empty_phone.setOnClickListener(this);
+        changeMobile.setOnClickListener(this);
         etLoginPwd.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -140,18 +151,29 @@ public class LoginActivity extends Activity implements ISplashView,View.OnClickL
         etLoginPhone.setOnFocusChangeListener(new View.OnFocusChangeListener() {//监听焦点事件
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus && showEditsMobile.getText().length()>0) {
-                    showEditsMobile.setVisibility(View.VISIBLE);
-                    // 此处为得到焦点时的处理内容
+                if (hasFocus) {
+                    //如果手机号输入框获取到焦点
+                    isEditMobileFocus = true;
+                    changeMobile.setImageResource(R.mipmap.icon_empty);
                 } else {
-                    showEditsMobile.setVisibility(View.GONE);
-                    // 此处为失去焦点时的处理内容
+                    //手机号输入框没有获取到焦点
+                    isEditMobileFocus = false;
+                    changeMobile.setImageResource(R.mipmap.icon_change_mobile);
                 }
+//                if (hasFocus && showEditsMobile.getText().length()>0) {
+//                    showEditsMobile.setVisibility(View.VISIBLE);
+//                    // 此处为得到焦点时的处理内容
+//                } else {
+//                    showEditsMobile.setVisibility(View.GONE);
+//                    // 此处为失去焦点时的处理内容
+//                }
             }
         });
+
         etLoginPhone.addTextChangedListener(new TextWatcher() {//监听输入事件
             private int lastlen = 0;
             private StringBuilder sb = null;
+
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -166,9 +188,8 @@ public class LoginActivity extends Activity implements ISplashView,View.OnClickL
             public void afterTextChanged(Editable editable) {
                 isStarMobile = false;
                 if (TextUtils.isEmpty(etLoginPhone.getText().toString().trim())) {
-                    showEditsMobile.setVisibility(View.GONE);
-                    showEditsMobile.setText("");
-                    empty_phone.setVisibility(View.GONE);
+//                    showEditsMobile.setVisibility(View.GONE);
+//                    showEditsMobile.setText("");
                 } else {
                     sb = new StringBuilder();
                     String str = etLoginPhone.getText().toString();
@@ -190,7 +211,7 @@ public class LoginActivity extends Activity implements ISplashView,View.OnClickL
 
                         } else {
                             for (int i = 0; i < len - 1; i++) {
-                                if (i == 2 || i == 6 ) {
+                                if (i == 2 || i == 6) {
                                     j++;
                                     sb.insert(i + j, " ");
                                 }
@@ -198,10 +219,8 @@ public class LoginActivity extends Activity implements ISplashView,View.OnClickL
                         }
 
                     }
-                    showEditsMobile.setText(sb.toString());
-                    showEditsMobile.setVisibility(View.VISIBLE);
-//                    showEditsMobile.setText(charSequence.toString().trim());
-                    empty_phone.setVisibility(View.VISIBLE);
+//                    showEditsMobile.setText(sb.toString());
+//                    showEditsMobile.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -243,9 +262,6 @@ public class LoginActivity extends Activity implements ISplashView,View.OnClickL
     public void onClick(View v) {
         int id = v.getId();
         switch (id){
-            case R.id.empty_phone://清空手机输入框数据
-                etLoginPhone.setText("");
-                break;
             case R.id.empty://清空密码输入框数据
                 etLoginPwd.setText("");
                 break;
@@ -269,8 +285,8 @@ public class LoginActivity extends Activity implements ISplashView,View.OnClickL
                 startActivityForResult(new Intent(LoginActivity.this,RegistActivity.class),100);
                 break;
             case R.id.login_button_finish://登录
-                if(!isStarMobile){//判断手机号填写控件是否隐藏
-                    //为隐藏就使用输入的手机号
+                if(!isStarMobile){//判断是否输入手机号
+                    //输入手机号
                     loginPhone = etLoginPhone.getText().toString();
                 }else{
                     //隐藏了就使用之前登录过的手机号
@@ -295,6 +311,18 @@ public class LoginActivity extends Activity implements ISplashView,View.OnClickL
                 }
                 startActivity(new Intent(LoginActivity.this,RegistActivity.class)
                             .putExtra("beforeMobile",loginPhone));
+                break;
+            case R.id.empty_change_mobile://是否显示登录过的手机号
+                if(isEditMobileFocus){
+                    etLoginPhone.setText("");//删除手机号输入框中的内容
+                }else{
+                    //显示登录过的手机号列表
+//                    if(listBeans != null && listBeans.size() > 0){
+//                        loginPop.showPop();
+//                    }
+                    loginPop = new LoginPopupwindow(this,mobileParent,etLoginPhone,listBeans);
+                    loginPop.showPop();
+                }
                 break;
         }
     }

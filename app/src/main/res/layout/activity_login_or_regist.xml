@@ -45,14 +45,6 @@
                         android:layout_weight="1"
                         android:layout_height="@dimen/height_login_edit" />
                     <ImageView
-                        android:id="@+id/empty_phone"
-                        android:visibility="gone"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginLeft="5dp"
-                        android:src="@mipmap/icon_empty"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <ImageView
                         android:id="@+id/empty_change_mobile"
                         android:layout_marginRight="5dp"
                         android:layout_marginLeft="5dp"
@@ -60,14 +52,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
-                <TextView
-                    android:id="@+id/show_edits_mobile"
-                    android:visibility="gone"
-                    android:gravity="center"
-                    android:background="@null"
-                    android:textColor="@color/hint_show_edits_mobile"
-                    android:textSize="@dimen/hint_show_edits_mobile"
-                    android:layout_width="match_parent"
+                <!--<TextView-->
+                    <!--android:id="@+id/show_edits_mobile"-->
+                    <!--android:visibility="gone"-->
+                    <!--android:gravity="center"-->
+                    <!--android:background="@null"-->
+                    <!--android:textColor="@color/hint_show_edits_mobile"-->
+                    <!--android:textSize="@dimen/hint_show_edits_mobile"-->
+                    <!--android:layout_width="match_parent"-->
                     android:layout_height="@dimen/height_login_edit" />
                 <View
                     android:background="@color/bg_line"
