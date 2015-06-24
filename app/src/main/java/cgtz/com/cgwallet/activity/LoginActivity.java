@@ -45,7 +45,7 @@ import cgtz.com.cgwallet.widget.ProgressDialog;
 /**
  * 登录或注册页面
  */
-public class LoginActivity extends Activity implements ISplashView,View.OnClickListener{
+public class LoginActivity extends BaseActivity implements ISplashView,View.OnClickListener{
     private static final String TAG = "LoginActivity";
     private EditText etLoginPhone;//输入登录手机号码
     private EditText etLoginPwd;//输入登录密码
@@ -81,6 +81,14 @@ public class LoginActivity extends Activity implements ISplashView,View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("登录");
+        showBack(true);
+        setBackListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backMain();
+            }
+        });
         MApplication.registActivities(this);//存储该activity
         beforeMobile = Utils.getUserPhone(this);
         Utils.loginExit(this);
