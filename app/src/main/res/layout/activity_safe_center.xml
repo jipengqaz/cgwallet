@@ -23,12 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
                 <TextView
-                    android:layout_marginLeft="10dp"
                     android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/safe_center_text_color"
-                    android:textSize="@dimen/safe_center_text"
+                    style="@style/safe_center_type_text"
                     android:text="@string/really_name"/>
                 <LinearLayout
                     android:layout_centerVertical="true"
@@ -65,12 +61,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
                 <TextView
-                    android:layout_marginLeft="10dp"
                     android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/safe_center_text_color"
-                    android:textSize="@dimen/safe_center_text"
+                    style="@style/safe_center_type_text"
                     android:text="@string/really_bankcard"/>
                 <LinearLayout
                     android:layout_centerVertical="true"
@@ -119,12 +111,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
                 <TextView
-                    android:layout_marginLeft="10dp"
                     android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/safe_center_text_color"
-                    android:textSize="@dimen/text_size_16sp"
+                    style="@style/safe_center_type_text"
                     android:text="@string/login_pwd_change"/>
                 <ImageView
                     android:layout_centerVertical="true"
@@ -146,12 +134,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
                 <TextView
-                    android:layout_marginLeft="10dp"
                     android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/safe_center_text_color"
-                    android:textSize="@dimen/text_size_16sp"
+                    style="@style/safe_center_type_text"
                     android:text="@string/sodoko_unlock"/>
                 <ImageView
                     android:layout_centerVertical="true"
@@ -172,12 +156,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
                 <TextView
-                    android:layout_marginLeft="10dp"
                     android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/safe_center_text_color"
-                    android:textSize="@dimen/text_size_16sp"
+                    style="@style/safe_center_type_text"
                     android:text="@string/Reset_Passwrod"/>
                 <TextView
                     android:id="@+id/is_pay_passwrod"

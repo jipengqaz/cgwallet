@@ -312,11 +312,15 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
                 }
                 break;
             case R.id.tv_forget_pwd://忘记密码
-                if(etLoginPhone.getVisibility() == View.VISIBLE){//判断手机号填写控件是否隐藏
-                    //为隐藏就使用输入的手机号
-                    loginPhone = etLoginPhone.getText().toString();
-                }else{
-                    //隐藏了就使用之前登录过的手机号
+//                if(etLoginPhone.getVisibility() == View.VISIBLE){//判断手机号填写控件是否隐藏
+//                    //为隐藏就使用输入的手机号
+//                    loginPhone = etLoginPhone.getText().toString();
+//                }else{
+//                    //隐藏了就使用之前登录过的手机号
+//                    loginPhone = beforeMobile;
+//                }
+                loginPhone = etLoginPhone.getText().toString();
+                if(loginPhone.lastIndexOf("*") != -1){
                     loginPhone = beforeMobile;
                 }
                 startActivity(new Intent(LoginActivity.this,RegistActivity.class)

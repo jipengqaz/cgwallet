@@ -133,9 +133,11 @@ public class Utils {
      * @return
      */
     public static void loginExit(Context context){
-        Start_update_value.saveShare(context,"","");
+        Start_update_value.saveShare(context, "", "");
         SharedUtils sharedUtils = new SharedUtils(context,Constants.CONFIG);
         sharedUtils.remove(Constants.LOGIN_PASSWORD);
+        SharedUtils sharedUtils2 = new SharedUtils(context,Constants.CONFIG_GESTURE);
+        sharedUtils2.remove(Utils.getUserPhone(context));
 //        sharedUtils.remove(Constants.LOGIN_TOKEN);
         MApplication.setToken("");
         MApplication.setUser_id("");
