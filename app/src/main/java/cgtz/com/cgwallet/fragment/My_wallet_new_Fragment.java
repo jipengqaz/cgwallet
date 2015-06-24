@@ -300,6 +300,8 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
                     startActivity(new Intent(getActivity(), E_wallet_record_activity.class).putExtra("choose", 2));
                     break;
                 case 2://累计收益
+                    startActivity(new Intent(getActivity(), Earnings_record.class));
+                    break;
 
             }
         }
