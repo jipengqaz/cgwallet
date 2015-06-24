@@ -14,6 +14,7 @@ public class Ke_Fu_data {
     public static String KEY_WORK_TIME="work_time";
     public static String KEY_PHONE ="phone_number";
     public static String KEY_SAFE ="possession_safe";
+    public static String WALLET_TIP = "wallet_tip";
 
     /**
      * 存储客服信息文案
@@ -74,4 +75,26 @@ public class Ke_Fu_data {
         SharedPreferences sharedPreferences = context.getSharedPreferences(KE_FU, Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_SAFE,"");
     }
+
+    /**
+     * 存取钱包提示内容
+     * @param context
+     * @return
+     */
+    public static void saveWalletTip(Context context,String walletTip){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(KE_FU, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(WALLET_TIP,walletTip);
+        editor.apply();
+    }
+    /**
+     * 存取钱包提示内容
+     * @param context
+     * @return
+     */
+    public static String getWalletTip(Context context){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(KE_FU, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(WALLET_TIP,"");
+    }
+
 }

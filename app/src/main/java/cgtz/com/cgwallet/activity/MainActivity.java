@@ -942,8 +942,10 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                 mMenu.leftToggle();
                 break;
             case R.id.left_menu_cgtz://草根投资
-
                 mMenu.leftToggle();
+                startActivity(new Intent(this,WebViewActivity.class)
+                        .putExtra("url","http://m.cgtz.com/")
+                        .putExtra("title","草根投资"));
                 break;
             case R.id.left_menu_more://更多
                 startActivity(new Intent(this,MenuMoreActivity.class));

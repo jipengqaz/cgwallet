@@ -168,6 +168,7 @@
                             />
                     </LinearLayout>
                         <TextView
+                            android:id="@+id/wallet_tip"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="随存随取，1元也有高收益"

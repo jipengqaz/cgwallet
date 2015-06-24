@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,6 +32,7 @@ import cgtz.com.cgwallet.bean.JsonBean;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.CustomTask;
+import cgtz.com.cgwallet.utils.Ke_Fu_data;
 import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.view.ISplashView;
@@ -59,6 +61,7 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
     private SwipeRefreshLayout mSwipeLayout;//下拉刷新控件
     private View layoutView;
     private NotSlideGridView function;//所有的选项
+    private TextView wallet_tip;//钱包提示
 
 
     @Override
@@ -141,9 +144,10 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
         walletAssets = (TextView) view.findViewById(R.id.wallet_my_assets);//我的资产
         function = (NotSlideGridView) view.findViewById(R.id.function)  ;//列表选项
         walletEarnings = (TextView) view.findViewById(R.id.wallet_earnings);
+        wallet_tip = (TextView) view.findViewById(R.id.wallet_tip);//钱包提示
 
         //生成动态数组，并且转入数据
-        ArrayList<HashMap<String, Object>> lstImageItem = new ArrayList<HashMap<String, Object>>();
+        ArrayList<HashMap<String, Object>> lstImageItem = new ArrayList<>();
         int [] image = {R.mipmap.icon_zhuanru,R.mipmap.icon_zhuanchu,R.mipmap.icon_leijishouyi};
         String[] name = {"转入记录","转出记录","累计收益"};
         for(int i=0;i<image.length;i++)
@@ -208,7 +212,8 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
                             JSONObject jsonObject = new JSONObject(jsonBean.getJsonString());
                             earnings = jsonObject.optString("todayInterest");//今日收益
                             assets = jsonObject.optString("eTotal");//我的资产
-                            accumulative = jsonObject.optString("interestTotal");//累计收益
+//                            accumulative = jsonObject.optString("interestTotal");//累计收益
+                            accumulative = jsonObject.optString("receivableInterest");//累计收益
 //                            identity = jsonObject.optString("starIdentity");//身份证号
 //                            bankCord = jsonObject.optString("starCardNumber");//银行卡号
                             fillViews();
@@ -228,6 +233,9 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
      * widght填充数据
      */
     private void fillViews(){
+        if(!TextUtils.isEmpty(Ke_Fu_data.getWalletTip(getActivity()))){
+            wallet_tip.setText(Ke_Fu_data.getWalletTip(getActivity()));
+        }
         walletEarnings.setText(earnings);//今日收益
         walletAssets.setText(assets);//我的资产
         walletAccumulative.setText(accumulative);//累计收益

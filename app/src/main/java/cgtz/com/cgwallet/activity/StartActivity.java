@@ -129,6 +129,8 @@ public class StartActivity extends Activity {
      * @param json
      */
     private void getJudge_Update(JSONObject json){
+        String wallet_tip = json.optString("tip");//获取首页钱包提示
+        Ke_Fu_data.saveWalletTip(this,wallet_tip);
         Map<String,String> map = Start_update_value.getUpdateTime(StartActivity.this);
         String imageUpdate = json.optString("imageUpdate");//启动图图片更新时间
         kefuUpdate = json.optString("kefuUpdate");//客服信息更新时间
