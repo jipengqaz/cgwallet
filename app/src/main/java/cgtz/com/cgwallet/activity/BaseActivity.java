@@ -19,6 +19,8 @@ import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.Utils;
 import cn.jpush.android.api.JPushInterface;
 
+import com.networkbench.agent.impl.NBSAppAgent;
+
 /**
  * �自定义主activity
  * Created by Administrator on 2015/4/9.
@@ -35,6 +37,7 @@ public class BaseActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initBar();
+        NBSAppAgent.setLicenseKey("0856e9d72bbd4420ba1d0ff66de71df6").withLocationServiceEnabled(true).start(this);
     }
 
     private void initBar(){

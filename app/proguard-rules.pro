@@ -210,6 +210,12 @@
     public static *** v(...);
 }
 
+# ProGuard configurations for NetworkBench Lens
+-keep class com.networkbench.**{*;}
+-dontwarn com.networkbench.**
+-keepattributes Exceptions, Signature, InnerClasses
+# End NetworkBench Lens
+
 
 
 

@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.networkbench.agent.impl.NBSAppAgent;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
@@ -80,6 +81,7 @@ public class StartActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        NBSAppAgent.setLicenseKey("0856e9d72bbd4420ba1d0ff66de71df6").withLocationServiceEnabled(true).start(this);
         setContentView(R.layout.activity_start);
         MobclickAgent.setDebugMode(Constants.IS_TEST);
         MobclickAgent.updateOnlineConfig(this);

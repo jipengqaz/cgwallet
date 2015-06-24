@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.networkbench.agent.impl.NBSAppAgent;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.bean.HandlerRequestCode;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -108,6 +109,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        NBSAppAgent.setLicenseKey("0856e9d72bbd4420ba1d0ff66de71df6").withLocationServiceEnabled(true).start(this);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         MApplication.registActivities(this);//存储该activity
