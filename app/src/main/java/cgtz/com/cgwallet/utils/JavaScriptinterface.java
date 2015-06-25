@@ -65,7 +65,7 @@ public class JavaScriptinterface {
     @JavascriptInterface
 	public void showToast(String  i) {
             LogUtils.e("TAG",i);
-            if(i!=null && i.equals("close")){
+            if(i!=null && i.equals("close") && !Utils.isLogined()){
                 activity.finish();
             }
         }
