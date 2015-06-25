@@ -475,7 +475,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
                         break;
                     case R.id.understand://了解草根钱包
-
+                        startActivity(new Intent(MainActivity.this,WebViewActivity.class).putExtra("url" ,"http://192.168.10.188:45680/mobile/e/start").putExtra("title","草根钱包"));
                         break;
                 }
             }
