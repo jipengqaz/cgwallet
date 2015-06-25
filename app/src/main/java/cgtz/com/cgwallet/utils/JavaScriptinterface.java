@@ -64,18 +64,10 @@ public class JavaScriptinterface {
 	/** 与js交互时用到的方法，在js里直接调用的 */
     @JavascriptInterface
 	public void showToast(String  i) {
-//        if(i.equals("1")){
-//            if (UserSession.getInstance().isLogined()) {
-//                if (pd == null)
-//                    pd = new CustomProgressDialog(activity, R.style.loading_dialog);//显示加载弹窗
-//                if (pd != null) {
-//                    pd.show();
-//                }
-//                action = i;
-//            Token_Client.setToken(handler);
-//            }else{
-//                UtilityUtils.startLoginActivity(activity, false);//登录
-//            }
+            LogUtils.e("TAG",i);
+            if(i!=null && i.equals("close")){
+                activity.finish();
+            }
         }
 //    }
 }

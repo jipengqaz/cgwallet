@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.utils.JavaScriptinterface;
 import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.ScreenUtils;
 
@@ -55,8 +56,8 @@ public class WebViewActivity extends BaseActivity {
              *  这个接口实现了从网页跳到app中的activity 的
              *  方法，特别重要
              * **/
-//            webView.addJavascriptInterface(new JavascriptInterface(this, webView),
-//                    "android");
+            webView.addJavascriptInterface(new JavaScriptinterface(this, webView),
+                    "android");
 //        webView.addJavascriptInterface(new MyJavaScriptInterface(this),
 //                "android");
 
