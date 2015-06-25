@@ -49,7 +49,7 @@ public class WebViewActivity extends BaseActivity {
         //添加手机缩放
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setSupportZoom(true);//出现缩放工具
-//        webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//优先使用缓存
+        webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);//优先使用缓存
 
         /** 与js交互，JavaScriptinterface 是个接口，与js交互时用到的，
          *  这个接口实现了从网页跳到app中的activity 的
@@ -61,8 +61,8 @@ public class WebViewActivity extends BaseActivity {
 //                "android");
 
         //自适应屏幕
-//        webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-//        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setUseWideViewPort(true);//扩大比例缩放
 
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);//滚动条风格，为0就是不给滚动条留空间，滚动条覆盖在网页上

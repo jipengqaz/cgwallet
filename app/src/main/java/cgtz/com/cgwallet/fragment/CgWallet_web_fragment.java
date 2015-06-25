@@ -42,12 +42,13 @@ public class CgWallet_web_fragment extends BaseFragment{
         webView = (WebView)view. findViewById(R.id.webview);
         webView.getSettings().setJavaScriptEnabled(true);//可用JS
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-//        webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//优先使用缓存
+        webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);//优先使用缓存
         //添加手机缩放
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setSupportZoom(true);//出现缩放工具
         webView.getSettings().setUseWideViewPort(true);//扩大比例缩放
-//        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);//滚动条风格，为0就是不给滚动条留空间，滚动条覆盖在网页上
         CookieManager.getInstance().setAcceptCookie(true);
         pb= (TextView) view.findViewById(R.id.progress_bar_2);
