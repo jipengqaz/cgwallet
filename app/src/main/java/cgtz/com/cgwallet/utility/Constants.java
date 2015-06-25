@@ -24,7 +24,7 @@ public class Constants {
     public static final String VERSION = version+(IS_TEST?
             (IS_28?"-28":"-dev")
             :"");//版本号
-
+    public static final String WALLET_INTRODUCE = "http://192.168.10.188:45680/mobile/e/start";//草根钱包简介
     public static final String TEST_VERSION_UPDATE =
             "http://192.168.10.188:45680/version/app/WalletVersion";//测试服务器，版本更新
     public static final String TWO_NIGHT_VERSION_UPDATE =

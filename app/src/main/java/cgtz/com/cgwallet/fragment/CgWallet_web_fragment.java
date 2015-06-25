@@ -9,11 +9,13 @@ import android.view.ViewGroup;
 import android.webkit.CookieManager;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.JavaScriptinterface;
 import cgtz.com.cgwallet.utils.ScreenUtils;
 
@@ -26,11 +28,7 @@ public class CgWallet_web_fragment extends BaseFragment{
     private int Progress;
     private int width;
     private ViewGroup.LayoutParams lp;
-    private String url;
-
-    public CgWallet_web_fragment(String url){
-        this.url = url;
-    }
+    private String url = Constants.WALLET_INTRODUCE;
 
     /**
      * 刷新页面
@@ -44,10 +42,12 @@ public class CgWallet_web_fragment extends BaseFragment{
         webView = (WebView)view. findViewById(R.id.webview);
         webView.getSettings().setJavaScriptEnabled(true);//可用JS
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+//        webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//优先使用缓存
         //添加手机缩放
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setSupportZoom(true);//出现缩放工具
         webView.getSettings().setUseWideViewPort(true);//扩大比例缩放
+//        webView.getSettings().setLoadWithOverviewMode(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);//滚动条风格，为0就是不给滚动条留空间，滚动条覆盖在网页上
         CookieManager.getInstance().setAcceptCookie(true);
         pb= (TextView) view.findViewById(R.id.progress_bar_2);
