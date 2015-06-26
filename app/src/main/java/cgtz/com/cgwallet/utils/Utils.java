@@ -83,7 +83,7 @@ public class Utils {
      * @param mobile
      */
     public static void saveMobile(Context context,String mobile){
-        DataSupport.deleteAll(LoginMobileBean.class,"mobile = ?",mobile);
+        DataSupport.deleteAll(LoginMobileBean.class, "mobile = ?", mobile);
         LoginMobileBean loginMobileBean = new LoginMobileBean();
         loginMobileBean.setMobile(mobile);
         loginMobileBean.save();
@@ -533,6 +533,26 @@ public class Utils {
                 ((Activity)context).finish();
             }
         });
+    }
+
+    /**
+     *通过包名检测系统中是否安装某个应用程序
+     */
+    public static boolean checkApkExist(Context context, String packageName)
+    {
+        if (packageName == null || "".equals(packageName))
+        {
+            return false;
+        }
+        try
+        {
+            context.getPackageManager().getApplicationInfo(packageName,PackageManager.GET_UNINSTALLED_PACKAGES);
+            return true;
+        }
+        catch (PackageManager.NameNotFoundException e)
+        {
+            return false;
+        }
     }
 
 }

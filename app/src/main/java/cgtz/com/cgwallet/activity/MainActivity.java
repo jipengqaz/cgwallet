@@ -1,6 +1,7 @@
 package cgtz.com.cgwallet.activity;
 
 import android.app.Dialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -946,9 +947,14 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                 break;
             case R.id.left_menu_cgtz://草根投资
                 mMenu.leftToggle();
-                startActivity(new Intent(this,WebViewActivity.class)
-                        .putExtra("url","http://m.cgtz.com/")
-                        .putExtra("title","草根投资"));
+                if(!Utils.checkApkExist(this,Constants.CGTZ_PACKAGE)){//用于判断是否有草根投资app
+                    startActivity(new Intent(this,WebViewActivity.class)
+                            .putExtra("url", "http://m.cgtz.com/")
+                            .putExtra("title", "草根投资"));
+                }else{
+                    startActivity(new Intent().setComponent(
+                            new ComponentName(Constants.CGTZ_PACKAGE,Constants.CGTZ_START_ACTIVITY)));
+                }
                 break;
             case R.id.left_menu_more://更多
                 startActivity(new Intent(this,MenuMoreActivity.class));
