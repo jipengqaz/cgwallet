@@ -216,6 +216,7 @@
 -keepattributes Exceptions, Signature, InnerClasses
 -keepattributes SourceFile,LineNumberTable
 # End NetworkBench Lens
+-keep class org.litepal.**
 
 
 
