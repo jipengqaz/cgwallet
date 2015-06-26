@@ -11,6 +11,8 @@ public class Constants {
     public static final String version = "1.0.0";
     public static final String version_ = "100";
     public static final String ENCONDING = "UTF-8";
+    public static final String CGTZ_PACKAGE = "cgtz.com.cgtz";
+    public static final String CGTZ_START_ACTIVITY = CGTZ_PACKAGE+".ui.StartActivity";
     public static final String colors  ="#e44d42";//手势密码提示文案颜色
     public static final boolean IS_TEST = true;//判断是否为测试环境
     public static final boolean IS_DEVELOP = true;//用于在开发还是测试之间选择测试服务器路径的判断
