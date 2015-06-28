@@ -1,18 +1,15 @@
 package cgtz.com.cgwallet.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,9 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONObject;
-import org.litepal.crud.DataSupport;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -30,11 +25,9 @@ import cgtz.com.cgwallet.MApplication;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.Service.Code_download_Service;
 import cgtz.com.cgwallet.bean.JsonBean;
-import cgtz.com.cgwallet.bean.LoginMobileBean;
 import cgtz.com.cgwallet.presenter.SplashPresenter;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.CustomTask;
-import cgtz.com.cgwallet.utils.Ke_Fu_data;
 import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.MD5Util;
 import cgtz.com.cgwallet.utils.Utils;
@@ -64,7 +57,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
     private ImageView empty;//清空数据
     public boolean isStarMobile = false;//用于判断是否为星号手机号
     public boolean isEditMobileFocus = false;//判断手机输入框是否获取到焦点,默认没有获取到
-    private List<LoginMobileBean> listBeans;//登录过的手机号集合
+    private List<org.ryan.database.LoginMobileBean> listBeans;//登录过的手机号集合
     private LinearLayout mobileParent;//输入框外层布局
     private LoginPopupwindow loginPop;
 
@@ -121,7 +114,8 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
             etLoginPhone.setText(Utils.getHasStarsMobile(beforeMobile));
             etLoginPhone.setSelection(etLoginPhone.getText().toString().trim().length());
         }
-        listBeans = DataSupport.order("id desc").limit(3).find(LoginMobileBean.class);
+//        listBeans = DataSupport.order("id desc").limit(3).find(LoginMobileBean.class);
+        listBeans = org.ryan.database.DataSupport.getMobileList();
     }
 
     private void setListener(){

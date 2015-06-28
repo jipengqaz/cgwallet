@@ -1,12 +1,11 @@
 package cgtz.com.cgwallet.bean;
 
-import org.litepal.crud.DataSupport;
 
 /**
  * 本机登录过的手机号
  * Created by ryan on 15/6/18.
  */
-public class LoginMobileBean extends DataSupport{
+public class LoginMobileBean {
     private int id;
     private String userId;
     private String mobile;

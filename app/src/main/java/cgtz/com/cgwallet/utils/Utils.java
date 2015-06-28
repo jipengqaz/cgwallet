@@ -15,7 +15,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.litepal.crud.DataSupport;
 
 import java.util.HashMap;
 
@@ -26,10 +25,7 @@ import cgtz.com.cgwallet.activity.MainActivity;
 import cgtz.com.cgwallet.activity.SaveMoneyActivity;
 import cgtz.com.cgwallet.activity.WebViewActivity;
 import cgtz.com.cgwallet.bean.JsonBean;
-import cgtz.com.cgwallet.bean.LoginMobileBean;
-import cgtz.com.cgwallet.client.Withdraw_money_Client;
 import cgtz.com.cgwallet.utility.Constants;
-import cgtz.com.cgwallet.widget.ProgressDialog;
 import cgtz.com.cgwallet.widget.ServerMainTainDialog;
 
 /**
@@ -83,10 +79,14 @@ public class Utils {
      * @param mobile
      */
     public static void saveMobile(Context context,String mobile){
-        DataSupport.deleteAll(LoginMobileBean.class, "mobile = ?", mobile);
-        LoginMobileBean loginMobileBean = new LoginMobileBean();
-        loginMobileBean.setMobile(mobile);
-        loginMobileBean.save();
+//        DataSupport.deleteAll(LoginMobileBean.class, "mobile = ?", mobile);
+//        LoginMobileBean loginMobileBean = new LoginMobileBean();
+//        loginMobileBean.setMobile(mobile);
+//        loginMobileBean.save();
+        org.ryan.database.LoginMobileBean bean = new org.ryan.database.LoginMobileBean();
+        bean.setMobile(mobile);
+        org.ryan.database.DataSupport.deleteLoginMobile(mobile);
+        org.ryan.database.DataSupport.saveLoginMobile(bean);
         SharedUtils sharedUtils = new SharedUtils(context, Constants.CONFIG);
         sharedUtils.saveString(Constants.LOGIN_PHONE, mobile);
     }
