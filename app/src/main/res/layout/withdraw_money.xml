@@ -114,7 +114,7 @@
         <TextView
             android:id="@+id/save_money_transfer_figure_hint"
             android:layout_centerVertical="true"
-            android:text="取出金额"
+            android:text="转出金额"
             android:layout_marginLeft="@dimen/save_moeny_marign_left"
             android:textSize="@dimen/text_size_16sp"
             android:textColor="@color/money_text_hint"
