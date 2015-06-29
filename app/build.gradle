@@ -12,8 +12,8 @@ android {
         versionCode 2
         versionName "1.1.0"
     }
-    signingConfigs{
-        releaseConfig{
+    signingConfigs {
+        releaseConfig {
             storeFile file("cgwallet.jks")
             storePassword KEYSTORE_PASSWORD
             keyAlias "wallet"
@@ -34,6 +34,7 @@ android {
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
+            assets.srcDirs = ['src/main/assets', 'src/main/assets/']
         }
     }
     packagingOptions {
@@ -69,7 +70,7 @@ dependencies {
     compile 'com.networkbench.newlens.agent.android:nbs.newlens.agent:2.2.5'
     compile files('libs/nineoldandroids-2.4.0.jar')
     compile files('libs/umeng-update-v2.6.0.1.jar')
-    compile files('libs/litepal-1.2.0.jar')
+    compile files('libs/sqliter.jar')
 }
 // 为了增加libs中的.so文件
 task copyNativeLibs(type: Copy) {

@@ -1,9 +1,8 @@
 package cgtz.com.cgwallet;
 
 import android.app.Activity;
-import android.app.Application;
 
-import org.litepal.LitePalApplication;
+import org.ryan.LiteApplication;
 
 import java.util.ArrayList;
 
@@ -14,7 +13,7 @@ import cn.jpush.android.api.JPushInterface;
  * 自定义Application
  * Created by Administrator on 2015/4/22.
  */
-public class MApplication extends LitePalApplication {
+public class MApplication extends LiteApplication{
     private static ArrayList<Activity> activities = new ArrayList<>();
     private static String token ="";
     private static String user_id ="";

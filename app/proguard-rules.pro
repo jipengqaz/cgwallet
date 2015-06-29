@@ -216,6 +216,9 @@
 -keepattributes Exceptions, Signature, InnerClasses
 -keepattributes SourceFile,LineNumberTable
 # End NetworkBench Lens
+-keep class org.litepal.**
+-keep class cgtz.com.cgwallet.bean.**
+-keep class org.ryan.**
 
 
 

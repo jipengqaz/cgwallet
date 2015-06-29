@@ -1,27 +1,24 @@
 package cgtz.com.cgwallet.widget;
 
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.graphics.drawable.ColorDrawable;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
+import org.ryan.database.LoginMobileBean;
 
 import java.util.List;
 
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.activity.LoginActivity;
-import cgtz.com.cgwallet.bean.LoginMobileBean;
 import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.Utils;
 
