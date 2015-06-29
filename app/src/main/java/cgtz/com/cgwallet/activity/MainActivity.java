@@ -967,6 +967,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             case R.id.left_menu_login_out://退出登录
                 Utils.loginExit(this);
                 setLeftMenuInfo(0);
+                mMenu.leftToggle();
                 startActivity(new Intent(this, LoginActivity.class));
                 break;
         }
