@@ -113,6 +113,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
             isStarMobile = true;
             etLoginPhone.setText(Utils.getHasStarsMobile(beforeMobile));
             etLoginPhone.setSelection(etLoginPhone.getText().toString().trim().length());
+            etLoginPhone.setSelectAllOnFocus(true);  //获取焦点是全选
         }
 //        listBeans = DataSupport.order("id desc").limit(3).find(LoginMobileBean.class);
         listBeans = org.ryan.database.DataSupport.getMobileList();
