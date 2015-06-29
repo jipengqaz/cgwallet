@@ -471,7 +471,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
             public void onClick(View v) {
                 switch (v.getId()){
                     case R.id.start_money://开始生钱
-                        Utils.saveIsMask(MainActivity.this, true);//存储是否显示遮罩层的判断值
+//                        Utils.saveIsMask(MainActivity.this, true);//存储是否显示遮罩层的判断值
                         dialog_main.dismiss();
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
                         break;
