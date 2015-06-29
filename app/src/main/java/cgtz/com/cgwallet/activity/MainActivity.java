@@ -258,13 +258,13 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                             mController.setShareMedia(qqShareContent);
                             // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
                             mController.postShare(MainActivity.this, SHARE_MEDIA.QQ, mShareListener);
-                            mMenu.rightToggle();
                         }else{
                             Utils.makeToast(MainActivity.this,"您未安装该应用,请安装后分享！");
                         }
                         break;
                     case R.id.qzone:
                         //判断是否有安装
+
                         aa = mController.getConfig().getSsoHandler(HandlerRequestCode.QZONE_REQUEST_CODE).isClientInstalled();
                         if(aa){
                             QZoneShareContent qzone = new QZoneShareContent();
@@ -279,7 +279,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                             mController.setShareMedia(qzone);
                             // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
                             mController.postShare(MainActivity.this, SHARE_MEDIA.QZONE, mShareListener);
-                            mMenu.rightToggle();
                         }else{
                             Utils.makeToast(MainActivity.this,"您未安装该应用,请安装后分享！");
                         }
@@ -291,7 +290,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         mController.setShareMedia(sms);
                         // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
                         mController.postShare(MainActivity.this, SHARE_MEDIA.SMS, mShareListener);
-                        mMenu.rightToggle();
                         break;
                     case R.id.wechat://微信
                         //判断是否有安装
@@ -310,7 +308,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                             mController.setShareMedia(weixinContent);
                             // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
                             mController.postShare(MainActivity.this, SHARE_MEDIA.WEIXIN, mShareListener);
-                            mMenu.rightToggle();
                         }else{
                             Utils.makeToast(MainActivity.this,"您未安装该应用,请安装后分享！");
                         }
@@ -329,7 +326,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                             mController.setShareMedia(circleMedia);
                             // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
                             mController.postShare(MainActivity.this, SHARE_MEDIA.WEIXIN_CIRCLE, mShareListener);
-                            mMenu.rightToggle();
                         }else{
                             Utils.makeToast(MainActivity.this,"您未安装该应用,请安装后分享！");
                         }
@@ -349,9 +345,10 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         startActivity(new Intent(MainActivity.this, WebViewActivity.class)
                                 .putExtra("url", "https://d5ds88.cgtz.com/version/notice/rule")
                                 .putExtra("title", "推荐规则"));
-                        mMenu.rightToggle();
                         break;
                 }
+                com.umeng.socialize.utils.Log.LOG = true;
+                mMenu.rightToggle();
             }
         };
         QQ.setOnClickListener(share_click);
