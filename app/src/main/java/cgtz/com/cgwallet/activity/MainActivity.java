@@ -963,6 +963,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                 break;
             case R.id.left_menu_login_out://退出登录
                 Utils.loginExit(this);
+                myWalletFragment.empty();
                 setLeftMenuInfo(0);
                 mMenu.leftToggle();
                 startActivity(new Intent(this, LoginActivity.class));
