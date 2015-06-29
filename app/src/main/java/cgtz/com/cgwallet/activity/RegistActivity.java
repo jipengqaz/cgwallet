@@ -104,8 +104,8 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
 
         getSecurityCode.setOnClickListener(this);
         if(beforeMobile){
-            registMobile.setText(mobile);
-            registMobile.setSelection(mobile.length());
+//            registMobile.setText(mobile);
+//            registMobile.setSelection(mobile.length());
             if(mobile.length()==11){//设置获取验证码按钮可点
                 getSecurityCode.setEnabled(true);
                 getSecurityCode.setBackgroundResource(R.color.main_bg);
