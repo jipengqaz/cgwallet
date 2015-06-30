@@ -22,7 +22,6 @@
                 android:text="@string/hint_regist_text"
                 android:textSize="@dimen/text_size_12sp"
                 android:textColor="@color/money_tv_hint_text"
-                android:layout_marginLeft="8dp"
                 />
             <LinearLayout
                 android:orientation="horizontal"
@@ -143,7 +142,6 @@
                     android:text="@string/hint_regist_pwd_introduce"
                     android:textSize="@dimen/text_size_12sp"
                     android:textColor="@color/money_tv_hint_text"
-                    android:layout_marginLeft="6dp"
                     android:enabled="false"
                     android:background="@null"
                     android:layout_width="match_parent"
