@@ -29,7 +29,7 @@ public class SaveMoneySuccessActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save_money_success);
         MApplication.registActivities(this);
-        setTitle("存钱结果");
+        setTitle("转入结果");
         startCalculateTime = getIntent().getStringExtra("startCalculateTime");
         saveMoney = getIntent().getStringExtra("saveMoney");
         initViews();

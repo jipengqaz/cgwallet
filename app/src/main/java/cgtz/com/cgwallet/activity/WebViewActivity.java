@@ -28,6 +28,7 @@ import cgtz.com.cgwallet.utils.ScreenUtils;
  * Created by Administrator on 2015/4/21.
  */
 public class WebViewActivity extends BaseActivity {
+    private String TAG = "WebViewActivity";
     public WebView webView;
     private TextView pb;
     private int Progress;
@@ -102,7 +103,6 @@ public class WebViewActivity extends BaseActivity {
                 handler.proceed();
             }
         });
-
         if(savedInstanceState != null){
             id = savedInstanceState .getLong("projectID", 0);
             type =savedInstanceState .getInt("type", 0);
@@ -127,6 +127,7 @@ public class WebViewActivity extends BaseActivity {
                 webView.loadUrl(url);
             }
         }
+        LogUtils.i(TAG, "访问路径：" + url);
     }
 
 

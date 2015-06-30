@@ -17,12 +17,14 @@ import android.widget.TextView;
 import cgtz.com.cgwallet.R;
 import cgtz.com.cgwallet.utility.Constants;
 import cgtz.com.cgwallet.utils.JavaScriptinterface;
+import cgtz.com.cgwallet.utils.LogUtils;
 import cgtz.com.cgwallet.utils.ScreenUtils;
 
 /**
  * Created by Administrator on 2015/6/19.
  */
 public class CgWallet_web_fragment extends BaseFragment{
+    private String TAG = "CgWallet_web_fragment";
     private WebView webView;
     private TextView pb;
     private int Progress;
@@ -60,6 +62,7 @@ public class CgWallet_web_fragment extends BaseFragment{
                     "android");
         setClient();
 
+        LogUtils.i(TAG,"访问路径："+url);
         webView.loadUrl(url);
         return view;
     }
