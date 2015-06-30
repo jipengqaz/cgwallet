@@ -159,6 +159,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="42dp" />
                 <LinearLayout
+                    android:id ="@+id/protocol_layout"
                     android:padding="10dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
@@ -171,15 +172,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
-                        android:layout_marginLeft="5dp"
                         android:text="我已阅读并同意"
                         android:textColor="@color/gray"
+                        android:textSize="@dimen/text_size_12sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:id="@+id/tv_regist_protocol"
                         android:text="@string/hint_regist_protocol"
-                        android:textSize="@dimen/hint_regist_mobile"
+                        android:textSize="@dimen/text_size_12sp"
                         android:textColor="@color/bg_regist_protocol"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />

@@ -8,7 +8,7 @@
     <color name="top_title">@color/action_bar_bg</color>
     <color name="main_red">#fb5e4f</color>
     <color name="main_bg">@color/action_bar_bg</color>
-    <color name="main_bg_white">#f8f8f8</color>
+    <color name="main_bg_white">#f7f7f7</color>
     <color name="bg_center">#f5f5f5</color>
     <color name="main_comment">#606060</color>
     <color name="code_333333">#333333</color>

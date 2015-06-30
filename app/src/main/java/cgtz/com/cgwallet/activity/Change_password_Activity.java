@@ -3,6 +3,8 @@ package cgtz.com.cgwallet.activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,7 +52,7 @@ public class Change_password_Activity extends BaseActivity{
             if (mCount > 0) {
                 send_message.setText(mCount + "秒后重发");
                 send_message.setEnabled(false);
-                send_message.setBackgroundResource(R.drawable.banned_click);//设置背景
+                send_message.setBackgroundResource(R.drawable.bg_button_no_enabled);//设置背景
                 mHandler.postDelayed(this, 1000);//延迟一秒执行
             } else {
                 send_message.setText("重发验证码");
@@ -103,8 +105,39 @@ public class Change_password_Activity extends BaseActivity{
         code = (EditText) findViewById(R.id.code);
         send_message = (Button) findViewById(R.id.send_message);
         determine = (Button) findViewById(R.id.determine);
+        send_message.setEnabled(false);
+        determine.setEnabled(false);
+        password_1.addTextChangedListener(watcher);
+        password_2.addTextChangedListener(watcher);
+        code.addTextChangedListener(watcher);
     }
 
+    /**
+     * 设置事件
+     */
+    TextWatcher  watcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if(password_1.getText().toString().trim().length() == 6 && password_2.getText().toString().trim().length() == 6){
+                send_message.setEnabled(true);
+                send_message.setBackgroundResource(R.drawable.bg_button_preed);
+                if(code.getText().toString().trim().length() == 6){
+                    determine.setEnabled(true);
+                    determine.setBackgroundResource(R.drawable.bg_button_preed);
+                }
+            }
+        }
+    };
     /**
      * 填充控件   和添加事件
      */

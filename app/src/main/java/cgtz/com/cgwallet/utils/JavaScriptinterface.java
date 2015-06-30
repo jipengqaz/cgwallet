@@ -2,6 +2,7 @@ package cgtz.com.cgwallet.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.webkit.WebView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import cgtz.com.cgwallet.activity.SaveMoneyActivity;
 import cgtz.com.cgwallet.widget.ProgressDialog;
 
 
@@ -67,6 +69,8 @@ public class JavaScriptinterface {
             LogUtils.e("TAG",i);
             if(i!=null && i.equals("close") && !Utils.isLogined()){
                 activity.finish();
+            }else if(i!=null && i.equals("close") && Utils.isLogined()){
+                activity.startActivity(new Intent(activity, SaveMoneyActivity.class));
             }
         }
 //    }

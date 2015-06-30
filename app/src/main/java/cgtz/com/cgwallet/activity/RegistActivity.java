@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONObject;
@@ -57,6 +58,7 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
     private boolean isChecked = false;//设置是否显示密码
     private ImageView empty_code,empty_phone,empty;//清空验证码输入框，清空手机输入框，清空密码输入框
     private CheckBox checkbox;//草根协议是否同意
+    private LinearLayout protocol_layout;//协议布局
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,10 +91,13 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
         empty_phone = (ImageView) findViewById(R.id.empty_phone);//清空手机输入框
         empty = (ImageView) findViewById(R.id.empty);//清空密码输入框
         checkbox = (CheckBox) findViewById(R.id.checkbox);//同意草根协议
+        protocol_layout = (LinearLayout) findViewById(R.id.protocol_layout);//协议布局
+
 
         if(beforeMobile){//如果是修改密码
             lookProtocol.setVisibility(View.GONE);
             registBtn.setText("修改密码");
+            protocol_layout.setVisibility(View.INVISIBLE);
         }
         empty_code.setOnClickListener(this);
         empty_phone.setOnClickListener(this);
@@ -104,15 +109,15 @@ public class RegistActivity extends BaseActivity implements ISplashView, View.On
 
         getSecurityCode.setOnClickListener(this);
         if(beforeMobile){
-            registMobile.setText(mobile);
-            registMobile.setSelection(mobile.length());
-            if(mobile.length()==11){//设置获取验证码按钮可点
-                getSecurityCode.setEnabled(true);
-                getSecurityCode.setBackgroundResource(R.color.main_bg);
-            }else{
+//            registMobile.setText(mobile);
+//            registMobile.setSelection(mobile.length());
+//            if(mobile.length()==11){//设置获取验证码按钮可点
+//                getSecurityCode.setEnabled(true);
+//                getSecurityCode.setBackgroundResource(R.color.main_bg);
+//            }else{
                 getSecurityCode.setEnabled(false);
                 getSecurityCode.setBackgroundResource(R.color.bg_get_security_code);
-            }
+//            }
         }
         Utils.closeInputMethod(this);
         registMobile.addTextChangedListener(new TextWatcher() {

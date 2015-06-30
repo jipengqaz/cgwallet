@@ -33,8 +33,8 @@ public class Code_download_Service extends Service{
                     int code = jsonBean.getCode();
                     String errorMsg = jsonBean.getError_msg();
                     json = jsonBean.getJsonObject();
+                    LogUtils.e(TAG,json+"");
                     if(json.optInt("success") == 1) {
-                        LogUtils.e(TAG,json+"");
                         qrcode = json.optString("qrcode");
                         new Thread(connectNet).start();
                     }

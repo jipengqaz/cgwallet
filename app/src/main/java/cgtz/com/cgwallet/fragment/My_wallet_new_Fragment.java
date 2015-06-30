@@ -240,6 +240,12 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
         walletAssets.setText(assets);//我的资产
         walletAccumulative.setText(accumulative);//累计收益
     }
+
+    public void empty(){
+        walletEarnings.setText("0.00");//今日收益
+        walletAssets.setText("0.00");//我的资产
+        walletAccumulative.setText("0.00");//累计收益
+    }
     /**
      * 自定义适配器
      */
