@@ -213,7 +213,7 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
                             earnings = jsonObject.optString("todayInterest");//今日收益
                             assets = jsonObject.optString("eTotal");//我的资产
 //                            accumulative = jsonObject.optString("interestTotal");//累计收益
-                            accumulative = jsonObject.optString("receivableInterest");//累计收益
+                            accumulative = jsonObject.optString("receivableInterest");//可用收益
 //                            identity = jsonObject.optString("starIdentity");//身份证号
 //                            bankCord = jsonObject.optString("starCardNumber");//银行卡号
                             fillViews();
