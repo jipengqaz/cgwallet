@@ -160,7 +160,7 @@
                     android:layout_height="42dp" />
                 <LinearLayout
                     android:id ="@+id/protocol_layout"
-                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -175,6 +175,7 @@
                         android:text="我已阅读并同意"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/text_size_12sp"
+                        android:layout_marginLeft="6dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView

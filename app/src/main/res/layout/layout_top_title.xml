@@ -6,7 +6,7 @@
     <ImageView
         android:padding="5dp"
         android:scaleType="fitXY"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="10dp"
         android:id="@+id/show_left_button"
         android:layout_centerVertical="true"
         android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
     <ImageView
         android:padding="5dp"
         android:scaleType="fitXY"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="10dp"
         android:layout_centerVertical="true"
         android:id="@+id/show_right_button"
         android:layout_width="wrap_content"
