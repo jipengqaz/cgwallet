@@ -8,13 +8,13 @@ import java.io.File;
  * Created by Administrator on 2015/4/11.
  */
 public class Constants {
-    public static final String version = "1.0.0";
-    public static final String version_ = "100";
+    public static final String version = "1.1.0";
+    public static final String version_ = "110";
     public static final String ENCONDING = "UTF-8";
     public static final String CGTZ_PACKAGE = "cgtz.com.cgtz";
     public static final String CGTZ_START_ACTIVITY = CGTZ_PACKAGE+".ui.StartActivity";
     public static final String colors  ="#e44d42";//手势密码提示文案颜色
-    public static final boolean IS_TEST = true;//判断是否为测试环境
+    public static final boolean IS_TEST = false;//判断是否为测试环境
     public static final boolean IS_DEVELOP = true;//用于在开发还是测试之间选择测试服务器路径的判断
     public static final boolean IS_28 = false;//判断是否更改为28服务器路径
     public static final String OFFLINE_HTTP_TEST = "http://192.168.10.188:45680/wallet/";//用于开发的-测试服务器路径
@@ -26,7 +26,10 @@ public class Constants {
     public static final String VERSION = version+(IS_TEST?
             (IS_28?"-28":"-dev")
             :"");//版本号
-    public static final String WALLET_INTRODUCE = "http://192.168.10.188:45680/mobile/e/start";//草根钱包简介
+    public static final String TEST_WALLET_INTRODUCE = "http://192.168.10.188:45680/mobile/e/start";//草根钱包  简介  dev
+    public static final String ONLINT_WALLET_INTRODUCE = "http://mobile.cgtz.com/e/start";//草根钱包  简介  线上
+    public static final String WALLET_INTRODUCE =IS_TEST?TEST_WALLET_INTRODUCE: ONLINT_WALLET_INTRODUCE;//草根钱包简介
+
     public static final String TEST_VERSION_UPDATE =
             "http://192.168.10.188:45680/version/app/WalletVersion";//测试服务器，版本更新
     public static final String TWO_NIGHT_VERSION_UPDATE =

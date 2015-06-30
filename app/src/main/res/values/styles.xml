@@ -111,7 +111,7 @@
     </style>
     <style name="regist_checkbox" parent="Widget.AppCompat.CompoundButton.CheckBox">
         <item name="android:button">@drawable/regist_checkbox</item>
-        <item name="android:padding">5dp</item>
+        <item name="android:padding">3dp</item>
     </style>
     <style name="login_edit_text_hint">
         <item name="android:textColorHint">@color/hint_regist_edit</item>
