@@ -215,7 +215,7 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
                     }
                 });
                 cDiaog.withButton2Text("确定");
-                cDiaog.withButton2TextColor(R.color.main_bg);
+                cDiaog.withButton2TextColor(getResources().getColor(R.color.main_bg));
                 cDiaog.withButton2Click(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

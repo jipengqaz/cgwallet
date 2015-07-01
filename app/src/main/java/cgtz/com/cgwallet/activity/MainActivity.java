@@ -523,9 +523,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 //        if(layoutMyWallet != null){
 //            layoutMyWallet.setEnabled(false);
 //        }
-        if(cgWalletFragment != null){
-            cgWalletFragment.clearFocus();
-        }
         if(myWalletFragment != null){
             myWalletFragment.clearFocus();
         }
@@ -538,9 +535,6 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 //        if(layoutMyWallet != null){
 //            layoutMyWallet.setEnabled(true);
 //        }
-        if(cgWalletFragment != null){
-            cgWalletFragment.requetFocus();
-        }
         if(myWalletFragment != null){
             myWalletFragment.requetFocus();
         }
@@ -688,7 +682,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                     }
                     ft.show(fm.findFragmentByTag(CG_WALLET));
 //                    ft.show(cgWalletFragment);
-                    cgWalletFragment.reload();
+//                    cgWalletFragment.reload();
                 }else{
                     cgWalletFragment = new CgWallet_web_fragment();
                     if(fm.findFragmentByTag(CG_WALLET) != null

@@ -104,16 +104,4 @@ public class CgWallet_web_fragment extends BaseFragment{
             }
         });
     }
-
-    public void clearFocus() {
-        if(webView != null){
-            webView.setEnabled(false);
-        }
-    }
-
-    public void requetFocus() {
-        if(webView != null){
-            webView.setEnabled(true);
-        }
-    }
 }
