@@ -23,6 +23,7 @@
     <color name="tab_line">#afafaf</color>
     <color name="help_dialog_bg">#e0000000</color>
     <color name="investment_details_red">#ff3741</color>
+    <color name = "webview_Progress">#fed338</color>
     <color name="recommend_a">#fe980f</color>
     <color name="investment_details_green">#4bd961</color>
     <color name="rouncColor">#fa5c5b</color>

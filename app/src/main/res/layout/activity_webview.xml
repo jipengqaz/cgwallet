@@ -17,6 +17,6 @@
         android:id="@+id/progress_bar_2"
         android:layout_width="0dp"
         android:layout_height="2dp"
-        android:background="@color/investment_details_red"/>
+        android:background="@color/webview_Progress"/>
 
 </RelativeLayout>
