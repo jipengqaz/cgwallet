@@ -151,6 +151,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private final UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share");
     private String content="",url="";//分享内容  和  分享链接
     private ImageView Qr_code;//二维码
+    private boolean isShare =false;//判断是否是从分享回来的
 
     private Bitmap bitmap = null;
     private String res;
@@ -348,7 +349,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         break;
                 }
                 com.umeng.socialize.utils.Log.LOG = true;
-                mMenu.rightToggle();
+                isShare = true;
+//                mMenu.rightToggle();
             }
         };
         QQ.setOnClickListener(share_click);
@@ -757,6 +759,10 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     protected void onResume() {
         super.onResume();
+        if(isShare){//需求 需要    分享回来后要一直待在分享那   所以  在这判断是否是分享回来的  是的化就不
+                    //刷新了
+
+        }else{
         if(Utils.isLogined()){
             LogUtils.i(TAG, "Utils.isLogined 为 true");
             if (currIndex == 1){
@@ -781,6 +787,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 //            }else{
 //                layoutClick(R.id.cg_wallet_button);
 //            }
+        }
         }
             String userMobile = Utils.getUserPhone(this);
             LogUtils.i(TAG, "islogin: " + Utils.isLogined() + " mobile: " + Utils.getUserPhone(this));
