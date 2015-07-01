@@ -99,7 +99,7 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
         e_all_records_fragment1 = new E_all_records_fragment_1();
         e_all_records_fragment1.setType(2,this);
         e_all_records_fragment2 = new E_all_records_fragment_1();
-        e_all_records_fragment2.setType(3,this);
+        e_all_records_fragment2.setType(3, this);
 
         fragmentList.add(e_all_records_fragment);
         fragmentList.add(e_all_records_fragment1);
@@ -113,7 +113,22 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
         }
 
         viewpager.setAdapter(new MyFrageStatePagerAdapter(getSupportFragmentManager()));
+        viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                imageMove(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         changeView(getIntent().getIntExtra("choose",0));
     }
     /**
@@ -144,7 +159,7 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
                 return;
             }
 
-            imageMove(viewpager.getCurrentItem());
+//            imageMove(viewpager.getCurrentItem());
             currenttab = viewpager.getCurrentItem();
         }
 

@@ -30,6 +30,7 @@
                 android:paddingRight="10dp"
                 android:maxLength="140"
                 android:textColorHint="@color/feed_back_edit_hint"
+                android:textColor="@color/black"
                 android:paddingBottom="10dip"
                 android:background="@drawable/bg_feed_back"
                 />
