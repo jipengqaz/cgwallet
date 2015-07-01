@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 import cgtz.com.cgwallet.activity.SaveMoneyActivity;
 import cgtz.com.cgwallet.widget.ProgressDialog;
+import cgtz.com.cgwallet.widget.SlidingMenu;
 
 
 /**
@@ -69,7 +70,7 @@ public class JavaScriptinterface {
             LogUtils.e("TAG",i);
             if(i!=null && i.equals("close") && !Utils.isLogined()){
                 activity.finish();
-            }else if(i!=null && i.equals("close") && Utils.isLogined()){
+            }else if(i!=null && i.equals("close") && Utils.isLogined() && SlidingMenu.isshow){//在主界面  点击草根钱包时的事件
                 activity.startActivity(new Intent(activity, SaveMoneyActivity.class));
             }
         }
