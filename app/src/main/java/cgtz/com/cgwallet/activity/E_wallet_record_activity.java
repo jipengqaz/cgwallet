@@ -169,6 +169,9 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
         }
     }
     private void imageMove(int moveToTab){
+        if(moveToTab == currenttab){
+            return;
+        }
         int startPosition=0;
         int movetoPosition=0;
 
@@ -211,8 +214,8 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
 
     //手动设置ViewPager要显示的视图
     private void changeView(int desTab){
-        viewpager.setCurrentItem(desTab,true);
         imageMove(desTab);
+        viewpager.setCurrentItem(desTab, true);
     }
     @Override
     public void onClick(View v) {
