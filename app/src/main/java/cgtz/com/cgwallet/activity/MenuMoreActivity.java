@@ -60,7 +60,9 @@ public class MenuMoreActivity extends BaseActivity implements View.OnClickListen
         feedBack.setOnClickListener(this);
         contactMine.setOnClickListener(this);
         versionUpdate.setOnClickListener(this);
-        version.setText("当前版本: v " + Utils.getVersion(this));
+        version.setText("当前版本: v " + Utils.getVersion(this)+(Constants.IS_TEST?
+                (Constants.IS_28?"-28":"-dev")
+                :""));
         version.setOnClickListener(this);
     }
 
