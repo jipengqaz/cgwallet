@@ -136,15 +136,15 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                 }
             }
         });
-        if(!Utils.isLogined()){
+//        if(!Utils.isLogined()){
 //            if(!Utils.getIsMask(this)){//判断是否显示过遮罩层
 //                LogUtils.e(TAG, "aaa   " + Utils.getIsMask(this));
 //                showDialog();
 //            }
-            showDialog();
-        }else{
-            setFragment();
-        }
+//            showDialog();
+//        }else{
+//            setFragment();
+//        }
         initShare();
     }
     //获取友盟分享变量
@@ -475,6 +475,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
                         break;
                     case R.id.understand://了解草根钱包
+                        dialog_main.dismiss();
                         startActivity(new Intent(MainActivity.this,WebViewActivity.class)
                                 .putExtra("url" ,Constants.WALLET_INTRODUCE).putExtra("title","草根钱包"));
                         break;
