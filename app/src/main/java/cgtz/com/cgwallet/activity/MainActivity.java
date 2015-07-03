@@ -84,7 +84,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     private TextView tvShowLoginMobile;//显示登录的手机号
     private ImageView image_Login;//登录上面的图片
     private LinearLayout layotExit;//退出登录
-    private int currIndex;//当前页卡编号
+    private int currIndex = 1;//当前页卡编号
     private ProgressDialog progressDialog;
 //    private CgWalletFragment cgWalletFragment;
 //    private MyWalletFragment myWalletFragment;
@@ -433,6 +433,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
      */
     private Dialog dialog_main;
     private void showDialog(){
+        LogUtils.e(TAG,"11221s2fd1s211  进入遮罩层");
         LinearLayout dialog_layout =
                 (LinearLayout) LayoutInflater.from(this).inflate(R.layout.dialot_main_mask_layer, null);
         if(dialog_main == null){
@@ -781,13 +782,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 //            }
         }else{
             LogUtils.i(TAG, "Utils.isLogined 为 false");
-//            showDialog();
             layoutClick(R.id.my_wallet_button);
-//            if (currIndex == 1){
-//                layoutClick(R.id.my_wallet_button);
-//            }else{
-//                layoutClick(R.id.cg_wallet_button);
-//            }
         }
         }
             String userMobile = Utils.getUserPhone(this);

@@ -56,7 +56,7 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
     private String assets;//我的资产
     private String accumulative;//累计收益
     private int screenWidth;
-    private boolean goLogin = false;//判断是否去登录的标志
+    private boolean goLogin = true;//判断是否去登录的标志
     private LinearLayout today_earnings;//今日收益
     private SwipeRefreshLayout mSwipeLayout;//下拉刷新控件
     private View layoutView;

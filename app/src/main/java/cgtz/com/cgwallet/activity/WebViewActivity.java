@@ -50,6 +50,7 @@ public class WebViewActivity extends BaseActivity {
         //添加手机缩放
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setSupportZoom(true);//出现缩放工具
+        webView.getSettings().setUseWideViewPort(true);//扩大比例缩放
         webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);//优先使用缓存
 
         /** 与js交互，JavaScriptinterface 是个接口，与js交互时用到的，
