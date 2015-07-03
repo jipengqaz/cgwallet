@@ -8,7 +8,7 @@ import java.io.File;
  * Created by Administrator on 2015/4/11.
  */
 public class Constants {
-    public static final String version = "1.1.0";
+    public static final String version = "1.1.1";
     public static final String version_ = "110";
     public static final String ENCONDING = "UTF-8";
     public static final String CGTZ_PACKAGE = "cgtz.com.cgtz";
@@ -26,7 +26,7 @@ public class Constants {
     public static final String VERSION = version+(IS_TEST?
             (IS_28?"-28":"-dev")
             :"");//版本号
-    public static final String TEST_WALLET_INTRODUCE = "http://192.168.10.188:45680/mobile/e/start";//草根钱包  简介  dev
+    public static final String TEST_WALLET_INTRODUCE = !IS_28?"http://192.168.10.188:45680/mobile/e/start":"http://115.29.245.28:42111/mobile/e/start";//草根钱包  简介  dev
     public static final String ONLINT_WALLET_INTRODUCE = "http://mobile.cgtz.com/e/start";//草根钱包  简介  线上
     public static final String WALLET_INTRODUCE =IS_TEST?TEST_WALLET_INTRODUCE: ONLINT_WALLET_INTRODUCE;//草根钱包简介
 
