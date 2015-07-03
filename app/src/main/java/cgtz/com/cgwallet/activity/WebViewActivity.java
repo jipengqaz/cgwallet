@@ -61,10 +61,6 @@ public class WebViewActivity extends BaseActivity {
 //        webView.addJavascriptInterface(new MyJavaScriptInterface(this),
 //                "android");
 
-        //自适应屏幕
-        webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        webView.getSettings().setLoadWithOverviewMode(true);
-        webView.getSettings().setUseWideViewPort(true);//扩大比例缩放
 
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);//滚动条风格，为0就是不给滚动条留空间，滚动条覆盖在网页上
         CookieManager.getInstance().setAcceptCookie(true);
