@@ -186,7 +186,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        tools:text="转出免手续费，每日可转出1次"
         android:textColor="@color/money_tv_hint_text"
         android:textSize="@dimen/text_size_12sp"
         android:gravity="center"

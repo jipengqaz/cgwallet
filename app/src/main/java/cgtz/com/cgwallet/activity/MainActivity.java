@@ -129,11 +129,11 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         showRightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Utils.isLogined()) {
+//                if (Utils.isLogined()) {
                     mMenu.rightToggle();
-                } else {
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                }
+//                } else {
+//                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+//                }
             }
         });
 //        if(!Utils.isLogined()){
@@ -564,13 +564,13 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 //        layoutClick(R.id.my_wallet_button);
     }
 
-    public void layoutClick(int type){
+    public void layoutClick(){
         FragmentTransaction ft = fm.beginTransaction();
-        hideFragment(ft);
+//        hideFragment(ft);
 //                switch (type){
 //                    case R.id.my_wallet_button://显示我的钱包页面
                 currIndex = 1;
-                lineToLeft();
+//                lineToLeft();
                 if(Utils.isLogined()){
                     if(myWalletFragment != null) {
                         LogUtils.e(TAG, "show myWalletFragment");
@@ -702,21 +702,21 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 //        }
     }
 
-    private void hideFragment(android.support.v4.app.FragmentTransaction ft){
-        if(cgWalletFragment != null){
-            ft.hide(fm.findFragmentByTag(CG_WALLET));
-//            ft.hide(cgWalletFragment);
-        }
-        if(myWalletFragment != null){
-            ft.hide(fm.findFragmentByTag(MY_WALLET));
-//            ft.hide(myWalletFragment);
-        }
-    }
+//    private void hideFragment(android.support.v4.app.FragmentTransaction ft){
+//        if(cgWalletFragment != null){
+//            ft.hide(fm.findFragmentByTag(CG_WALLET));
+////            ft.hide(cgWalletFragment);
+//        }
+//        if(myWalletFragment != null){
+//            ft.hide(fm.findFragmentByTag(MY_WALLET));
+////            ft.hide(myWalletFragment);
+//        }
+//    }
 
     /**
      * 草根钱包
      */
-    private void lineToRight(){
+//    private void lineToRight(){
 //        cg_wallet_button.setTextColor(getResources().getColor(R.color.main_bg));
 //        cg_wallet_button.setBackgroundResource(R.drawable.bg_main_btn_right_back_on);
 //        my_wallet_button.setTextColor(getResources().getColor(R.color.white));
@@ -730,12 +730,12 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 //        layoutMyWallet.setBackgroundResource(R.mipmap.bg_wallet_selected);
 //        LineAnimTask task = new LineAnimTask();
 //        task.execute(50);
-    }
+//    }
 
     /**
      * 滑动到左边
      */
-    private void lineToLeft(){
+//    private void lineToLeft(){
 //        my_wallet_button.setTextColor(getResources().getColor(R.color.main_bg));
 //        my_wallet_button.setBackgroundResource(R.drawable.bg_main_btn_left_back_on);
 //        cg_wallet_button.setTextColor(getResources().getColor(R.color.white));
@@ -751,7 +751,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 //        task.execute(-50);
 
 
-    }
+//    }
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -764,26 +764,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         if(isShare){//需求 需要    分享回来后要一直待在分享那   所以  在这判断是否是分享回来的  是的化就不
                     //刷新了
 
-        }else{
-        if(Utils.isLogined()){
-            LogUtils.i(TAG, "Utils.isLogined 为 true");
-//            if (currIndex == 1){
-////                layoutClick(R.id.my_wallet_button);
-//            }else{
-                layoutClick(R.id.cg_wallet_button);
-//            }
-//            showDialog();
-//            layoutClick(R.id.my_wallet_button);
-//            if(!Utils.getIsMask(this)){//判断是否显示过遮罩层
-//
-//            }else{
-//                startActivity(new Intent(this,LoginActivity.class));
-//                setLeftMenuInfo(0);//未登录
-//            }
-        }else{
-            LogUtils.i(TAG, "Utils.isLogined 为 false");
-//            layoutClick(R.id.my_wallet_button);
-        }
+        }else{//如果不是从分享回来的
+            layoutClick();
         }
             String userMobile = Utils.getUserPhone(this);
             LogUtils.i(TAG, "islogin: " + Utils.isLogined() + " mobile: " + Utils.getUserPhone(this));
@@ -907,15 +889,15 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.cg_wallet_button://显示草根钱包页面
-                if(SlidingMenu.isshow){
-                    if(currIndex == 2){
-                        break;
-                    }
-                    currIndex = 2;
-                    layoutClick(v.getId());
-                }
-                break;
+//            case R.id.cg_wallet_button://显示草根钱包页面
+//                if(SlidingMenu.isshow){
+//                    if(currIndex == 2){
+//                        break;
+//                    }
+//                    currIndex = 2;
+//                    layoutClick(v.getId());
+//                }
+//                break;
 //            case R.id.my_wallet_button://显示我的钱包页面
 //                if(SlidingMenu.isshow){
 //                    if(currIndex == 1){
@@ -926,11 +908,11 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 //                }
 //                break;
             case R.id.left_menu_safe_center://安全中心
-                if(Utils.isLogined()){//判断是否登录
+//                if(Utils.isLogined()){//判断是否登录
                     startActivity(new Intent(this,SafeCenterActivity.class));
-                }else{
-                    startActivity(new Intent(this,LoginActivity.class));
-                }
+//                }else{
+//                    startActivity(new Intent(this,LoginActivity.class));
+//                }
                 mMenu.leftToggle();
                 break;
             case R.id.left_menu_help_center://帮助中心
@@ -976,49 +958,49 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 
 
 
-    class LineAnimTask extends AsyncTask<Integer, Integer, Integer> {
+//    class LineAnimTask extends AsyncTask<Integer, Integer, Integer> {
+//
+//        @Override
+//        protected Integer doInBackground(Integer... speed) {
+//            int leftMargin = params.leftMargin;
+//            // 根据传入的速度来滚动界面，当滚动到达边界值时，跳出循环。
+//            while (true) {
+//                leftMargin = leftMargin + speed[0];
+//                if(leftMargin > screenWith/2){
+//                    leftMargin = screenWith/2;
+//                    break;
+//                }
+//                if(leftMargin < 0){
+//                    leftMargin = 0;
+//                    break;
+//                }
+//                publishProgress(leftMargin);
+//                // 为了要有滚动效果产生，每次循环使线程睡眠一段时间，这样肉眼才能够看到滚动动画。
+//                sleep(15);
+//            }
+//            return leftMargin;
+//        }
+//
+//        @Override
+//        protected void onProgressUpdate(Integer... leftMargin) {
+////            params.leftMargin = leftMargin[0];
+////            bottomLineSelected.setLayoutParams(params);
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Integer leftMargin) {
+////            params.leftMargin = leftMargin;
+////            bottomLineSelected.setLayoutParams(params);
+//        }
+//    }
 
-        @Override
-        protected Integer doInBackground(Integer... speed) {
-            int leftMargin = params.leftMargin;
-            // 根据传入的速度来滚动界面，当滚动到达边界值时，跳出循环。
-            while (true) {
-                leftMargin = leftMargin + speed[0];
-                if(leftMargin > screenWith/2){
-                    leftMargin = screenWith/2;
-                    break;
-                }
-                if(leftMargin < 0){
-                    leftMargin = 0;
-                    break;
-                }
-                publishProgress(leftMargin);
-                // 为了要有滚动效果产生，每次循环使线程睡眠一段时间，这样肉眼才能够看到滚动动画。
-                sleep(15);
-            }
-            return leftMargin;
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... leftMargin) {
-//            params.leftMargin = leftMargin[0];
-//            bottomLineSelected.setLayoutParams(params);
-        }
-
-        @Override
-        protected void onPostExecute(Integer leftMargin) {
-//            params.leftMargin = leftMargin;
-//            bottomLineSelected.setLayoutParams(params);
-        }
-    }
-
-    private void sleep(int time){
-        try {
-            Thread.sleep(time);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void sleep(int time){
+//        try {
+//            Thread.sleep(time);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @Override
     protected void onStart() {

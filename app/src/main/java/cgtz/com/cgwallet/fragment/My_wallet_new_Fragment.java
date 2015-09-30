@@ -237,6 +237,7 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
             goLogin = true;
             Utils.makeToast(getActivity(), Constants.NEED_LOGIN);
             startActivity(new Intent(getActivity(), LoginActivity.class));
+            hideProcessBar();
         } else {
             HashMap<String, String> params1 = new HashMap<>();
             params1.put("user_id", Utils.getUserId());

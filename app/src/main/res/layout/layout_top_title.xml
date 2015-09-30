@@ -35,7 +35,7 @@
             <!--android:textColor="@color/main_bg"-->
             <!--/>-->
         <TextView
-            android:id="@+id/cg_wallet_button"
+            android:id="@+id/my_wallet_button"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
