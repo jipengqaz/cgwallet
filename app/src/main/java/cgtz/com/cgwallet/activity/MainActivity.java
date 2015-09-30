@@ -97,8 +97,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 //    private ImageView myWalletIcon;
 //    private TextView cgWalletText;
 //    private TextView myWalletText;
-    private TextView my_wallet_button;//title  我的钱包 按钮
-    private TextView cg_wallet_button;//title  草根钱包 按钮
+//    private TextView my_wallet_button;//title  我的钱包 按钮
+//    private TextView cg_wallet_button;//title  草根钱包 按钮
     private SlidingMenu mMenu;
     private int Value = 0;
     private FragmentManager fm;
@@ -515,8 +515,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 //        params.width = screenWith/2;
 //        bottomLineSelected.setLayoutParams(params);
 
-        my_wallet_button = (TextView) findViewById(R.id.my_wallet_button);//title 我的钱包
-        cg_wallet_button = (TextView) findViewById(R.id.cg_wallet_button);//title 草根钱包
+//        my_wallet_button = (TextView) findViewById(R.id.my_wallet_button);//title 我的钱包
+//        cg_wallet_button = (TextView) findViewById(R.id.cg_wallet_button);//title 草根钱包
     }
 
     public void clearFocus(){
@@ -551,8 +551,8 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         menuMore.setOnClickListener(this);
         menuCgtz.setOnClickListener(this);
         layotExit.setOnClickListener(this);
-        cg_wallet_button.setOnClickListener(this);
-        my_wallet_button.setOnClickListener(this);
+//        cg_wallet_button.setOnClickListener(this);
+//        my_wallet_button.setOnClickListener(this);
 //        layoutCgWallet.setOnClickListener(this);//底部的草根钱包
 //        layoutMyWallet.setOnClickListener(this);//底部的我的钱包
     }
@@ -561,14 +561,14 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
      * 初始化fragment
      */
     private void setFragment(){
-        layoutClick(R.id.my_wallet_button);
+//        layoutClick(R.id.my_wallet_button);
     }
 
     public void layoutClick(int type){
         FragmentTransaction ft = fm.beginTransaction();
         hideFragment(ft);
-        switch (type){
-            case R.id.my_wallet_button://显示我的钱包页面
+//                switch (type){
+//                    case R.id.my_wallet_button://显示我的钱包页面
                 currIndex = 1;
                 lineToLeft();
                 if(Utils.isLogined()){
@@ -673,33 +673,33 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 //                    ft.commitAllowingStateLoss();
                 }
 
-                break;
-            case R.id.cg_wallet_button://显示草根钱包页面
-                lineToRight();
-                currIndex = 2;
-                if(cgWalletFragment != null){
-                    if(fm.findFragmentByTag(CG_WALLET) != null
-                            && fm.findFragmentByTag(CG_WALLET).isAdded()){
-                        ft.show(fm.findFragmentByTag(CG_WALLET));
-                    }else{
-                        ft.add(R.id.menu_center_framelayout,cgWalletFragment,CG_WALLET);
-                    }
-                    ft.show(fm.findFragmentByTag(CG_WALLET));
-//                    ft.show(cgWalletFragment);
-//                    cgWalletFragment.reload();
-                }else{
-                    cgWalletFragment = new CgWallet_web_fragment();
-                    if(fm.findFragmentByTag(CG_WALLET) != null
-                            && fm.findFragmentByTag(CG_WALLET).isAdded()){
-                        ft.show(fm.findFragmentByTag(CG_WALLET));
-                    }else{
-                        ft.add(R.id.menu_center_framelayout,cgWalletFragment,CG_WALLET);
-                    }
-//                    ft.add(R.id.menu_center_framelayout,cgWalletFragment,CG_WALLET);
-                }
-                ft.commitAllowingStateLoss();
-                break;
-        }
+//                break;
+//            case R.id.cg_wallet_button://显示草根钱包页面
+//                lineToRight();
+//                currIndex = 2;
+//                if(cgWalletFragment != null){
+//                    if(fm.findFragmentByTag(CG_WALLET) != null
+//                            && fm.findFragmentByTag(CG_WALLET).isAdded()){
+//                        ft.show(fm.findFragmentByTag(CG_WALLET));
+//                    }else{
+//                        ft.add(R.id.menu_center_framelayout,cgWalletFragment,CG_WALLET);
+//                    }
+//                    ft.show(fm.findFragmentByTag(CG_WALLET));
+////                    ft.show(cgWalletFragment);
+////                    cgWalletFragment.reload();
+//                }else{
+//                    cgWalletFragment = new CgWallet_web_fragment();
+//                    if(fm.findFragmentByTag(CG_WALLET) != null
+//                            && fm.findFragmentByTag(CG_WALLET).isAdded()){
+//                        ft.show(fm.findFragmentByTag(CG_WALLET));
+//                    }else{
+//                        ft.add(R.id.menu_center_framelayout,cgWalletFragment,CG_WALLET);
+//                    }
+////                    ft.add(R.id.menu_center_framelayout,cgWalletFragment,CG_WALLET);
+//                }
+//                ft.commitAllowingStateLoss();
+//                break;
+//        }
     }
 
     private void hideFragment(android.support.v4.app.FragmentTransaction ft){
@@ -717,10 +717,10 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
      * 草根钱包
      */
     private void lineToRight(){
-        cg_wallet_button.setTextColor(getResources().getColor(R.color.main_bg));
-        cg_wallet_button.setBackgroundResource(R.drawable.bg_main_btn_right_back_on);
-        my_wallet_button.setTextColor(getResources().getColor(R.color.white));
-        my_wallet_button.setBackgroundResource(R.drawable.bg_main_btn_left_back_off);
+//        cg_wallet_button.setTextColor(getResources().getColor(R.color.main_bg));
+//        cg_wallet_button.setBackgroundResource(R.drawable.bg_main_btn_right_back_on);
+//        my_wallet_button.setTextColor(getResources().getColor(R.color.white));
+//        my_wallet_button.setBackgroundResource(R.drawable.bg_main_btn_left_back_off);
 
 //        cgWalletIcon.setImageResource(R.mipmap.icon_cg_wallet_normal);
 //        myWalletIcon.setImageResource(R.mipmap.icon_my_wallet_selected);
@@ -736,10 +736,10 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
      * 滑动到左边
      */
     private void lineToLeft(){
-        my_wallet_button.setTextColor(getResources().getColor(R.color.main_bg));
-        my_wallet_button.setBackgroundResource(R.drawable.bg_main_btn_left_back_on);
-        cg_wallet_button.setTextColor(getResources().getColor(R.color.white));
-        cg_wallet_button.setBackgroundResource(R.drawable.bg_main_btn_right_back_off);
+//        my_wallet_button.setTextColor(getResources().getColor(R.color.main_bg));
+//        my_wallet_button.setBackgroundResource(R.drawable.bg_main_btn_left_back_on);
+//        cg_wallet_button.setTextColor(getResources().getColor(R.color.white));
+//        cg_wallet_button.setBackgroundResource(R.drawable.bg_main_btn_right_back_off);
 
 //        cgWalletIcon.setImageResource(R.mipmap.icon_wallet);
 //        myWalletIcon.setImageResource(R.mipmap.icon_my_wallet);
@@ -767,11 +767,11 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
         }else{
         if(Utils.isLogined()){
             LogUtils.i(TAG, "Utils.isLogined 为 true");
-            if (currIndex == 1){
-                layoutClick(R.id.my_wallet_button);
-            }else{
+//            if (currIndex == 1){
+////                layoutClick(R.id.my_wallet_button);
+//            }else{
                 layoutClick(R.id.cg_wallet_button);
-            }
+//            }
 //            showDialog();
 //            layoutClick(R.id.my_wallet_button);
 //            if(!Utils.getIsMask(this)){//判断是否显示过遮罩层
@@ -782,7 +782,7 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
 //            }
         }else{
             LogUtils.i(TAG, "Utils.isLogined 为 false");
-            layoutClick(R.id.my_wallet_button);
+//            layoutClick(R.id.my_wallet_button);
         }
         }
             String userMobile = Utils.getUserPhone(this);
@@ -916,15 +916,15 @@ public class MainActivity extends FragmentActivity implements ISplashView,View.O
                     layoutClick(v.getId());
                 }
                 break;
-            case R.id.my_wallet_button://显示我的钱包页面
-                if(SlidingMenu.isshow){
-                    if(currIndex == 1){
-                        break;
-                    }
-                    currIndex = 1;
-                    layoutClick(v.getId());
-                }
-                break;
+//            case R.id.my_wallet_button://显示我的钱包页面
+//                if(SlidingMenu.isshow){
+//                    if(currIndex == 1){
+//                        break;
+//                    }
+//                    currIndex = 1;
+//                    layoutClick(v.getId());
+//                }
+//                break;
             case R.id.left_menu_safe_center://安全中心
                 if(Utils.isLogined()){//判断是否登录
                     startActivity(new Intent(this,SafeCenterActivity.class));

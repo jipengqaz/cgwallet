@@ -5,30 +5,43 @@
     android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/id_swipe_ly"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-        <ScrollView
-            android:id="@+id/wallet_scrollview"
-            android:scrollbars="none"
+    <!--<android.support.v4.widget.SwipeRefreshLayout-->
+        <!--android:id="@+id/id_swipe_ly"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" >-->
+        <cgtz.com.cgwallet.view.PullToRefreshLayout android:id="@+id/refresh_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        <include layout="@layout/refresh_head"/>
+        <!--<ScrollView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:scrollbars="none">-->
+        <cgtz.com.cgwallet.view.PullableLinearLayout
+            android:id="@+id/wallet_scrollview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            >
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
                 <LinearLayout
-                    android:id="@+id/today_earnings"
+                    android:id="@+id/aa"
                     android:background="@color/back_my_wallet"
                     android:gravity="center"
+                    android:layout_weight="1"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="170dp">
+                    android:layout_height="match_parent">
                     <LinearLayout
+                        android:id="@+id/today_earnings"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_marginTop="30dp"
                         android:orientation="horizontal"
                         android:gravity="center"
                         android:layout_width="wrap_content"
@@ -59,6 +72,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
+                    </LinearLayout>
                     <LinearLayout
                         android:orientation="vertical"
                         android:gravity="right"
@@ -71,130 +85,152 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:gravity="center"
-                    android:background="@color/white"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="105dp">
                     <LinearLayout
-                        android:id="@+id/wallet_assets_layout"
                         android:layout_weight="1"
-                        android:orientation="vertical"
                         android:gravity="center"
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:id="@+id/wallet_my_assets"
-                            android:layout_margin="5dp"
-                            android:text="0.00"
-                            android:textColor="@color/my_wallet_earning_num_text"
-                            android:textSize="@dimen/my_wallet_earning_num_size"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        <TextView
-                                android:text="本金（元）"
-                                android:textColor="@color/my_wallet_earning_text"
+                        android:layout_height="105dp">
+                        <LinearLayout
+                            android:id="@+id/wallet_assets_layout"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:text="@string/my_wallet_text1"
+                                android:textColor="@color/white"
                                 android:textSize="@dimen/my_wallet_earning_size"
                                 android:layout_marginTop="10dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
-                    </LinearLayout>
-                    <View
-                        android:background="@color/my_wallet_line"
-                        android:layout_width="0.5dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        />
-                    <LinearLayout
-                        android:id="@+id/wallet_accumulative_layout"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:id="@+id/wallet_accumulative_earnings"
-                            android:layout_margin="5dp"
-                            android:text="0.00"
-                            android:textColor="@color/my_wallet_earning_num_text"
-                            android:textSize="@dimen/my_wallet_earning_num_size"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        <TextView
-                                android:text="可用收益（元）"
-                                android:textColor="@color/my_wallet_earning_text"
-                                android:textSize="@dimen/my_wallet_earning_size"
-                            android:layout_marginTop="10dp"
+                            <TextView
+                                android:id="@+id/wallet_my_assets"
+                                android:layout_margin="5dp"
+                                android:text="0.00"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/my_wallet_earning_num_size"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/wallet_rate_layout"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:text="@string/my_wallet_text2"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/my_wallet_earning_size"
+                                android:layout_marginTop="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:id="@+id/wallet_rate"
+                                android:layout_margin="5dp"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/my_wallet_earning_num_size"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
-                <View
-                    android:background="@color/my_wallet_line"
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="6dp"
-                    android:paddingBottom="10dp"
-                    android:orientation="vertical">
+                    <include layout="@layout/layout_banner_black_2"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
                     <LinearLayout
+                        android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_centerInParent="true"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:gravity="center">
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
+                        >
+                        <TextView
+                            android:id="@+id/wallet_draw_money"
                             android:layout_weight="1"
-                            android:background="@color/my_wallet_earning_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_main_btn_right_back_off"
+                            android:gravity="center"
+                            android:text="@string/my_wallet_text5"
+                            android:textColor="@color/white"
+                            android:layout_marginRight="20dp"
                             />
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:text="会生钱的钱包"
-                            android:textColor="@color/my_wallet_earning_num_text"
-                            />
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
+                            android:id="@+id/wallet_save_money"
                             android:layout_weight="1"
-                            android:background="@color/my_wallet_earning_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_main_btn_right_back_off"
+                            android:gravity="center"
+                            android:text="@string/my_wallet_text4"
+                            android:textSize="@dimen/text_size_16sp"
+                            android:textColor="@color/white"
+                            android:layout_marginLeft="20dp"
                             />
                     </LinearLayout>
-                        <TextView
-                            android:id="@+id/wallet_tip"
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/wallet_accumulative_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/aa"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_weight="8"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        >
+                        <ImageView
+                            android:src="@mipmap/checkbox_normal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="随存随取，1元也有高收益"
-                            android:textSize="@dimen/text_size_10sp"
-                            android:textColor="@color/my_wallet_earning_text"
-                            android:gravity="center"
+                            android:layout_weight="3"
                             />
+                        <TextView
+                            android:text="@string/my_wallet_text3"
+                            android:textColor="@color/money_text_hint"
+                            android:textSize="@dimen/my_wallet_earning_size"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/wallet_accumulative_earnings"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:text="0.00"
+                        android:textColor="@color/money_asset_text"
+                        android:textSize="@dimen/my_wallet_earning_num_size"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
                 </LinearLayout>
-                <cgtz.com.cgwallet.view.NotSlideGridView
-                    android:id="@+id/function"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:numColumns="3"
-                    android:verticalSpacing="1.0px"
-                    android:horizontalSpacing="1.0px"
-                    android:background="@color/my_wallet_line"
-                    android:columnWidth="150dip"
-                    android:stretchMode="columnWidth"
-                    android:gravity="center"
-                    />
-            </LinearLayout>
-        </ScrollView>
-    </android.support.v4.widget.SwipeRefreshLayout>
-    <fragment
-        android:id="@+id/save"
-        android:name="cgtz.com.cgwallet.fragment.Save_or_draw_money_Fragment"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/save_or_draw_money_layout_height" />
+        </cgtz.com.cgwallet.view.PullableLinearLayout>
+            <include layout="@layout/load_more"/>
+    </cgtz.com.cgwallet.view.PullToRefreshLayout>
+       <!--</ScrollView>-->
+    <!--</android.support.v4.widget.SwipeRefreshLayout>-->
+    <!--<fragment-->
+        <!--android:id="@+id/save"-->
+        <!--android:name="cgtz.com.cgwallet.fragment.Save_or_draw_money_Fragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/save_or_draw_money_layout_height" />-->
 </LinearLayout>
