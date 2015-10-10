@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.TextViewCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONObject;
@@ -38,9 +40,9 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
 
     private BankCard card;//银行卡信息
     private String capitalBalance;//可用余额
-    private String tip,tip2;//提示文案
+    private String tip,tip2,tip3,tip4;//提示文案
     private int success;//判断值
-    private TextView text_tip2,text_tip1;//显示文案
+    private TextView text_tip2,text_tip1,text_tip3;//显示文案
     private Button apply_withdraw;//取钱按钮
     private ImageView delete_edit;//删除输入数据
     private EditText with_draw_num;//取钱金额
@@ -50,6 +52,15 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
     private String withdrawAmount;//输入的提现金额;
     private ProgressDialog pDialog;
     private DecimalFormat df = new DecimalFormat("#0");
+    private DecimalFormat df1 = new DecimalFormat("#0.00");
+    private LinearLayout wallet_out_free_layout;//需要手续费时  显示的布局
+    private TextView prompt;//手续费提示
+    private TextView freeFormula;//手续费公式
+    private TextView freeAmount;//所需手续费
+    private Long freeOutAmount;//免费转出金额
+    private TextView text_account;//转出手续费
+    private Double free;//手续费利率
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,13 +73,20 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
             card = (BankCard) savedInstanceState.getSerializable("card");
             tip = savedInstanceState.getString("tip");
             tip2 = savedInstanceState.getString("tip2");
-            success = savedInstanceState.getInt("success",1);
+            tip3 = savedInstanceState.getString("tip3");
+            tip4 = savedInstanceState.getString("tip4");
+            success = savedInstanceState.getInt("success", 1);
+            freeOutAmount = savedInstanceState.getLong("freeOutAmount");
         }else{
             capitalBalance = getIntent().getStringExtra("capitalBalance");
             card = (BankCard) getIntent().getSerializableExtra("card");
             tip = getIntent().getStringExtra("tip");
             tip2 =getIntent().getStringExtra("tip2");
-            success = getIntent().getIntExtra("success",1);
+            success = getIntent().getIntExtra("success", 1);
+            tip3 = "会到达您的草根投资账号“余额”中";
+            tip4 = "转入金额未满2天即转出收取0.5%的手续费";
+            freeOutAmount = 300L;
+            free = 0.5;
         }
         init();
         assignment();
@@ -80,6 +98,7 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
     private void init(){
         text_tip2 = (TextView) findViewById(R.id.text_tip2);
         text_tip1 = (TextView) findViewById(R.id.text_tip1);
+        text_tip3 = (TextView) findViewById(R.id.text_tip3);
         apply_withdraw = (Button) findViewById(R.id.apply_withdraw);
         delete_edit = (ImageView) findViewById(R.id.delete_edit);
         with_draw_num = (EditText) findViewById(R.id.with_draw_num);
@@ -87,6 +106,12 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
         bank_tail = (TextView) findViewById(R.id.bank_tail);
         bank_name = (TextView) findViewById(R.id.bank_name);
         bank_icon = (ImageView) findViewById(R.id.bank_icon);
+        text_account = (TextView) findViewById(R.id.text_account);
+
+        wallet_out_free_layout = (LinearLayout) findViewById(R.id.wallet_out_free_layout);
+        prompt = (TextView) findViewById(R.id.wallet_out_prompt);
+        freeFormula = (TextView) findViewById(R.id.wallet_out_free_formula);
+        freeAmount = (TextView) findViewById(R.id.wallet_out_free_amount);
         Utils.closeInputMethod(this);//关闭输入键盘
         Utils.safeCopyWrite(this);//设置安全文案
 
@@ -97,11 +122,13 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
      * 给控件赋值
      */
     private void assignment(){
+        text_account.setText("0");
         text_tip2.setText(tip2);
         text_tip1.setText(tip);
+        text_tip3.setText(tip3);
         bank_tail.setText("尾号 "+card.getCardLast());
         bank_name.setText(card.getBankName());
-        available_balance.setText(capitalBalance );
+        available_balance.setText(capitalBalance +" 元");
         bank_icon.setImageResource(BankCard.getBankIcon(Integer.parseInt(card.getBankId())));
         if(success == -2){
             apply_withdraw.setEnabled(false);
@@ -121,11 +148,12 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
                 String str = charSequence.toString().trim();
                 if(str.length()>0){
-                    int num = Integer.parseInt(str);
+                    Long num = Long.parseLong(str);
                     if(num >Double.parseDouble(capitalBalance)){//判断取钱金额是否大于本金   是的话  把取钱金额设为本金
                         String  test = df.format(Double.parseDouble(capitalBalance));
                         with_draw_num.setText(test);
                         with_draw_num.setSelection(test.length());
+                        num =  Long.parseLong(test);
                         Utils.makeToast_short(Withdraw_money.this,"取出金额不能大于本金");
                     }
                     if(str.length()>1){
@@ -139,7 +167,23 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
                     apply_withdraw.setEnabled(true);
                     apply_withdraw.setBackgroundResource(R.drawable.bg_button_preed);
                     delete_edit.setVisibility(View.VISIBLE);
+
+                    //判断是否显示公式
+                    if(num>freeOutAmount){
+                        wallet_out_free_layout.setVisibility(View.VISIBLE);
+                        prompt.setText("手续费提示：" + tip4);
+                        freeFormula.setText(num-freeOutAmount+"*"+free+"%");
+                        Double amount = (num-freeOutAmount)*free/100;
+                        String amount_string = df1.format(amount);
+                        freeAmount.setText(amount_string+"元");
+                        text_account.setText(amount_string);
+                    }else{
+                        wallet_out_free_layout.setVisibility(View.GONE);
+                        text_account.setText("0");
+                    }
                 }else{
+                    wallet_out_free_layout.setVisibility(View.GONE);
+                    text_account.setText("0");
                     delete_edit.setVisibility(View.GONE);
                     apply_withdraw.setBackgroundResource(R.drawable.bg_button_no_enabled);
                     apply_withdraw.setEnabled(true);
@@ -253,8 +297,11 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
         outState.putString("capitalBalance", capitalBalance);
         outState.putSerializable("card", card);
         outState.putString("tip", tip);
-        outState.putInt("success",success);
-        outState.putString("tip2",tip2);
+        outState.putInt("success", success);
+        outState.putString("tip2", tip2);
+        outState.putString("tip2",tip3);
+        outState.putString("tip2",tip4);
+        outState.putLong("freeOutAmount",freeOutAmount);
     }
 
 
