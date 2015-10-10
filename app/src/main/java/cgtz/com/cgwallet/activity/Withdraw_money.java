@@ -42,7 +42,7 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
     private String capitalBalance;//可用余额
     private String tip,tip2,tip3,tip4;//提示文案
     private int success;//判断值
-    private TextView text_tip2,text_tip1,text_tip3;//显示文案
+    private TextView text_tip2,text_tip3;//显示文案,text_tip1
     private Button apply_withdraw;//取钱按钮
     private ImageView delete_edit;//删除输入数据
     private EditText with_draw_num;//取钱金额
@@ -85,7 +85,7 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
             success = getIntent().getIntExtra("success", 1);
             tip3 = "会到达您的草根投资账号“余额”中";
             tip4 = "转入金额未满2天即转出收取0.5%的手续费";
-            freeOutAmount = 300L;
+            freeOutAmount = card.getFreeOutAmount();//获取免手续费金额
             free = 0.5;
         }
         init();
@@ -97,7 +97,7 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
      */
     private void init(){
         text_tip2 = (TextView) findViewById(R.id.text_tip2);
-        text_tip1 = (TextView) findViewById(R.id.text_tip1);
+//        text_tip1 = (TextView) findViewById(R.id.text_tip1);
         text_tip3 = (TextView) findViewById(R.id.text_tip3);
         apply_withdraw = (Button) findViewById(R.id.apply_withdraw);
         delete_edit = (ImageView) findViewById(R.id.delete_edit);
@@ -124,7 +124,7 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
     private void assignment(){
         text_account.setText("0");
         text_tip2.setText(tip2);
-        text_tip1.setText(tip);
+//        text_tip1.setText(tip);
         text_tip3.setText(tip3);
         bank_tail.setText("尾号 "+card.getCardLast());
         bank_name.setText(card.getBankName());

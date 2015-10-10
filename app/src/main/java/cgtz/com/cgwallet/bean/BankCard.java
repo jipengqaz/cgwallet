@@ -29,6 +29,7 @@ public class BankCard implements Serializable {
     private String cardNumber;
     private int llMark;//连连标识
     private int umpMark;//联动标识
+    private Long freeOutAmount;//免手续费转出金额
 
     public BankCard(JSONObject json){
         cardNumber = json.optString("cardNumber");
@@ -40,6 +41,7 @@ public class BankCard implements Serializable {
         status = json.optString("status");
         bindTime = json.optString("bindTime");
         branchName = json.optString("branchName");
+        freeOutAmount = json.optLong("freeamount");
 
         cardLast = json.optString("cardLast");
         fullCardNumber = json.optString("fullCardNumber");
@@ -126,6 +128,10 @@ public class BankCard implements Serializable {
                 return R.drawable.bank_33;
         }
         return 0;
+    }
+
+    public Long getFreeOutAmount() {
+        return freeOutAmount;
     }
 
     public int getLlMark() {
