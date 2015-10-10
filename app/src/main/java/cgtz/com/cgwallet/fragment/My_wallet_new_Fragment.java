@@ -75,6 +75,7 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
      * 下拉刷新组件
      */
     public PullToRefreshLayout mPtrl;
+    private boolean isOne = false;//用于判断是否才启动程序
 //    private NotSlideGridView function;//所有的选项
 //    private TextView wallet_tip;//钱包提示
 
@@ -392,7 +393,9 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
 //            progressDialog.dismiss();
 //        }
 //        progressDialog.show();
-        mPtrl.autoRefresh();
+        if( isOne){
+            mPtrl.autoRefresh();
+        }
     }
 
     @Override
@@ -400,8 +403,10 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
 //        if(progressDialog != null && progressDialog.isShowing()){
 //            progressDialog.dismiss();
 //        }
-        if (mPtrl != null) {
+        if (mPtrl != null && isOne) {
             mPtrl.refreshFinish(PullToRefreshLayout.SUCCEED);
+        }else{
+            isOne = true;
         }
     }
 

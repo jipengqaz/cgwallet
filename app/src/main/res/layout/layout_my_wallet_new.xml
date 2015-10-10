@@ -27,7 +27,7 @@
 
                 <LinearLayout
                     android:id="@+id/aa"
-                    android:background="@color/back_my_wallet"
+                    android:background="@mipmap/icon_wallet_background"
                     android:gravity="center"
                     android:layout_weight="1"
                     android:orientation="vertical"
@@ -197,7 +197,7 @@
                         android:gravity="center_vertical"
                         >
                         <ImageView
-                            android:src="@mipmap/checkbox_normal"
+                            android:src="@mipmap/icon_wallet_1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"

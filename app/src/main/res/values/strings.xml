@@ -117,7 +117,7 @@
     <string name="text_change_pwd_confirmchange">确定修改</string>
     <string name="error_exception">小草犯困了，休息一会</string>
     <string name="withdraw_money_text">储蓄卡</string>
-    <string name="withdraw_money_text_1">草根钱包本金：</string>
+    <string name="withdraw_money_text_1">钱包本金：</string>
     <string name="withdraw_money">确认转出</string>
     <string name="error_msg_notradepwd">请先设置交易密码</string>
     <string name="update_tip_title">更新提示</string>
@@ -132,6 +132,9 @@
     <string name="bank_not_logout_msg_ok">确认注销银行卡吗?</string>
     <string name="rmb"> 元</string>
     <string name="dialog_main_btn_text">开始生钱</string>
+    <string name = "withdraw_money_text1">到帐时间：</string>
+    <string name = "withdraw_money_text2">手续费：</string>
+    <string name = "withdraw_money_text3">利息：</string>
 
     <string name="my_wallet_text1">已转入金额（元）</string>
     <string name="my_wallet_text2">固定年化收益率</string>
