@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_center"
+    android:orientation="vertical">
+
+    <!--  <cgtz.com.cgwallet.view.PullToRefreshLayout
+          android:id="@+id/refresh_view"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical">
+
+          <include layout="@layout/refresh_head" />
+
+          <cgtz.com.cgwallet.view.PullableLinearLayout
+              android:id="@+id/wallet_scrollview"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical">-->
+
+    <RelativeLayout
+        android:id="@+id/aa"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/bg_center">
+
+        <ImageView
+            android:id="@+id/iv_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:src="@mipmap/ico_gouwu" />
+
+        <ImageView
+            android:id="@+id/iv_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_one"
+            android:layout_marginLeft="35dp"
+            android:src="@mipmap/ico_chongzhi" />
+
+        <ImageView
+            android:id="@+id/iv_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_one"
+            android:layout_marginLeft="95dp"
+            android:layout_toRightOf="@id/iv_two"
+            android:src="@mipmap/ico_fuwu" />
+
+        <ImageView
+            android:id="@+id/iv_four"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_two"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/pament_one" />
+
+        <ImageView
+            android:id="@+id/iv_five"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_three"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/iv_four"
+            android:src="@mipmap/ico_waichu" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_view"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray" />
+
+    <LinearLayout
+        android:id="@+id/wallet_accumulative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_view"
+        android:layout_marginTop="5dp"
+        android:layout_weight="3"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/lv_three_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
+
+        <TextView
+            android:id="@+id/tv_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="7dp"
+            android:text="点击查看更多"
+            android:textColor="@color/gray"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+    <!--        </cgtz.com.cgwallet.view.PullableLinearLayout>
+
+            <include layout="@layout/load_more" />
+        </cgtz.com.cgwallet.view.PullToRefreshLayout>-->
+
+</LinearLayout>
