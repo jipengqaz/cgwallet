@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:orientation="horizontal" >
+
         <include layout="@layout/main_left_layout" />
         <include layout="@layout/main_center_layout"/>
         <include layout="@layout/main_right_layout"/>

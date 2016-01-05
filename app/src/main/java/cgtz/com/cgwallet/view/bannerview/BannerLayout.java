@@ -1,6 +1,5 @@
 package cgtz.com.cgwallet.view.bannerview;
 
-import com.example.bannerlayoutdemo.R;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -9,6 +8,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
+
+import cgtz.com.cgwallet.R;
 
 public class BannerLayout extends LinearLayout {
 	private Context context;
@@ -37,10 +38,10 @@ public class BannerLayout extends LinearLayout {
 	}
 
 	private void setUpViews() {
-		inflater.inflate(R.layout.layout_banner, this);
+		inflater.inflate(R.layout.layout_banner_indicator, this);
 		bannerViewPager = (AutoScrollViewPager) findViewById(R.id.banner_viewpager);
 		bannerViewPager.setCycle(true);
-		bannerViewPager.setInterval(5000);
+		bannerViewPager.setInterval(3000);
 		bannerViewPager.startAutoScroll();
 		pageIndicator = (CirclePageIndicator) findViewById(R.id.banner_indicator);
 

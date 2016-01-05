@@ -255,17 +255,18 @@ public class E_all_records_fragment_1 extends BaseFragment implements ISplashVie
                 case 1:
                     if (null == convertView) {
                         holder1 = new ViewHolder1();
+//                      2015年12月23日14:08:48  测试是否显示“钱包资金=本金+利息”公式
                         convertView = LinearLayout.inflate(getActivity(), R.layout.itme_e_wallet_1, null);
-                        holder1.eTotal = (TextView) convertView.findViewById(R.id.eTotal);
-                        holder1.eBalance = (TextView) convertView.findViewById(R.id.eBalance);
-                        holder1.receivableInterest = (TextView) convertView.findViewById(R.id.receivableInterest);
+//                        holder1.eTotal = (TextView) convertView.findViewById(R.id.eTotal);
+//                        holder1.eBalance = (TextView) convertView.findViewById(R.id.eBalance);
+//                        holder1.receivableInterest = (TextView) convertView.findViewById(R.id.receivableInterest);
                         convertView.setTag(holder1);
                     } else {
-                        holder1 = (ViewHolder1) convertView.getTag();
+//                        holder1 = (ViewHolder1) convertView.getTag();
                     }
-                    holder1.eTotal.setText(inves.geteTotal());
-                    holder1.eBalance.setText(inves.geteBalance());
-                    holder1.receivableInterest.setText(inves.getReceivableInterest());
+//                    holder1.eTotal.setText(inves.geteTotal());
+//                    holder1.eBalance.setText(inves.geteBalance());
+//                    holder1.receivableInterest.setText(inves.getReceivableInterest());
                     break;
             }
             return convertView;

@@ -35,19 +35,19 @@ import cgtz.com.cgwallet.widget.ProgressDialog;
  * 取钱界面
  * Created by Administrator on 2015/4/28 0028.
  */
-public class Withdraw_money  extends BaseActivity implements View.OnClickListener{
-    private  String TAG = "Withdraw_money";
+public class Withdraw_money extends BaseActivity implements View.OnClickListener {
+    private String TAG = "Withdraw_money";
 
     private BankCard card;//银行卡信息
     private String capitalBalance;//可用余额
-    private String tip,tip2,tip3,tip4;//提示文案
+    private String tip, tip2, tip3, tip4;//提示文案
     private int success;//判断值
-    private TextView text_tip2,text_tip3;//显示文案,text_tip1
+    private TextView text_tip2, text_tip3;//显示文案,text_tip1
     private Button apply_withdraw;//取钱按钮
     private ImageView delete_edit;//删除输入数据
     private EditText with_draw_num;//取钱金额
     private TextView available_balance;//可取金额
-    private TextView bank_tail,bank_name;//银行卡尾号，银行名
+    private TextView bank_tail, bank_name;//银行卡尾号，银行名
     private ImageView bank_icon;//银行图标
     private String withdrawAmount;//输入的提现金额;
     private ProgressDialog pDialog;
@@ -68,8 +68,8 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
         MApplication.registActivities(this);
         setContentView(R.layout.withdraw_money);
         setTitle(getResources().getString(R.string.transfer_output));
-        if(savedInstanceState !=null ){//从savedInstanceState获取数据
-            capitalBalance =savedInstanceState.getString("capitalBalance");
+        if (savedInstanceState != null) {//从savedInstanceState获取数据
+            capitalBalance = savedInstanceState.getString("capitalBalance");
             card = (BankCard) savedInstanceState.getSerializable("card");
             tip = savedInstanceState.getString("tip");
             tip2 = savedInstanceState.getString("tip2");
@@ -77,16 +77,19 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
             tip4 = savedInstanceState.getString("tip4");
             success = savedInstanceState.getInt("success", 1);
             freeOutAmount = savedInstanceState.getLong("freeOutAmount");
-        }else{
+        } else {
             capitalBalance = getIntent().getStringExtra("capitalBalance");
             card = (BankCard) getIntent().getSerializableExtra("card");
             tip = getIntent().getStringExtra("tip");
-            tip2 =getIntent().getStringExtra("tip2");
+            tip2 = getIntent().getStringExtra("tip2");
             success = getIntent().getIntExtra("success", 1);
             tip3 = "会到达您的草根投资账号“余额”中";
-            tip4 = "转入金额未满2天即转出收取0.5%的手续费";
+//原        free = 0.5;
+            free = getIntent().getDoubleExtra("free", 0.5);
+//原        tip4 = "转入金额未满2天即转出收取0.5%的手续费";
+//            tip4="转入金额未满2天即转出收取"+free+"%的手续费";
+            tip4 = getIntent().getStringExtra("tip4");
             freeOutAmount = card.getFreeOutAmount();//获取免手续费金额
-            free = 0.5;
         }
         init();
         assignment();
@@ -95,7 +98,7 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
     /**
      * 初始化控件
      */
-    private void init(){
+    private void init() {
         text_tip2 = (TextView) findViewById(R.id.text_tip2);
 //        text_tip1 = (TextView) findViewById(R.id.text_tip1);
         text_tip3 = (TextView) findViewById(R.id.text_tip3);
@@ -121,18 +124,20 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
     /**
      * 给控件赋值
      */
-    private void assignment(){
+    private void assignment() {
         text_account.setText("0");
         text_tip2.setText(tip2);
 //        text_tip1.setText(tip);
         text_tip3.setText(tip3);
-        bank_tail.setText("尾号 "+card.getCardLast());
+        bank_tail.setText("尾号 " + card.getCardLast());
         bank_name.setText(card.getBankName());
-        available_balance.setText(capitalBalance +" 元");
+        available_balance.setText(capitalBalance + " 元");
         bank_icon.setImageResource(BankCard.getBankIcon(Integer.parseInt(card.getBankId())));
-        if(success == -2){
-            apply_withdraw.setEnabled(false);
-            apply_withdraw.setBackgroundResource(R.drawable.banned_click);
+        apply_withdraw.setEnabled(false);
+        apply_withdraw.setBackgroundResource(R.drawable.banned_click);
+        if (success == -2) {
+//            apply_withdraw.setEnabled(false);
+//            apply_withdraw.setBackgroundResource(R.drawable.banned_click);
             apply_withdraw.setText("今天您已经提现过一次，请明天再来");
         }
         delete_edit.setOnClickListener(this);
@@ -147,46 +152,66 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
                 String str = charSequence.toString().trim();
-                if(str.length()>0){
+                if (str.length() > 0) {
                     Long num = Long.parseLong(str);
-                    if(num >Double.parseDouble(capitalBalance)){//判断取钱金额是否大于本金   是的话  把取钱金额设为本金
-                        String  test = df.format(Double.parseDouble(capitalBalance));
+                    if (num > Double.parseDouble(capitalBalance)) {//判断取钱金额是否大于本金   是的话  把取钱金额设为本金
+                        String test = df.format(Double.parseDouble(capitalBalance));
                         with_draw_num.setText(test);
                         with_draw_num.setSelection(test.length());
-                        num =  Long.parseLong(test);
-                        Utils.makeToast_short(Withdraw_money.this,"取出金额不能大于本金");
+                        num = Long.parseLong(test);
+                        Utils.makeToast_short(Withdraw_money.this, "取出金额不能大于本金");
                     }
-                    if(str.length()>1){
-                        if(str.subSequence(0, 1).equals("0")){//判断是否大于0
+                    if (str.length() > 1) {
+                        if (str.subSequence(0, 1).equals("0")) {//判断是否大于0
                             with_draw_num.setText(str.substring(1));
                             with_draw_num.setSelection(str.substring(1).length());
                         }
                     }
-
-                //按钮变为可点击
-                    apply_withdraw.setEnabled(true);
-                    apply_withdraw.setBackgroundResource(R.drawable.bg_button_preed);
+//1015新加
+                    if (success != -2) {//判断是否提现过
+                        //按钮变为可点击
+                        apply_withdraw.setEnabled(true);
+                        apply_withdraw.setBackgroundResource(R.drawable.bg_button_preed);
+                    }
                     delete_edit.setVisibility(View.VISIBLE);
-
-                    //判断是否显示公式
-                    if(num>freeOutAmount){
-                        wallet_out_free_layout.setVisibility(View.VISIBLE);
-                        prompt.setText("手续费提示：" + tip4);
-                        freeFormula.setText(num-freeOutAmount+"*"+free+"%");
-                        Double amount = (num-freeOutAmount)*free/100;
-                        String amount_string = df1.format(amount);
-                        freeAmount.setText(amount_string+"元");
-                        text_account.setText(amount_string);
-                    }else{
+                    if (free == 0 || free == 0.00) {
                         wallet_out_free_layout.setVisibility(View.GONE);
                         text_account.setText("0");
+                    } else {
+                        if (num > freeOutAmount) {
+                            wallet_out_free_layout.setVisibility(View.VISIBLE);
+                            prompt.setText("手续费提示：" + tip4);
+                            freeFormula.setText(num - freeOutAmount + " * " + free + "%"+" =");
+                            Double amount = (num - freeOutAmount) * free / 100;
+                            String amount_string = df1.format(amount);
+                            freeAmount.setText(amount_string + "元");
+                            text_account.setText(amount_string);
+                        } else {
+                            wallet_out_free_layout.setVisibility(View.GONE);
+                            text_account.setText("0");
+                        }
                     }
-                }else{
+//1015测试
+                   /* //判断是否显示公式
+                    if (num > freeOutAmount) {
+                        wallet_out_free_layout.setVisibility(View.VISIBLE);
+                        prompt.setText("手续费提示：" + tip4);
+                        freeFormula.setText(num - freeOutAmount + "*" + free + "%");
+                        Double amount = (num - freeOutAmount) * free / 100;
+                        String amount_string = df1.format(amount);
+                        freeAmount.setText(amount_string + "元");
+                        text_account.setText(amount_string);
+                    } else {
+                        wallet_out_free_layout.setVisibility(View.GONE);
+                        text_account.setText("0");
+                    }*/
+                } else {
                     wallet_out_free_layout.setVisibility(View.GONE);
                     text_account.setText("0");
                     delete_edit.setVisibility(View.GONE);
                     apply_withdraw.setBackgroundResource(R.drawable.bg_button_no_enabled);
-                    apply_withdraw.setEnabled(true);
+//1015修改                    apply_withdraw.setEnabled(true);
+                    apply_withdraw.setEnabled(false);
                 }
 
             }
@@ -198,93 +223,95 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
         });
     }
 
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if(pDialog.isShowing()){
+            if (pDialog.isShowing()) {
                 pDialog.dismiss();
             }
             JsonBean jsonBean = (JsonBean) msg.obj;
             int code = jsonBean.getCode();
             String errorMsg = jsonBean.getError_msg();
-            if(!Utils.filtrateCode(Withdraw_money.this,jsonBean)){
+            if (!Utils.filtrateCode(Withdraw_money.this, jsonBean)) {
                 return;
             }
             JSONObject json = jsonBean.getJsonObject();
-            LogUtils.e(TAG,json+"");
+            LogUtils.e(TAG, json + "");
             String status = json.optString("success");
             if ("0".equals(status)) {
                 Utils.makeToast(Withdraw_money.this, json.optString("msg"));
-            }else if(status.equals("-1")){
+            } else if (status.equals("-1")) {
                 Utils.makeToast(Withdraw_money.this, json.optString("msg"));
-            } else if(status.equals("1")) {
+            } else if (status.equals("1")) {
 //                Utils.makeToast(Withdraw_money.this, json.optString("msg"));
                 /**提现请求成功， 跳转提现成功页面*/
-                startActivity(new Intent(Withdraw_money.this, InProgressActivity.class).putExtra("isSaveAt",false).putExtra("redeemTip",json.optString("redeemTip")));
+                startActivity(new Intent(Withdraw_money.this, InProgressActivity.class).putExtra("isSaveAt", false).putExtra("redeemTip", json.optString("redeemTip")));
                 finish();
             }
         }
     };
+
     @Override
     public void onClick(View v) {
-    switch(v.getId()){
-        case R.id.delete_edit://清空输入框数据
-            with_draw_num.setText("");
-            delete_edit.setVisibility(View.GONE);
-            break;
-        case R.id.apply_withdraw:
-            withdrawAmount = with_draw_num.getText().toString();
-            if(withdrawAmount.isEmpty()){
-                Utils.makeToast(Withdraw_money.this, "请输入所要提现金额");
-            }else if(Double.parseDouble(withdrawAmount) <=0){
-                Utils.makeToast(Withdraw_money.this, "提现金额不可为0元");
-            }else if(Double.parseDouble(withdrawAmount) > Double.parseDouble(capitalBalance)){
-                Utils.makeToast(Withdraw_money.this, "输入金额大于可提现金额");
-            }else{
-                final View layoutTradePwd = LayoutInflater.from(Withdraw_money.this)
-                        .inflate(R.layout.layout_tradepwd,null);
-                final CustomEffectsDialog cDiaog =
-                        CustomEffectsDialog.getInstans(Withdraw_money.this);
-                cDiaog.setCustomView(layoutTradePwd, Withdraw_money.this);
-                cDiaog.withTitle("请验证交易密码");
-                cDiaog.withMessage(null);
-                cDiaog.withBtnLineColor(R.color.bg_line);
-                cDiaog.withBtnContentLineColor(R.color.bg_line);
-                cDiaog.withButton1Text("取消");
-                cDiaog.withButton1Click(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        cDiaog.dismiss();
-                    }
-                });
-                cDiaog.withButton2Text("确定");
-                cDiaog.withButton2TextColor(getResources().getColor(R.color.main_bg));
-                cDiaog.withButton2Click(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String tradepwd = ((EditText) layoutTradePwd.findViewById(R.id.trade_password))
-                                .getText().toString().trim();//交易密码
-                        if (TextUtils.isEmpty(tradepwd)) {
-                            Utils.makeToast(Withdraw_money.this, "请输入交易密码");
-                        } else {
-                            if (pDialog ==null) {
-                                pDialog = new ProgressDialog(Withdraw_money.this, R.style.loading_dialog);
-                            }
-                            pDialog.show();
-                            Withdraw_money_Client.getMoney(handler, withdrawAmount, card.getCard_id(), tradepwd,1);
+        switch (v.getId()) {
+            case R.id.delete_edit://清空输入框数据
+                with_draw_num.setText("");
+                delete_edit.setVisibility(View.GONE);
+                break;
+            case R.id.apply_withdraw:
+                withdrawAmount = with_draw_num.getText().toString();
+                if (withdrawAmount.isEmpty()) {
+                    Utils.makeToast(Withdraw_money.this, "请输入所要提现金额");
+                } else if (Double.parseDouble(withdrawAmount) <= 0) {
+                    Utils.makeToast(Withdraw_money.this, "提现金额不可为0元");
+                } else if (Double.parseDouble(withdrawAmount) > Double.parseDouble(capitalBalance)) {
+                    Utils.makeToast(Withdraw_money.this, "输入金额大于可提现金额");
+                } else {
+                    final View layoutTradePwd = LayoutInflater.from(Withdraw_money.this)
+                            .inflate(R.layout.layout_tradepwd, null);
+                    final CustomEffectsDialog cDiaog =
+                            CustomEffectsDialog.getInstans(Withdraw_money.this);
+                    cDiaog.setCustomView(layoutTradePwd, Withdraw_money.this);
+                    cDiaog.withTitle("请验证交易密码");
+                    cDiaog.withMessage(null);
+                    cDiaog.withBtnLineColor(R.color.bg_line);
+                    cDiaog.withBtnContentLineColor(R.color.bg_line);
+                    cDiaog.withButton1Text("取消");
+                    cDiaog.withButton1Click(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
                             cDiaog.dismiss();
                         }
+                    });
+                    cDiaog.withButton2Text("确定");
+                    cDiaog.withButton2TextColor(getResources().getColor(R.color.main_bg));
+                    cDiaog.withButton2Click(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String tradepwd = ((EditText) layoutTradePwd.findViewById(R.id.trade_password))
+                                    .getText().toString().trim();//交易密码
+                            if (TextUtils.isEmpty(tradepwd)) {
+                                Utils.makeToast(Withdraw_money.this, "请输入交易密码");
+                            } else {
+                                if (pDialog == null) {
+                                    pDialog = new ProgressDialog(Withdraw_money.this, R.style.loading_dialog);
+                                }
+                                pDialog.show();
+                                Withdraw_money_Client.getMoney(handler, withdrawAmount, card.getCard_id(), tradepwd, 1);
+                                cDiaog.dismiss();
+                            }
 
-                    }
-                });
-                cDiaog.setCancelable(false);
-                cDiaog.setCanceledOnTouchOutside(false);
-                cDiaog.show();
-            }
-            break;
-     }
+                        }
+                    });
+                    cDiaog.setCancelable(false);
+                    cDiaog.setCanceledOnTouchOutside(false);
+                    cDiaog.show();
+                }
+                break;
+        }
     }
+
     /**
      * Activity被系统杀死时被调用.
      * 例如:屏幕方向改变时,Activity被销毁再重建;当前Activity处于后台,系统资源紧张将其杀死.
@@ -299,9 +326,9 @@ public class Withdraw_money  extends BaseActivity implements View.OnClickListene
         outState.putString("tip", tip);
         outState.putInt("success", success);
         outState.putString("tip2", tip2);
-        outState.putString("tip2",tip3);
-        outState.putString("tip2",tip4);
-        outState.putLong("freeOutAmount",freeOutAmount);
+        outState.putString("tip2", tip3);
+        outState.putString("tip2", tip4);
+        outState.putLong("freeOutAmount", freeOutAmount);
     }
 
 

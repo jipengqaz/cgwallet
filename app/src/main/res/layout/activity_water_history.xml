@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_center"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_history_gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="暂无账单记录"
+            android:textSize="20sp"
+            android:textColor="@color/gray"
+            android:gravity="center"
+            android:layout_marginTop="30dp"/>
+ <!--   <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="历史账单" />-->
+
+    <ListView
+        android:id="@+id/lv_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:divider="@color/line"
+        android:dividerHeight="0.5dp">
+    </ListView>
+    </FrameLayout>
 
 </LinearLayout>

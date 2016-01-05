@@ -3,19 +3,314 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/click_color"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@color/bg_center"
-        android:padding="7dp">
+        android:orientation="vertical">
 
-        <TextView
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:background="@color/bg_line">
+        <LinearLayout
+            android:layout_width="251dp"
+            android:layout_height="35dp"
+            android:orientation="horizontal"
+            android:background="@color/main_bg">
+            <TextView
+                android:id="@+id/tv_data"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="@color/white"
+                android:layout_marginLeft="10dp"
+                android:text="0000-00-00" />
+            <TextView
+                android:id="@+id/tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="25dp"
+                android:textColor="@color/white"
+                android:text="00.00000000" />
+        </LinearLayout>
+        </RelativeLayout>
+
+
+      <!--  <TextView
+      android:layout_width="87dp"
+            android:layout_marginLeft="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="表格呵呵呵" />
+            android:layout_marginTop="5dp"
+            android:text="2015-06-06       1.91"
+            android:textSize="17sp" />-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/bg_center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_weight="1"
+                android:background="@drawable/pament_shape"
+                android:gravity="center"
+                android:text="利息明细"
+                android:textSize="17sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_weight="1"
+                android:background="@drawable/pament_shape"
+                android:gravity="center"
+                android:text="对应本金"
+                android:textSize="17sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_weight="1"
+                android:background="@drawable/pament_shape"
+                android:gravity="center"
+                android:text="年化收益率"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_inter_one"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:background="@drawable/pament_shape"
+                android:gravity="center"
+                android:text="00.00000"
+                android:textColor="@color/gray"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/tv_bal_one"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:background="@drawable/pament_shape"
+                android:gravity="center"
+                android:text="00.00000元"
+                android:textColor="@color/gray"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/tv_rate_one"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:background="@drawable/pament_shape"
+                android:gravity="center"
+                android:text="0%"
+                android:textColor="@color/gray"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+        <!--android:visibility="invisible"-->
+        <LinearLayout
+            android:id="@+id/ll_inter"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_inter_two"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:background="@drawable/pament_shape"
+                android:gravity="center"
+                android:text="00.00000"
+                android:textColor="@color/gray"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/tv_bal_two"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:background="@drawable/pament_shape"
+                android:gravity="center"
+                android:text="00.00000元"
+                android:textColor="@color/gray"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/tv_rate_two"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:background="@drawable/pament_shape"
+                android:gravity="center"
+                android:text="0%"
+                android:textColor="@color/gray"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_inter_three"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_inter_three"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:background="@drawable/pament_shape"
+                android:gravity="center"
+                android:text="00.00000"
+                android:textColor="@color/gray"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/tv_bal_three"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:background="@drawable/pament_shape"
+                android:gravity="center"
+                android:text="00.00000元"
+                android:textColor="@color/gray"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/tv_rate_three"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:background="@drawable/pament_shape"
+                android:gravity="center"
+                android:text="0%"
+                android:textColor="@color/gray"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_inter_four"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_inter_four"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:background="@drawable/pament_shape"
+                android:gravity="center"
+                android:text="00.00000"
+                android:textColor="@color/gray"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/tv_bal_four"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:background="@drawable/pament_shape"
+                android:gravity="center"
+                android:text="00.00000元"
+                android:textColor="@color/gray"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/tv_rate_four"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:background="@drawable/pament_shape"
+                android:gravity="center"
+                android:text="0%"
+                android:textColor="@color/gray"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_inter_five"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_inter_five"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:background="@drawable/pament_shape"
+                android:gravity="center"
+                android:text="00.00000"
+                android:textColor="@color/gray"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/tv_bal_five"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:background="@drawable/pament_shape"
+                android:gravity="center"
+                android:text="00.00000元"
+                android:textColor="@color/gray"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/tv_rate_five"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:background="@drawable/pament_shape"
+                android:gravity="center"
+                android:text="0%"
+                android:textColor="@color/gray"
+                android:textSize="17sp" />
+        </LinearLayout>
+
 
     </LinearLayout>
 </LinearLayout>

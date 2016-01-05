@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -115,7 +116,7 @@ public class Utils {
      */
     public static String getUserPhone(Context context){
         SharedUtils sharedUtils = new SharedUtils(context, Constants.CONFIG);
-        return sharedUtils.getString(Constants.LOGIN_PHONE,"");
+        return sharedUtils.getString(Constants.LOGIN_PHONE, "");
     }
 
     /**
@@ -249,7 +250,32 @@ public class Utils {
      */
     public static void makeToast_short(Context context,String msg){
         Toast.makeText(context,msg,Toast.LENGTH_SHORT).show();
+//        给吐司自定义位置 但是为啥不顶用呢
+//        Toast.makeText(context,msg,Toast.LENGTH_SHORT).setGravity(Gravity.CENTER_VERTICAL,0,0);
     }
+
+
+/*//    2015年12月9日11:17:36   测试
+    *//**
+     * 测试用的显示Toast信息
+     *//*
+    private static Toast mToast;
+    public static void showToast(Context context, String text) {
+        if (context != null && text != null) {
+            try {
+                if (mToast == null) {
+                    mToast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+                } else {
+                    mToast.setText(text);
+                    mToast.setDuration(Toast.LENGTH_SHORT);
+                }
+                mToast.show();
+            } catch (NullPointerException e) {
+            }
+        }
+    }*/
+
+
     /**
      * 判断SD卡是否存在
      * @return
@@ -270,17 +296,17 @@ public class Utils {
         int code = jsonBean.getCode();//code判断值
         String errorMsg = jsonBean.getError_msg();//错误信息
         if(code == Constants.NO_DATA || code == Constants.IS_EVENT){
-            Utils.makeToast(context,errorMsg);
-            return false;
-        }else if(code == Constants.NEED_LOGIN_AGAIN){//需要重新登录
-            loginExit(context);
-            context.startActivity(new Intent(context, LoginActivity.class));
-            if(!MainActivity.class.getName().equals(((Activity)context).getClass().getName())){
-                ((Activity)context).finish();
-            }
-            return false;
-        }else if(code == Constants.SERVICE_MAINTAIN){//服务器正在维护
-            maintainDialog(context);
+                Utils.makeToast(context,errorMsg);
+                return false;
+            }else if(code == Constants.NEED_LOGIN_AGAIN){//需要重新登录
+                loginExit(context);
+                context.startActivity(new Intent(context, LoginActivity.class));
+                if(!MainActivity.class.getName().equals(((Activity)context).getClass().getName())){
+                    ((Activity)context).finish();
+                }
+                return false;
+            }else if(code == Constants.SERVICE_MAINTAIN){//服务器正在维护
+                maintainDialog(context);
             return false;
         }else{
             return true;
@@ -555,4 +581,27 @@ public class Utils {
         }
     }
 
+    /**
+     * 1013新增从正在输入的有输入框的页面点击返回键跳到其他页面时关闭软键盘
+     * @param activity
+     */
+    public static void HideSoftKeyboard(Activity activity) {
+        if (activity.getCurrentFocus()!=null) {
+            ((InputMethodManager) activity.getSystemService(activity.INPUT_METHOD_SERVICE))
+                    .hideSoftInputFromWindow(activity
+                                    .getCurrentFocus().getWindowToken(),
+                            InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
+
+    /**
+     *有Dialog时调用的关闭软键盘的方法
+     */
+    public static void HideSoftKeyboardDialog(Activity activity, View view) {
+        if (view!=null) {
+            ((InputMethodManager) activity.getSystemService(activity.INPUT_METHOD_SERVICE))
+                    .hideSoftInputFromWindow(view.getWindowToken(),
+                            InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
 }

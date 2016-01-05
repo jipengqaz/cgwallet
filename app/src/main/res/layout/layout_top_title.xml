@@ -1,65 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/main_bg"
     android:layout_width="0dp"
-    android:layout_height="0dp">
+    android:layout_height="0dp"
+    android:background="@color/new_main_bg">
+
     <ImageView
-        android:padding="5dp"
-        android:scaleType="fitXY"
-        android:layout_marginLeft="10dp"
         android:id="@+id/show_left_button"
-        android:layout_centerVertical="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:src="@mipmap/icon_menu"
-        />
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:padding="5dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/icon_menu" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginRight="70dp"
-        android:layout_marginLeft="70dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:layout_centerInParent="true"
-        android:orientation="horizontal"
-        >
-        <!--<TextView-->
-            <!--android:id="@+id/my_wallet_button"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:background="@drawable/bg_main_btn_left_back_on"-->
-            <!--android:gravity="center"-->
-            <!--android:text="我的钱包"-->
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_weight="1">
+    <TextView
+        android:id="@+id/my_wallet_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_main_btn_left_back_on"
+        android:gravity="center"
+        android:text="钱包"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_16sp"/>
+    <View
+        android:id="@+id/wallet_view"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/white" />
+</LinearLayout>
             <!--android:textColor="@color/main_bg"-->
-            <!--/>-->
+
+           <!-- android:textSize="@dimen/text_size_18sp"-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
         <TextView
-            android:id="@+id/my_wallet_button"
-            android:layout_weight="1"
+            android:id="@+id/my_invest_button"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_main_btn_middle_back_off"
             android:gravity="center"
-            android:text="草根钱包"
-            android:textSize="@dimen/text_size_18sp"
-            android:textColor="@color/white"
-        />
+            android:text="消费"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/text_size_16sp"/>
+        <View
+            android:id="@+id/pay_view"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/white" />
+            <!--android:textColor="@color/white"-->
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/my_pay_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_main_btn_right_back_off"
+            android:gravity="center"
+            android:text="投资"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/text_size_16sp"/>
+        <View
+            android:id="@+id/invest_view"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/white" />
+            <!--android:textColor="@color/white"-->
+    </LinearLayout>
         <!--android:background="@drawable/bg_main_btn_right_back_off"-->
     </LinearLayout>
     <!--<ImageView-->
-        <!--android:layout_centerInParent="true"-->
-        <!--android:src="@mipmap/bg_slogan"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content" />-->
+    <!--android:layout_centerInParent="true"-->
+    <!--android:src="@mipmap/bg_slogan"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content" />-->
     <ImageView
-        android:padding="5dp"
-        android:scaleType="fitXY"
-        android:layout_marginRight="10dp"
-        android:layout_centerVertical="true"
         android:id="@+id/show_right_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:src="@mipmap/icon_share"
-        />
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:padding="5dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/icon_share" />
 </RelativeLayout>

@@ -121,6 +121,7 @@ public class StartActivity extends Activity {
         task.execute();
         //获取
         Get_data.getStartUp(handler);
+//        2015年11月27日15:00:29 测试代码  此部分与手势解锁有关 认真分析
         Utils.autoLogin(this,turnHandler);
         //跳转到   主界面
 //        getonLine();

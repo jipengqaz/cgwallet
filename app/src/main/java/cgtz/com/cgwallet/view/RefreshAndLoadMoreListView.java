@@ -483,6 +483,20 @@ public class RefreshAndLoadMoreListView extends ListView implements AbsListView.
         }
         return mLoadMoreView;
     }
+//2015年12月28日16:02:09  测试
+    public View newGetLoadMoreFootView() {
+        if (mLoadMoreView == null) {
+            mLoadMoreView = inflater.inflate(R.layout.list_loadmore_foot, null);
+            mLoadMoreView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!isNoMore())
+                        newLoadMore();
+                }
+            });
+        }
+        return mLoadMoreView;
+    }
 
     public void setLoadMore(boolean more) {
         if (more) {
@@ -498,6 +512,22 @@ public class RefreshAndLoadMoreListView extends ListView implements AbsListView.
                 this.removeFooterView(mLoadMoreView);
         }
     }
+//2015年12月28日16:01:09  测试
+public void newSetLoadMore(boolean more) {
+    if (more) {
+        if (this.getFooterViewsCount() == 0) {
+            this.addFooterView(newGetLoadMoreFootView());
+        }else{
+            if (mLoadMoreView != null) {
+                mLoadMoreView.setVisibility(VISIBLE);
+            }
+        }
+    } else {
+        if (mLoadMoreView != null)
+            this.removeFooterView(mLoadMoreView);
+    }
+}
+
 
     public void onLoadMoreComplete() {
         isLoadingMore = false;
@@ -605,6 +635,30 @@ public class RefreshAndLoadMoreListView extends ListView implements AbsListView.
         }
     }
 
+//    2015年12月28日13:50:54  测试
+public void newNoMore(boolean nomore) {
+    isLoadingMore = false;
+    noMore = nomore;
+    if (mLoadMoreView != null) {
+        if (getDividerHeight() != 0)
+            mLoadMoreView.findViewById(R.id.end_line).setVisibility(VISIBLE);
+        TextView tipsView = (TextView) mLoadMoreView.findViewById(R.id.foot_tipsTextView);
+        if (nomore) {
+            tipsView.setText(R.string.new_no_more);
+            mLoadMoreView.findViewById(R.id.line_left).setVisibility(VISIBLE);
+            mLoadMoreView.findViewById(R.id.line_right).setVisibility(VISIBLE);
+            mLoadMoreView.findViewById(R.id.no_transfer_project).setVisibility(GONE);//隐藏图片
+        } else {
+            tipsView.setText(R.string.click_to_see_more);
+            mLoadMoreView.findViewById(R.id.line_left).setVisibility(GONE);
+            mLoadMoreView.findViewById(R.id.line_right).setVisibility(GONE);
+        }
+        ProgressBar progressView = (ProgressBar) mLoadMoreView.findViewById(R.id.foot_progressBar);
+        progressView.setVisibility(GONE);
+        mLoadMoreView.findViewById(R.id.tv_go_submit).setVisibility(GONE);
+    }
+}
+
     public void noMore(boolean noMore, int endText, boolean showGoSubmit) {
         String endTextStr = getResources().getString(endText);
         noMore(noMore, endTextStr, showGoSubmit);
@@ -645,6 +699,27 @@ public class RefreshAndLoadMoreListView extends ListView implements AbsListView.
             tipsView.setText("正在加载...");
             ProgressBar progressView = (ProgressBar) mLoadMoreView.findViewById(R.id.foot_progressBar);
             progressView.setVisibility(VISIBLE);
+            mLoadMoreView.findViewById(R.id.line_left).setVisibility(GONE);
+            mLoadMoreView.findViewById(R.id.line_right).setVisibility(GONE);
+        }
+        if (emptyView != null) {
+            emptyView.setVisibility(GONE);
+        }
+        if (mOnLoadMoreLister != null) {
+            mOnLoadMoreLister.onLoadMore();
+        }
+    }
+//2015年12月28日14:47:02  测试
+    public void newLoadMore() {
+        if (isLoadingMore)
+            return;
+        isLoadingMore = true;
+        if (mLoadMoreView != null) {
+            TextView tipsView = (TextView) mLoadMoreView.findViewById(R.id.foot_tipsTextView);
+            tipsView.setVisibility(VISIBLE);
+            tipsView.setText("");
+//            ProgressBar progressView = (ProgressBar) mLoadMoreView.findViewById(R.id.foot_progressBar);
+//            progressView.setVisibility(VISIBLE);
             mLoadMoreView.findViewById(R.id.line_left).setVisibility(GONE);
             mLoadMoreView.findViewById(R.id.line_right).setVisibility(GONE);
         }

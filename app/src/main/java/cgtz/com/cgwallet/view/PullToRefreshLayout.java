@@ -617,5 +617,4 @@ public class PullToRefreshLayout extends RelativeLayout {
          */
         void onLoadMore(PullToRefreshLayout pullToRefreshLayout);
     }
-
 }

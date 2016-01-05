@@ -67,6 +67,7 @@ public class Code_download_Service extends Service{
 //                } else {
 //
 //                }
+                LogUtils.e(TAG, "下载二维码  ");
                 handler.sendEmptyMessage(1);
             } catch (Exception e) {
                 LogUtils.e(TAG, "下载二维码  错误");

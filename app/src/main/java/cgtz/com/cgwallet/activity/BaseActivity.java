@@ -30,8 +30,9 @@ public class BaseActivity extends ActionBarActivity {
     private ActionBar actionBar;
     private LinearLayout backLayout;
     private TextView titleView;
-    private TextView rightText;
+    protected TextView rightText;
     private ImageView iconBack;
+    protected ImageView locationIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,7 @@ public class BaseActivity extends ActionBarActivity {
         actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setDisplayUseLogoEnabled(false);
         actionBar.setIcon(android.R.color.transparent);
-        actionBar.setBackgroundDrawable(getResources().getDrawable(R.color.top_title));
+        actionBar.setBackgroundDrawable(getResources().getDrawable(R.color.new_top_title));
         actionBar.setTitle("草根");
         actionBar.setElevation(0);
         View actionBarWeek = RelativeLayout.inflate(this, R.layout.layout_action_bar, null);
@@ -54,6 +55,7 @@ public class BaseActivity extends ActionBarActivity {
         titleView = (TextView) actionBarWeek.findViewById(R.id.action_bar_title);
         rightText = (TextView) actionBarWeek.findViewById(R.id.action_bar_right_text);
         iconBack = (ImageView) actionBarWeek.findViewById(R.id.action_bar_left_icon);
+        locationIcon = (ImageView) actionBarWeek.findViewById(R.id.actionbar_location_icon);
         backLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,8 +149,15 @@ public class BaseActivity extends ActionBarActivity {
             Intent intent  = new Intent();
             intent.setClass(this,GestureVerifyActivity.class);
             startActivity(intent);
-        }else{
-//            Toast.makeText(this, "未设置手势密码", Toast.LENGTH_SHORT);
         }
+    }
+
+    /**
+     * 重写关闭软键盘的方法
+     */
+    @Override
+    public void finish() {
+        Utils.HideSoftKeyboard(this);
+        super.finish();
     }
 }

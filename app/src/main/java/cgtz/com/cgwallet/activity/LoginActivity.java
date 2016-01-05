@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import org.json.JSONObject;
 
+import java.sql.DatabaseMetaData;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,14 +39,14 @@ import cgtz.com.cgwallet.widget.ProgressDialog;
 /**
  * 登录或注册页面
  */
-public class LoginActivity extends BaseActivity implements ISplashView,View.OnClickListener{
+public class LoginActivity extends BaseActivity implements ISplashView, View.OnClickListener {
     private static final String TAG = "LoginActivity";
     private EditText etLoginPhone;//输入登录手机号码
     private EditText etLoginPwd;//输入登录密码
     private Button btnLogin;//登录按钮
     private TextView tvRegistAccount;//注册账户
     private TextView tvForgetPwd;//忘记密码
-//    private TextView showEditsMobile;//显示输入的手机号码
+    //    private TextView showEditsMobile;//显示输入的手机号码
     private ImageView changeMobile;//手机号输入框后的图标
     private SplashPresenter presenter;
     private ProgressDialog progressDialog;
@@ -64,7 +65,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == 10){//用于用户注册时    已注册账号  直接返回该页面  并输入手机号
+        if (resultCode == 10) {//用于用户注册时    已注册账号  直接返回该页面  并输入手机号
             etLoginPhone.setVisibility(View.VISIBLE);
             etLoginPwd.setText("");
             etLoginPhone.setText(data.getStringExtra("mobile"));
@@ -91,7 +92,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
         setListener();
     }
 
-    private void initViews(){
+    private void initViews() {
         etLoginPhone = (EditText) findViewById(R.id.login_edit_phone);//输入登录手机号码
         etLoginPwd = (EditText) findViewById(R.id.login_edit_pwd);//输入登录密码
         btnLogin = (Button) findViewById(R.id.login_button_finish);//登录按钮
@@ -108,8 +109,8 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
     /**
      * 填充页面内容
      */
-    private void fillViews(){
-        if(!TextUtils.isEmpty(beforeMobile)){
+    private void fillViews() {
+        if (!TextUtils.isEmpty(beforeMobile)) {
             isStarMobile = true;
             etLoginPhone.setText(Utils.getHasStarsMobile(beforeMobile));
             etLoginPhone.setSelection(etLoginPhone.getText().toString().trim().length());
@@ -119,7 +120,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
         listBeans = org.ryan.database.DataSupport.getMobileList();
     }
 
-    private void setListener(){
+    private void setListener() {
         Utils.closeInputMethod(this);//关闭输入键盘
         btnLogin.setOnClickListener(this);
         tvRegistAccount.setOnClickListener(this);
@@ -141,10 +142,10 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
                 } else {
                     empty.setVisibility(View.GONE);
                 }
-                if(str.length()>=6){
+                if (str.length() >= 6) {
                     btnLogin.setTextColor(getResources().getColor(R.color.login_btn_can_click_text));
                     btnLogin.setEnabled(true);
-                }else{
+                } else {
                     btnLogin.setTextColor(getResources().getColor(R.color.login_btn_text));
                     btnLogin.setEnabled(false);
                 }
@@ -229,10 +230,10 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
 
     @Override
     public void startProcessBar() {
-        if(progressDialog == null){
-            progressDialog = new ProgressDialog(LoginActivity.this,R.style.loading_dialog);
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(LoginActivity.this, R.style.loading_dialog);
         }
-        if(progressDialog.isShowing()){
+        if (progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
         progressDialog.show();
@@ -240,7 +241,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
 
     @Override
     public void hideProcessBar() {
-        if(progressDialog != null && progressDialog.isShowing()){
+        if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
     }
@@ -252,29 +253,29 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
 
     @Override
     public void startNextActivity() {
-        HashMap<String,String> params = new HashMap<>();
-        params.put("username",loginPhone);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("username", loginPhone);
         params.put("password", MD5Util.md5(loginPwd));
-        CustomTask task = new CustomTask(mHandler,Constants.WHAT_LOGIN,Constants.URL_LOGIN,true,params,true);
+        CustomTask task = new CustomTask(mHandler, Constants.WHAT_LOGIN, Constants.URL_LOGIN, true, params, true);
         task.execute();
     }
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        switch (id){
+        switch (id) {
             case R.id.empty://清空密码输入框数据
                 etLoginPwd.setText("");
                 break;
             case R.id.iv_show_pwd://是否显示密码
 //                registPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                if(isChecked){//判断现在密码显示状态，正在可见状态
+                if (isChecked) {//判断现在密码显示状态，正在可见状态
                     //变为不可见
                     showPwd.setImageResource(R.mipmap.icon_regist_no_show_password);
                     etLoginPwd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     etLoginPwd.setSelection(etLoginPwd.getText().toString().length());
                     isChecked = false;
-                }else{//正在不可见状态
+                } else {//正在不可见状态
                     //变为可见
                     showPwd.setImageResource(R.mipmap.icon_regist_show_password);
                     etLoginPwd.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
@@ -283,7 +284,7 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
                 }
                 break;
             case R.id.tv_regist_account://注册用户
-                startActivityForResult(new Intent(LoginActivity.this,RegistActivity.class),100);
+                startActivityForResult(new Intent(LoginActivity.this, RegistActivity.class), 100);
                 break;
             case R.id.login_button_finish://登录
 //                if(!isStarMobile){//判断是否输入手机号
@@ -294,15 +295,15 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
 //                    loginPhone = beforeMobile;
 //                }
                 loginPhone = etLoginPhone.getText().toString();
-                if(loginPhone.lastIndexOf("*") != -1){
+                if (loginPhone.lastIndexOf("*") != -1) {
                     loginPhone = beforeMobile;
                 }
                 loginPwd = etLoginPwd.getText().toString();
-                if(TextUtils.isEmpty(loginPhone)){
-                    Utils.makeToast(LoginActivity.this,getResources().getString(R.string.error_need_phone));
-                }else if(TextUtils.isEmpty(loginPwd)){
-                    Utils.makeToast(LoginActivity.this,getResources().getString(R.string.error_need_pwd));
-                }else{
+                if (TextUtils.isEmpty(loginPhone)) {
+                    Utils.makeToast(LoginActivity.this, getResources().getString(R.string.error_need_phone));
+                } else if (TextUtils.isEmpty(loginPwd)) {
+                    Utils.makeToast(LoginActivity.this, getResources().getString(R.string.error_need_pwd));
+                } else {
                     presenter.didFinishLoading(LoginActivity.this);
                 }
                 break;
@@ -315,19 +316,19 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
 //                    loginPhone = beforeMobile;
 //                }
                 loginPhone = etLoginPhone.getText().toString();
-                if(loginPhone.lastIndexOf("*") != -1){
+                if (loginPhone.lastIndexOf("*") != -1) {
                     loginPhone = beforeMobile;
                 }
-                startActivity(new Intent(LoginActivity.this,RegistActivity.class)
-                            .putExtra("beforeMobile",loginPhone));
+                startActivity(new Intent(LoginActivity.this, RegistActivity.class)
+                        .putExtra("beforeMobile", loginPhone));
                 break;
             case R.id.empty_change_mobile://是否显示登录过的手机号
-                if(isEditMobileFocus){
+                if (isEditMobileFocus) {
                     etLoginPhone.setText("");//删除手机号输入框中的内容
-                }else{
+                } else {
                     //显示登录过的手机号列表
-                    if(listBeans != null && listBeans.size() > 0){
-                        loginPop = new LoginPopupwindow(this,mobileParent,etLoginPhone,listBeans);
+                    if (listBeans != null && listBeans.size() > 0) {
+                        loginPop = new LoginPopupwindow(this, mobileParent, etLoginPhone, listBeans);
                         loginPop.showPop();
                     }
 
@@ -336,25 +337,25 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
         }
     }
 
-    private Handler mHandler = new Handler(){
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            try{
+            try {
                 JsonBean jsonBean = (JsonBean) msg.obj;
-                LogUtils.i(TAG,"登录返回内容："+jsonBean.getJsonString());
+                LogUtils.i(TAG, "登录返回内容：" + jsonBean.getJsonString());
                 int code = jsonBean.getCode();
                 String errorMsg = jsonBean.getError_msg();
-                if(code == Constants.DATA_EVENT){
-                    Utils.makeToast(LoginActivity.this,Constants.ERROR_MSG_CODE+code);
+                if (code == Constants.DATA_EVENT) {
+                    Utils.makeToast(LoginActivity.this, Constants.ERROR_MSG_CODE + code);
                     return;
                 }
                 int action = msg.what;
-                switch (action){
+                switch (action) {
                     case Constants.WHAT_LOGIN:
-                        boolean flag = Utils.filtrateCode(LoginActivity.this,jsonBean);
-                        if(flag && code == Constants.OPERATION_FAIL){//数据交互失败
+                        boolean flag = Utils.filtrateCode(LoginActivity.this, jsonBean);
+                        if (flag && code == Constants.OPERATION_FAIL) {//数据交互失败
                             Utils.makeToast(LoginActivity.this, errorMsg);
-                        }else if(flag && code == Constants.OPERATION_SUCCESS){//数据交互成功
+                        } else if (flag && code == Constants.OPERATION_SUCCESS) {//数据交互成功
                             JSONObject jsonObject = new JSONObject(jsonBean.getJsonString());
                             JSONObject object = jsonObject.optJSONObject("info");
                             String userId = object.optString("userId");
@@ -364,23 +365,24 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
                             Utils.saveToken(token);
                             Utils.saveMobile(LoginActivity.this, mobile);
                             Utils.saveLoginPwd(LoginActivity.this, MD5Util.md5(loginPwd));
-                            if(Utils.getisLockPassWord(LoginActivity.this,mobile)==0){//判断该账号是否是第一次登录该手机
-                                Utils.saveisLockPassWord(LoginActivity.this,mobile,1);
+                            if (Utils.getisLockPassWord(LoginActivity.this, mobile) == 0) {//判断该账号是否是第一次登录该手机
+                                Utils.saveisLockPassWord(LoginActivity.this, mobile, 1);
                             }
                             startService(new Intent(LoginActivity.this, Code_download_Service.class)
-                                    .putExtra("userId",userId).putExtra("token",token));//开启获取分享数据的服务
+                                    .putExtra("userId", userId).putExtra("token", token));//开启获取分享数据的服务
                             hideProcessBar();
                             finish();
                         }
                         hideProcessBar();
                         break;
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
-                LogUtils.e(TAG,"activity数据异常");
+                LogUtils.e(TAG, "activity数据异常");
             }
         }
     };
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -394,10 +396,11 @@ public class LoginActivity extends BaseActivity implements ISplashView,View.OnCl
     /**
      * 用于关闭处理main以外的activity
      */
-    private void backMain(){
+    private void backMain() {
         MApplication.setGoLogin(false);
         MApplication.finishAllActivitys(MainActivity.class.getName());//关掉除了主页面以外的所有页面
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {

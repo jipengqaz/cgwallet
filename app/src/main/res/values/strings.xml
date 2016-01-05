@@ -16,6 +16,7 @@
     <string name="load_wait">请稍后……</string>
     <string name="load_error">载入失败，点击重新载入</string>
     <string name="no_more">• END •</string>
+    <string name="new_no_more">以上是全部订单</string>
 
     <!-- 设置手势界面文案  -->
     <string name="setup_gesture_code">设置手势密码</string>
@@ -32,7 +33,7 @@
     <string name="wallet_basic_info2">五重保障</string>
     <string name="wallet_basic_info3">随存随取</string>
     <string name="really_name">实名认证</string>
-    <string name="really_bankcard">银行卡</string>
+    <string name="really_bankcard">绑定银行卡</string>
     <string name="no_anthen">未认证</string>
     <string name="no_binding">未绑定</string>
     <string name="login_pwd_change">登录密码</string>
@@ -60,9 +61,9 @@
     <string name="error_need_phone">请输入手机号</string>
     <string name="error_need_pwd">请输入登录密码</string>
     <string name="text_please_login">请登录</string>
-    <string name="hint_regist_mobile">请输入手机号</string>
-    <string name="hint_regist_text">草根投资用户可直接登录</string>
-    <string name="hint_regist_security_code">请填写验证码</string>
+    <string name="hint_regist_mobile">手机号码</string>
+    <string name="hint_regist_text">“草根投资”用户可直接登录</string>
+    <string name="hint_regist_security_code">验证码</string>
     <string name="hint_regist_get_security_code">获取验证码</string>
     <string name="hint_regist_next">下一步</string>
     <string name="title_activity_login_or_regist">登录</string>
@@ -152,4 +153,173 @@
     <string name="loading">正在加载...</string>
     <string name="load_succeed">加载成功</string>
     <string name="load_fail">加载失败</string>
+
+    <string name="citys">[
+{label:"北京Beijing010",name:"北京",pinyin:"Beijing",zip:"010"},
+{label:"重庆Chongqing023",name:"重庆",pinyin:"Chongqing",zip:"023"},
+{label:"上海Shanghai021",name:"上海",pinyin:"Shanghai",zip:"021"},
+{label:"长沙Changsha0731",name:"长沙",pinyin:"Changsha",zip:"0731"},
+{label:"常州Changzhou0519",name:"常州",pinyin:"Changzhou",zip:"0519"},
+{label:"成都Chengdu028",name:"成都",pinyin:"Chengdu",zip:"028"},
+{label:"福州Fuzhou0591",name:"福州",pinyin:"Fuzhou",zip:"0591"},
+{label:"广州Guangzhou020",name:"广州",pinyin:"Guangzhou",zip:"020"},
+{label:"贵阳Guiyang0851",name:"贵阳",pinyin:"Guiyang",zip:"0851"},
+{label:"哈尔滨Haerbin0451",name:"哈尔滨",pinyin:"Haerbin",zip:"0451"},
+{label:"邯郸Handan0310",name:"邯郸",pinyin:"Handan",zip:"0310"},
+{label:"沧州Cangzhou0317",name:"沧州",pinyin:"Cangzhou",zip:"0317"},
+{label:"杭州Hangzhou0571",name:"杭州",pinyin:"Hangzhou",zip:"0571"},
+{label:"合肥Hefei0551",name:"合肥",pinyin:"Hefei",zip:"0551"},
+{label:"嘉兴Jiaxing0573",name:"嘉兴",pinyin:"Jiaxing",zip:"0573"},
+{label:"济南Jinan0531",name:"济南",pinyin:"Jinan",zip:"0531"},
+{label:"兰州Lanzhou0931",name:"兰州",pinyin:"Lanzhou",zip:"0931"},
+{label:"柳州Liuzhou0772",name:"柳州",pinyin:"Liuzhou",zip:"0772"},
+{label:"南昌Nanchang0791",name:"南昌",pinyin:"Nanchang",zip:"0791"},
+{label:"南京Nanjing025",name:"南京",pinyin:"Nanjing",zip:"025"},
+{label:"南宁Nanning0771",name:"南宁",pinyin:"Nanning",zip:"0771"},
+{label:"南通Nantong0513",name:"南通",pinyin:"Nantong",zip:"0513"},
+{label:"宁波Ningbo0574",name:"宁波",pinyin:"Ningbo",zip:"0574"},
+{label:"泉州Quanzhou0595",name:"泉州",pinyin:"Quanzhou",zip:"0595"},
+{label:"沈阳Shenyang024",name:"沈阳",pinyin:"Shenyang",zip:"024"},
+{label:"深圳Shenzhen0755",name:"深圳",pinyin:"Shenzhen",zip:"0755"},
+{label:"石家庄Shijiazhuang0311",name:"石家庄",pinyin:"Shijiazhuang",zip:"0311"},
+{label:"苏州Suzhou0512",name:"苏州",pinyin:"Suzhou",zip:"0512"},
+{label:"台州Taizhou0576",name:"台州",pinyin:"Taizhou",zip:"0576"},
+{label:"无锡Wuxi0510",name:"无锡",pinyin:"Wuxi",zip:"0510"},
+{label:"厦门Xiamen0592",name:"厦门",pinyin:"Xiamen",zip:"0592"},
+{label:"西安Xian029",name:"西安",pinyin:"Xian",zip:"029"},
+{label:"徐州Xuzhou0516",name:"徐州",pinyin:"Xuzhou",zip:"0516"},
+{label:"扬州Yangzhou0514",name:"扬州",pinyin:"Yangzhou",zip:"0514"},
+{label:"漳州Zhangzhou0596",name:"漳州",pinyin:"Zhangzhou",zip:"0596"},
+{label:"郑州Zhengzhou0371",name:"郑州",pinyin:"Zhengzhou",zip:"0371"},
+{label:"阿拉善盟Alashanmeng0483",name:"阿拉善盟",pinyin:"Alashanmeng",zip:"0483"},
+{label:"安康Ankang0915",name:"安康",pinyin:"Ankang",zip:"0915"},
+{label:"白银Baiyin0943",name:"白银",pinyin:"Baiyin",zip:"0943"},
+{label:"蚌埠Bangbu0552",name:"蚌埠",pinyin:"Bangbu",zip:"0552"},
+{label:"保定Baoding0312",name:"保定",pinyin:"Baoding",zip:"0312"},
+{label:"包头Baotou0472",name:"包头",pinyin:"Baotou",zip:"0472"},
+{label:"巴彦淖尔Bayannaoer0478",name:"巴彦淖尔",pinyin:"Bayannaoer",zip:"0478"},
+{label:"巴中Bazhong0827",name:"巴中",pinyin:"Bazhong",zip:"0827"},
+{label:"常德Changde0736",name:"常德",pinyin:"Changde",zip:"0736"},
+{label:"长治Changzhi0355",name:"长治",pinyin:"Changzhi",zip:"0355"},
+{label:"郴州Chenzhou0735",name:"郴州",pinyin:"Chenzhou",zip:"0735"},
+{label:"赤峰Chifeng0476",name:"赤峰",pinyin:"Chifeng",zip:"0476"},
+{label:"池州Chizhou0566",name:"池州",pinyin:"Chizhou",zip:"0566"},
+{label:"丹东Dandong0415",name:"丹东",pinyin:"Dandong",zip:"0415"},
+{label:"大庆Daqing0459",name:"大庆",pinyin:"Daqing",zip:"0459"},
+{label:"大同Datong0352",name:"大同",pinyin:"Datong",zip:"0352"},
+{label:"达州Dazhou0818",name:"达州",pinyin:"Dazhou",zip:"0818"},
+{label:"德阳Deyang0838",name:"德阳",pinyin:"Deyang",zip:"0838"},
+{label:"定西Dingxi0932",name:"定西",pinyin:"Dingxi",zip:"0932"},
+{label:"鄂尔多斯Eerduosi0477",name:"鄂尔多斯",pinyin:"Eerduosi",zip:"0477"},
+{label:"抚州Fuzhou0794",name:"抚州",pinyin:"Fuzhou",zip:"0794"},
+{label:"赣州Ganzhou0797",name:"赣州",pinyin:"Ganzhou",zip:"0797"},
+{label:"广安Guangan0826",name:"广安",pinyin:"Guangan",zip:"0826"},
+{label:"广元Guangyuan0839",name:"广元",pinyin:"Guangyuan",zip:"0839"},
+{label:"桂林Guilin0773",name:"桂林",pinyin:"Guilin",zip:"0773"},
+{label:"果洛Guoluo0975",name:"果洛",pinyin:"Guoluo",zip:"0975"},
+{label:"海北Haibei0970",name:"海北",pinyin:"Haibei",zip:"0970"},
+{label:"海东Haidong0972",name:"海东",pinyin:"Haidong",zip:"0972"},
+{label:"海南Hainan0974",name:"海南",pinyin:"Hainan",zip:"0974"},
+{label:"海西Haixi0977",name:"海西",pinyin:"Haixi",zip:"0977"},
+{label:"汉中Hanzhong0916",name:"汉中",pinyin:"Hanzhong",zip:"0916"},
+{label:"衡水Hengshui0318",name:"衡水",pinyin:"Hengshui",zip:"0318"},
+{label:"衡阳Hengyang0734",name:"衡阳",pinyin:"Hengyang",zip:"0734"},
+{label:"淮安Huaian0517",name:"淮安",pinyin:"Huaian",zip:"0517"},
+{label:"怀化Huaihua0745",name:"怀化",pinyin:"Huaihua",zip:"0745"},
+{label:"黄南Huangnan0973",name:"黄南",pinyin:"Huangnan",zip:"0973"},
+{label:"呼和浩特Huhehaote0471",name:"呼和浩特",pinyin:"Huhehaote",zip:"0471"},
+{label:"呼伦贝尔Hulunbeier0470",name:"呼伦贝尔",pinyin:"Hulunbeier",zip:"0470"},
+{label:"湖州Huzhou0572",name:"湖州",pinyin:"Huzhou",zip:"0572"},
+{label:"吉安Jian0796",name:"吉安",pinyin:"Jian",zip:"0796"},
+{label:"嘉峪关Jiayuguan0937",name:"嘉峪关",pinyin:"Jiayuguan",zip:"0937"},
+{label:"金昌Jinchang0935",name:"金昌",pinyin:"Jinchang",zip:"0935"},
+{label:"晋城Jincheng0356",name:"晋城",pinyin:"Jincheng",zip:"0356"},
+{label:"景德镇Jingdezhen0798",name:"景德镇",pinyin:"Jingdezhen",zip:"0798"},
+{label:"金华Jinhua0579",name:"金华",pinyin:"Jinhua",zip:"0579"},
+{label:"晋中Jinzhong0354",name:"晋中",pinyin:"Jinzhong",zip:"0354"},
+{label:"连云港Lianyungang0518",name:"连云港",pinyin:"Lianyungang",zip:"0518"},
+{label:"临汾Linfen0357",name:"临汾",pinyin:"Linfen",zip:"0357"},
+{label:"丽水Lishui0578",name:"丽水",pinyin:"Lishui",zip:"0578"},
+{label:"龙岩Longyan0597",name:"龙岩",pinyin:"Longyan",zip:"0597"},
+{label:"娄底Loudi0738",name:"娄底",pinyin:"Loudi",zip:"0738"},
+{label:"泸州Luzhou0830",name:"泸州",pinyin:"Luzhou",zip:"0830"},
+{label:"吕梁Lvliang0358",name:"吕梁",pinyin:"Lvliang",zip:"0358"},
+{label:"马鞍山Maanshan0555",name:"马鞍山",pinyin:"Maanshan",zip:"0555"},
+{label:"眉山Meishan028",name:"眉山",pinyin:"Meishan",zip:"028"},
+{label:"绵阳Mianyang0816",name:"绵阳",pinyin:"Mianyang",zip:"0816"},
+{label:"南充Nanchong0817",name:"南充",pinyin:"Nanchong",zip:"0817"},
+{label:"南平Nanping0599",name:"南平",pinyin:"Nanping",zip:"0599"},
+{label:"内江Neijiang0832",name:"内江",pinyin:"Neijiang",zip:"0832"},
+{label:"宁德Ningde0593",name:"宁德",pinyin:"Ningde",zip:"0593"},
+{label:"攀枝花Panzhihua0812",name:"攀枝花",pinyin:"Panzhihua",zip:"0812"},
+{label:"平凉Pingliang0933",name:"平凉",pinyin:"Pingliang",zip:"0933"},
+{label:"萍乡Pingxiang0799",name:"萍乡",pinyin:"Pingxiang",zip:"0799"},
+{label:"莆田Putian0594",name:"莆田",pinyin:"Putian",zip:"0594"},
+{label:"庆阳Qingyang0934",name:"庆阳",pinyin:"Qingyang",zip:"0934"},
+{label:"衢州Quzhou0570",name:"衢州",pinyin:"Quzhou",zip:"0570"},
+{label:"三明Sanming0598",name:"三明",pinyin:"Sanming",zip:"0598"},
+{label:"商洛Shangluo0914",name:"商洛",pinyin:"Shangluo",zip:"0914"},
+{label:"汕头Shantou0754",name:"汕头",pinyin:"Shantou",zip:"0754"},
+{label:"绍兴Shaoxing0575",name:"绍兴",pinyin:"Shaoxing",zip:"0575"},
+{label:"邵阳Shaoyang0739",name:"邵阳",pinyin:"Shaoyang",zip:"0739"},
+{label:"朔州Shuozhou0349",name:"朔州",pinyin:"Shuozhou",zip:"0349"},
+{label:"宿迁Suqian0527",name:"宿迁",pinyin:"Suqian",zip:"0527"},
+{label:"太原Taiyuan0351",name:"太原",pinyin:"Taiyuan",zip:"0351"},
+{label:"泰州Taizhou0523",name:"泰州",pinyin:"Taizhou",zip:"0523"},
+{label:"天水Tianshui0938",name:"天水",pinyin:"Tianshui",zip:"0938"},
+{label:"铜川Tongchuan0919",name:"铜川",pinyin:"Tongchuan",zip:"0919"},
+{label:"通辽Tongliao0475",name:"通辽",pinyin:"Tongliao",zip:"0475"},
+{label:"渭南Weinan0913",name:"渭南",pinyin:"Weinan",zip:"0913"},
+{label:"温州Wenzhou0577",name:"温州",pinyin:"Wenzhou",zip:"0577"},
+{label:"乌海Wuhai0473",name:"乌海",pinyin:"Wuhai",zip:"0473"},
+{label:"乌兰察布Wulanchabu0474",name:"乌兰察布",pinyin:"Wulanchabu",zip:"0474"},
+{label:"湘潭Xiangtan0732",name:"湘潭",pinyin:"Xiangtan",zip:"0732"},
+{label:"湘西Xiangxi0743",name:"湘西",pinyin:"Xiangxi",zip:"0743"},
+{label:"咸阳Xianyang029",name:"咸阳",pinyin:"Xianyang",zip:"029"},
+{label:"锡林郭勒盟Xilinguolemeng0479",name:"锡林郭勒盟",pinyin:"Xilinguolemeng",zip:"0479"},
+{label:"兴安盟Xinganmeng0482",name:"兴安盟",pinyin:"Xinganmeng",zip:"0482"},
+{label:"邢台Xingtai0319",name:"邢台",pinyin:"Xingtai",zip:"0319"},
+{label:"西宁Xining0971",name:"西宁",pinyin:"Xining",zip:"0971"},
+{label:"新余Xinyu0790",name:"新余",pinyin:"Xinyu",zip:"0790"},
+{label:"忻州Xinzhou0350",name:"忻州",pinyin:"Xinzhou",zip:"0350"},
+{label:"延安Yanan0911",name:"延安",pinyin:"Yanan",zip:"0911"},
+{label:"盐城Yancheng0515",name:"盐城",pinyin:"Yancheng",zip:"0515"},
+{label:"阳泉Yangquan0353",name:"阳泉",pinyin:"Yangquan",zip:"0353"},
+{label:"宜宾Yibin0831",name:"宜宾",pinyin:"Yibin",zip:"0831"},
+{label:"宜春Yichun0795",name:"宜春",pinyin:"Yichun",zip:"0795"},
+{label:"鹰潭Yingtan0701",name:"鹰潭",pinyin:"Yingtan",zip:"0701"},
+{label:"益阳Yiyang0737",name:"益阳",pinyin:"Yiyang",zip:"0737"},
+{label:"永州Yongzhou0746",name:"永州",pinyin:"Yongzhou",zip:"0746"},
+{label:"岳阳Yueyang0730",name:"岳阳",pinyin:"Yueyang",zip:"0730"},
+{label:"榆林Yulin0912",name:"榆林",pinyin:"Yulin",zip:"0912"},
+{label:"运城Yuncheng0359",name:"运城",pinyin:"Yuncheng",zip:"0359"},
+{label:"玉树Yushu0976",name:"玉树",pinyin:"Yushu",zip:"0976"},
+{label:"张家界Zhangjiajie0744",name:"张家界",pinyin:"Zhangjiajie",zip:"0744"},
+{label:"张掖Zhangye0936",name:"张掖",pinyin:"Zhangye",zip:"0936"},
+{label:"镇江Zhenjiang0511",name:"镇江",pinyin:"Zhenjiang",zip:"0511"},
+{label:"舟山Zhoushan0580",name:"舟山",pinyin:"Zhoushan",zip:"0580"},
+{label:"株洲Zhuzhou0731",name:"株洲",pinyin:"Zhuzhou",zip:"0731"},
+{label:"自贡Zigong0813",name:"自贡",pinyin:"Zigong",zip:"0813"},
+{label:"资阳Ziyang028",name:"资阳",pinyin:"Ziyang",zip:"028"},
+{label:"九江Jiujiang0792",name:"九江",pinyin:"Jiujiang",zip:"0792"},
+{label:"上饶Shangrao0793",name:"上饶",pinyin:"Shangrao",zip:"0793"},
+{label:"宝鸡Baoji0917",name:"宝鸡",pinyin:"Baoji",zip:"0917"}
+]</string>
 </resources>
+    <!--{label:"昆明Kunming0871",name:"昆明",pinyin:"Kunming",zip:"0871"},
+        {label:"保山Baoshan0875",name:"保山",pinyin:"Baoshan",zip:"0875"},
+        {label:"楚雄彝族自治州Chuxiong0875",name:"楚雄彝族自治州",pinyin:"Chuxiong",zip:"0875"},
+        {label:"大理白族自治州Dali0872",name:"大理白族自治州",pinyin:"Dali",zip:"0872"},
+        {label:"德宏傣族景颇族自治州Dehong0692",name:"德宏傣族景颇族自治州",pinyin:"Dehong",zip:"0692"},
+        {label:"迪庆藏族自治州Diqing0887",name:"迪庆藏族自治州",pinyin:"Diqing",zip:"0887"},
+        {label:"红河哈尼族彝族自治州Honghe0873",name:"红河哈尼族彝族自治州",pinyin:"Honghe",zip:"0873"},
+        {label:"怒江傈僳族自治州Nujiang0886",name:"怒江傈僳族自治州",pinyin:"Nujiang",zip:"0886"},
+        {label:"普洱Puer0879",name:"普洱",pinyin:"Puer",zip:"0879"},
+        {label:"曲靖Qujing0874",name:"曲靖",pinyin:"Qujing",zip:"0874"},
+        {label:"文山壮族苗族自治州Wenshan0876",name:"文山壮族苗族自治州",pinyin:"Wenshan",zip:"0876"},
+        {label:"西双版纳傣族自治州Xishuangbanna0691",name:"西双版纳傣族自治州",pinyin:"Xishuangbanna",zip:"0691"},
+        {label:"玉溪Yuxi0877",name:"玉溪",pinyin:"Yuxi",zip:"0877"},
+        {label:"昭通Zhaotong0870",name:"昭通",pinyin:"Zhaotong",zip:"0870"},
+        {label:"丽江Lijiang0888",name:"丽江",pinyin:"Lijiang",zip:"0888"},
+        {label:"临沧Lincang0883",name:"临沧",pinyin:"Lincang",zip:"0883"},
+    -->

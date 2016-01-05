@@ -25,7 +25,7 @@ import android.graphics.Color;
 import android.graphics.Paint.Align;
 import android.util.AttributeSet;
 
-import com.twq.chartsimple.graphview.GraphViewSeries.GraphViewSeriesStyle;
+import cgtz.com.cgwallet.view.graphview.GraphViewSeries.GraphViewSeriesStyle;
 
 /**
  * Draws a Bar Chart

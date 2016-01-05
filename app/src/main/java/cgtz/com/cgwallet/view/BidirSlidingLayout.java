@@ -12,7 +12,7 @@ import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 /**
- * 双向滑动菜单框架
+ * 双向滑动菜单框架   (但目前是用的是自定义的SlidingMenu实现的滑动，具体区别要抽空进行分析)
  * 
  * @author guolin
  */

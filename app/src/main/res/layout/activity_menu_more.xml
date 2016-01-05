@@ -202,8 +202,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/hint_regist_pwd_introduce"
-            android:layout_marginTop="30dp"
-            android:gravity="center"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="30dp"
             />
     </LinearLayout>
     <include layout="@layout/layout_banner_black"

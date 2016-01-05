@@ -24,6 +24,7 @@
     <dimen name="text_size_13sp">13sp</dimen>
     <dimen name="text_size_14sp">14sp</dimen>
     <dimen name="text_size_16sp">16sp</dimen>
+    <dimen name="text_size_17sp">17sp</dimen>
     <dimen name="text_size_18sp">18sp</dimen>
     <dimen name="text_size_20sp">20sp</dimen>
     <dimen name="text_size_28sp">28sp</dimen>
@@ -78,4 +79,27 @@
     <dimen name="height_edit">46dp</dimen>
     <dimen name="height_edit_2">50dp</dimen>
     <dimen name="menu_more_text_margin_left">30dp</dimen>
+
+    <dimen name="qib_letter_size">14sp</dimen>
+    <!--快速索引条字体大小-->
+
+
+    <!--2015年11月16日15:41:43 1.1.4加入的关于适配的相关内容-->
+    <dimen name="margin_padding_0.5dp">0.5dp</dimen>
+    <dimen name="margin_padding_2dp">2dp</dimen>
+    <dimen name="margin_padding_3dp">3dp</dimen>
+    <dimen name="margin_padding_5dp">5dp</dimen>
+    <dimen name="margin_padding_7dp">7dp</dimen>
+    <dimen name="margin_padding_15dp">15dp</dimen>
+    <dimen name="margin_padding_20dp">20dp</dimen>
+    <dimen name="margin_padding_21dp">21dp</dimen>
+    <dimen name="margin_padding_25dp">25dp</dimen>
+    <dimen name="margin_padding_35dp">35dp</dimen>
+    <dimen name="margin_padding_45dp">45dp</dimen>
+    <dimen name="margin_padding_70dp">70dp</dimen>
+    <dimen name="margin_padding_95dp">95dp</dimen>
+
+    <dimen name="width_12dp">12dp</dimen>
+    <dimen name="height_17dp">17dp</dimen>
+
 </resources>

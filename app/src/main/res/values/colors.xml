@@ -6,8 +6,10 @@
     <color name="main_blue">#45c01a</color>
     <color name="bg_about_mine_btn">#45c01a</color>
     <color name="top_title">@color/action_bar_bg</color>
+    <color name="new_top_title">#344143</color>
     <color name="main_red">#fb5e4f</color>
     <color name="main_bg">@color/action_bar_bg</color>
+    <color name="new_main_bg">#344143</color>
     <color name="main_bg_white">#f7f7f7</color>
     <color name="bg_center">#f5f5f5</color>
     <color name="main_comment">#606060</color>
@@ -120,4 +122,17 @@
     <color name="my_wallet_line">#e5e5e5</color>
     <color name="my_wallet_back">#F2F2F2</color>
     <color name = "dialog_back">#00000000</color>
+
+    <color name="lighter_gray">#ddd</color>
+    <color name="darker_gray">#aaa</color>
+
+    <!--viewpagerindicator color-->
+    <bool name="default_circle_indicator_centered">true</bool>
+    <color name="default_circle_indicator_fill_color">#ffB55A37</color>
+    <color name="default_circle_indicator_page_color">#ffffffff</color>
+    <integer name="default_circle_indicator_orientation">0</integer>
+    <dimen name="default_circle_indicator_radius">3dp</dimen>
+    <bool name="default_circle_indicator_snap">false</bool>
+    <color name="default_circle_indicator_stroke_color">#FFFFFF</color>
+    <dimen name="default_circle_indicator_stroke_width">0dp</dimen>
 </resources>

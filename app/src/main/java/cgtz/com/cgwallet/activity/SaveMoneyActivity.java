@@ -8,6 +8,7 @@ import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -101,6 +102,14 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
         presenter = new SplashPresenter(this);
         initViews();
         setListener();
+
+        setBackListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backListener();
+            }
+        });
+
     }
 
     /**
@@ -190,8 +199,8 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.length() >= 10){
-                    Utils.makeToast(SaveMoneyActivity.this,"最大投资额不能超过9999999999元");
+                if (s.length() >= 10) {
+                    Utils.makeToast(SaveMoneyActivity.this, "最大投资额不能超过9999999999元");
                 }
 
             }
@@ -208,8 +217,8 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                     confirmSave.setBackgroundResource(R.drawable.bg_button_no_enabled);
                     deleteEdit.setVisibility(View.GONE);
                 } else {
-                    if(str.length()>1){
-                        if(str.subSequence(0, 1).equals("0")){//判断是否大于0
+                    if (str.length() > 1) {
+                        if (str.subSequence(0, 1).equals("0")) {//判断是否大于0
                             editFigure.setText(str.substring(1));
                             editFigure.setSelection(str.substring(1).length());
                         }
@@ -242,14 +251,14 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
                             useBank = saveMoney;
                             needEdit = true;
                             onlyUseAccount = false;
-                            useAccount="0.00";
+                            useAccount = "0.00";
 //                            payMethod();
                             setBeforePay();
                         }
                     } else {
                         //未设置交易密码
                         Utils.makeToast(SaveMoneyActivity.this, "请设置交易密码");
-                        startActivity(new Intent(SaveMoneyActivity.this,TradePwdActivity.class));
+                        startActivity(new Intent(SaveMoneyActivity.this, TradePwdActivity.class));
                     }
                 }
             }
@@ -604,4 +613,28 @@ public class SaveMoneyActivity extends BaseActivity implements ISplashView{
             }
         }
     };
+
+    //2015年11月18日16:10:21      尝试对返回事件进行处理，点击返回后返回到主界面
+//    键盘返回键的监听
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                Intent intent=new Intent(SaveMoneyActivity.this,MainActivity.class);
+                startActivity(intent);
+                MApplication.finishAllActivitys(MainActivity.class.getName());
+                finish();
+                break;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+//   actionBar的返回键的监听
+    public void backListener(){
+        Intent intent=new Intent(SaveMoneyActivity.this,MainActivity.class);
+        startActivity(intent);
+        MApplication.finishAllActivitys(MainActivity.class.getName());
+        finish();
+    }
 }
+
+

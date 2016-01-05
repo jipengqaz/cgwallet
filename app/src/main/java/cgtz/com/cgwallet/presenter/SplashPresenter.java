@@ -1,6 +1,7 @@
 package cgtz.com.cgwallet.presenter;
 
 import android.content.Context;
+import android.util.Log;
 
 import cgtz.com.cgwallet.model.IsNetConnect;
 import cgtz.com.cgwallet.model.impl.NetConnect;

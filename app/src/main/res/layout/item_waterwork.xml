@@ -11,6 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="北京市自来水集团有限公司" />
+        android:singleLine="true"
+        android:text="北京市自来水集团有限责任公司"
+        android:layout_marginLeft="@dimen/margin_padding_5dp"
+        android:textSize="17sp"
+        android:layout_marginTop="@dimen/margin_padding_7dp"/>
 
 </LinearLayout>

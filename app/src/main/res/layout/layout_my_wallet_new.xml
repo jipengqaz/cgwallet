@@ -4,12 +4,14 @@
     android:background="@color/my_wallet_back"
     android:gravity="center_horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
     <!--<android.support.v4.widget.SwipeRefreshLayout-->
         <!--android:id="@+id/id_swipe_ly"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent" >-->
-        <cgtz.com.cgwallet.view.PullToRefreshLayout android:id="@+id/refresh_view"
+        <cgtz.com.cgwallet.view.PullToRefreshLayout
+            android:id="@+id/refresh_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -131,6 +133,7 @@
                             <TextView
                                 android:id="@+id/wallet_rate"
                                 android:layout_margin="5dp"
+                                android:text="0.00"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/my_wallet_earning_num_size"
                                 android:layout_width="wrap_content"
@@ -161,9 +164,10 @@
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/bg_main_btn_right_back_off"
+                            android:background="@drawable/bg_main_btn_left_back_off"
                             android:gravity="center"
                             android:text="@string/my_wallet_text5"
+                            android:textSize="@dimen/text_size_16sp"
                             android:textColor="@color/white"
                             android:layout_marginRight="20dp"
                             />

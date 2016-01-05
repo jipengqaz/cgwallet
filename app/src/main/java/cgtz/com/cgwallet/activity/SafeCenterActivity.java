@@ -39,6 +39,8 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
     private SplashPresenter presenter;
     private ProgressDialog progressDialog;
     private TextView is_pay_passwrod;
+//    2015年11月19日21:32:19  测试
+    private boolean hasPayPassword;
 
     private boolean isbinding = false;
 
@@ -104,8 +106,9 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.Reset_Passwrod://修改交易密码
                 if(Utils.isLogined()){
+//                    2015年11月19日21:34:50  测试
                 intent = new Intent(SafeCenterActivity.this,TradePwdActivity.class);
-                intent.putExtra("isSetTradePwd",true);
+                    intent.putExtra("isSetTradePwd",this.hasPayPassword);
                 startActivity(intent);
                 }else{
                     startActivity(new Intent(SafeCenterActivity.this,LoginActivity.class));
@@ -259,6 +262,7 @@ public class SafeCenterActivity extends BaseActivity implements View.OnClickList
                             }
                             is_pay_passwrod.setVisibility(View.VISIBLE);
                             if(json.optInt("isPayPassSet") == 1){
+                                hasPayPassword = true;
                                 is_pay_passwrod.setText("已设置");
                             }
                             hideProcessBar();

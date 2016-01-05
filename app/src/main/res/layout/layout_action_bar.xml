@@ -34,6 +34,7 @@
     </LinearLayout>
     <TextView
         android:visibility="gone"
+        android:gravity="center_vertical"
         android:id="@+id/action_bar_right_text"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
@@ -43,4 +44,12 @@
         android:textColor="@color/action_bar_right_text_color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/actionbar_location_icon"
+        android:visibility="gone"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/action_bar_right_text"
+        android:src="@drawable/location_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp" />
 </RelativeLayout>

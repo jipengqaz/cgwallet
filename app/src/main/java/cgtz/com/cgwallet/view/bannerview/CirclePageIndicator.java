@@ -17,11 +17,6 @@ package cgtz.com.cgwallet.view.bannerview;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-
-
-import com.example.bannerlayoutdemo.R;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -38,6 +33,9 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
+
+import cgtz.com.cgwallet.R;
+
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 import static android.widget.LinearLayout.HORIZONTAL;
 import static android.widget.LinearLayout.VERTICAL;

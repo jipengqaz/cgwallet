@@ -56,8 +56,10 @@ public class TradePwdActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         if(savedInstanceState != null){
             isSetTradePwd = savedInstanceState.getBoolean("isSetTradePwd", false);//用于判断是否不设交易密码
+//            LogUtils.e("-----------isSetTradePwd1---------","isSetTradePwd1:"+isSetTradePwd);
         }else{
             isSetTradePwd = getIntent().getBooleanExtra("isSetTradePwd", false);//用于判断是否不设交易密码
+//            LogUtils.e("-----------isSetTradePwd2---------","isSetTradePwd2:"+isSetTradePwd);
         }
         showBack(true);
         if(isSetTradePwd){
@@ -89,6 +91,7 @@ public class TradePwdActivity extends BaseActivity {
         et_trade_pwd_again = (EditText) findViewById(R.id.trade_pwd_again);
         trade_pwd_confirm = (Button) findViewById(R.id.trade_pwd_confirm);
         layout_seted_trade_pwd = (LinearLayout) findViewById(R.id.layout_seted_trade_pwd);
+//        LogUtils.e("-----------isSetTradePwd3---------","isSetTradePwd3:"+isSetTradePwd);
         if(isSetTradePwd){
             trade_pwd_parent.setVisibility(View.GONE);
             layout_seted_trade_pwd.setVisibility(View.VISIBLE);

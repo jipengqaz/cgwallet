@@ -22,6 +22,7 @@ public class CustomTask extends AsyncTask<String,Void,String> {
     private int handler_what;//回调handler的 what判断值
     private Context mContext;//所在页面
     private boolean isFinish;//判断是否要关闭所在页面
+    private boolean isNeedKeep = false; // 是否对服务器传来的Json进行初步解析
     /**
      *
      * @param handler
@@ -38,6 +39,7 @@ public class CustomTask extends AsyncTask<String,Void,String> {
         this.flag = isPost;
         this.url_ = (Constants.IS_TEST?Constants.OFFLINE_HTTP:Constants.ONLINE_HTTP) + url_;
         this.encode = encode;
+        this.isNeedKeep = false;
         if(flag){
             content = HttpUtils.getRequestData(maps,encode).toString();
         }
@@ -58,6 +60,7 @@ public class CustomTask extends AsyncTask<String,Void,String> {
         this.handler_what = handler_what;
         this.flag = isPost;
         this.flag = true;
+        this.isNeedKeep = false;
         if(is_ping) {
             this.url_ = (Constants.IS_TEST?Constants.OFFLINE_HTTP:Constants.ONLINE_HTTP) + url_;
         }else{
@@ -68,6 +71,29 @@ public class CustomTask extends AsyncTask<String,Void,String> {
         }
         LogUtils.e("CustomTask", "url: " + this.url_+" content: "+content);
     }
+
+    /**
+     *2015年12月29日00:01:56  测试
+     * @param handler
+     * @param handler_what  handler 判断值
+     * @param url_          接口
+     * @param isPost        判断是否为post访问   true为post
+     * @param maps          参数集合
+     */
+    public CustomTask(Handler handler,int handler_what,String url_,
+                      boolean isPost,Map<String,String> maps){
+        this.handler = handler;
+        this.handler_what = handler_what;
+        this.flag = isPost;
+        this.flag = true;
+        this.isNeedKeep = false;
+        this.url_=url_;
+        if(flag){
+            content = HttpUtils.getRequestData(maps,encode).toString();
+        }
+        LogUtils.e("CustomTask", "url: " + this.url_+" content: "+content);
+    }
+
     /**
      *
      * @param handler
@@ -84,6 +110,7 @@ public class CustomTask extends AsyncTask<String,Void,String> {
         this.handler_what = handler_what;
         this.flag = isPost;
         this.flag = true;
+        this.isNeedKeep = false;
         if(is_ping) {
             this.url_ = (Constants.IS_TEST?Constants.OFFLINE_HTTP:Constants.ONLINE_HTTP) + url_;
         }else{
@@ -96,6 +123,13 @@ public class CustomTask extends AsyncTask<String,Void,String> {
         LogUtils.e("CustomTask", "url: " + this.url_+" content: "+content);
     }
 
+    public void setUrl(String url_) {
+        this.url_ = url_;
+    }
+
+    public void setNeedKeep(boolean isNeedKeep) {
+        this.isNeedKeep = isNeedKeep;
+    }
     @Override
     protected String doInBackground(String... params) {
         if(flag){
@@ -116,7 +150,14 @@ public class CustomTask extends AsyncTask<String,Void,String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        JsonBean jsonBean = new JsonBean(s,url_);
-        handler.sendMessage(handler.obtainMessage(handler_what,jsonBean));
+        if (isNeedKeep) {
+            // 目前仅用于免登陆逻辑，不对返回的数据进行任何解析，isNeedKeep = true;
+            handler.sendMessage(handler.obtainMessage(handler_what,s));
+        } else {
+            // 默认对服务器返回的数据进行初步解析
+            JsonBean jsonBean = new JsonBean(s,url_);
+            handler.sendMessage(handler.obtainMessage(handler_what,jsonBean));
+        }
+
     }
 }

@@ -6,6 +6,7 @@ import android.net.http.SslError;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -174,5 +175,15 @@ public class WebViewActivity extends BaseActivity {
         outState.putLong("projectID", id);
         outState.putInt("type", type);
     }
-
+/*//         2015年11月8日09:54:58
+//设置回退
+// 覆盖Activity类的onKeyDown(int keyCoder,KeyEvent event)方法
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && webView.canGoBack()) {
+            webView.goBack(); // goBack()表示返回WebView的上一页面
+            return true;
+        }
+        return super.onKeyDown(keyCode,event);
+    }*/
 }

@@ -51,15 +51,15 @@ public class SlidingMenu extends HorizontalScrollView{
 	private ViewGroup leftLayout3;
 
 
-	private int menuType;//用来存储显示的是哪一个菜单页面  0，左边 1，右边
-	private static final int SHOW_LEFT_MENU = -1;//显示左边菜单
+	public int menuType;//用来存储显示的是哪一个菜单页面  0，左边 1，右边
+	public static final int SHOW_LEFT_MENU = -1;//显示左边菜单
 	private static final int SHOW_RIGHT_MENU = 1;//显示右边菜单
 	private static final int HIDE_LEFT_MENU = -2;//隐藏左边菜单
 	private static final int HIDE_RIGHT_MENU = 2;//隐藏右边菜单
 	private static final int NEED_TO_LOGIN = 3;//去登录
 	private static final int NO_MENU_TOGGLE = 0;//没有菜单
 	private boolean isShowLeftMenu = false;
-	private boolean isShowRightMenu = false;
+	public boolean isShowRightMenu = false;
 	private MainActivity bindActivity;//绑定的Activity
 	private int rightSlidingMenu;//右边菜单显示时，向左滑动的距离
 	private GestureDetector mGestureDetector;

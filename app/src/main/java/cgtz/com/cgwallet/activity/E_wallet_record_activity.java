@@ -23,7 +23,7 @@ import cgtz.com.cgwallet.utils.Utils;
 import cgtz.com.cgwallet.widget.ProgressDialog;
 
 /**
- * 草根钱包  转入转出流水
+ * 草根钱包  转入转出流水（实现了左右滑动 viewpager的使用 ） 根据滑动的跳转进行界面交互
  * Created by Administrator on 2015-3-16.
  */
 public class E_wallet_record_activity extends  BaseActivity implements View.OnClickListener{
@@ -116,7 +116,6 @@ public class E_wallet_record_activity extends  BaseActivity implements View.OnCl
         viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override

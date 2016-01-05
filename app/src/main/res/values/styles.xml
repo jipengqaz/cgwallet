@@ -171,4 +171,14 @@
         <item name="android:windowBackground">@color/dialog_back</item><!--背景透明-->
         <item name="android:windowIsTranslucent">true</item><!--半透明-->
     </style>
+
+    <style name="ActionBar_title_style">
+        <item name="android:textSize">20.0sp</item>
+        <item name="android:textColor">#fff</item>
+    </style>
+    <!--主界面右侧的AddPopWindow的style-->
+    <style name="AnimationPreview">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
 </resources>

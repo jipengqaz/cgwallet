@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_center"
+    android:padding="@dimen/margin_padding_5dp">
 
-</LinearLayout>
+    <ImageView
+        android:scaleType="fitXY"
+        android:id="@+id/iv_water"
+        android:src="@mipmap/ico_water_"
+        android:layout_width="@dimen/width_12dp"
+        android:layout_height="@dimen/height_17dp"
+        android:layout_marginLeft="@dimen/margin_padding_5dp"
+        android:layout_marginTop="@dimen/margin_padding_2dp" />
+
+    <TextView
+        android:id="@+id/tv_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/iv_water"
+        android:layout_marginLeft="@dimen/margin_padding_5dp"
+        android:text="水费"
+        android:textSize="@dimen/text_size_17sp" />
+
+    <TextView
+        android:id="@+id/tv_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="2015-10-15"
+        android:textSize="@dimen/text_size_17sp" />
+
+    <TextView
+        android:id="@+id/tv_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/margin_padding_5dp"
+        android:text="待支付"
+        android:textSize="@dimen/text_size_17sp" />
+
+</RelativeLayout>

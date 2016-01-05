@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".BannerFragment" >
-    <com.example.bannerlayoutdemo.view.AutoScrollViewPager
+    <cgtz.com.cgwallet.view.bannerview.AutoScrollViewPager
         android:id="@+id/banner_viewpager"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
     />
-    <com.example.bannerlayoutdemo.view.CirclePageIndicator
+    <cgtz.com.cgwallet.view.bannerview.CirclePageIndicator
         android:id="@+id/banner_indicator"
         android:layout_width="wrap_content"
         android:layout_height="10dp"
@@ -16,5 +16,5 @@
         android:padding="3dp"
         android:layout_marginBottom="3dp"
     >
-    </com.example.bannerlayoutdemo.view.CirclePageIndicator>    
+    </cgtz.com.cgwallet.view.bannerview.CirclePageIndicator>
 </FrameLayout>

@@ -27,8 +27,8 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 
-import com.twq.chartsimple.util.DensityUtil;
-
+import cgtz.com.cgwallet.utils.DensityUtil;
+import cgtz.com.cgwallet.utils.LogUtils;
 
 /**
  * Line Graph View. This draws a line chart.
@@ -87,6 +87,7 @@ public class LineGraphView extends GraphView {
 
       double valX = values[i].getX() - minX;
       double ratX = valX / diffX;
+
       double x = graphwidth * ratX;
 
       if (i > 0) {
@@ -110,11 +111,13 @@ public class LineGraphView extends GraphView {
           bgPath.lineTo(endX, endY + style.thickness);
         }
 
-        // 保存下最后一个标点
+        // 保存下最后一个标点  最后一个在图标上的百分比
         if (i == values.length - 1) {
           markerX = endX;
           markerY = endY;
-          content = String.valueOf(values[i].getY());
+//          content = String.valueOf(values[i].getY()+"%");
+          LogUtils.e("-------------77777777777777777----------------","String.valueOf(values[i].getY()):"+String.valueOf(values[i].getY()));
+          content = String.valueOf(values[i].getY())+"%";
         }
       } else if (drawDataPoints) {
         // fix: last value not drawn as datapoint. Draw first point here, and then on every step the
