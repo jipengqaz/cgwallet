@@ -21,6 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -151,14 +152,16 @@ public class EarningsDetailActivity extends BaseActivity implements View.OnClick
                             interone.setText(interest.toPlainString());
 
                             String balanceStr = pageList.getJSONObject(0).optString("balance");
+                            LogUtils.e("------------------bbbbbbb-----------------","balanceStr:"+balanceStr);
                             BigDecimal balance = new BigDecimal(balanceStr).setScale(2);
                             balone.setText(balance.toPlainString());
-
 //                            rateone.setText(pageList.getJSONObject(0).getString("annualizedRate"));
                             String rate = pageList.getJSONObject(0).optString("annualizedRate");
-//                            int index=rate.indexOf(".");
-                            String newRate = rate.substring(rate.length() - 1, rate.length());
-                            rateone.setText(newRate + "%");
+                            final BigDecimal decimal100 = new BigDecimal(100);
+//2016年1月6日17:45:39  错误方法    String newRate = rate.substring(rate.length() - 1, rate.length());
+//格式化数据 去掉数据末尾没用的0     NumberFormat.getInstance().format(值)
+//用BigDecimal的方式去给他乘以100   new BigDecimal(rate).multiply(decimal100)
+                            rateone.setText(NumberFormat.getInstance().format(new BigDecimal(rate).multiply(decimal100)) + "%");
                             if (pageList.length() >= 2) {//目前用的方法，如果有第二条数据，就显示第二行的布局
                                 llinter.setVisibility(View.VISIBLE);
                                 String interestTwoStr = pageList.getJSONObject(1).optString("interest");
@@ -168,8 +171,8 @@ public class EarningsDetailActivity extends BaseActivity implements View.OnClick
                                 BigDecimal balanceTwo = new BigDecimal(balanceTwoStr).setScale(2);
                                 baltwo.setText(balanceTwo.toPlainString());
                                 String rate1 = pageList.getJSONObject(1).optString("annualizedRate");
-                                String newRate1 = rate1.substring(rate1.length() - 1, rate1.length());
-                                ratetwo.setText(newRate1 + "%");
+//                                String newRate1 = rate1.substring(rate1.length() - 1, rate1.length());
+                                ratetwo.setText(NumberFormat.getInstance().format(new BigDecimal(rate1).multiply(decimal100)) + "%");
                             }
                             if (pageList.length() >= 3) {//目前用的方法，如果有第三条数据，就显示第三行的布局
                                 llinterThree.setVisibility(View.VISIBLE);
@@ -180,8 +183,8 @@ public class EarningsDetailActivity extends BaseActivity implements View.OnClick
                                 BigDecimal balanceThree = new BigDecimal(balanceThreeStr).setScale(2);
                                 balthree.setText(balanceThree.toPlainString());
                                 String rate2 = pageList.getJSONObject(2).optString("annualizedRate");
-                                String newRate2 = rate2.substring(rate2.length() - 1, rate2.length());
-                                ratethree.setText(newRate2 + "%");
+//                                String newRate2 = rate2.substring(rate2.length() - 1, rate2.length());
+                                ratethree.setText(NumberFormat.getInstance().format(new BigDecimal(rate2).multiply(decimal100)) + "%");
                             }
                             if (pageList.length() >= 4) {//目前用的方法，如果有第四条数据，就显示第四行的布局
                                 llinterFour.setVisibility(View.VISIBLE);
@@ -192,8 +195,8 @@ public class EarningsDetailActivity extends BaseActivity implements View.OnClick
                                 BigDecimal balanceFour = new BigDecimal(balanceFourStr).setScale(2);
                                 balfour.setText(balanceFour.toPlainString());
                                 String rate3 = pageList.getJSONObject(3).optString("annualizedRate");
-                                String newRate3 = rate3.substring(rate3.length() - 1, rate3.length());
-                                ratefour.setText(newRate3 + "%");
+//                                String newRate3 = rate3.substring(rate3.length() - 1, rate3.length());
+                                ratefour.setText(NumberFormat.getInstance().format(new BigDecimal(rate3).multiply(decimal100)) + "%");
                             }
                             if (pageList.length() >= 5) {//目前用的方法，如果有第五条数据，就显示第五行的布局
                                 llinterFive.setVisibility(View.VISIBLE);
@@ -204,8 +207,8 @@ public class EarningsDetailActivity extends BaseActivity implements View.OnClick
                                 BigDecimal balanceFive = new BigDecimal(balanceFiveStr).setScale(2);
                                 balfive.setText(balanceFive.toPlainString());
                                 String rate4 = pageList.getJSONObject(4).optString("annualizedRate");
-                                String newRate4 = rate4.substring(rate4.length() - 1, rate4.length());
-                                ratefive.setText(newRate4 + "%");
+//                                String newRate4 = rate4.substring(rate4.length() - 1, rate4.length());
+                                ratefive.setText(NumberFormat.getInstance().format(new BigDecimal(rate4).multiply(decimal100)) + "%");
                             }
                         }
                         hideProcessBar();

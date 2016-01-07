@@ -415,7 +415,11 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
 //                            accumulative = jsonObject.optString("interestTotal");//累计收益
 //                            identity = jsonObject.optString("starIdentity");//身份证号
 //                            bankCord = jsonObject.optString("starCardNumber");//银行卡号
-                            amount.setText((Double.parseDouble(assets) + Double.parseDouble(accumulative)) + "  ");//总金额
+                            BigDecimal bigAssets = new BigDecimal(assets);   //创建BigDecimal对象
+                            BigDecimal bigAccumulative = new BigDecimal(accumulative);
+                            BigDecimal bigInterest = bigAssets.add(bigAccumulative); //BigDecimal运算
+                            amount.setText(bigInterest.toPlainString()+"  ");//总金额
+                            //amount.setText((Double.parseDouble(assets) + Double.parseDouble(accumulative)) + "  ");//总金额
                             fillViews();
                         }
                         hideProcessBar();
@@ -610,7 +614,7 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
 
 //        imgArrays.clear();
 //        urlArrays.clear();
-
+        //  轮播图接口 2016年1月6日10:54:22
         getImage();
     }
 
@@ -708,6 +712,8 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
                 return null;
             }
         });
+
+        将构建好的视图添加到根布局中 代码里预
 
         //将构建好的视图添加到根布局里，在代码里预留一个LinearLayout就行
         lltable.addView(graphView);
