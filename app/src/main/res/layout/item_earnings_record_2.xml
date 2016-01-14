@@ -29,7 +29,7 @@
             android:textColor="@color/white"
             tools:text="2015-12-1" />
 
-        <ImageView
+        <!--原箭头 已取消  <ImageView
             android:id="@+id/arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,6 +37,6 @@
             android:gravity="right"
             android:paddingTop="13.5dp"
             android:layout_alignParentRight="true"
-            />
+            />-->
     </RelativeLayout>
 </LinearLayout>

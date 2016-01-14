@@ -181,7 +181,7 @@ public class LineGraphView extends GraphView {
         y - DensityUtil.dip2px(context, GraphViewConfig.MARKER_HEIGHT_OFFSET / 2));
     path.close();
     canvas.drawPath(path, paint);
-    paint.setColor(Color.WHITE);
+    paint.setColor(Color.WHITE);//最后一个利率的字体颜色（就是显示在图表上的7%的颜色）
     FontMetricsInt fontMetrics = paint.getFontMetricsInt();
     int baseline =
         (int) (r.top + (r.bottom - r.top - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top);

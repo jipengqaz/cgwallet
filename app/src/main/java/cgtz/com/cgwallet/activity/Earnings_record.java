@@ -250,7 +250,7 @@ public class Earnings_record extends BaseActivity implements ISplashView {
                         convertView = LinearLayout.inflate(Earnings_record.this, R.layout.item_earnings_record_2, null);
                         holder.money = (TextView) convertView.findViewById(R.id.money);
                         holder.time = (TextView) convertView.findViewById(R.id.time);
-                        arrow = (ImageView) convertView.findViewById(R.id.arrow);
+//2016年1月12日10:40:24  取消箭头  arrow = (ImageView) convertView.findViewById(R.id.arrow);
 
                         convertView.setTag(holder);
                     } else {

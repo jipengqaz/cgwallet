@@ -250,8 +250,6 @@ public class Utils {
      */
     public static void makeToast_short(Context context,String msg){
         Toast.makeText(context,msg,Toast.LENGTH_SHORT).show();
-//        给吐司自定义位置 但是为啥不顶用呢
-//        Toast.makeText(context,msg,Toast.LENGTH_SHORT).setGravity(Gravity.CENTER_VERTICAL,0,0);
     }
 
 

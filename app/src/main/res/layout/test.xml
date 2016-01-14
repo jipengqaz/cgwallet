@@ -46,20 +46,21 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
-                            <ImageView
+                            <!--<ImageView
                                 android:id="@+id/iv_spread"
                                 android:layout_width="match_parent"
                                 android:layout_height="150dp"
                                 android:scaleType="fitXY"
                                 android:src="@mipmap/banner" />
+                                轮播图 暂未使用
+                                -->
 
-                        <!--轮播图 暂未使用
+
                                 <cgtz.com.cgwallet.view.bannerview.BannerLayout
                                 android:id="@+id/banner"
                                 android:layout_width="match_parent"
-                                android:layout_height="150dp"
-                                >
-                            </cgtz.com.cgwallet.view.bannerview.BannerLayout>-->
+                                android:layout_height="150dp">
+                            </cgtz.com.cgwallet.view.bannerview.BannerLayout>
 
                         </LinearLayout>
 

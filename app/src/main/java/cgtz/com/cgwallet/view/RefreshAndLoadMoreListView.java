@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.utils.LogUtils;
 
 
 public class RefreshAndLoadMoreListView extends ListView implements AbsListView.OnScrollListener {
@@ -75,6 +76,9 @@ public class RefreshAndLoadMoreListView extends ListView implements AbsListView.
     private boolean isRefresh;
 
     private boolean noMore;
+
+//    2016年1月12日17:46:26  测试
+    private boolean newNoMore;
 
     public RefreshAndLoadMoreListView(Context context) {
         super(context);
@@ -158,6 +162,7 @@ public class RefreshAndLoadMoreListView extends ListView implements AbsListView.
 
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         if (!noMore && !isRefresh && lastItem == getAdapter().getCount() && scrollState == OnScrollListener.SCROLL_STATE_IDLE) {
+            LogUtils.e("---------------nnnnnnnn---------------","noMore:"+noMore);
             loadMore();
         }
         if (isRefresh && scrollState == OnScrollListener.SCROLL_STATE_IDLE) {
@@ -534,6 +539,16 @@ public void newSetLoadMore(boolean more) {
         if (mLoadMoreView != null) {
             TextView tipsView = (TextView) mLoadMoreView.findViewById(R.id.foot_tipsTextView);
             tipsView.setText(R.string.click_to_see_more);
+            ProgressBar progressView = (ProgressBar) mLoadMoreView.findViewById(R.id.foot_progressBar);
+            progressView.setVisibility(GONE);
+        }
+    }
+//2016年1月12日14:45:58  测试
+    public void newOnLoadMoreComplete() {
+        isLoadingMore = false;
+        if (mLoadMoreView != null) {
+            TextView tipsView = (TextView) mLoadMoreView.findViewById(R.id.foot_tipsTextView);
+            tipsView.setText("");
             ProgressBar progressView = (ProgressBar) mLoadMoreView.findViewById(R.id.foot_progressBar);
             progressView.setVisibility(GONE);
         }

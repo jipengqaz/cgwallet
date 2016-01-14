@@ -109,25 +109,6 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
     private ArrayList<String> imgArrays = new ArrayList<>();//拿到所有订单号的集合
     private ArrayList<String> urlArrays = new ArrayList<>();//拿到所有状态的集合
 
-/*    private long now = new Date().getTime();//获取当前时间的毫秒值
-    private long t = 86400000;//一天的毫秒值*/
-
-    /*private double oneRate=Double.parseDouble(stringRateArray[1]);
-    private double twoRate=Double.parseDouble(stringRateArray[2]);
-    private double threeRate=Double.parseDouble(stringRateArray[3]);
-    private double fourRate=Double.parseDouble(stringRateArray[4]);
-    private double fiveRate=Double.parseDouble(stringRateArray[5]);
-    private double sixRate=Double.parseDouble(stringRateArray[6]);
-    private double sevenRate=Double.parseDouble(stringRateArray[7]);
-    //最近7天的数据，其中24d是今天的数据，double类型，服务器若是返回String，需要装箱成double
-    private double[] data = {oneRate*10, twoRate*10, threeRate*10, fourRate*10, fiveRate*10, sixRate*10, sevenRate*10};*/
-
-    //最近7天的数据，其中24d是今天的数据，double类型，服务器若是返回String，需要装箱成double   private double[] data = {6d, 7d, 10d, 7d, 8d, 7d,7d};
-    //private double[] data = {6d, 6d, 7d, 7d, 7d, 6d,7d};
-
-    /*String str1 = "6.00", str2 = "7.00", str3 = "6.00", str4 = "7.00",
-            str5 = "7.65", str6 = "7.65", str7 = "7.65";*/
-
     /**
      * 下拉刷新组件
      */
@@ -135,13 +116,7 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
 //    public PullToRefreshLayout mPtrl;
     public PullToRefreshScrollView mPtrl;
     private boolean isOne = false;//用于判断是否才启动程序
-    /*    private String str1;
-        private String str2;
-        private String str3;
-        private String str4;
-        private String str5;
-        private String str6;
-        private String str7;*/
+
     private BannerLayout bl_banner;
     private BannerViewPagerAdapter adapter;
     private String imageData;//图片的数据
@@ -158,7 +133,7 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
         layoutView = inflater.inflate(R.layout.test, container, false);
 //        layoutView = inflater.inflate(R.layout.layout_my_wallet_new,container,false);
         initViews(layoutView);
-//        initBannerData();  轮播图 暂不使用
+        initBannerData();  //轮播图 暂不使用
 
 //        setData(true);
         setListener();
@@ -252,7 +227,7 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
         drawMoney.setOnClickListener(this);//转出
         saveMoney.setOnClickListener(this);//转入
 
-        iv_spread.setOnClickListener(this);//活动图片
+        //iv_spread.setOnClickListener(this);//活动图片  iv_spread
         // TODO
 //        mPtrl.setOnRefreshListener(new AutoPullListener());//下拉刷新
 
@@ -305,8 +280,8 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
         saveMoney = (LinearLayout) view.findViewById(R.id.wallet_save_money);//转入
 
         amount = (TextView) view.findViewById(R.id.new_text);//总金额
-        iv_spread = (ImageView) view.findViewById(R.id.iv_spread);//活动图片
-        //bl_banner = (BannerLayout) view.findViewById(R.id.banner);//轮播图 暂未使用
+//        iv_spread = (ImageView) view.findViewById(R.id.iv_spread);//活动图片  2016年1月13日12:17:40  测试
+        bl_banner = (BannerLayout) view.findViewById(R.id.banner);//轮播图 暂未使用
 //        wallet_tip = (TextView) view.findViewById(R.id.wallet_tip);//钱包提示
 //        function = (NotSlideGridView) view.findViewById(R.id.function)  ;//列表选项
 
@@ -351,13 +326,17 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
 //        });
     }
 
-/*//2015年12月29日11:31:39  轮播图的adapter
+//2015年12月29日11:31:39  轮播图的adapter
     private void initBannerData() {
         adapter = new BannerViewPagerAdapter(getActivity(),imgArrays,urlArrays);
         bl_banner.bannerViewPager.setAdapter(adapter);
-        bl_banner.initPagerIndicator();
-        bl_banner.showPageIndicator();
-    }*/
+       /* bl_banner.initPagerIndicator();
+        if (imgArrays.size()==1){
+            bl_banner.hidePageIndicator();
+        }else {
+            bl_banner.showPageIndicator();
+        }*/
+    }
 
 
     /**
@@ -438,13 +417,7 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
                         }
                         stringRateArray = listRate.toArray(new String[listRate.size()]);
                         LogUtils.e("------------- 打印打印打印------------", "stringArray:" + stringRateArray[3]);
-//                        str1 = stringRateArray[0];
-//                        str2 = stringRateArray[1];
-//                        str3 = stringRateArray[2];
-//                        str4 = stringRateArray[3];
-//                        str5 = stringRateArray[4];
-//                        str6 = stringRateArray[5];
-//                        str7 = stringRateArray[6];
+
                         initLineChartView();//保持线程数据同步
                         LogUtils.e("-------------数据数据数据数据数据-----------------", "sevenResult:" + sevenResult);
                         LogUtils.e("--------------中间数值---------------------------", "midRate：" + midRate);
@@ -660,10 +633,10 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
             case R.id.wallet_save_money://转入
                 getActivity().startActivity(new Intent(getActivity(), SaveMoneyActivity.class));
                 break;
-            case R.id.iv_spread://活动图片
+/*            case R.id.iv_spread://活动图片  iv_spread
 //                if (!(urlArrays.get(0)==null)){}
                     startActivity(new Intent(getActivity(), WebViewActivity.class).putExtra("url", urlArrays.get(0)).putExtra("title", "活动中心"));
-                break;
+                break;*/
         }
     }
 
@@ -853,9 +826,17 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
                             LogUtils.e("-------------urlurlurlurlurlurlurlurl---------------", "mUrl：" + mUrl);
                             urlArrays.add(mUrl);
                         }
-//                      ImageLoader加载图片  2015年12月29日14:09:27
-                        ImageLoader.getInstance().displayImage(imgArrays.get(0), iv_spread);
-                        //adapter.notifyDataSetChanged();//填充数据变化后去刷新数据  暂未使用
+//2016年1月14日00:11:44  测试
+                        bl_banner.initPagerIndicator();
+                        if (imgArrays.size()==1){
+                            bl_banner.hidePageIndicator();
+                        }else {
+                            bl_banner.showPageIndicator();
+                        }
+
+                        //ImageLoader加载图片  2015年12月29日14:09:27
+                        //ImageLoader.getInstance().displayImage(imgArrays.get(0), iv_spread); 2016年1月13日12:13:08 测试
+                        adapter.notifyDataSetChanged();//填充数据变化后去刷新数据  暂未使用
                         LogUtils.e("-------------imgArraysimgArraysimgArraysimgArrays---------------", "imgArrays：" + imgArrays);
                         LogUtils.e("-------------urlArraysurlArraysurlArraysurlArrays---------------", "urlArrays：" + urlArrays);
 //                        }

@@ -220,7 +220,9 @@ public class Constants {
     public static final String SEAWAY_JAVASEAWAY = "seaway/javaSeaway";//java端思伟通用接口
     /**
      * 2015年12月21日10:11:09  七日年化收益率接口
+     * public static final String QUERY_IMAGEDATA="https://cgwallet.sinaapp.com/index.php/Home/Index/index";//1.1.5（6）版本轮播图信息  线上
+     *                                              http://cgwallet.sinaapp.com/index.php/Home/Index/test
      */
     public static final String UTIL_QUERY_SEVENDAYSRATES="util/querySevenDaysRates";//1.1.5（6）版本七日年化收益率
-    public static final String QUERY_IMAGEDATA="https://cgwallet.sinaapp.com/index.php/Home/Index/index";//1.1.5（6）版本轮播图信息
+    public static final String QUERY_IMAGEDATA="https://cgwallet.sinaapp.com/index.php/Home/Index/test";//1.1.5（6）版本轮播图信息
 }

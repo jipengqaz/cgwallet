@@ -1087,9 +1087,9 @@ public class MainActivity extends FragmentActivity implements ISplashView, View.
 //                }
                 mMenu.leftToggle();
                 break;
-            case R.id.left_menu_help_center://帮助中心
+            case R.id.left_menu_help_center://帮助中心   "https://d5ds88.cgtz.com/version/e/detail"
                 startActivity(new Intent(this, WebViewActivity.class)
-                        .putExtra("url", "https://d5ds88.cgtz.com/version/e/detail")
+                        .putExtra("url", Constants.OFFLINE_HTTP_DEVELOP + "show/help")
                         .putExtra("title", "帮助中心"));
                 mMenu.leftToggle();
                 break;

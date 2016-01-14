@@ -25,7 +25,7 @@ public class BannerLayout extends LinearLayout {
 	}
 
 	public BannerLayout(Context context, AttributeSet attrs) {
-		this(context, attrs,0);
+		this(context, attrs, 0);
 		
 	}
 	
@@ -49,13 +49,22 @@ public class BannerLayout extends LinearLayout {
 
 	public void initPagerIndicator() {
 		pageIndicator.setViewPager(bannerViewPager);
+//		2016年1月13日16:28:56  测试
+		pageIndicator.setVisibility(View.VISIBLE);
 	}
 
+	/*public void hidePageIndicator() {
+		if (pageIndicator != null) {
+			pageIndicator.setVisibility(View.GONE);
+		}
+	}*/
+//2016年1月13日15:54:28  测试
 	public void hidePageIndicator() {
 		if (pageIndicator != null) {
 			pageIndicator.setVisibility(View.GONE);
 		}
 	}
+
 
 	public void showPageIndicator() {
 		if (pageIndicator != null) {

@@ -16,6 +16,7 @@ import java.net.URL;
 import java.util.List;
 
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.activity.WebViewActivity;
 
 public class BannerViewPagerAdapter extends PagerAdapter {
 	private Context context;
@@ -26,7 +27,7 @@ public class BannerViewPagerAdapter extends PagerAdapter {
 //出现错误 private DisplayImageOptions options;
 //	options=new DisplayImageOptions.Builder().showImageLoading(R.mipmap.cs).showImageForEmptyUri().
 //	showImageOnFail(R.mipmap.cs).cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).
-//	displayer(new FadeInBitmapDisplayer(3000)).build();
+//	displayer(new FadeInBitmapDisplayer(3000)).build();  ilist.size();
 
 
 	public BannerViewPagerAdapter(Context context) {
@@ -49,16 +50,13 @@ public class BannerViewPagerAdapter extends PagerAdapter {
 	public Object instantiateItem(ViewGroup container, final int position) {
 		final View view = View.inflate(context, R.layout.layout_adapter, null);
 		container.addView(view);
+
 		icdifault = (ImageView) view.findViewById(R.id.ic_default);//默认的图片
 		ImageLoader.getInstance().displayImage(ilist.get(position).toString(), icdifault);
 		icdifault.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent();
-				intent.setAction("android.intent.action.VIEW");
-				Uri content_url = Uri.parse(ulist.get(position).toString());
-				intent.setData(content_url);
-				context.startActivity(intent);
+				context.startActivity(new Intent(context, WebViewActivity.class).putExtra("url", ulist.get(position).toString()).putExtra("title", "活动中心"));
 			}
 		});
 		return view;
