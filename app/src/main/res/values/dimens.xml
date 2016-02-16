@@ -88,12 +88,15 @@
     <dimen name="margin_padding_0.5dp">0.5dp</dimen>
     <dimen name="margin_padding_2dp">2dp</dimen>
     <dimen name="margin_padding_3dp">3dp</dimen>
+    <dimen name="margin_padding_4dp">4dp</dimen>
     <dimen name="margin_padding_5dp">5dp</dimen>
     <dimen name="margin_padding_7dp">7dp</dimen>
     <dimen name="margin_padding_10dp">10dp</dimen>
+    <dimen name="margin_padding_13dp">13dp</dimen>
     <dimen name="margin_padding_15dp">15dp</dimen>
     <dimen name="margin_padding_20dp">20dp</dimen>
     <dimen name="margin_padding_21dp">21dp</dimen>
+    <dimen name="margin_padding_23dp">23dp</dimen>
     <dimen name="margin_padding_25dp">25dp</dimen>
     <dimen name="margin_padding_35dp">35dp</dimen>
     <dimen name="margin_padding_45dp">45dp</dimen>
@@ -101,7 +104,9 @@
     <dimen name="margin_padding_70dp">70dp</dimen>
     <dimen name="margin_padding_95dp">95dp</dimen>
 
-    <dimen name="width_12dp">12dp</dimen>
-    <dimen name="height_17dp">17dp</dimen>
+    <dimen name="width_20dp">20dp</dimen>
+    <dimen name="height_20dp">20dp</dimen>
+    <dimen name="width_27dp">27dp</dimen>
+    <dimen name="height_27dp">27dp</dimen>
 
 </resources>

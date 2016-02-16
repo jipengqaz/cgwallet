@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_marginLeft="4dp"
+        android:id="@+id/ll_pay"
+      android:orientation="vertical"
+      android:background="#FFFFFF"
+      android:gravity="center"
+        android:layout_marginBottom="15dp"
+      android:layout_width="100dp"
+      android:layout_height="80dp">
+    <TextView
+        android:id="@+id/tv_item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#999999"
+
+        android:textSize="22sp"
+       />
+    <TextView
+        android:textColor="#999999"
+        android:id="@+id/tv_item_payprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        />
+    </LinearLayout>
+</LinearLayout>

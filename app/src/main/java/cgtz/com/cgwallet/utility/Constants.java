@@ -8,7 +8,7 @@ import java.io.File;
  * Created by Administrator on 2015/4/11.
  */
 public class Constants {
-    public static final String version = "1.1.7";
+    public static final String version = "1.1.8";
     public static final String version_ = "110";
     public static final String ENCONDING = "UTF-8";
     public static final String CGTZ_PACKAGE = "cgtz.com.cgtz";
@@ -16,19 +16,21 @@ public class Constants {
     public static final String colors = "#e44d42";//手势密码提示文案颜色
     /*111111111111111111111111111111111111111111111111111111111111111111111111111111111111111*/
     public static final boolean IS_TEST = false;//判断是否为测试环境
-    public static final boolean IS_DEVELOP = true;//用于在开发还是测试之间选择测试服务器路径的判断
+    public static final boolean IS_DEVELOP = false;//用于在开发还是测试之间选择测试服务器路径的判断
     public static final boolean IS_28 = false;//判断是否更改为28服务器路径
     public static final String OFFLINE_HTTP_TEST = "http://192.168.10.188:45680/wallet/";//用于开发的-测试服务器路径
     public static final String OFFLINE_HTTP_DEVELOP = "http://172.16.34.188:45680/wallet2/";//用于开发的-测试服务器路径 192.168.10
     //    public static final String OFFLINE_HTTP_28 = "http://115.29.245.28:42111/wallet/";//测试服务器路径    http://115.29.245.28:42111/wallet114
     //    public static final String OFFLINE_HTTP_28 = "http://115.29.245.28:42111/wallet113/";//测试服务器路径
-    public static final String OFFLINE_HTTP_28 = "http://115.29.245.28:42111/wallet115/";//测试服务器路径
+    //    public static final String OFFLINE_HTTP_28 = "http://115.29.245.28:42111/wallet115/";//测试服务器路径
+    public static final String OFFLINE_HTTP_28 = "http://115.29.245.28:42111/wallet116/";//测试服务器路径
     public static final String OFFLINE_HTTP = IS_28 ? OFFLINE_HTTP_28 :
             (IS_DEVELOP ? OFFLINE_HTTP_DEVELOP : OFFLINE_HTTP_TEST);//测试服务器路径
     //    public static final String ONLINE_HTTP = "https://wallet.cgtz.com/";//线上服务器路径
 //    public static final String ONLINE_HTTP = "https://wallet.cgtz.com/wallet113/";//线上服务器路径
 //    public static final String ONLINE_HTTP = "https://wallet.cgtz.com/wallet114/";//线上服务器路径
-      public static final String ONLINE_HTTP = "https://wallet.cgtz.com/wallet115/";//1.1.6线上服务器路径
+//    public static final String ONLINE_HTTP = "https://wallet.cgtz.com/wallet115/";//1.1.5（6、7）线上服务器路径
+    public static final String ONLINE_HTTP = "https://wallet.cgtz.com/wallet116/";//1.1.6(8)线上服务器路径
     public static final String VERSION = version + (IS_TEST ?
             (IS_28 ? "-28" : "-dev")
             : "");//版本号
@@ -134,9 +136,19 @@ public class Constants {
     public static final int WHAT_MOBILE=2015111302;
     public static final int WHAT_MOBILE_PASSWORD = 2015111501;
 
+    public static final int WHAT_CHARGE = 2016012001;
+
     //UTIL_QUERY_SEVENDAYSRATES   1.1.5（6）版本七日年化收益率
     public static final int WHAT_QUERY_SEVENDAYSRATES=2015122101;
     public static final int WHAT_QUERY_IMAGEDATA=2015122801;//轮播图信息
+    public static final int WHAT_QUERY_IMAGEDATA_OLD=2016020201;//轮播图信息
+    /**
+     * 2016年1月14日15:35:10  新加入话费充值的识别标识
+     */
+    public static final int WHAT_QUERY_PAYPHONE=2016010601;//查询话费充值的接口
+    public static final int WHAT_PHONE_ORDER = 2016010802;//生成渠道订单  //点击支付
+    public static final int WHAT_PAYPHONEORDER = 2016010803;////支付订单  //订单详情界面
+
     /**
      * 88888888888888888888888888888888888888
      **/
@@ -222,7 +234,22 @@ public class Constants {
      * 2015年12月21日10:11:09  七日年化收益率接口
      * public static final String QUERY_IMAGEDATA="https://cgwallet.sinaapp.com/index.php/Home/Index/index";//1.1.5（6）版本轮播图信息  线上
      *                                              http://cgwallet.sinaapp.com/index.php/Home/Index/test
+     *                                              https://cgwallet.sinaapp.com/index.php/Home/Index/test   util/shufflingFigure
+     *                                              http://www.vbian.net/cg/index.php
      */
+
     public static final String UTIL_QUERY_SEVENDAYSRATES="util/querySevenDaysRates";//1.1.5（6）版本七日年化收益率
-    public static final String QUERY_IMAGEDATA="https://cgwallet.sinaapp.com/index.php/Home/Index/test";//1.1.5（6）版本轮播图信息
+    public static final String QUERY_IMAGEDATA="https://cgwallet.applinzi.com/index.php/Home/index/lunbo";//1.1.6（8）版本轮播图信息 飞哥
+    public static final String QUERY_IMAGEDATA_OLD="util/shufflingFigure";//1.1.6（8）版本轮播图信息
+//    2016年1月20日16:23:09  测试
+    public static final String DATA_CHARGE="http://192.168.1.100/www/ping/index.php";//charge信息
+
+    /**
+     * 2016年1月14日15:35:10  新加入话费充值
+     *
+     */
+    public static final String SEAWAY_QUERY_PAYPHONE = "seaway/queryOnSale";//查询话费在售产品
+    public static final String SEAWAY_MOBILE_ORDER = "seaway/mobileRechargeOrder";//生成话费订单  //点击支付
+    public static final String SEAWAY_MOBILEPAYORDER = "seaway/mobilePayOrder";////话费充值支付订单  //订单详情界面
+
 }

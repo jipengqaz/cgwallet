@@ -64,7 +64,8 @@ public class E_all_records_fragment_1 extends BaseFragment implements ISplashVie
         presenter = new SplashPresenter(this);
         listview= (RefreshAndLoadMoreListView) view.findViewById(R.id.record_listview);
         projectAdapter = new ProjectAdapter1();
-        listview.setAdapter(projectAdapter);
+//        2016年1月25日19:14:04  测试
+        listview.setAdapter(projectAdapter,0);
         listview.setLoadMore(true);
         listview.setOnLoadMoreLister(projectAdapter);//加载
         listview.setOnItemClickListener(projectAdapter);//记录单击事件

@@ -2,11 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_center"
     android:orientation="vertical">
 
     <!--  <cgtz.com.cgwallet.view.PullToRefreshLayout
-          android:id="@+id/refresh_view"
+          android:id="@+id/refresh_view"   bg_center
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:orientation="vertical">
@@ -24,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
-        android:background="@color/bg_center"
+        android:background="@color/three_white_one"
         android:gravity="center_vertical">
 
         <RelativeLayout
@@ -59,7 +58,7 @@
                     android:id="@+id/iv_two"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ico_chongzhi" />
+                    android:src="@drawable/pament_two" />
             </LinearLayout>
 
             <LinearLayout
@@ -130,7 +129,8 @@
         android:id="@+id/fl_select"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="@color/three_white">
 
         <TextView
             android:id="@+id/tv_gone"

@@ -23,7 +23,7 @@ public class BannerViewPagerAdapter extends PagerAdapter {
 	private List ilist;
 	private List ulist;
 	public ImageView icdifault;//默认的图片
-
+	private DisplayImageOptions options;
 //出现错误 private DisplayImageOptions options;
 //	options=new DisplayImageOptions.Builder().showImageLoading(R.mipmap.cs).showImageForEmptyUri().
 //	showImageOnFail(R.mipmap.cs).cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).
@@ -50,9 +50,11 @@ public class BannerViewPagerAdapter extends PagerAdapter {
 	public Object instantiateItem(ViewGroup container, final int position) {
 		final View view = View.inflate(context, R.layout.layout_adapter, null);
 		container.addView(view);
-
+		options=new DisplayImageOptions.Builder().showImageOnLoading(R.mipmap.banner).
+				showImageForEmptyUri(R.mipmap.banner).showImageOnFail(R.mipmap.banner).
+				cacheInMemory(true).cacheOnDisk(true).build();
 		icdifault = (ImageView) view.findViewById(R.id.ic_default);//默认的图片
-		ImageLoader.getInstance().displayImage(ilist.get(position).toString(), icdifault);
+		ImageLoader.getInstance().displayImage(ilist.get(position).toString(), icdifault,options);
 		icdifault.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

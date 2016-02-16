@@ -133,7 +133,7 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
         layoutView = inflater.inflate(R.layout.test, container, false);
 //        layoutView = inflater.inflate(R.layout.layout_my_wallet_new,container,false);
         initViews(layoutView);
-        initBannerData();  //轮播图 暂不使用
+        initBannerData();  //轮播图
 
 //        setData(true);
         setListener();
@@ -588,7 +588,7 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
 //        imgArrays.clear();
 //        urlArrays.clear();
         //  轮播图接口 2016年1月6日10:54:22
-        getImage();
+        getImageold();
     }
 
     @Override
@@ -780,7 +780,7 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
         task.execute();
     }
 
-    //2015年12月28日18:52:38  测试
+    //2015年12月28日18:52:38  测试  飞哥轮播图
     public void getImage() {
         //服务器数据交互操作
         HashMap<String, String> maps = new HashMap<>();
@@ -810,9 +810,9 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
 //                        boolean flag = Utils.filtrateCode(getActivity(), jsonBean);
 //                        if (flag && code == Constants.OPERATION_FAIL) {//数据交互失败
 //                        } else if (flag && code == Constants.OPERATION_SUCCESS) {//数据交互成功
-                            JSONObject jsonObject = new JSONObject(jsonBean.getJsonString());
-                            JSONArray imageData=jsonObject.optJSONArray("data");
-                            LogUtils.e("-------------图片信息图片信息---------------", "imageData：" + imageData);
+                        JSONObject jsonObject = new JSONObject(jsonBean.getJsonString());
+                        JSONArray imageData=jsonObject.optJSONArray("data");
+                        LogUtils.e("-------------图片信息图片信息---------------", "imageData：" + imageData);
 
                         imgArrays.clear();//每次请求数据前先刷新一次 避免多次填充
                         urlArrays.clear();
@@ -826,7 +826,7 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
                             LogUtils.e("-------------urlurlurlurlurlurlurlurl---------------", "mUrl：" + mUrl);
                             urlArrays.add(mUrl);
                         }
-//2016年1月14日00:11:44  测试
+                        //2016年1月14日00:11:44  测试
                         bl_banner.initPagerIndicator();
                         if (imgArrays.size()==1){
                             bl_banner.hidePageIndicator();
@@ -850,6 +850,83 @@ public class My_wallet_new_Fragment extends BaseFragment implements ISplashView,
             }
         }
     };
+
+//2016年2月2日11:09:04   公司轮播图逻辑
+    public void getImageold() {
+        //服务器数据交互操作
+        HashMap<String, String> maps = new HashMap<>();
+//        maps.put("user_id", Utils.getUserId());
+//        maps.put("token", Utils.getToken());
+        CustomTask task = new CustomTask(imOldHandler, Constants.WHAT_QUERY_IMAGEDATA_OLD,
+                Constants.QUERY_IMAGEDATA_OLD,
+                true, maps,true);
+        task.execute();
+    }
+    /**
+     * 访问轮播图的接口，拿到当前接口的数据所用到的handler
+     */
+    private Handler imOldHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            try {
+                JsonBean jsonBean = (JsonBean) msg.obj;
+                int code = jsonBean.getCode();
+                if (code == Constants.DATA_EVENT) {
+                    hideProcessBar();
+                    return;
+                }
+                int action = msg.what;
+                switch (action) {
+                    case Constants.WHAT_QUERY_IMAGEDATA_OLD:
+                        boolean flag = Utils.filtrateCode(getActivity(), jsonBean);
+                        if (flag && code == Constants.OPERATION_FAIL) {//数据交互失败
+                        } else if (flag && code == Constants.OPERATION_SUCCESS) {//数据交互成功
+                            JSONObject jsonObject = new JSONObject(jsonBean.getJsonString());
+                            JSONObject json = jsonBean.getJsonObject();
+                            JSONObject mdetailMsg = json.optJSONObject("result");
+                            JSONArray imageData=mdetailMsg.optJSONArray("shufflingFigures");
+                            if (imageData.length()==0){
+                                LogUtils.e("-------------000000000000000000000--------------------","imageData.length():"+imageData.length());
+                                getImage();
+                            }else {
+                                LogUtils.e("-------------图片信息图片信息---------------", "imageData：" + imageData);
+                                imgArrays.clear();//每次请求数据前先刷新一次 避免多次填充
+                                urlArrays.clear();
+                                for (int i = 0; i <imageData.length(); i++){
+                                    //拿到所有的img和url，并把他们放在集合中
+                                    String mImage=imageData.getJSONObject(i).getString("img");
+                                    LogUtils.e("-------------imgimgimgimgimgimgimgimg---------------", "mImage：" + mImage);
+                                    imgArrays.add(mImage);
+                                    String mUrl=imageData.getJSONObject(i).getString("url");
+                                    LogUtils.e("-------------urlurlurlurlurlurlurlurl---------------", "mUrl：" + mUrl);
+                                    urlArrays.add(mUrl);
+                                }
+                                //2016年1月14日00:11:44  测试
+                                bl_banner.initPagerIndicator();
+                                if (imgArrays.size()==1){
+                                    bl_banner.hidePageIndicator();
+                                }else {
+                                    bl_banner.showPageIndicator();
+                                }
+
+                                //ImageLoader加载图片  2015年12月29日14:09:27
+                                //ImageLoader.getInstance().displayImage(imgArrays.get(0), iv_spread); 2016年1月13日12:13:08 测试
+                                adapter.notifyDataSetChanged();//填充数据变化后去刷新数据  暂未使用
+                                LogUtils.e("-------------imgArraysimgArraysimgArraysimgArrays---------------", "imgArrays：" + imgArrays);
+                                LogUtils.e("-------------urlArraysurlArraysurlArraysurlArrays---------------", "urlArrays：" + urlArrays);
+                            }
+                        }
+                        hideProcessBar();
+                        break;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                hideProcessBar();
+                LogUtils.e("new_Fragment", "handler 异常");
+            }
+        }
+    };
+
 
 
     /**

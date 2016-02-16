@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="300dp"
+    android:layout_gravity="center"
+    android:background="@color/bg_center"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@android:color/black"
+        android:padding="15dp"
+        android:textSize="18sp"
+        android:gravity="center_vertical"
+        android:textColor="@android:color/white"
+        android:text="选择要充值的号码"/>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lv_dialog" />
+
+</LinearLayout>

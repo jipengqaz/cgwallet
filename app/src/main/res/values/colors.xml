@@ -125,6 +125,8 @@
 
     <color name="lighter_gray">#ddd</color>
     <color name="darker_gray">#aaa</color>
+    <color name="three_white_one">#efefef</color>
+    <color name="three_white">#fff</color>
 
     <!--viewpagerindicator color-->
     <bool name="default_circle_indicator_centered">true</bool>

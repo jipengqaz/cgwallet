@@ -43,10 +43,12 @@
                         <LinearLayout
                             android:id="@+id/today_earning_test"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="150dp"
+                            android:background="@drawable/banner_cache"
                             android:orientation="vertical">
 
                             <!--<ImageView
+                                android:layout_height="wrap_content"
                                 android:id="@+id/iv_spread"
                                 android:layout_width="match_parent"
                                 android:layout_height="150dp"
@@ -59,7 +61,7 @@
                                 <cgtz.com.cgwallet.view.bannerview.BannerLayout
                                 android:id="@+id/banner"
                                 android:layout_width="match_parent"
-                                android:layout_height="150dp">
+                                android:layout_height="wrap_content">
                             </cgtz.com.cgwallet.view.bannerview.BannerLayout>
 
                         </LinearLayout>

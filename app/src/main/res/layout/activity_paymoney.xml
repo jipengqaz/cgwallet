@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#eeeff3"
+    >
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#fff"
+        android:orientation="horizontal"
+        >
+        <LinearLayout
+
+            android:layout_width="260dp"
+            android:layout_height="60dp"
+            android:orientation="vertical">
+            <EditText
+
+                android:layout_width="260dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:inputType="number"
+                android:textSize="18sp"
+                android:maxLength="13"
+                android:background="@null"
+                android:hint="请输入手机号码"
+                android:dropDownWidth="410dp"
+
+                android:textColor="@android:color/black"
+                android:id="@+id/et_num"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:text="账号绑定号码"
+                    android:textColor="#83d62f"
+                    android:id="@+id/tv_address"/>
+                <TextView
+                    android:textSize="14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="#000000"
+                    android:id="@+id/tv_city"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:id="@+id/iv_delete"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="20dp"
+
+
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/shanchu"
+                />
+            <ImageView
+                android:id="@+id/iv_linkman"
+                android:layout_width="10dp"
+                android:layout_weight="1"
+
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/lianxiren"/>
+        </LinearLayout>
+  </LinearLayout>
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp"
+            android:textSize="18sp"
+            android:textColor="#8f8f8f"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="充话费"/>
+        <cgtz.com.cgwallet.paymoney.MyGridView
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"
+            android:scrollbars="none"
+            android:gravity="center"
+
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:verticalSpacing="10dp"
+            android:numColumns="3"
+            android:columnWidth="70dp"
+            android:id="@+id/gv_pay"/>
+
+    <TextView
+        android:visibility="gone"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="18sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="充流量"/>
+
+    <Button
+        android:visibility="gone"
+        android:text="选流量包"
+        android:textSize="18sp"
+        android:layout_marginLeft="15dp"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:id="@+id/bt_flow"/>
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/cb_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:checked="true" />
+
+        <TextView
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="我已阅读并同意" />
+
+        <TextView
+            android:textSize="12sp"
+            android:id="@+id/tv_agreement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="《草根钱包用户自助手机充值等服务协议》"
+            android:textColor="@color/main_bg" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/help_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:textSize="17sp"
+        android:text="帮助中心"
+        android:textColor="@color/bg_login_edit_stroke" />
+    <View
+        android:id="@+id/pay_view"
+        android:layout_width="67dp"
+        android:layout_height="1dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/bg_login_edit_stroke" />
+
+</LinearLayout>

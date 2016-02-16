@@ -2,24 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/bg_center"
+    android:background="@color/three_white"
     android:padding="@dimen/margin_padding_5dp">
 
     <ImageView
         android:scaleType="fitXY"
         android:id="@+id/iv_water"
         android:src="@mipmap/ico_water_"
-        android:layout_width="@dimen/width_12dp"
-        android:layout_height="@dimen/height_17dp"
-        android:layout_marginLeft="@dimen/margin_padding_5dp"
-        android:layout_marginTop="@dimen/margin_padding_2dp" />
+        android:layout_width="@dimen/width_20dp"
+        android:layout_height="@dimen/height_20dp"
+        android:layout_marginLeft="@dimen/margin_padding_15dp"
+        android:layout_centerVertical="true"
+         />
 
     <TextView
         android:id="@+id/tv_money"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/iv_water"
-        android:layout_marginLeft="@dimen/margin_padding_5dp"
+        android:layout_marginLeft="@dimen/margin_padding_10dp"
         android:text="水费"
         android:textSize="@dimen/text_size_17sp" />
 
@@ -36,8 +37,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/margin_padding_5dp"
+        android:layout_marginRight="@dimen/margin_padding_23dp"
         android:text="待支付"
         android:textSize="@dimen/text_size_17sp" />
 
 </RelativeLayout>
+
+<!--android:layout_marginTop="@dimen/margin_padding_3dp"
+        android:layout_width="@dimen/width_12dp"
+        android:layout_height="@dimen/height_17dp"-->

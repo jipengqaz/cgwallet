@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import cgtz.com.cgwallet.R;
+import cgtz.com.cgwallet.activity.OrderformActivity;
 import cgtz.com.cgwallet.utils.LogUtils;
 
 
@@ -76,9 +77,9 @@ public class RefreshAndLoadMoreListView extends ListView implements AbsListView.
     private boolean isRefresh;
 
     private boolean noMore;
+    private int newMark;
 
 //    2016年1月12日17:46:26  测试
-    private boolean newNoMore;
 
     public RefreshAndLoadMoreListView(Context context) {
         super(context);
@@ -163,7 +164,13 @@ public class RefreshAndLoadMoreListView extends ListView implements AbsListView.
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         if (!noMore && !isRefresh && lastItem == getAdapter().getCount() && scrollState == OnScrollListener.SCROLL_STATE_IDLE) {
             LogUtils.e("---------------nnnnnnnn---------------","noMore:"+noMore);
-            loadMore();
+            if (newMark ==1){
+                LogUtils.e("---------------zzzzzzzzzzzzzzz---------------","newMark:"+ newMark);
+                newLoadMore();
+            }else {
+                LogUtils.e("---------------xxxxxxxxxxxxxxx---------------","newMark:"+ newMark);
+                loadMore();
+            }
         }
         if (isRefresh && scrollState == OnScrollListener.SCROLL_STATE_IDLE) {
             isRefresh = false;
@@ -447,12 +454,13 @@ public class RefreshAndLoadMoreListView extends ListView implements AbsListView.
         }
         child.measure(childWidthSpec, childHeightSpec);
     }
-
-    public void setAdapter(BaseAdapter adapter) {
+//2016年1月25日19:01:54  测试
+    public void setAdapter(BaseAdapter adapter,int mark) {
         SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
         String date = format.format(new Date());
         lastUpdatedTextView.setText("最近更新: " + date);
         super.setAdapter(adapter);
+        newMark = mark;
     }
 
     public boolean isNoMore() {

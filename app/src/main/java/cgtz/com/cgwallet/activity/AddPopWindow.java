@@ -87,7 +87,7 @@ public class AddPopWindow extends PopupWindow {
     public void showPopupWindow(View parent) {
         if (!this.isShowing()) {
             // 以下拉方式显示PopupWindow   并且设置显示PopupWindow的位置位于View的左下方，x,y表示坐标偏移量  原：parent.getLayoutParams().width / 2
-          this.showAsDropDown(parent, w, -5);
+          this.showAsDropDown(parent, w, -7);
         } else {
             this.dismiss();
         }
